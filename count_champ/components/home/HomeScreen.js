@@ -29,13 +29,13 @@ class HomeScreen extends React.Component {
                 </View>
                 <View style={styles.buttonContainer}>
                     <Button
-                    style={styles.buttons}
                     title="Learn"
+                    color="#000000"
                     onPress={() => navigate('Learn', {name: 'Learn'})}
                     />
                     <Button
-                    style={styles.myButtons}
                     title="Train"
+                    color="#000000"
                     onPress={() => navigate('Train', {name: 'Train'})}
                     />
                 </View>
@@ -75,10 +75,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         height: 120,
     },
-    myButtons: {
-        margin: 50,
-        backgroundColor: '#0f9b0f',
-    }
 });
 
 export default HomeScreen

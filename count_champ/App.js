@@ -4,6 +4,11 @@ import { Constants } from 'expo';
 import HomeScreen from './components/home/HomeScreen'
 import Learn from './components/learn/Learn'
 import Train from './components/train/Train'
+import BasicStrategy from './components/train/basic_strategy/BasicStrategy'
+import SelfPacedCount from './components/train/self_paced_count/SelfPacedCount'
+import SpeedCount from './components/train/speed_count/SpeedCount'
+import TrueCount from './components/train/true_count/TrueCount'
+import BetSizing from './components/train/bet_sizing/BetSizing'
 
 // You can import from local files
 import AssetExample from './components/AssetExample';
@@ -17,6 +22,11 @@ const MainNavigator = createStackNavigator({
   Home: {screen: HomeScreen},
   Learn: {screen: Learn},
   Train: {screen: Train},
+  BasicStrategy: {screen: BasicStrategy},
+  SelfPacedCount: {screen: SelfPacedCount},
+  SpeedCount: {screen: SpeedCount},
+  TrueCount: {screen: TrueCount},
+  BetSizing: {screen: BetSizing},
   //Profile: {screen: ProfileScreen},
 });
 

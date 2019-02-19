@@ -4,7 +4,7 @@ import { Constants } from 'expo';
 
 let ScreenHeight = Dimensions.get("window").height;
 
-class Train extends React.Component {
+class BetSizing extends React.Component {
     static navigationOptions = {
         title: 'Count Champ',
     };
@@ -13,34 +13,36 @@ class Train extends React.Component {
         const {navigate} = this.props.navigation;
         return (
             <View style={styles.container}>
-
-                <View style={styles.buttonContainer}>
+                <Text>
+                    True Count Drill
+                </Text>
+                {/* <View style={styles.buttonContainer}>
                     <Button
                     title="Basic Strategy"
                     color="#000000"
-                    onPress={() => navigate('BasicStrategy', {name: 'Basic Strategy'})}
+                    onPress={() => navigate('Home', {name: 'Basic Strategy'})}
                     />
                     <Button
                     title="Self Paced Count"
                     color="#000000"
-                    onPress={() => navigate('SelfPacedCount', {name: 'Self Paced Count'})}
+                    onPress={() => navigate('Learn', {name: 'Self Paced Count'})}
                     />
                     <Button
                     title="Speed Count"
                     color="#000000"
-                    onPress={() => navigate('SpeedCount', {name: 'Speed Count'})}
+                    onPress={() => navigate('Train', {name: 'Speed Count'})}
                     />
                     <Button
                     title="True Count"
                     color="#000000"
-                    onPress={() => navigate('TrueCount', {name: 'True Count'})}
+                    onPress={() => navigate('Train', {name: 'True Count'})}
                     />
                     <Button
                     title="Bet Sizing"
                     color="#000000"
-                    onPress={() => navigate('BetSizing', {name: 'Bet Sizing'})}
+                    onPress={() => navigate('Train', {name: 'Bet Sizing'})}
                     />
-                </View>
+                </View> */}
         </View>
 
 
@@ -64,4 +66,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Train
+export default BetSizing

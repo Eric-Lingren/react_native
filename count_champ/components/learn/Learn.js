@@ -11,7 +11,7 @@ class Learn extends React.Component {
         return (
             <View>
                 <Text>
-                    Here is some text for this page
+                    This is the LEARNING PAGE
                 </Text>
             </View>
         );
