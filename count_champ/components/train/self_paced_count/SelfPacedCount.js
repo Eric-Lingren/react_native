@@ -10,6 +10,8 @@ class SelfPacedCount extends React.Component {
     };
     
     render() {
+        let test = "hi"
+        console.log(test)
         const {navigate} = this.props.navigation;
         return (
             <View style={styles.container}>
