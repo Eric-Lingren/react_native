@@ -9,6 +9,7 @@ import SelfPacedCount from './components/train/self_paced_count/SelfPacedCount'
 import SpeedCount from './components/train/speed_count/SpeedCount'
 import TrueCount from './components/train/true_count/TrueCount'
 import BetSizing from './components/train/bet_sizing/BetSizing'
+import BankrollSizing from './components/train/bankroll_sizing/BankrollSizing'
 
 // You can import from local files
 import AssetExample from './components/AssetExample';
@@ -27,6 +28,7 @@ const MainNavigator = createStackNavigator({
   SpeedCount: {screen: SpeedCount},
   TrueCount: {screen: TrueCount},
   BetSizing: {screen: BetSizing},
+  BankrollSizing: {screen: BankrollSizing},
   //Profile: {screen: ProfileScreen},
 });
 

@@ -26,7 +26,8 @@ class DealCardsProvider extends Component {
         return (
             <DealCardsContext.Provider
                 value={{
-
+                    deckID: this.state.deckID,
+                    test: this.state.test
                 }}>
                 { this.props.children }
             </DealCardsContext.Provider>
