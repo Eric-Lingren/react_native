@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Button, Text, View, StyleSheet, Image, Dimensions } from 'react-native';
 import { Constants } from 'expo';
+import CardProvider from '../context/CardProvider'
 
 let ScreenHeight = Dimensions.get("window").height;
 
@@ -12,6 +13,7 @@ class Train extends React.Component {
     render() {
         const {navigate} = this.props.navigation;
         return (
+            <CardProvider>
             <View style={styles.container}>
 
                 <View style={styles.buttonContainer}>
@@ -46,7 +48,8 @@ class Train extends React.Component {
                     onPress={() => navigate('BetSizing', {name: 'Bet Sizing'})}
                     />
                 </View>
-        </View>
+            </View>
+            </CardProvider>
 
 
             

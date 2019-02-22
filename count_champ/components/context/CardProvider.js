@@ -8,7 +8,6 @@ class DealCardsProvider extends Component {
         super()
         this.state = {
             deckID: '',
-            test: 'hello'
         }
     }
 
@@ -22,7 +21,7 @@ class DealCardsProvider extends Component {
     }
 
     render(){
-        console.log(this.state.test)
+    
         return (
             <DealCardsContext.Provider
                 value={{

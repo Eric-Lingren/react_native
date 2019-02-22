@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Button, Text, View, StyleSheet, Image, Dimensions } from 'react-native';
 import { Constants } from 'expo';
+import {withCard} from '../context/CardProvider'
 import homeLogo from './blackjackLogo.jpg'
 
 let ScreenHeight = Dimensions.get("window").height;
@@ -11,12 +12,10 @@ class HomeScreen extends React.Component {
     };
     render() {
         const {navigate} = this.props.navigation;
-        console.log(this.props)
-        console.log('test')
+    
         return (
-            <View   style={styles.container}>
-                
-                
+            <View style={styles.container}>
+
                 <View>
                     <Text style={styles.paragraph}>
                         So You Want To Be A Card Counter...
@@ -79,4 +78,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default HomeScreen
+export default withCard(HomeScreen)

@@ -1,52 +1,47 @@
 import * as React from 'react';
 import { Button, Text, View, StyleSheet, Image, Dimensions } from 'react-native';
 import { Constants } from 'expo';
+import {withCard} from '../../context/CardProvider'
+import axios from 'axios'
 
 let ScreenHeight = Dimensions.get("window").height;
 
 class BasicStrategy extends React.Component {
+    constructor(){
+        super()
+        this.state = {
+            deckID: '',
+        }
+    }
+
     static navigationOptions = {
         title: 'Count Champ',
     };
     
+    componentDidMount(){
+        this.getDecks()
+    }
+
+    getDecks = () => {
+        axios.get('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=8').then(response => {
+            const deckID = response.data.deck_id;
+            this.setState({
+                deckID: deckID,
+            })
+        })
+    }
+
     render() {
         const {navigate} = this.props.navigation;
+        console.log(this.state.deckID)
         return (
+            
             <View style={styles.container}>
                 <Text>
                     THIS IS THE BASIC STRATEGY PAGE
                 </Text>
-                {/* <View style={styles.buttonContainer}>
-                    <Button
-                    title="Basic Strategy"
-                    color="#000000"
-                    onPress={() => navigate('Home', {name: 'Basic Strategy'})}
-                    />
-                    <Button
-                    title="Self Paced Count"
-                    color="#000000"
-                    onPress={() => navigate('Learn', {name: 'Self Paced Count'})}
-                    />
-                    <Button
-                    title="Speed Count"
-                    color="#000000"
-                    onPress={() => navigate('Train', {name: 'Speed Count'})}
-                    />
-                    <Button
-                    title="True Count"
-                    color="#000000"
-                    onPress={() => navigate('Train', {name: 'True Count'})}
-                    />
-                    <Button
-                    title="Bet Sizing"
-                    color="#000000"
-                    onPress={() => navigate('Train', {name: 'Bet Sizing'})}
-                    />
-                </View> */}
-        </View>
+            </View>
 
-
-            
         );
     }
 }
@@ -66,4 +61,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default BasicStrategy
+export default withCard(BasicStrategy)
