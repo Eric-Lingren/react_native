@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Text, View, StyleSheet, Form, Input, Image, Dimensions } from 'react-native';
+import { Button, Text, View, StyleSheet, FormLabel,  Image, Dimensions } from 'react-native';
 import { Constants } from 'expo';
 import axios from 'axios'
 
@@ -118,15 +118,18 @@ class SpeedCount extends React.Component {
             <View style={styles.container}>
                 <View className='container'>
 
-                    <Form >
+                    {/* <Form > */}
                         <Text >Cards Per Second:</Text> 
-                        <Input  name='cardsPerSecond' 
-                                type='number' 
-                                value={this.state.cardsPerSecond} 
-                                placeholder='Cards Per Second' 
-                                onChange={this.handleChange}>
-                        </Input>
-                    </Form> 
+                        
+                        {/* <FormInput   
+                                // name='cardsPerSecond' 
+                                // type='number' 
+                                // value={this.state.cardsPerSecond} 
+                                // placeholder='Cards Per Second' 
+                                // onChange={this.handleChange}
+                        //         >
+                        // </FormInput>
+                    </Form>  */}
 
                     <View >
                         <View style={styles.deckContainer}>
