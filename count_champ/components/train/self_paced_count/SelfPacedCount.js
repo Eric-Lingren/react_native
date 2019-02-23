@@ -130,7 +130,6 @@ const styles = StyleSheet.create({
         height: ScreenHeight,
     },
     deckContainer: {
-        
         justifyContent: 'center',
         alignItems: 'center',
         alignContent: 'center',
