@@ -44,7 +44,6 @@ class SelfPacedCount extends React.Component {
                 currentCardValue: cardValue,
                 remainingCardsInDeck: remaining
             }
-            //  Once state is set from the new card, re-run the player hand total functions
             }, () => this.whatsTheCount() )
         })
     }
@@ -54,14 +53,14 @@ class SelfPacedCount extends React.Component {
             axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/shuffle/`).then(response => {
             })
         }
-        //  if card value is 10 or greater, count is subtracted by 1
+        //  If card value is 10 or greater, count is decremented by 1
         if (this.state.currentCardValue === '10' || this.state.currentCardValue === 'JACK' || this.state.currentCardValue === 'QUEEN' || this.state.currentCardValue === 'KING' || this.state.currentCardValue === 'ACE'){
             this.setState(prevState => {
                 return{
                     count: prevState.count -1
                 }
             })
-        //  if card value is 6 or less, count is added by 1
+        //  If card value is 6 or less, count is incremented by 1
         } else if(this.state.currentCardValue < 7){
             this.setState(prevState => {
                 return{
@@ -71,7 +70,7 @@ class SelfPacedCount extends React.Component {
         }
     }
 
-    hideShowRunningCount = () => {
+    toggleShowCount = () => {
         if (this.state.runningCountVisible){
             this.setState({
                 runningCountVisible: false
@@ -83,38 +82,38 @@ class SelfPacedCount extends React.Component {
         }
     }
 
-    hideShowCountDiv = () => {
-        if (this.state.runningCountVisible) {
-            return <Text>Click To Show Running Count</Text>
-        } else {
-            return <Text>Click To Hide Running Count</Text>
-        }
-    }
-
-    // navigate = this.props.navigation.state.params.name;
     static navigationOptions = {
         title: 'Count Champ'
     };
     
     render() {
-        
-        console.log(this.props.navigation.state.params.name)
         return (
             <View style={styles.container}>
                 <View className='trainingWrapper'>
-                    <View className='container'>
-                        <Text className='trainDrillSubtitle'>Self Paced Count Drill</Text>
-                        <View className='deckDisplay'>
+                    <View style={styles.deckContainer}>
 
-                            <Image
-                                style={{width: 250, height: 350}}
-                                source={{uri: this.state.cardsDealtImages}}
-                            />
+                        <Image
+                            style={styles.deckDisplay}
+                            source={{uri: this.state.cardsDealtImages}}
+                        />
 
-                        </View>
-                        <Button onPress={this.dealCard} title="Deal Card">Deal Card</Button>
-                        <Text onPress={this.hideShowRunningCount} className='toggleCount'>{this.hideShowCountDiv()} </Text>
-                        <Text className={this.state.runningCountVisible ? 'hideCountDiv' : 'showCountDiv' }> Running Count: {this.state.count}</Text>
+                    </View>
+                    <View style={styles.buttonContainer}>
+                        <Button color="#000000" onPress={this.dealCard} title="Deal Card"></Button>
+                        { 
+                            this.state.runningCountVisible ?
+                            <Button color="#000000" onPress={this.toggleShowCount} title="Hide Count">Show Count</Button>
+                            :
+                            <Button color="#000000" onPress={this.toggleShowCount} title="Show Count">Show Count</Button>
+                        }
+                    </View>
+                    <View>
+                    {
+                        this.state.runningCountVisible ?
+                        <Text style={styles.count}> Running Count: {this.state.count}</Text>
+                        :
+                        null
+                    }
                     </View>
                 </View>
             </View>
@@ -130,11 +129,30 @@ const styles = StyleSheet.create({
         backgroundColor: ( '#0f9b0f', '#52c234', '#52c234', '#0f9b0f'),
         height: ScreenHeight,
     },
+    deckContainer: {
+        
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignContent: 'center',
+        marginBottom: 15,
+    },
+    deckDisplay: {
+        width: 250, 
+        height: 350,
+    },
     buttonContainer: {
-        marginTop: 100,
+        marginTop: 0,
         flex: 0,
         justifyContent: 'space-evenly',
-        height: 350,
+        height: 120,
+    },
+    count: {
+        fontSize: 30,
+        fontWeight: 'bold',
+        color: "#ffffff",
+        textAlign: 'center',
+
+
     },
 });
 
