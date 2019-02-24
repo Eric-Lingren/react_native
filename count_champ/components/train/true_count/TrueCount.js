@@ -61,7 +61,7 @@ class TrueCount extends React.Component {
         const {navigate} = this.props.navigation;
         return (
             <View style={styles.container}>
-                <View className='container'>
+                <View>
                     <View style={styles.textContainer}>
                         <Text style={styles.textStyle}> Running Count: {this.state.randomCount} </Text>
                         <Text style={styles.textStyle}> Decks Left: {this.state.randomDeck} </Text>

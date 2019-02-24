@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Text, View, StyleSheet, FormLabel,  Image, Dimensions } from 'react-native';
+import { Button, Text, View, StyleSheet, TextInput,  Image, Dimensions } from 'react-native';
 import { Constants } from 'expo';
 import axios from 'axios'
 
@@ -19,6 +19,7 @@ class SpeedCount extends React.Component {
             whatsTheCountVisible: false,
             cardsPerSecond: 1,
             howFast: 1000,
+            input: '',
         }
     }
 
@@ -36,7 +37,14 @@ class SpeedCount extends React.Component {
             runningCountVisible: false,
             whatsTheCountVisible: false, 
         })
-        const speed = this.state.howFast
+        
+        let speed;
+        if(this.state.input){
+            speed = ( 1000 / (parseInt(this.state.input)) )
+        } else {
+            speed = 1000
+        }
+
         const timerId = setInterval(()=>{
             axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=1`).then(response => {
                 const oneCardDealt = response.data.cards[0].code;
@@ -49,14 +57,13 @@ class SpeedCount extends React.Component {
                     cardsDealtValues: [...prevState.cardsDealtValues, cardValue],
                     currentCardValue: cardValue,
                 }
-                //  Once state is set from the new card, re-run the player hand total functions
                 }, () => this.whatsTheCount() )
             })
         },speed)
         setTimeout( ()=> { 
             clearInterval(timerId)
             this.countIsFinished()
-        }, 30000)  
+        }, 5000)  
     }
     
     whatsTheCount = () => {
@@ -81,7 +88,8 @@ class SpeedCount extends React.Component {
         setTimeout ( () => {
             this.setState({
                 cardsDealtImages: null,
-                whatsTheCountVisible: true 
+                whatsTheCountVisible: true,
+                input: ''
             }) 
         }, 1000)
         this.displayCount()    
@@ -94,18 +102,6 @@ class SpeedCount extends React.Component {
             }) 
         }, 3000)  
     }
-    
-    handleChange = event => {
-        this.setState({ 
-            [event.target.name]: event.target.value,
-            runningCountVisible: false
-        }, () => {
-            this.setState({
-                howFast: (1000 / this.state.cardsPerSecond),
-            })
-            
-        }, () => console.log(this.state.cardsPerSecond) ) 
-    }
 
     static navigationOptions = {
         title: 'Speed Count Drill',
@@ -115,40 +111,29 @@ class SpeedCount extends React.Component {
         const {navigate} = this.props.navigation;
         return (
             <View style={styles.container}>
-                <View className='container'>
-
-                    {/* <Form > */}
-                        <Text >Cards Per Second:</Text> 
-                        
-                        {/* <FormInput   
-                                // name='cardsPerSecond' 
-                                // type='number' 
-                                // value={this.state.cardsPerSecond} 
-                                // placeholder='Cards Per Second' 
-                                // onChange={this.handleChange}
-                        //         >
-                        // </FormInput>
-                    </Form>  */}
-
+                <View>
+                    <View style={styles.textContainer}>
+                        <Text style={styles.textStyle}>Cards Per Second:</Text> 
+                        <TextInput
+                            style={{height: 40, borderColor: 'black', borderWidth: 1, borderRadius: 10, backgroundColor: 'white', opacity: 0.7, width: 100, paddingTop: 5, paddingBottom: 5, paddingLeft: 35, fontSize: 26, fontWeight: 'bold'}}
+                            keyboardType = 'phone-pad'
+                            maxLength={3}
+                            onChangeText={(input) => this.setState({input})}
+                            value={this.state.input}
+                        />
+                    </View>
                     <View >
                         <View style={styles.deckContainer}>
                             <Image style={styles.deckDisplay} source={{uri: this.state.cardsDealtImages}} />
+                            {   this.state.whatsTheCountVisible ? <Text style={styles.textStyleAnswer}>Whats The Count?</Text>
+                                : null
+                            }
+                            {   this.state.runningCountVisible ? <Text style={styles.textStyleAnswer}>{this.state.count}</Text> 
+                                : null
+                            }
                         </View>
                         
-                        {
-                            this.state.whatsTheCountVisible 
-                            ?
-                            <Text >Whats The Count?</Text>
-                            : 
-                            null
-                        }
-                        {
-                            this.state.runningCountVisible 
-                            ?
-                            <Text >{this.state.count}</Text> 
-                            :
-                            null
-                        }
+                        
                     </View>
                     <Button color="#000000" onPress={this.dealCard} title="Start"></Button>
                     
@@ -168,6 +153,14 @@ const styles = StyleSheet.create({
         backgroundColor: ( '#0f9b0f', '#52c234', '#52c234', '#0f9b0f'),
         height: ScreenHeight,
     },
+    textContainer: {
+        marginTop: -20,
+        flex: 0,
+        justifyContent: 'space-evenly',
+        height: 100,
+        alignItems: 'center',
+        alignContent: 'center',
+    },
     deckContainer: {
         justifyContent: 'center',
         alignItems: 'center',
@@ -178,12 +171,25 @@ const styles = StyleSheet.create({
         width: 250, 
         height: 350,
     },
+    answers: {
+        marginTop: -100,
+    },
     buttonContainer: {
         marginTop: 100,
         flex: 0,
         justifyContent: 'space-evenly',
         height: 350,
     },
+    textStyle: {
+        fontSize: 18, 
+        fontWeight: 'bold', 
+        color: 'white'
+    },
+    textStyleAnswer: {
+        fontSize: 22, 
+        fontWeight: 'bold', 
+        color: 'white'
+    }
 });
 
 export default SpeedCount
