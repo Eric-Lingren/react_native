@@ -83,7 +83,7 @@ class SelfPacedCount extends React.Component {
     }
 
     static navigationOptions = {
-        title: 'Count Champ'
+        title: 'Self Paced Count Drill'
     };
     
     render() {

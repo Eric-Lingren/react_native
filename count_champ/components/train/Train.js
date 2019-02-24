@@ -7,7 +7,7 @@ let ScreenHeight = Dimensions.get("window").height;
 
 class Train extends React.Component {
     static navigationOptions = {
-        title: 'Count Champ',
+        title: 'Count Champ Training',
     };
     
     render() {

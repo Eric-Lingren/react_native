@@ -108,12 +108,11 @@ class SpeedCount extends React.Component {
     }
 
     static navigationOptions = {
-        title: 'Count Champ',
+        title: 'Speed Count Drill',
     };
     
     render() {
         const {navigate} = this.props.navigation;
-        console.log(this.state.cardsDealtImages)
         return (
             <View style={styles.container}>
                 <View className='container'>

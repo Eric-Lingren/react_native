@@ -10,10 +10,10 @@ class TrueCount extends React.Component {
         this.state = {
             randomDeck: 2,
             randomCount: 2,
-            guess: 1,
             answer: 1,
-            wereTheyRight: true,
-            input: ''
+            wereTheyRight: '',
+            input: '',
+            showAnswerBox: false
         }
     }
 
@@ -24,7 +24,9 @@ class TrueCount extends React.Component {
         let randomCount = countArray[Math.floor(Math.random()*countArray.length)]
         this.setState({
             randomDeck: randomDeck,
-            randomCount: randomCount
+            randomCount: randomCount,
+            input: '',
+            showAnswerBox: false
         })
     }
 
@@ -34,58 +36,61 @@ class TrueCount extends React.Component {
         const correctAnswer = (Math.floor( count / deck));
         this.setState({
             answer: correctAnswer,
+            showAnswerBox: true
         }, () => this.checkAnswer() )
     }
 
     checkAnswer = () => {
-        let guessNumber = parseInt(this.state.guess)
+        let guessNumber = parseInt(this.state.input)
         if (this.state.answer === guessNumber){
             this.setState({
                 wereTheyRight: true,
             })
-            return <h2>Correct!</h2>
         } else{
             this.setState({
                 wereTheyRight: false
             })
-            return <h2> answered wrong</h2>
         }
     }
     
-
     static navigationOptions = {
-        title: 'Count Champ',
+        title: 'True Count Drill',
     };
     
     render() {
         const {navigate} = this.props.navigation;
-        console.log(this.state.input)
         return (
             <View style={styles.container}>
                 <View className='container'>
-                    <Text className='trainDrillSubtitle'>Convert to True Count Drill</Text>
-                    <Text className='subTitle'>Running Count is: {this.state.randomCount} </Text>
-                    <Text className='subTitle'>Decks Left: {this.state.randomDeck}</Text>
-                    <Text className='subTitleMargin'>What's the true count? (round) </Text>
-                    <TextInput
-                        style={{height: 40, borderColor: 'black', borderWidth: 1, borderRadius: 10, backgroundColor: 'white', opacity: 0.7, width: 100, paddingTop: 5, paddingBottom: 5, paddingLeft: 35, fontSize: 26, fontWeight: 'bold'}}
-                        keyboardType = 'phone-pad'
-                        maxLength={2}
-                        onChangeText={(input) => this.setState({input})}
-                        value={this.state.input}
-                    />
+                    <View style={styles.textContainer}>
+                        <Text style={styles.textStyle}> Running Count: {this.state.randomCount} </Text>
+                        <Text style={styles.textStyle}> Decks Left: {this.state.randomDeck} </Text>
+                        <Text style={styles.textStyle}> What's the true count? (round down) </Text>
+                        <TextInput
+                            style={{height: 40, borderColor: 'black', borderWidth: 1, borderRadius: 10, backgroundColor: 'white', opacity: 0.7, width: 100, paddingTop: 5, paddingBottom: 5, paddingLeft: 35, fontSize: 26, fontWeight: 'bold'}}
+                            keyboardType = 'phone-pad'
+                            maxLength={2}
+                            onChangeText={(input) => this.setState({input})}
+                            value={this.state.input}
+                        />
+                    </View>
                     
                     <View style={styles.buttonContainer}>
                         <Button color="#000000" onPress={this.generateNewQuestion} title="New Question"></Button>
                         <Button color="#000000" onPress={this.clickCheck} title="Check Answer"></Button>
                     </View>
-                    <Text className={this.state.wereTheyRight ? 'showCountDiv' : 'hideCountDiv' }>Correct!</Text>
-                    <Text className={this.state.wereTheyRight ? 'hideCountDiv' : 'showCountDiv' }>The Answer Was: {this.state.answer}</Text>
+                    {
+                        this.state.showAnswerBox ?
+                        <View style={styles.answerContainer}>
+                            { this.state.wereTheyRight ? <Text style={styles.answerStyle}>Correct!</Text> : <Text style={styles.answerStyle}>Answer Was: {this.state.answer}</Text>
+                            }
+                        </View>
+                        :
+                        null
+                    }
+                    
                 </View>
-        </View>
-
-
-            
+            </View>
         );
     }
 }
@@ -96,6 +101,30 @@ const styles = StyleSheet.create({
         padding: 8,
         backgroundColor: ( '#0f9b0f', '#52c234', '#52c234', '#0f9b0f'),
         height: ScreenHeight,
+    },
+    textContainer: {
+        marginTop: 0,
+        flex: 0,
+        justifyContent: 'space-evenly',
+        height: 200,
+        alignItems: 'center',
+        alignContent: 'center',
+    },
+    textStyle: {
+        fontSize: 18, 
+        fontWeight: 'bold', 
+        color: 'white'
+    },
+    answerContainer: {
+        marginTop: 0,
+        flex: 0,
+        alignItems: 'center',
+        alignContent: 'center',
+    },
+    answerStyle: {
+        fontSize: 22, 
+        fontWeight: 'bold', 
+        color: 'white'
     },
     buttonContainer: {
         marginTop: 0,
