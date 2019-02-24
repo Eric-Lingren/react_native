@@ -12,18 +12,12 @@ class TrueCount extends React.Component {
             randomCount: 2,
             guess: 1,
             answer: 1,
-            wereTheyRight: true
+            wereTheyRight: true,
+            input: ''
         }
     }
 
-    clickNew = () => {
-        console.log('guess is : ' + this.state.guess)
-        // this.setState({
-        //     wereTheyRight: true
-        // })
-        this.generateNumbers()
-    }
-    generateNumbers = () => {
+    generateNewQuestion = () => {
         const decksLeftArray = [1,2,3,4,5,6,7,8];
         let randomDeck = decksLeftArray[Math.floor(Math.random()*decksLeftArray.length)]
         const countArray = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]
@@ -34,17 +28,10 @@ class TrueCount extends React.Component {
         })
     }
 
-    handleChange = event => {
-        this.setState({ 
-            [event.target.name]: event.target.value,  
-        }) 
-    }
-
     clickCheck = () => {
-        console.log('check was clicked')
         const deck = this.state.randomDeck;
         const count = this.state.randomCount;
-        const correctAnswer = (Math.round( count / deck));
+        const correctAnswer = (Math.floor( count / deck));
         this.setState({
             answer: correctAnswer,
         }, () => this.checkAnswer() )
@@ -72,6 +59,7 @@ class TrueCount extends React.Component {
     
     render() {
         const {navigate} = this.props.navigation;
+        console.log(this.state.input)
         return (
             <View style={styles.container}>
                 <View className='container'>
@@ -83,21 +71,13 @@ class TrueCount extends React.Component {
                         style={{height: 40, borderColor: 'black', borderWidth: 1, borderRadius: 10, backgroundColor: 'white', opacity: 0.7, width: 100, paddingTop: 5, paddingBottom: 5, paddingLeft: 35, fontSize: 26, fontWeight: 'bold'}}
                         keyboardType = 'phone-pad'
                         maxLength={2}
-                        onChangeText={(text) => this.setState({text})}
-                        value={this.state.text}
+                        onChangeText={(input) => this.setState({input})}
+                        value={this.state.input}
                     />
-                    {/* <form className='runningCountTrueCountForm'>
-                        <input  className='runCountTrueCountInput' 
-                                type='number' 
-                                name='guess' 
-                                value={this.state.guess} 
-                                onChange={this.handleChange} 
-                                placeholder='Enter True Count' >
-                        </input>
-                    </form> */}
+                    
                     <View style={styles.buttonContainer}>
-                        <Button color="#000000" onPress={this.clickNew} title="New"></Button>
-                        <Button color="#000000" onPress={this.clickCheck} title="Check"></Button>
+                        <Button color="#000000" onPress={this.generateNewQuestion} title="New Question"></Button>
+                        <Button color="#000000" onPress={this.clickCheck} title="Check Answer"></Button>
                     </View>
                     <Text className={this.state.wereTheyRight ? 'showCountDiv' : 'hideCountDiv' }>Correct!</Text>
                     <Text className={this.state.wereTheyRight ? 'hideCountDiv' : 'showCountDiv' }>The Answer Was: {this.state.answer}</Text>
