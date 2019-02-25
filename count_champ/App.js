@@ -10,6 +10,7 @@ import SpeedCount from './components/train/speed_count/SpeedCount'
 import TrueCount from './components/train/true_count/TrueCount'
 import BetSizing from './components/train/bet_sizing/BetSizing'
 import BankrollSizing from './components/train/bankroll_sizing/BankrollSizing'
+// import CorrectPlays from './components/train/basic_strategy/CorrectPlays'
 
 // // or any pure javascript modules available in npm
 // import { Card } from 'react-native-paper';
@@ -26,6 +27,7 @@ const MainNavigator = createStackNavigator({
   TrueCount: {screen: TrueCount},
   BetSizing: {screen: BetSizing},
   BankrollSizing: {screen: BankrollSizing},
+  //CorrectPlays: {screen: CorrectPlays},
 });
 
 const App = createAppContainer(MainNavigator);
