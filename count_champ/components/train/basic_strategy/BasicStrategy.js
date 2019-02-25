@@ -143,6 +143,21 @@ class BasicStrategy extends React.Component {
 
     whatCheckHandFunctionToRun = () => {
         console.log(this.state)
+
+        // const pCard1Number = parseInt(this.state.pCard1Number)
+        // const pCard2Number = parseInt(this.state.pCard2Number)
+    
+        // let dealerHand = parseInt(this.state.dHand)
+        // let playerHand = parseInt(this.state.pHand)
+
+        // if (pCard1Number === pCard2Number ){
+        //     this.props.checkSplitHand(dealerHand, playerHand)
+        // } else if (pCard1Number === 11 || pCard2Number === 11){
+        //     this.props.checkSoftHand(dealerHand, playerHand)
+        // } else {
+        //     this.props.checkHardHand(dealerHand, playerHand)
+        // }
+
     }
 
     checkButton = () => {
