@@ -200,7 +200,7 @@ class BasicStrategy extends React.Component {
                     <Text style={styles.handLabel}>Player Hand</Text>
                     <Button onPress={this.dealCard} width='50' color='#000000' title='Deal'></Button>
                     
-                        <Text style={{marginBottom: this.state.bottomMargin}}>Choose the correct play:</Text>
+                        <Text style={styles.handLabel}> Choose the correct play:</Text>
                         <View style={styles.buttonWrapper}>
                             <View style={styles.buttonContainerLeft}>
                                 <Button onPress={this.checkButton} title='Hit'></Button>
@@ -213,8 +213,6 @@ class BasicStrategy extends React.Component {
                             <View style={styles.buttonContainerRight}>
                                 <Button onPress={this.checkButton} title='Stand'></Button>
                                 <Button onPress={this.checkButton} title='Split'></Button>
-                                {/* {this.state.buttonList} */}
-                                {/* <Button onPress={this.checkStats} title='Check Stats'></Button> */}
                             </View>
                         </View>
                     {/* <BasicStrategyStatsModal /> */}
