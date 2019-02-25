@@ -69,12 +69,6 @@ class BetSizing extends React.Component {
         let answer = parseInt(this.state.answer)
         let count = this.state.randomCount
 
-        console.log('answer is ' + answer)
-        console.log(typeof(answer))
-    
-        console.log( 'count is ' + count)
-        console.log(typeof(count))
-
         if (answer === 1 && count === 0 ){
             this.displayOutputCorrect()
         } else if (answer === 2 && count === 1 ){
@@ -125,6 +119,7 @@ class BetSizing extends React.Component {
                         <Button color="#000000" onPress={this.setAnswerTo8} title='1  hand  of  8  Units'></Button>
                         <Button color="#000000" onPress={this.setAnswerTo16} title='2  hands  of  8  Units'></Button>
                     </View>
+                    
                     {
                     this.state.showAnswer ?
                     <View>
@@ -139,9 +134,6 @@ class BetSizing extends React.Component {
                     </View>
                 </View>
             </View>
-
-
-            
         );
     }
 }

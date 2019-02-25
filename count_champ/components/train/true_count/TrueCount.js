@@ -88,7 +88,6 @@ class TrueCount extends React.Component {
                         :
                         null
                     }
-                    
                 </View>
             </View>
         );

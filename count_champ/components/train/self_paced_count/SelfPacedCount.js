@@ -91,12 +91,10 @@ class SelfPacedCount extends React.Component {
             <View style={styles.container}>
                 <View className='trainingWrapper'>
                     <View style={styles.deckContainer}>
-
                         <Image
                             style={styles.deckDisplay}
                             source={{uri: this.state.cardsDealtImages}}
                         />
-
                     </View>
                     <View style={styles.buttonContainer}>
                         <Button color="#000000" onPress={this.dealCard} title="Deal Card"></Button>
@@ -117,7 +115,6 @@ class SelfPacedCount extends React.Component {
                     </View>
                 </View>
             </View>
-
         );
     }
 }

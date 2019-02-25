@@ -132,16 +132,11 @@ class SpeedCount extends React.Component {
                                 : null
                             }
                         </View>
-                        
-                        
                     </View>
                     <Button color="#000000" onPress={this.dealCard} title="Start"></Button>
                     
                 </View>
-            </View>
-
-
-            
+            </View> 
         );
     }
 }

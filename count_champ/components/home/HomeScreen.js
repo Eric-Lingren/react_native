@@ -7,15 +7,16 @@ import homeLogo from './blackjackLogo.jpg'
 let ScreenHeight = Dimensions.get("window").height;
 
 class HomeScreen extends React.Component {
+
     static navigationOptions = {
         title: 'Count Champ',
     };
+
     render() {
         const {navigate} = this.props.navigation;
     
         return (
             <View style={styles.container}>
-
                 <View>
                     <Text style={styles.paragraph}>
                         So You Want To Be A Card Counter...
@@ -26,8 +27,8 @@ class HomeScreen extends React.Component {
                     <Text style={styles.paragraph}>
                         You Better Start By Learning!
                     </Text>
-
                 </View>
+                
                 <View style={styles.buttonContainer}>
                     <Button
                     title="Learn"
