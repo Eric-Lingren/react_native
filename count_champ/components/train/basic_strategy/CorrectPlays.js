@@ -1,4 +1,8 @@
-import React, { Component } from 'react';
+// import React, { Component } from 'react';
+import * as React from 'react';
+import { Constants } from 'expo';
+import BasicStrategy from './BasicStrategy';
+import BasicStrategy from './BasicStrategy';
 
 const CorrectPlayContext = React.createContext()
 
@@ -58,7 +62,7 @@ class CorrectPlayProvider extends Component {
     }
 
     toggleBasicStrategyStats = () => {
-        if (this.state.showBasicStrategyStats === false){
+        if (!this.state.showBasicStrategyStats) {
             this.setState({showBasicStrategyStats: true})
         } else{
             this.setState({showBasicStrategyStats: false})
@@ -597,26 +601,27 @@ class CorrectPlayProvider extends Component {
 
     render(){
         return (
-            <CorrectPlayContext.Provider 
-                value={{
-                    checkSplitHand: this.checkSplitHand,
-                    checkSoftHand: this.checkSoftHand,
-                    checkHardHand: this.checkHardHand,
-                    correctPlay: this.state.correctPlay,
-                    setCorrectPlayRules: this.setCorrectPlayRules,
-                    currentKindOfHandBeingPlayed: this.state.currentKindOfHandBeingPlayed,
-                    setCorrectHandsPlayed: this.setCorrectHandsPlayed,
-                    hardHandsPlayed: this.state.hardHandsPlayed,
-                    hardHandsCorrect: this.state.hardHandsCorrect,
-                    softHandsPlayed: this.state.softHandsPlayed,
-                    softHandsCorrect: this.state.softHandsCorrect,
-                    splitHandsPlayed: this.state.splitHandsPlayed,
-                    splitHandsCorrect: this.state.splitHandsCorrect,
-                    toggleBasicStrategyStats: this.toggleBasicStrategyStats,
-                    showBasicStrategyStats: this.state.showBasicStrategyStats,
-                }}>
-                { this.props.children }
-            </CorrectPlayContext.Provider>
+            // <CorrectPlayContext.Provider 
+            //     value={{
+            //         checkSplitHand: this.checkSplitHand,
+            //         checkSoftHand: this.checkSoftHand,
+            //         checkHardHand: this.checkHardHand,
+            //         correctPlay: this.state.correctPlay,
+            //         setCorrectPlayRules: this.setCorrectPlayRules,
+            //         currentKindOfHandBeingPlayed: this.state.currentKindOfHandBeingPlayed,
+            //         setCorrectHandsPlayed: this.setCorrectHandsPlayed,
+            //         hardHandsPlayed: this.state.hardHandsPlayed,
+            //         hardHandsCorrect: this.state.hardHandsCorrect,
+            //         softHandsPlayed: this.state.softHandsPlayed,
+            //         softHandsCorrect: this.state.softHandsCorrect,
+            //         splitHandsPlayed: this.state.splitHandsPlayed,
+            //         splitHandsCorrect: this.state.splitHandsCorrect,
+            //         toggleBasicStrategyStats: this.toggleBasicStrategyStats,
+            //         showBasicStrategyStats: this.state.showBasicStrategyStats,
+            //     }}>
+            //     { this.props.children }
+            // </CorrectPlayContext.Provider>
+            <BasicStrategy />
         )
     }
 }
@@ -624,8 +629,8 @@ class CorrectPlayProvider extends Component {
 export default CorrectPlayProvider
 
 
-export const withCorrectPlay = C => props => (
-    <CorrectPlayContext.Consumer>
-        {value => <C {...props} {...value}/>}
-    </CorrectPlayContext.Consumer>
-)
+// export const withCorrectPlay = C => props => (
+//     <CorrectPlayContext.Consumer>
+//         {value => <C {...props} {...value}/>}
+//     </CorrectPlayContext.Consumer>
+// )
