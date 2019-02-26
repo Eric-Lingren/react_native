@@ -14,7 +14,8 @@ class Menubar extends React.Component {
             <View style={styles.container}>
                 <View style={styles.textContainer}>
                     <Text style={styles.textStyles}>Casino Rules</Text>
-                    <Text style={styles.textStyles}>My Account</Text>
+                    <Text style={styles.textStyles}>My Stats</Text>
+                    <Text style={styles.textStyles}>Profile</Text>
                     <Text style={styles.textStyles}>About</Text>
                 </View>
             </View>
