@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { Button, Text, View, StyleSheet, Image, Dimensions } from 'react-native';
 import { Constants } from 'expo';
-import {withCard} from '../context/CardProvider'
-import homeLogo from './blackjackLogo.jpg'
+import homeLogo from './blackjackLogo.jpg';
 
 let ScreenHeight = Dimensions.get("window").height;
 
@@ -52,6 +51,8 @@ const styles = StyleSheet.create({
         padding: 8,
         backgroundColor: ( '#0f9b0f', '#52c234', '#52c234', '#0f9b0f'),
         height: ScreenHeight,
+        zIndex: 10,
+        marginTop: -50,
     },
     paragraph: {
         margin: 24,
@@ -79,4 +80,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default withCard(HomeScreen)
+export default HomeScreen

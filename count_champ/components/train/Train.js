@@ -38,11 +38,6 @@ class Train extends React.Component {
                     onPress={() => navigate('TrueCount', {name: 'True Count'})}
                     />
                     <Button
-                    title="Bankroll Sizing"
-                    color="#000000"
-                    onPress={() => navigate('BankrollSizing', {name: 'Bankroll Sizing'})}
-                    />
-                    <Button
                     title="Bet Sizing"
                     color="#000000"
                     onPress={() => navigate('BetSizing', {name: 'Bet Sizing'})}

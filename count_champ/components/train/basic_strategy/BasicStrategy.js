@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Button, Text, View, StyleSheet, Image, Dimensions, ScrollView } from 'react-native';
 import { Constants } from 'expo';
 import axios from 'axios';
-//import CorrectPlays from './CorrectPlays';
 
 
 let ScreenHeight = Dimensions.get("window").height;
@@ -803,7 +802,7 @@ class BasicStrategy extends React.Component {
         }
     }
 
-    
+
 
 
     static navigationOptions = {
@@ -812,31 +811,30 @@ class BasicStrategy extends React.Component {
 
     render() {
         const {navigate} = this.props.navigation;
-        //console.log(this.props)
         return (
             <ScrollView>
-            <View style={styles.container}>
-                <Text style={styles.rulesLabel}>Choose your Casino Rules:</Text>
-                {/* <form onChange={this.handleRulesCheckbox} className='casino-rules-form'>
-                    <input  className='rules-checkbox' 
-                            name='dealerStandsSoft17' 
-                            type='checkbox'>
-                    </input> Dealer stand's on soft 17
-                    <input  className='rules-checkbox'
-                            name='doubleAllowed' 
-                            type='checkbox'>
-                    </input>  Double allowed
-                    <input  className='rules-checkbox'
-                            name='doubleAfterSplitAllowed' 
-                            type='checkbox'>
-                    </input>  Double after split allowed
-                    <input  className='rules-checkbox' 
-                            name='surrenderAllowed' 
-                            type='checkbox'>
-                    </input>  Surrender allowed
-                </form> */}
-                <Text style={styles.handLabel}>Dealer Hand</Text>
-                
+                <View style={styles.container}>
+                    <Text style={styles.rulesLabel}>Choose your Casino Rules:</Text>
+                    {/* <form onChange={this.handleRulesCheckbox} className='casino-rules-form'>
+                        <input  className='rules-checkbox' 
+                                name='dealerStandsSoft17' 
+                                type='checkbox'>
+                        </input> Dealer stand's on soft 17
+                        <input  className='rules-checkbox'
+                                name='doubleAllowed' 
+                                type='checkbox'>
+                        </input>  Double allowed
+                        <input  className='rules-checkbox'
+                                name='doubleAfterSplitAllowed' 
+                                type='checkbox'>
+                        </input>  Double after split allowed
+                        <input  className='rules-checkbox' 
+                                name='surrenderAllowed' 
+                                type='checkbox'>
+                        </input>  Surrender allowed
+                    </form> */}
+                    <Text style={styles.handLabel}>Dealer Hand</Text>
+                    
                     <View style={styles.tableContainer}>
                         <Image
                             style={styles.cardDisplay}
@@ -857,24 +855,21 @@ class BasicStrategy extends React.Component {
                     <Text style={styles.handLabel}>Player Hand</Text>
                     <Button onPress={this.dealCard} width='50' color='#000000' title='Deal'></Button>
                     
-                        <Text style={styles.handLabel}> Choose the correct play:</Text>
-                        <View style={styles.buttonWrapper}>
-                            <View style={styles.buttonContainerLeft}>
-                                <Button onPress={this.checkHitButton} title='Hit' color={this.state.hitButtonColor}></Button>
-                                <Button onPress={this.checkDoubleButton} title='Double' color={this.state.doubleButtonColor}></Button>
-                                <Button onPress={this.checkSurrenderButton} title='Surrender' color={this.state.surrenderButtonColor}></Button>
-                                
-                                {/* {this.state.buttonList} */}
-                                {/* <Button onPress={this.checkStats} title='Check Stats'></Button> */}
-                            </View>
-                            <View style={styles.buttonContainerRight}>
-                                <Button onPress={this.checkStandButton} title='Stand' color={this.state.standButtonColor}></Button>
-                                <Button onPress={this.checkSplitButton} title='Split' color={this.state.splitButtonColor}></Button>
-                            </View>
+                    <Text style={styles.handLabel}> Choose the correct play:</Text>
+                    <View style={styles.buttonWrapper}>
+                        <View style={styles.buttonContainerLeft}>
+                            <Button onPress={this.checkHitButton} title='Hit' color={this.state.hitButtonColor}></Button>
+                            <Button onPress={this.checkDoubleButton} title='Double' color={this.state.doubleButtonColor}></Button>
+                            <Button onPress={this.checkSurrenderButton} title='Surrender' color={this.state.surrenderButtonColor}></Button>
+                            
+                            {/* <Button onPress={this.checkStats} title='Check Stats'></Button> */}
                         </View>
-                    {/* <BasicStrategyStatsModal /> */}
-            </View>
-            {/* <CorrectPlays /> */}
+                        <View style={styles.buttonContainerRight}>
+                            <Button onPress={this.checkStandButton} title='Stand' color={this.state.standButtonColor}></Button>
+                            <Button onPress={this.checkSplitButton} title='Split' color={this.state.splitButtonColor}></Button>
+                        </View>
+                    </View>
+                </View>
             </ScrollView>
 
         );

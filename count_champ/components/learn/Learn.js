@@ -13,6 +13,12 @@ class Learn extends React.Component {
                 <Text>
                     This is the LEARNING PAGE
                 </Text>
+                
+                <Button
+                    title="Bankroll Sizing"
+                    color="#000000"
+                    onPress={() => navigate('BankrollSizing', {name: 'Bankroll Sizing'})}
+                    />
             </View>
         );
     }
