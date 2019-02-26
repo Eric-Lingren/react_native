@@ -5,15 +5,22 @@ let ScreenHeight = Dimensions.get("window").height;
 let ScreenWidth = Dimensions.get("window").width;
 
 class Menubar extends React.Component {
-    // test = () => {
-    //     console.log('menu pressed')
-    // }
+    
+    static navigationOptions = {
+        header: null
+    };
+
     render() {
-        //const {navigate} = this.props.navigation;
+        const navigate = this.props.navigation
+        
         return (
             <View style={styles.container}>
                 <View style={styles.textContainer}>
-                    <Text style={styles.textStyles}>Casino Rules</Text>
+                    <Text   style={styles.textStyles}
+                            onPress={() => navigate('CasinoRules', {name: 'Casino Rules'})}
+                    >
+                        Casino Rules
+                    </Text>
                     <Text style={styles.textStyles}>My Stats</Text>
                     <Text style={styles.textStyles}>Profile</Text>
                     <Text style={styles.textStyles}>About</Text>
