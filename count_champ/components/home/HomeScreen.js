@@ -1,25 +1,57 @@
 import * as React from 'react';
-import { Button, Text, View, StyleSheet, Image, Dimensions } from 'react-native';
+import { Button, Text, View, StyleSheet, Image, Dimensions, TouchableWithoutFeedback, Animated } from 'react-native';
 import { Constants } from 'expo';
 import homeLogo from './blackjackLogo.jpg';
-import Navbar from '../navbar/Navbar'
+import Menubar from '../menubar/Menubar';
 
 let ScreenHeight = Dimensions.get("window").height;
+let ScreenWidth = Dimensions.get("window").width;
+let menuIconMargin = (ScreenWidth - 65)
+
+
+test = () => {
+    console.log('menu pressed')
+    
+}
 
 class HomeScreen extends React.Component {
+    constructor(){
+        super()
+        this.state = {
+            sideMenuShowing: false,
+            menuIconMargin: menuIconMargin,
+        }
+    }
+
+    toggleMenu = () => {
+        console.log('myfunc ran')
+        this.state.sideMenuShowing ? this.setState({sideMenuShowing: false, menuIconMargin: menuIconMargin}) : this.setState({sideMenuShowing: true, menuIconMargin: (ScreenWidth * .24)})
+    }
 
     static navigationOptions = {
-        headerTitle: <Image
-        source={require('./blackjackLogo.jpg')}
-        style={{ width: 30, height: 30 }}
-      />,
+        // headerTitle: 
+        //             <TouchableWithoutFeedback onPress={() => this.test()}>
+        //                 <Image
+        //                     source={require('./menu.png')}
+        //                     style={{ width: 50, height: 50, marginLeft: iconMargin}}
+        //                 />
+        //             </TouchableWithoutFeedback>,
+        header: null
     };
+    
 
     render() {
         const {navigate} = this.props.navigation;
-    
+        
         return (
             <View style={styles.container}>
+            { this.state.sideMenuShowing ? <Menubar /> : null }
+                    <TouchableWithoutFeedback onPress={() => this.toggleMenu()}>
+                        <Image
+                            source={require('./menu.png')}
+                            style={{ width: 50, height: 50, marginLeft: this.state.menuIconMargin}}
+                        />
+                    </TouchableWithoutFeedback>
                 <View>
                     <Text style={styles.paragraph}>
                         So You Want To Be A Card Counter...
@@ -44,6 +76,8 @@ class HomeScreen extends React.Component {
                     onPress={() => navigate('Train', {name: 'Train'})}
                     />
                 </View>
+                
+                
             </View>
         );
     }
