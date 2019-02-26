@@ -2,13 +2,17 @@ import * as React from 'react';
 import { Button, Text, View, StyleSheet, Image, Dimensions } from 'react-native';
 import { Constants } from 'expo';
 import homeLogo from './blackjackLogo.jpg';
+import Navbar from '../navbar/Navbar'
 
 let ScreenHeight = Dimensions.get("window").height;
 
 class HomeScreen extends React.Component {
 
     static navigationOptions = {
-        title: 'Count Champ',
+        headerTitle: <Image
+        source={require('./blackjackLogo.jpg')}
+        style={{ width: 30, height: 30 }}
+      />,
     };
 
     render() {
@@ -52,7 +56,6 @@ const styles = StyleSheet.create({
         backgroundColor: ( '#0f9b0f', '#52c234', '#52c234', '#0f9b0f'),
         height: ScreenHeight,
         zIndex: 10,
-        marginTop: -50,
     },
     paragraph: {
         margin: 24,

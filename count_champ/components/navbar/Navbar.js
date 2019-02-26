@@ -6,11 +6,9 @@ class Navbar extends React.Component {
     render() {
         const {navigate} = this.props.navigation;
         return (
-            <View>
                 <Text>
                     This is the Navbar
                 </Text>
-            </View>
         );
     }
 }
