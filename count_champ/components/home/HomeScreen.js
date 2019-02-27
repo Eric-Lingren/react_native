@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Button, Text, View, StyleSheet, Image, Dimensions, TouchableWithoutFeedback } from 'react-native';
 import { Constants } from 'expo';
 import homeLogo from './blackjackLogo.jpg';
+import closeIcon from './close.png'
 import Menubar from '../menubar/Menubar';
 
 let ScreenHeight = Dimensions.get("window").height;
@@ -32,13 +33,23 @@ class HomeScreen extends React.Component {
         //console.log(navigate)
         return (
             <View style={styles.container}>
-            { this.state.sideMenuShowing ? <Menubar navigation={navigate}/> : null }
+            { this.state.sideMenuShowing ? 
+                    <View style={styles.menuContainer}>
+                        <Menubar navigation={navigate}/> 
+                        <TouchableWithoutFeedback onPress={() => this.toggleMenu()}>
+                            <Image
+                                source={require('./close.png')}
+                                style={{ width: 40, height: 40, marginLeft:(this.state.menuIconMargin +10), marginTop: 30}}/>
+                        </TouchableWithoutFeedback>
+                    </View>
+                    : 
                     <TouchableWithoutFeedback onPress={() => this.toggleMenu()}>
                         <Image
                             source={require('./menu.png')}
-                            style={{ width: 50, height: 50, marginLeft: this.state.menuIconMargin}}
-                        />
+                            style={{ width: 50, height: 50, marginLeft: this.state.menuIconMargin}}/>
                     </TouchableWithoutFeedback>
+                    }
+
                 <View>
                     <Text style={styles.paragraph}>
                         So You Want To Be A Card Counter...
@@ -77,6 +88,9 @@ const styles = StyleSheet.create({
         backgroundColor: ( '#0f9b0f', '#52c234', '#52c234', '#0f9b0f'),
         height: ScreenHeight,
         zIndex: 10,
+    },
+    menuContainer: {
+        marginTop: -20,
     },
     paragraph: {
         margin: 24,
