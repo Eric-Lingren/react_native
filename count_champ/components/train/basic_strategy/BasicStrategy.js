@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Text, View, StyleSheet, Image, Dimensions, ScrollView } from 'react-native';
+import { Button, Text, View, StyleSheet, Image, Dimensions, ScrollView, AsyncStorage  } from 'react-native';
 import { Constants } from 'expo';
 import axios from 'axios';
 
@@ -59,6 +59,14 @@ class BasicStrategy extends React.Component {
                 deckID: deckID,
             })
         })
+        AsyncStorage.getItem("test").then((value) => {
+            console.log(value)
+            //this.setState({"myKey": value});
+        }).done();
+        AsyncStorage.getItem("test2").then((value) => {
+            console.log(value)
+            //this.setState({"myKey": value});
+        }).done();
     }
 
     // getDecks = () => {
@@ -802,7 +810,9 @@ class BasicStrategy extends React.Component {
         }
     }
 
+    helpButton = () => {
 
+    }
 
 
     static navigationOptions = {
@@ -814,7 +824,6 @@ class BasicStrategy extends React.Component {
         return (
             <ScrollView>
                 <View style={styles.container}>
-                    <Text style={styles.rulesLabel}>Choose your Casino Rules:</Text>
                     {/* <form onChange={this.handleRulesCheckbox} className='casino-rules-form'>
                         <input  className='rules-checkbox' 
                                 name='dealerStandsSoft17' 
@@ -867,6 +876,7 @@ class BasicStrategy extends React.Component {
                         <View style={styles.buttonContainerRight}>
                             <Button onPress={this.checkStandButton} title='Stand' color={this.state.standButtonColor}></Button>
                             <Button onPress={this.checkSplitButton} title='Split' color={this.state.splitButtonColor}></Button>
+                            <Button onPress={this.helpButton} title='Help' ></Button>
                         </View>
                     </View>
                 </View>
@@ -898,7 +908,7 @@ const styles = StyleSheet.create({
     buttonContainerRight: {
         flex: 1,
         justifyContent: 'space-evenly',
-        height: 112,
+        height: 160,
         width: 100,
         marginLeft: 5,
     },

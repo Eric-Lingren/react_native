@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Text, View, StyleSheet, Image, Dimensions, TouchableWithoutFeedback } from 'react-native';
+import { Button, Text, View, StyleSheet, Image, Dimensions, TouchableWithoutFeedback, AsyncStorage } from 'react-native';
 import { Constants } from 'expo';
 import homeLogo from './blackjackLogo.jpg';
 import closeIcon from './close.png'
@@ -23,10 +23,28 @@ class HomeScreen extends React.Component {
         this.state.sideMenuShowing ? this.setState({sideMenuShowing: false, menuIconMargin: menuIconMargin}) : this.setState({sideMenuShowing: true, menuIconMargin: (ScreenWidth * .24)})
     }
 
+    
+    componentDidMount(){
+        this.setRules()
+    }
+
+    setRules = async () => {
+        console.log('store data ran')
+        try {
+            await AsyncStorage.setItem('test', 'test value');
+        } catch (error) {
+            // Error saving data
+        }
+        try {
+            await AsyncStorage.setItem('test2', 'test value2');
+        } catch (error) {
+            // Error saving data
+        }
+    };
+
     static navigationOptions = {
         header: null
     };
-    
 
     render() {
         const {navigate} = this.props.navigation;
@@ -35,7 +53,7 @@ class HomeScreen extends React.Component {
             <View style={styles.container}>
             { this.state.sideMenuShowing ? 
                     <View style={styles.menuContainer}>
-                        <Menubar navigation={navigate}/> 
+                        <Menubar navigation={navigate} /> 
                         <TouchableWithoutFeedback onPress={() => this.toggleMenu()}>
                             <Image
                                 source={require('./close.png')}
