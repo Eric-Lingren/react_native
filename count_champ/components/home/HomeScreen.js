@@ -25,20 +25,34 @@ class HomeScreen extends React.Component {
 
     
     componentDidMount(){
-        this.setRules()
+        AsyncStorage.getItem("doubleAllowed").then((doubleAllowedValue) => {
+            console.log('Home -- Starting double allowed value: ' + doubleAllowedValue)
+            console.log('Home -- type of double allowed value: ' + typeof(doubleAllowedValue))
+
+            // Rules haven't been set to local storage yet (first load only)
+            if(doubleAllowedValue === 'null'){
+                this.setDefaultCasinoRules()
+            }
+        }).done();
     }
 
-    setRules = async () => {
-        console.log('store data ran')
+    setDefaultCasinoRules = async () => {
+        console.log('set default casino rules function ran')
         try {
-            await AsyncStorage.setItem('test', 'test value');
+            await AsyncStorage.setItem('doubleAllowed', 'true');
         } catch (error) {
-            // Error saving data
         }
         try {
-            await AsyncStorage.setItem('test2', 'test value2');
+            await AsyncStorage.setItem('doubleAfterSplitAllowed', 'false');
         } catch (error) {
-            // Error saving data
+        }
+        try {
+            await AsyncStorage.setItem('surrenderAllowed', 'false');
+        } catch (error) {
+        }
+        try {
+            await AsyncStorage.setItem('dealerStands17', 'true');
+        } catch (error) {
         }
     };
 

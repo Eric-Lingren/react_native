@@ -24,12 +24,8 @@ class BasicStrategy extends React.Component {
             pCard2Number: '',
             dHand: '',
             pHand: '',
-            // options: ['HIT', 'STAND', 'DOUBLE', 'SPLIT', 'SURRENDER'],
-            // playerGuess: '',
-            // buttonList: '',
-            // buttonClass: 'checkButton',
-            // //bottomMargin: '18px',
             correctPlay: '',
+            ///////////////////////////////
             dealerStandsSoft17: false,
             doubleAllowed: false,
             doubleAfterSplitAllowed: false,
@@ -40,13 +36,15 @@ class BasicStrategy extends React.Component {
             softHandsCorrect: 0,
             splitHandsPlayed: 0,
             splitHandsCorrect: 0,
+            ////////////////////////////////
             currentKindOfHandBeingPlayed: '',
             showBasicStrategyStats: false,
             selectedButtonColor: '',
-            standButtonColor: '',
-            doubleButtonColor: '',
-            splitButtonColor: '',
-            surrenderButtonColor: '',
+            hitButtonColor: '#2196f3',
+            standButtonColor: '#2196f3',
+            doubleButtonColor: '#2196f3',
+            splitButtonColor: '#2196f3',
+            surrenderButtonColor: '#2196f3',
         }
     }
 
@@ -59,19 +57,24 @@ class BasicStrategy extends React.Component {
                 deckID: deckID,
             })
         })
-        AsyncStorage.getItem("test").then((value) => {
-            console.log(value)
-            //this.setState({"myKey": value});
-        }).done();
-        AsyncStorage.getItem("test2").then((value) => {
-            console.log(value)
+        this.getCasinoRules()
+        
+    }
+
+    getCasinoRules = () => {
+        // AsyncStorage.getItem("test").then((value) => {
+        //     console.log('test data value is: ' + value)
+        //     //this.setState({"myKey": value});
+        // }).done();
+        // AsyncStorage.getItem("test2").then((value) => {
+        //     console.log('test 2 data value is: ' + value)
+        //     //this.setState({"myKey": value});
+        // }).done();
+        AsyncStorage.getItem("doubleAllowed").then((value) => {
+            console.log('BS - double allowed value is: ' + value)
             //this.setState({"myKey": value});
         }).done();
     }
-
-    // getDecks = () => {
-        
-    // }
 
     dealCard = () => {
         axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=3`).then(response => {
@@ -876,7 +879,7 @@ class BasicStrategy extends React.Component {
                         <View style={styles.buttonContainerRight}>
                             <Button onPress={this.checkStandButton} title='Stand' color={this.state.standButtonColor}></Button>
                             <Button onPress={this.checkSplitButton} title='Split' color={this.state.splitButtonColor}></Button>
-                            <Button onPress={this.helpButton} title='Help' ></Button>
+                            <Button onPress={this.helpButton} title='Help' color='#2196f3'></Button>
                         </View>
                     </View>
                 </View>

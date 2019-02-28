@@ -13,7 +13,7 @@ class CasinoRules extends React.Component {
             doubleAllowed: true,
             doubleAfterSplitAllowed: false,
             surrenderAllowed: false,
-            dealerRules: 0, // 0 = Dealer stands on soft 17   ;   1 = Dealer hits on soft 17
+            dealerStands17: true, // 0 = Dealer stands on soft 17   ;   1 = Dealer hits on soft 17
             radioProps: [
                 {label: 'Dealer stands on soft 17', value: 0 },
                 {label: 'Dealer hits on soft 17', value: 1 }
@@ -21,15 +21,83 @@ class CasinoRules extends React.Component {
         }
     }
 
-    storeData = async () => {
-        console.log('store data ran')
-        console.log(this.state.doubleAllowed)
-        let isDoubleAllowed = this.state.doubleAllowed 
-        try {
-            await AsyncStorage.setItem('test', 'new test data');
-        } catch (error) {
-            // Error saving data
+    componentDidMount(){
+        this.getSavedRulesFromMemory()
+    }
+
+    getSavedRulesFromMemory = () =>{
+        console.log('got saved rules')
+
+        AsyncStorage.getItem("doubleAllowed").then((doubleAllowedValue) => {
+            if(doubleAllowedValue === 'true'){
+                this.setState({doubleAllowed: true})
+            } else{
+                this.setState({doubleAllowed: false})
+            }
+        }).done();
+
+
+        AsyncStorage.getItem("doubleAfterSplitAllowed").then((doubleAfterSplitAllowedValue) => {
+            console.log('Rules -- double after split allowed value: ' + doubleAfterSplitAllowedValue)
+            console.log('state- double allowed: ' + this.state.doubleAfterSplitAllowed)
+            if(doubleAfterSplitAllowedValue === 'true'){
+                console.log('If statement rule was true')
+                this.setState({doubleAfterSplitAllowed: true}, () => console.log('state- double after split allowed: ' + this.state.doubleAfterSplitAllowed))
+            } else{
+                console.log('If statement rule was false')
+                this.setState({doubleAfterSplitAllowed: false}, () => console.log('state- double after split allowed: ' + this.state.doubleAfterSplitAllowed ))
+            }
+        }).done();
+
+        // AsyncStorage.getItem("surrenderAllowed").then((surrenderAllowedValue) => {
+        //     console.log('Rules -- surrender allowed value: ' + surrenderAllowedValue)
+        //     console.log('state- double allowed: ' + this.state.surrenderAllowed)
+        //     if(surrenderAllowedValue === 'true'){
+        //         console.log('If statement rule was true')
+        //         this.setState({surrenderAllowed: true}, () => console.log('state- surrender allowed: ' + this.state.surrenderAllowed))
+        //     } else{
+        //         console.log('If statement rule was false')
+        //         this.setState({surrenderAllowed: false}, () => console.log('state- surrender allowed: ' + this.state.surrenderAllowed ))
+        //     }
+        // }).done();
+
+        // AsyncStorage.getItem("dealerStands17").then((dealerStands17Value) => {
+        //     console.log('Rules -- dealer stands 17 value: ' + dealerStands17Value)
+        //     console.log('state -- dealer stands 17 value: ' + this.state.dealerStands17)
+        //     if(surrenderAllowedValue === 'true'){
+        //         console.log('If statement rule was true')
+        //         this.setState({surrenderAllowed: true}, () => console.log('state- surrender allowed: ' + this.state.surrenderAllowed))
+        //     } else{
+        //         console.log('If statement rule was false')
+        //         this.setState({surrenderAllowed: false}, () => console.log('state- surrender allowed: ' + this.state.surrenderAllowed ))
+        //     }
+        // }).done();
+    }
+
+    saveRuleInStorage = async (rule , value) => {
+        console.log(rule)
+        console.log(value)
+        console.log(typeof(value))
+        //console.log('store data ran')
+        //console.log(this.state.doubleAllowed)
+        //let isDoubleAllowed = this.state.doubleAllowed 
+        if(rule === 'doubleAllowed'){
+            console.log('if statement got hit')
+            if(value === true){
+                console.log('value was true')
+                try {
+                    await AsyncStorage.setItem('doubleAllowed', 'true');
+                } catch (error) {
+                }
+            } else {
+                console.log('value was false')
+                try {
+                    await AsyncStorage.setItem('doubleAllowed', 'false');
+                } catch (error) {
+                }
+            }
         }
+        this.getSavedRulesFromMemory()
     };
 
     static navigationOptions = {
@@ -57,7 +125,8 @@ class CasinoRules extends React.Component {
                         // disabled={true}
                     />
                     <CheckBox
-                        onClick={()=>{ this.setState({ doubleAllowed: !this.state.doubleAllowed }, () => this.storeData()) }}
+                        onClick={   ()=>{ this.setState({ doubleAllowed: !this.state.doubleAllowed }, 
+                                    () => this.saveRuleInStorage('doubleAllowed' , this.state.doubleAllowed )) }}
                         isChecked={this.state.doubleAllowed}
                         rightText={"Double allowed"} 
                         checkBoxColor={'#fff'}
@@ -66,7 +135,8 @@ class CasinoRules extends React.Component {
                         // disabled={true}
                     /> 
                     <CheckBox
-                        onClick={()=>{ this.setState({ doubleAfterSplitAllowed: !this.state.doubleAfterSplitAllowed }) }}
+                        onClick={()=>{  this.setState({ doubleAfterSplitAllowed: !this.state.doubleAfterSplitAllowed },
+                                        () => this.saveRuleInStorage('doubleAfterSplitAllowed', this.state.doubleAfterSplitAllowed)) }}
                         isChecked={this.state.doubleAfterSplitAllowed}
                         rightText={"Double after split allowed"}
                         checkBoxColor={'#fff'}
