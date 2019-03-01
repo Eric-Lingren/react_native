@@ -13,7 +13,8 @@ class CasinoRules extends React.Component {
             doubleAllowed: true,
             doubleAfterSplitAllowed: false,
             surrenderAllowed: false,
-            dealerStands17: true, // 0 = Dealer stands on soft 17   ;   1 = Dealer hits on soft 17
+            dealerStands17: true,
+            dealerRules: 0, // 0 = Dealer stands on soft 17   ;   1 = Dealer hits on soft 17
             radioProps: [
                 {label: 'Dealer stands on soft 17', value: 0 },
                 {label: 'Dealer hits on soft 17', value: 1 }
@@ -116,6 +117,23 @@ class CasinoRules extends React.Component {
                     await AsyncStorage.setItem('surrenderAllowed', 'false');
                 } catch (error) {
                 }
+            }
+        } else if(rule === 'dealerStands17'){
+            console.log('if statement got hit for dealer stands 17')
+            console.log('dealer rules: ' + this.state.dealerRules)
+            console.log('dealer stands 17: ' + this.state.dealerStands17)
+            if(value === true){
+                console.log('value was true')
+                // try {
+                //     await AsyncStorage.setItem('surrenderAllowed', 'true');
+                // } catch (error) {
+                // }
+            } else {
+                console.log('value was false')
+                // try {
+                //     await AsyncStorage.setItem('surrenderAllowed', 'false');
+                // } catch (error) {
+                // }
             }
         }
         this.getSavedRulesFromMemory()
