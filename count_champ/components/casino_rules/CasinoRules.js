@@ -36,42 +36,33 @@ class CasinoRules extends React.Component {
             }
         }).done();
 
-
         AsyncStorage.getItem("doubleAfterSplitAllowed").then((doubleAfterSplitAllowedValue) => {
-            console.log('Rules -- double after split allowed value: ' + doubleAfterSplitAllowedValue)
-            console.log('state- double allowed: ' + this.state.doubleAfterSplitAllowed)
             if(doubleAfterSplitAllowedValue === 'true'){
-                console.log('If statement rule was true')
-                this.setState({doubleAfterSplitAllowed: true}, () => console.log('state- double after split allowed: ' + this.state.doubleAfterSplitAllowed))
+                this.setState({doubleAfterSplitAllowed: true})
             } else{
-                console.log('If statement rule was false')
-                this.setState({doubleAfterSplitAllowed: false}, () => console.log('state- double after split allowed: ' + this.state.doubleAfterSplitAllowed ))
+                this.setState({doubleAfterSplitAllowed: false})
             }
         }).done();
 
-        // AsyncStorage.getItem("surrenderAllowed").then((surrenderAllowedValue) => {
-        //     console.log('Rules -- surrender allowed value: ' + surrenderAllowedValue)
-        //     console.log('state- double allowed: ' + this.state.surrenderAllowed)
-        //     if(surrenderAllowedValue === 'true'){
-        //         console.log('If statement rule was true')
-        //         this.setState({surrenderAllowed: true}, () => console.log('state- surrender allowed: ' + this.state.surrenderAllowed))
-        //     } else{
-        //         console.log('If statement rule was false')
-        //         this.setState({surrenderAllowed: false}, () => console.log('state- surrender allowed: ' + this.state.surrenderAllowed ))
-        //     }
-        // }).done();
+        AsyncStorage.getItem("surrenderAllowed").then((surrenderAllowedValue) => {
+            if(surrenderAllowedValue === 'true'){
+                this.setState({surrenderAllowed: true})
+            } else{
+                this.setState({surrenderAllowed: false})
+            }
+        }).done();
 
-        // AsyncStorage.getItem("dealerStands17").then((dealerStands17Value) => {
-        //     console.log('Rules -- dealer stands 17 value: ' + dealerStands17Value)
-        //     console.log('state -- dealer stands 17 value: ' + this.state.dealerStands17)
-        //     if(surrenderAllowedValue === 'true'){
-        //         console.log('If statement rule was true')
-        //         this.setState({surrenderAllowed: true}, () => console.log('state- surrender allowed: ' + this.state.surrenderAllowed))
-        //     } else{
-        //         console.log('If statement rule was false')
-        //         this.setState({surrenderAllowed: false}, () => console.log('state- surrender allowed: ' + this.state.surrenderAllowed ))
-        //     }
-        // }).done();
+        AsyncStorage.getItem("dealerStands17").then((dealerStands17Value) => {
+            console.log('Rules -- dealer stands 17 value: ' + dealerStands17Value)
+            console.log('state -- dealer stands 17 value: ' + this.state.dealerStands17)
+            if(dealerStands17Value === 'true'){
+                console.log('If statement rule was true')
+                this.setState({dealerStands17: true}, () => console.log('state- dealer stands 17 : ' + this.state.dealerStands17))
+            } else{
+                console.log('If statement rule was false')
+                this.setState({dealerStands17: false}, () => console.log('state- dealer stands 17 : ' + this.state.dealerStands17 ))
+            }
+        }).done();
     }
 
     saveRuleInStorage = async (rule , value) => {
@@ -82,7 +73,7 @@ class CasinoRules extends React.Component {
         //console.log(this.state.doubleAllowed)
         //let isDoubleAllowed = this.state.doubleAllowed 
         if(rule === 'doubleAllowed'){
-            console.log('if statement got hit')
+            console.log('if statement got hit for double allowed')
             if(value === true){
                 console.log('value was true')
                 try {
@@ -93,6 +84,36 @@ class CasinoRules extends React.Component {
                 console.log('value was false')
                 try {
                     await AsyncStorage.setItem('doubleAllowed', 'false');
+                } catch (error) {
+                }
+            }
+        } else if(rule === 'doubleAfterSplitAllowed'){
+            console.log('if statement got hit for double after split allowed')
+            if(value === true){
+                console.log('value was true')
+                try {
+                    await AsyncStorage.setItem('doubleAfterSplitAllowed', 'true');
+                } catch (error) {
+                }
+            } else {
+                console.log('value was false')
+                try {
+                    await AsyncStorage.setItem('doubleAfterSplitAllowed', 'false');
+                } catch (error) {
+                }
+            }
+        } else if(rule === 'surrenderAllowed'){
+            console.log('if statement got hit for surrender after split allowed')
+            if(value === true){
+                console.log('value was true')
+                try {
+                    await AsyncStorage.setItem('surrenderAllowed', 'true');
+                } catch (error) {
+                }
+            } else {
+                console.log('value was false')
+                try {
+                    await AsyncStorage.setItem('surrenderAllowed', 'false');
                 } catch (error) {
                 }
             }
@@ -118,7 +139,8 @@ class CasinoRules extends React.Component {
                     <RadioForm
                         radio_props={this.state.radioProps}
                         initial={0}
-                        onPress={(value) => {this.setState({dealerRules:value})}}
+                        onPress={(value) => {this.setState({dealerRules:value}, 
+                                            () => this.saveRuleInStorage('dealerStands17' , this.state.dealerRules ) )}}
                         buttonColor={'#ffffff'}
                         selectedButtonColor={'#ffffff'}
                         labelStyle={{fontSize: 20, color: '#fff'}}
@@ -145,7 +167,8 @@ class CasinoRules extends React.Component {
                         // disabled={true}
                     /> 
                     <CheckBox
-                        onClick={()=>{ this.setState({ surrenderAllowed: !this.state.surrenderAllowed }) }}
+                        onClick={()=>{ this.setState({ surrenderAllowed: !this.state.surrenderAllowed },
+                            () => this.saveRuleInStorage('surrenderAllowed', this.state.surrenderAllowed)) }}
                         isChecked={this.state.surrenderAllowed}
                         rightText={"Surrender Allowed"}
                         checkBoxColor={'#fff'}
