@@ -26,10 +26,15 @@ class BasicStrategy extends React.Component {
             pHand: '',
             correctPlay: '',
             ///////////////////////////////
-            dealerStandsSoft17: false,
+            ///          RULES         ///
+            //////////////////////////////
+            dealerStandsOnSoft17: false,
+            dealerHitsOnSoft17: false,
             doubleAllowed: false,
             doubleAfterSplitAllowed: false,
             surrenderAllowed: false,
+            ///////////////////////////////
+            currentKindOfHandBeingPlayed: '',
             hardHandsPlayed: 0,
             hardHandsCorrect: 0,
             softHandsPlayed: 0,
@@ -37,7 +42,6 @@ class BasicStrategy extends React.Component {
             splitHandsPlayed: 0,
             splitHandsCorrect: 0,
             ////////////////////////////////
-            currentKindOfHandBeingPlayed: '',
             showBasicStrategyStats: false,
             selectedButtonColor: '',
             hitButtonColor: '#2196f3',
@@ -57,24 +61,152 @@ class BasicStrategy extends React.Component {
                 deckID: deckID,
             })
         })
-        this.getCasinoRules()
-        
+        this.getSavedRulesFromMemory()
+        this.getStatsFromStorage()
     }
 
-    getCasinoRules = () => {
-        // AsyncStorage.getItem("test").then((value) => {
-        //     console.log('test data value is: ' + value)
-        //     //this.setState({"myKey": value});
-        // }).done();
-        // AsyncStorage.getItem("test2").then((value) => {
-        //     console.log('test 2 data value is: ' + value)
-        //     //this.setState({"myKey": value});
-        // }).done();
-        AsyncStorage.getItem("doubleAllowed").then((value) => {
-            console.log('BS - double allowed value is: ' + value)
-            //this.setState({"myKey": value});
+    componentWillUnmount(){
+        let hardHandsPlayed = this.state.hardHandsPlayed.toString()
+        let hardHandsCorrect = this.state.hardHandsCorrect.toString()
+        let softHandsPlayed = this.state.softHandsPlayed.toString()
+        let softHandsCorrect = this.state.softHandsCorrect.toString()
+        let splitHandsPlayed = this.state.splitHandsPlayed.toString()
+        let splitHandsCorrect = this.state.splitHandsCorrect.toString()
+        
+        this.saveStatsInStorage(hardHandsPlayed, hardHandsCorrect, softHandsPlayed, softHandsCorrect, splitHandsPlayed, splitHandsCorrect )
+
+        // this.removeItems()
+    }
+
+    removeItems = async () => {
+        try {
+            await AsyncStorage.removeItem('hardHandsPlayed');
+        } catch (error) {
+        }
+        try {
+            await AsyncStorage.removeItem('hardHandsCorrect');
+        } catch (error) {
+        }
+        try {
+            await AsyncStorage.removeItem('softHandsPlayed');
+        } catch (error) {
+        }
+        try {
+            await AsyncStorage.removeItem('softHandsCorrect');
+        } catch (error) {
+        }
+        try {
+            await AsyncStorage.removeItem('splitHandsPlayed');
+        } catch (error) {
+        }
+        try {
+            await AsyncStorage.removeItem('splitHandsCorrect');
+        } catch (error) {
+        }
+    }
+
+
+    saveStatsInStorage = async (hardHandsPlayed, hardHandsCorrect, softHandsPlayed, softHandsCorrect, splitHandsPlayed, splitHandsCorrect ) => {
+        try {
+            await AsyncStorage.setItem('hardHandsPlayed', hardHandsPlayed);
+        } catch (error) {
+        }
+        try {
+            await AsyncStorage.setItem('hardHandsCorrect', hardHandsCorrect);
+        } catch (error) {
+        }
+        try {
+            await AsyncStorage.setItem('softHandsPlayed', softHandsPlayed);
+        } catch (error) {
+        }
+        try {
+            await AsyncStorage.setItem('softHandsCorrect', softHandsCorrect);
+        } catch (error) {
+        }
+        try {
+            await AsyncStorage.setItem('splitHandsPlayed', splitHandsPlayed);
+        } catch (error) {
+        }
+        try {
+            await AsyncStorage.setItem('splitHandsCorrect', splitHandsCorrect);
+        } catch (error) {
+        }
+    }
+
+    getStatsFromStorage = () => {
+        AsyncStorage.getItem("hardHandsPlayed").then((hardHandsPlayed) => {
+            console.log('hard hands played is: ' + hardHandsPlayed)
+            let hardHandsPlayedNum;
+            hardHandsPlayed === 'NaN' ? hardHandsPlayedNum = 0 : hardHandsPlayedNum = parseInt(hardHandsPlayed)
+            this.setState({hardHandsPlayed: hardHandsPlayedNum})
+        }).done();
+        AsyncStorage.getItem("hardHandsCorrect").then((hardHandsCorrect) => {
+            console.log('hard hands Correct is: ' + hardHandsCorrect)
+            let hardHandsCorrectNum;
+            hardHandsCorrect === 'NaN' || hardHandsCorrect === 'null' ? hardHandsCorrectNum = 0 : hardHandsCorrectNum = parseInt(hardHandsCorrect)
+            this.setState({hardHandsCorrect: hardHandsCorrectNum})
+        }).done();
+        AsyncStorage.getItem("softHandsPlayed").then((softHandsPlayed) => {
+            console.log('soft hands played is: ' + softHandsPlayed)
+            let softHandsPlayedNum;
+            softHandsPlayed === 'NaN' || softHandsPlayed === 'null' ? softHandsPlayedNum = 0 : softHandsPlayedNum = parseInt(softHandsPlayed)
+            this.setState({softHandsPlayed: softHandsPlayedNum})
+        }).done();
+        AsyncStorage.getItem("softHandsCorrect").then((softHandsCorrect) => {
+            console.log('soft hands Correct is: ' + softHandsCorrect)
+            let softHandsCorrectNum;
+            softHandsCorrect === 'NaN' || softHandsCorrect === 'null' ?  softHandsCorrectNum = 0 : softHandsCorrectNum = parseInt(softHandsCorrect)
+            this.setState({softHandsCorrect: softHandsCorrectNum})
+        }).done();
+        AsyncStorage.getItem("splitHandsPlayed").then((splitHandsPlayed) => {
+            console.log('split hands played is: ' + splitHandsPlayed)
+            let splitHandsPlayedNum;
+            splitHandsPlayed === 'NaN' || splitHandsPlayed === 'null' ? splitHandsPlayedNum = 0 : splitHandsPlayedNum = parseInt(splitHandsPlayed)
+            this.setState({splitHandsPlayed: splitHandsPlayedNum})
+        }).done();
+        AsyncStorage.getItem("splitHandsCorrect").then((splitHandsCorrect) => {
+            console.log('split hands Correct is: ' + splitHandsCorrect)
+            let splitHandsCorrectNum;
+            splitHandsCorrect === 'NaN' || splitHandsCorrect === 'null' ? splitHandsCorrectNum = 0 : splitHandsCorrectNum = parseInt(splitHandsCorrect)
+            this.setState({splitHandsCorrect: splitHandsCorrectNum})
         }).done();
     }
+
+    getSavedRulesFromMemory = () =>{
+
+        AsyncStorage.getItem("dealerStandsOnSoft17").then((dealerStandsOnSoft17Value) => {
+            if(dealerStandsOnSoft17Value === 'true'){
+                this.setState({dealerStandsOnSoft17: true, dealerHitsOnSoft17: false} )
+            } else{
+                this.setState({dealerStandsOnSoft17: false, dealerHitsOnSoft17: true} )
+            }
+        }).done();
+
+        AsyncStorage.getItem("doubleAllowed").then((doubleAllowedValue) => {
+            if(doubleAllowedValue === 'true'){
+                this.setState({doubleAllowed: true})
+            } else{
+                this.setState({doubleAllowed: false})
+            }
+        }).done();
+
+        AsyncStorage.getItem("doubleAfterSplitAllowed").then((doubleAfterSplitAllowedValue) => {
+            if(doubleAfterSplitAllowedValue === 'true'){
+                this.setState({doubleAfterSplitAllowed: true})
+            } else{
+                this.setState({doubleAfterSplitAllowed: false})
+            }
+        }).done();
+
+        AsyncStorage.getItem("surrenderAllowed").then((surrenderAllowedValue) => {
+            if(surrenderAllowedValue === 'true'){
+                this.setState({surrenderAllowed: true})
+            } else{
+                this.setState({surrenderAllowed: false})
+            }
+        }).done();
+    }
+
 
     dealCard = () => {
         axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=3`).then(response => {
@@ -85,10 +217,6 @@ class BasicStrategy extends React.Component {
             const dealerCardImage = response.data.cards[0].image
             const playerCardImage1 = response.data.cards[1].image
             const playerCardImage2 = response.data.cards[2].image
-
-            // const hands = ['Hit', 'Stand', 'Double', 'Split', 'Surrender']
-            // const options = hands.map(hand => <button className='checkButton' onClick={this.checkButton} id='notSelected' 
-            //                 name={hand.toUpperCase()} value={hand.toUpperCase()} >{hand}</button>)
 
             this.setState({
                 dealerHand: dealerCardValue,
@@ -104,7 +232,6 @@ class BasicStrategy extends React.Component {
                 doubleButtonColor: '',
                 splitButtonColor: '',
                 surrenderButtonColor: '',
-                //buttonList: options
             }, () => this.showCardData() )
         })
     }
@@ -194,22 +321,29 @@ class BasicStrategy extends React.Component {
 
     }
 
-    
-
     //////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
     checkSplitHand = (dealerHand, playerHand) => {
-        this.setState(prevState => {
-            return{
-                splitHandsPlayed: prevState.splitHandsPlayed += 1,
-                currentKindOfHandBeingPlayed: 'SPLIT'
-            }
-        })
-
         const pHand = playerHand;
         const dHand = dealerHand;
+
+        if(pHand === 20){
+            this.setState(prevState => {
+                return{
+                    hardHandsPlayed: prevState.hardHandsPlayed += 1,
+                    currentKindOfHandBeingPlayed: 'HARD'
+                }
+            })
+        } else {
+            this.setState(prevState => {
+                return{
+                    splitHandsPlayed: prevState.splitHandsPlayed += 1,
+                    currentKindOfHandBeingPlayed: 'SPLIT'
+                }
+            })
+        }
 
         if(pHand === 22){
             console.log('the correct play is SPLIT')
@@ -222,7 +356,7 @@ class BasicStrategy extends React.Component {
                 correctPlay: 'STAND',
             })
         } else if (pHand === 16){
-            if (dHand === 11 && this.dealerStandsSoft17 === false && this.state.surrenderAllowed === true) {
+            if (dHand === 11 && this.dealerStandsOnSoft17 === false && this.state.surrenderAllowed === true) {
                 console.log('the correct play is SURRENDER')
                 this.setState({
                     correctPlay: 'SURRENDER',
@@ -339,12 +473,12 @@ class BasicStrategy extends React.Component {
                 correctPlay: 'STAND',
             })
         } else if (pHand === 19){
-            if (this.state.dealerStandsSoft17 === true){
+            if (this.state.dealerStandsOnSoft17 === true){
                 console.log('the correct play is STAND')
                 this.setState({
                     correctPlay: 'STAND',
                 })
-            } else if (this.state.dealerStandsSoft17 === false){
+            } else if (this.state.dealerStandsOnSoft17 === false){
                 if(dHand === 6){
                     if (this.state.doubleAllowed === true){
                         console.log('the correct play is DOUBLE')
@@ -475,12 +609,12 @@ class BasicStrategy extends React.Component {
                 correctPlay: 'HIT',
             })
         } else if(pHand === 18 && dHand === 2){
-            if(this.dealerStandsSoft17 === true) {
+            if(this.dealerStandsOnSoft17 === true) {
                 console.log('the correct play is STAND')
                 this.setState({
                     correctPlay: 'STAND',
                 })
-            } else if (this.dealerStandsSoft17 === false) {
+            } else if (this.dealerStandsOnSoft17 === false) {
                 if(this.state.doubleAllowed === true){
                     console.log('the correct play is DOUBLE')
                     this.setState({
@@ -540,13 +674,13 @@ class BasicStrategy extends React.Component {
                 correctPlay: 'STAND',
             })
         } else if (pHand === 17) {
-            if(this.state.dealerStandsSoft17 === true){
+            if(this.state.dealerStandsOnSoft17 === true){
                 console.log('the correct Play is STAND')
                 this.setState({
                     correctPlay: 'STAND',
                 })
             }
-            if(this.state.dealerStandsSoft17 === false){
+            if(this.state.dealerStandsOnSoft17 === false){
                 if(dHand === 11 && this.state.surrenderAllowed === true){
                     console.log('the correct Play is SURRENDER')
                     this.setState({
@@ -611,17 +745,17 @@ class BasicStrategy extends React.Component {
                 })
             } 
         } else if (pHand === 11 && dHand === 11){
-            if (this.state.dealerStandsSoft17 === true){
+            if (this.state.dealerStandsOnSoft17 === true){
                 console.log('the correct Play is HIT')
                 this.setState({
                     correctPlay: 'HIT',
                 })
-            } else if (this.state.dealerStandsSoft17 === false && this.state.doubleAllowed === true){
+            } else if (this.state.dealerStandsOnSoft17 === false && this.state.doubleAllowed === true){
                 console.log('the correct Play is DOUBLE')
                 this.setState({
                     correctPlay: 'DOUBLE',
                 })
-            }  else if (this.state.dealerStandsSoft17 === false && this.state.doubleAllowed === false){
+            }  else if (this.state.dealerStandsOnSoft17 === false && this.state.doubleAllowed === false){
                 console.log('the correct Play is HIT')
                 this.setState({
                     correctPlay: 'HIT',
@@ -685,12 +819,12 @@ class BasicStrategy extends React.Component {
                 })
             }   
         } else if (pHand === 15 && dHand === 11){
-            if(this.state.dealerStandsSoft17 === true){
+            if(this.state.dealerStandsOnSoft17 === true){
                 console.log('the correct Play is HIT')
                 this.setState({
                     correctPlay: 'HIT',
                 })
-            } else if (this.state.dealerStandsSoft17 === false){
+            } else if (this.state.dealerStandsOnSoft17 === false){
                 if(this.state.surrenderAllowed === true){
                     console.log('the correct Play is SURRENDER')
                     this.setState({
@@ -731,6 +865,15 @@ class BasicStrategy extends React.Component {
     checkHitButton = (e) => {
         if (this.state.correctPlay === 'HIT'){
             this.setState({ hitButtonColor: '#055902' })
+
+            if (this.state.currentKindOfHandBeingPlayed === 'HARD'){
+                this.setState(prevState => { return{ hardHandsCorrect: prevState.hardHandsCorrect += 1 }} )
+            } else if(this.state.currentKindOfHandBeingPlayed === 'SOFT'){
+                this.setState(prevState => { return{ softHandsCorrect: prevState.softHandsCorrect += 1 }} )
+            } else if(this.state.currentKindOfHandBeingPlayed === 'SPLIT'){
+                this.setState(prevState => { return{ splitHandsCorrect: prevState.splitHandsCorrect += 1 }} )
+            }
+
         } else {
             this.setState({ hitButtonColor: '#ff0000' })
             if(this.state.correctPlay === 'STAND'){
@@ -748,6 +891,13 @@ class BasicStrategy extends React.Component {
     checkStandButton = (e) => {
         if (this.state.correctPlay === 'STAND'){
             this.setState({ standButtonColor: '#055902' })
+            if (this.state.currentKindOfHandBeingPlayed === 'HARD'){
+                this.setState(prevState => { return{ hardHandsCorrect: prevState.hardHandsCorrect += 1 }} )
+            } else if(this.state.currentKindOfHandBeingPlayed === 'SOFT'){
+                this.setState(prevState => { return{ softHandsCorrect: prevState.softHandsCorrect += 1 }} )
+            } else if(this.state.currentKindOfHandBeingPlayed === 'SPLIT'){
+                this.setState(prevState => { return{ splitHandsCorrect: prevState.splitHandsCorrect += 1 }} )
+            }
         } else {
             this.setState({ standButtonColor: '#ff0000' })
             if(this.state.correctPlay === 'HIT'){
@@ -765,6 +915,13 @@ class BasicStrategy extends React.Component {
     checkDoubleButton = (e) => {
         if (this.state.correctPlay === 'DOUBLE'){
             this.setState({ doubleButtonColor: '#055902' })
+            if (this.state.currentKindOfHandBeingPlayed === 'HARD'){
+                this.setState(prevState => { return{ hardHandsCorrect: prevState.hardHandsCorrect += 1 }} )
+            } else if(this.state.currentKindOfHandBeingPlayed === 'SOFT'){
+                this.setState(prevState => { return{ softHandsCorrect: prevState.softHandsCorrect += 1 }} )
+            } else if(this.state.currentKindOfHandBeingPlayed === 'SPLIT'){
+                this.setState(prevState => { return{ splitHandsCorrect: prevState.splitHandsCorrect += 1 }} )
+            }
         } else {
             this.setState({ doubleButtonColor: '#ff0000' })
             if(this.state.correctPlay === 'STAND'){
@@ -782,6 +939,13 @@ class BasicStrategy extends React.Component {
     checkSplitButton = (e) => {
         if (this.state.correctPlay === 'SPLIT'){
             this.setState({ splitButtonColor: '#055902' })
+            if (this.state.currentKindOfHandBeingPlayed === 'HARD'){
+                this.setState(prevState => { return{ hardHandsCorrect: prevState.hardHandsCorrect += 1 }} )
+            } else if(this.state.currentKindOfHandBeingPlayed === 'SOFT'){
+                this.setState(prevState => { return{ softHandsCorrect: prevState.softHandsCorrect += 1 }} )
+            } else if(this.state.currentKindOfHandBeingPlayed === 'SPLIT'){
+                this.setState(prevState => { return{ splitHandsCorrect: prevState.splitHandsCorrect += 1 }} )
+            }
         } else {
             this.setState({ splitButtonColor: '#ff0000' })
             if(this.state.correctPlay === 'STAND'){
@@ -799,6 +963,13 @@ class BasicStrategy extends React.Component {
     checkSurrenderButton = (e) => {
         if (this.state.correctPlay === 'SURRENDER'){
             this.setState({ surrenderButtonColor: '#055902' })
+            if (this.state.currentKindOfHandBeingPlayed === 'HARD'){
+                this.setState(prevState => { return{ hardHandsCorrect: prevState.hardHandsCorrect += 1 }} )
+            } else if(this.state.currentKindOfHandBeingPlayed === 'SOFT'){
+                this.setState(prevState => { return{ softHandsCorrect: prevState.softHandsCorrect += 1 }} )
+            } else if(this.state.currentKindOfHandBeingPlayed === 'SPLIT'){
+                this.setState(prevState => { return{ splitHandsCorrect: prevState.splitHandsCorrect += 1 }} )
+            }
         } else {
             this.setState({ surrenderButtonColor: '#ff0000' })
             if(this.state.correctPlay === 'STAND'){
@@ -824,27 +995,20 @@ class BasicStrategy extends React.Component {
 
     render() {
         const {navigate} = this.props.navigation;
+        // console.log('                                                           ')
+        // console.log('hard hands played: ' + this.state.hardHandsPlayed)
+        // console.log('hard hands correct: ' + this.state.hardHandsCorrect)
+        // console.log('soft hands played: ' + this.state.softHandsPlayed)
+        // console.log('soft hands correct: ' + this.state.softHandsCorrect)
+        // console.log('split hands played: ' + this.state.splitHandsPlayed)
+        // console.log('split hands correct: ' + this.state.splitHandsCorrect)
+        // console.log('                                                           ')
+
+        // console.log('currentKindOfHandBeingPlayed : ' + this.state.currentKindOfHandBeingPlayed)
         return (
             <ScrollView>
                 <View style={styles.container}>
-                    {/* <form onChange={this.handleRulesCheckbox} className='casino-rules-form'>
-                        <input  className='rules-checkbox' 
-                                name='dealerStandsSoft17' 
-                                type='checkbox'>
-                        </input> Dealer stand's on soft 17
-                        <input  className='rules-checkbox'
-                                name='doubleAllowed' 
-                                type='checkbox'>
-                        </input>  Double allowed
-                        <input  className='rules-checkbox'
-                                name='doubleAfterSplitAllowed' 
-                                type='checkbox'>
-                        </input>  Double after split allowed
-                        <input  className='rules-checkbox' 
-                                name='surrenderAllowed' 
-                                type='checkbox'>
-                        </input>  Surrender allowed
-                    </form> */}
+                
                     <Text style={styles.handLabel}>Dealer Hand</Text>
                     
                     <View style={styles.tableContainer}>
