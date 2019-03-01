@@ -25,7 +25,9 @@ class Menubar extends React.Component {
                     <Text   style={styles.textStyles}
                             onPress={() => navigate('Profile', {name: 'Profile'})}
                     > Profile </Text>
-                    <Text style={styles.textStyles}>About</Text>
+                    <Text   style={styles.textStyles}
+                            onPress={() => navigate('About', {name: 'About'})}
+                    > About </Text>
                 </View>
             </View>
         )

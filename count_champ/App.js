@@ -12,6 +12,7 @@ import Menubar from './components/menubar/Menubar'
 import CasinoRules from './components/casino_rules/CasinoRules'
 import MyStats from './components/my_stats/MyStats'
 import Profile from './components/profile/Profile'
+import About from './components/about/About'
 
 
 import {createStackNavigator, createAppContainer} from 'react-navigation';
@@ -31,6 +32,7 @@ const MainNavigator = createStackNavigator({
   CasinoRules: {screen: CasinoRules},
   MyStats: {screen: MyStats},
   Profile: {screen: Profile},
+  About: {screen: About},
 });
 
 const App = createAppContainer(MainNavigator);
