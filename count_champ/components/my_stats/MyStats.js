@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Dimensions, View, Text, StyleSheet} from 'react-native';
+import { Constants } from 'expo';
 
 let ScreenHeight = Dimensions.get("window").height;
 let ScreenWidth = Dimensions.get("window").width;
@@ -7,7 +8,7 @@ let ScreenWidth = Dimensions.get("window").width;
 class MyStats extends React.Component {
     
     static navigationOptions = {
-        header: null
+        title: 'My Stats'
     };
 
     render() {
@@ -15,39 +16,22 @@ class MyStats extends React.Component {
         
         return (
             <View style={styles.container}>
-                <View style={styles.textContainer}>
-                    
-                    <Text style={styles.textStyles}>My Stats Page</Text>
-                </View>
+                <Text style={styles.textStyles}>My Stats Page</Text>
             </View>
         )
     }
 }
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'black',
-        opacity: .8,
-        width: (ScreenWidth * .6),
-        position: 'absolute',
-        marginTop: 24,
-        marginLeft: (ScreenWidth * .4),
-        height: (ScreenHeight - 300),
-        borderTopLeftRadius: 30,
-        borderBottomLeftRadius: 30,
-        zIndex: 10,
-    },
-    textContainer: {
-        flex: 0,
-        justifyContent: 'space-evenly',
-        height: (ScreenHeight - 400),
-        width: (ScreenWidth * .6),
-        alignItems: 'center',
+        paddingTop: Constants.statusBarHeight,
+        padding: 8,
+        backgroundColor: ( '#0f9b0f'),
+        height: ScreenHeight,
     },
     textStyles: {
         color: 'white',
-        fontSize: 22,
+        fontSize: 20,
         fontWeight: 'bold',
-        textDecorationLine: 'underline',
     }
 });
 export default MyStats
