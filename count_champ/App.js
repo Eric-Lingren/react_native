@@ -10,6 +10,7 @@ import BetSizing from './components/train/bet_sizing/BetSizing'
 import BankrollSizing from './components/train/bankroll_sizing/BankrollSizing'
 import Menubar from './components/menubar/Menubar'
 import CasinoRules from './components/casino_rules/CasinoRules'
+import MyStats from './components/my_stats/MyStats'
 
 
 import {createStackNavigator, createAppContainer} from 'react-navigation';
@@ -27,6 +28,7 @@ const MainNavigator = createStackNavigator({
   BetSizing: {screen: BetSizing},
   BankrollSizing: {screen: BankrollSizing},
   
+  MyStats: {screen: MyStats},
   CasinoRules: {screen: CasinoRules},
 });
 

@@ -4,7 +4,7 @@ import { Dimensions, View, Text, StyleSheet} from 'react-native';
 let ScreenHeight = Dimensions.get("window").height;
 let ScreenWidth = Dimensions.get("window").width;
 
-class Menubar extends React.Component {
+class MyStats extends React.Component {
     
     static navigationOptions = {
         header: null
@@ -16,14 +16,8 @@ class Menubar extends React.Component {
         return (
             <View style={styles.container}>
                 <View style={styles.textContainer}>
-                    <Text   style={styles.textStyles}
-                            onPress={() => navigate('CasinoRules', {name: 'Casino Rules'})}
-                    > Casino Rules </Text>
-                    <Text   style={styles.textStyles}
-                            onPress={() => navigate('MyStats', {name: 'My Stats'})}
-                    > My Stats </Text>
-                    <Text style={styles.textStyles}>Profile</Text>
-                    <Text style={styles.textStyles}>About</Text>
+                    
+                    <Text style={styles.textStyles}>My Stats Page</Text>
                 </View>
             </View>
         )
@@ -56,4 +50,4 @@ const styles = StyleSheet.create({
         textDecorationLine: 'underline',
     }
 });
-export default Menubar
+export default MyStats

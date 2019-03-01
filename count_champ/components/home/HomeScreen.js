@@ -19,11 +19,6 @@ class HomeScreen extends React.Component {
         }
     }
 
-    toggleMenu = () => {
-        this.state.sideMenuShowing ? this.setState({sideMenuShowing: false, menuIconMargin: menuIconMargin}) : this.setState({sideMenuShowing: true, menuIconMargin: (ScreenWidth * .24)})
-    }
-
-    
     componentDidMount(){
         AsyncStorage.getItem("doubleAllowed").then((doubleAllowedValue) => {
             console.log('Home -- Starting double allowed value: ' + doubleAllowedValue)
@@ -34,6 +29,11 @@ class HomeScreen extends React.Component {
             }
         }).done();
     }
+
+    toggleMenu = () => {
+        this.state.sideMenuShowing ? this.setState({sideMenuShowing: false, menuIconMargin: menuIconMargin}) : this.setState({sideMenuShowing: true, menuIconMargin: (ScreenWidth * .24)})
+    }
+
 
     setDefaultCasinoRules = async () => {
         console.log('set default casino rules function ran')
