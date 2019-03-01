@@ -13,12 +13,8 @@ class CasinoRules extends React.Component {
             doubleAllowed: true,
             doubleAfterSplitAllowed: false,
             surrenderAllowed: false,
-            dealerStands17: true,
-            dealerRules: 0, // 0 = Dealer stands on soft 17   ;   1 = Dealer hits on soft 17
-            radioProps: [
-                {label: 'Dealer stands on soft 17', value: 0 },
-                {label: 'Dealer hits on soft 17', value: 1 }
-            ]
+            dealerStandsOnSoft17: true,
+            dealerHitsOnSoft17: false
         }
     }
 
@@ -27,7 +23,14 @@ class CasinoRules extends React.Component {
     }
 
     getSavedRulesFromMemory = () =>{
-        console.log('got saved rules')
+
+        AsyncStorage.getItem("dealerStandsOnSoft17").then((dealerStandsOnSoft17Value) => {
+            if(dealerStandsOnSoft17Value === 'true'){
+                this.setState({dealerStandsOnSoft17: true, dealerHitsOnSoft17: false} )
+            } else{
+                this.setState({dealerStandsOnSoft17: false, dealerHitsOnSoft17: true} )
+            }
+        }).done();
 
         AsyncStorage.getItem("doubleAllowed").then((doubleAllowedValue) => {
             if(doubleAllowedValue === 'true'){
@@ -53,87 +56,85 @@ class CasinoRules extends React.Component {
             }
         }).done();
 
-        AsyncStorage.getItem("dealerStands17").then((dealerStands17Value) => {
-            console.log('Rules -- dealer stands 17 value: ' + dealerStands17Value)
-            console.log('state -- dealer stands 17 value: ' + this.state.dealerStands17)
-            if(dealerStands17Value === 'true'){
-                console.log('If statement rule was true')
-                this.setState({dealerStands17: true}, () => console.log('state- dealer stands 17 : ' + this.state.dealerStands17))
-            } else{
-                console.log('If statement rule was false')
-                this.setState({dealerStands17: false}, () => console.log('state- dealer stands 17 : ' + this.state.dealerStands17 ))
-            }
-        }).done();
+        
     }
 
     saveRuleInStorage = async (rule , value) => {
-        console.log(rule)
-        console.log(value)
-        console.log(typeof(value))
-        //console.log('store data ran')
-        //console.log(this.state.doubleAllowed)
-        //let isDoubleAllowed = this.state.doubleAllowed 
         if(rule === 'doubleAllowed'){
-            console.log('if statement got hit for double allowed')
             if(value === true){
-                console.log('value was true')
                 try {
                     await AsyncStorage.setItem('doubleAllowed', 'true');
                 } catch (error) {
                 }
             } else {
-                console.log('value was false')
                 try {
                     await AsyncStorage.setItem('doubleAllowed', 'false');
                 } catch (error) {
                 }
             }
         } else if(rule === 'doubleAfterSplitAllowed'){
-            console.log('if statement got hit for double after split allowed')
             if(value === true){
-                console.log('value was true')
                 try {
                     await AsyncStorage.setItem('doubleAfterSplitAllowed', 'true');
                 } catch (error) {
                 }
             } else {
-                console.log('value was false')
                 try {
                     await AsyncStorage.setItem('doubleAfterSplitAllowed', 'false');
                 } catch (error) {
                 }
             }
         } else if(rule === 'surrenderAllowed'){
-            console.log('if statement got hit for surrender after split allowed')
             if(value === true){
-                console.log('value was true')
                 try {
                     await AsyncStorage.setItem('surrenderAllowed', 'true');
                 } catch (error) {
                 }
             } else {
-                console.log('value was false')
                 try {
                     await AsyncStorage.setItem('surrenderAllowed', 'false');
                 } catch (error) {
                 }
             }
-        } else if(rule === 'dealerStands17'){
-            console.log('if statement got hit for dealer stands 17')
-            console.log('dealer rules: ' + this.state.dealerRules)
-            console.log('dealer stands 17: ' + this.state.dealerStands17)
-            if(value === true){
-                console.log('value was true')
-                // try {
-                //     await AsyncStorage.setItem('surrenderAllowed', 'true');
-                // } catch (error) {
-                // }
+        } else if(rule === 'dealerStandsOnSoft17'){
+            if(this.state.dealerStandsOnSoft17 === true){
+                try {
+                    await AsyncStorage.setItem('dealerStandsOnSoft17', 'true');
+                } catch (error) {
+                }
+                try {
+                    await AsyncStorage.setItem('dealerHitsOnSoft17', 'false');
+                } catch (error) {
+                }
             } else {
-                console.log('value was false')
-                // try {
-                //     await AsyncStorage.setItem('surrenderAllowed', 'false');
-                // } catch (error) {
-                // }
+                try {
+                    await AsyncStorage.setItem('dealerStandsOnSoft17', 'false');
+                } catch (error) {
+                }
+                try {
+                    await AsyncStorage.setItem('dealerHitsOnSoft17', 'true');
+                } catch (error) {
+                }
+            }
+        }else if(rule === 'dealerHitsOnSoft17'){
+            if(this.state.dealerHitsOnSoft17 === true){
+                try {
+                    await AsyncStorage.setItem('dealerHitsOnSoft17', 'true');
+                } catch (error) {
+                }
+                try {
+                    await AsyncStorage.setItem('dealerStandsOnSoft17', 'false');
+                } catch (error) {
+                }
+            } else {
+                try {
+                    await AsyncStorage.setItem('dealerHitsOnSoft17', 'false');
+                } catch (error) {
+                }
+                try {
+                    await AsyncStorage.setItem('dealerStandsOnSoft17', 'true');
+                } catch (error) {
+                }
             }
         }
         this.getSavedRulesFromMemory()
@@ -145,25 +146,33 @@ class CasinoRules extends React.Component {
 
     render() {
         const {navigate} = this.props.navigation;
-        // console.log('double allowed: ' + this.state.doubleAllowed)
-        // console.log('double after split allowed: ' + this.state.doubleAfterSplitAllowed)
-        // console.log('surrender allowed: ' + this.state.surrenderAllowed)
-        // console.log('dealer rules: ' + this.state.dealerRules)
         return (
             
             <View style={styles.container}>
                 <View style={styles.buttonContainer}>
-                
-                    <RadioForm
-                        radio_props={this.state.radioProps}
-                        initial={0}
-                        onPress={(value) => {this.setState({dealerRules:value}, 
-                                            () => this.saveRuleInStorage('dealerStands17' , this.state.dealerRules ) )}}
-                        buttonColor={'#ffffff'}
-                        selectedButtonColor={'#ffffff'}
-                        labelStyle={{fontSize: 20, color: '#fff'}}
+
+                    <CheckBox
+                        onClick={   ()=>{ this.setState({ dealerStandsOnSoft17: !this.state.dealerStandsOnSoft17 }, 
+                                    () => this.saveRuleInStorage('dealerStandsOnSoft17' , this.state.dealerStandsOnSoft17 )) }}
+                        isChecked={this.state.dealerStandsOnSoft17}
+                        rightText={"Dealer stands on soft 17"} 
+                        checkBoxColor={'#fff'}
+                        checkedCheckBoxColor={'#fff'}
+                        rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5}}
+                        // disabled={true}
+                    /> 
+
+                    <CheckBox
+                        onClick={   ()=>{ this.setState({ dealerHitsOnSoft17: !this.state.dealerHitsOnSoft17 }, 
+                                    () => this.saveRuleInStorage('dealerHitsOnSoft17' , this.state.dealerHitsOnSoft17 )) }}
+                        isChecked={this.state.dealerHitsOnSoft17}
+                        rightText={"Dealer hits on soft 17"} 
+                        checkBoxColor={'#fff'}
+                        checkedCheckBoxColor={'#fff'}
+                        rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5}}
                         // disabled={true}
                     />
+
                     <CheckBox
                         onClick={   ()=>{ this.setState({ doubleAllowed: !this.state.doubleAllowed }, 
                                     () => this.saveRuleInStorage('doubleAllowed' , this.state.doubleAllowed )) }}
@@ -196,7 +205,7 @@ class CasinoRules extends React.Component {
                     /> 
                 </View>
                 <Text style={{color: '#fff', fontSize: 16, textAlign: 'center', marginTop: 60}}>
-                    These options are only editable in premium version
+                    {/* These options are only editable in premium version */}
                 </Text>
             </View>
 

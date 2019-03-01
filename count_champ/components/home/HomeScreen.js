@@ -28,9 +28,8 @@ class HomeScreen extends React.Component {
         AsyncStorage.getItem("doubleAllowed").then((doubleAllowedValue) => {
             console.log('Home -- Starting double allowed value: ' + doubleAllowedValue)
             console.log('Home -- type of double allowed value: ' + typeof(doubleAllowedValue))
-
             // Rules haven't been set to local storage yet (first load only)
-            if(doubleAllowedValue === 'null'){
+            if(typeof(doubleAllowedValue) === 'object'){
                 this.setDefaultCasinoRules()
             }
         }).done();
