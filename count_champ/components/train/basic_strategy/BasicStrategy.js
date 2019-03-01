@@ -355,7 +355,19 @@ class BasicStrategy extends React.Component {
             this.setState({
                 correctPlay: 'STAND',
             })
-        } else if (pHand === 16){
+        }  else if(pHand === 10 && dHand <= 9){
+            if (this.state.doubleAllowed === true){
+                console.log('the correct Play is DOUBLE')
+                this.setState({
+                    correctPlay: 'DOUBLE',
+                })
+            } else if (this.state.doubleAllowed === false){
+                console.log('the correct Play is HIT')
+                this.setState({
+                    correctPlay: 'HIT',
+                })
+            } 
+        }else if (pHand === 16){
             if (dHand === 11 && this.dealerStandsOnSoft17 === false && this.state.surrenderAllowed === true) {
                 console.log('the correct play is SURRENDER')
                 this.setState({
