@@ -11,6 +11,7 @@ import BankrollSizing from './components/train/bankroll_sizing/BankrollSizing'
 import Menubar from './components/menubar/Menubar'
 import CasinoRules from './components/casino_rules/CasinoRules'
 import MyStats from './components/my_stats/MyStats'
+import Profile from './components/profile/Profile'
 
 
 import {createStackNavigator, createAppContainer} from 'react-navigation';
@@ -27,9 +28,9 @@ const MainNavigator = createStackNavigator({
   TrueCount: {screen: TrueCount},
   BetSizing: {screen: BetSizing},
   BankrollSizing: {screen: BankrollSizing},
-  
-  MyStats: {screen: MyStats},
   CasinoRules: {screen: CasinoRules},
+  MyStats: {screen: MyStats},
+  Profile: {screen: Profile},
 });
 
 const App = createAppContainer(MainNavigator);
