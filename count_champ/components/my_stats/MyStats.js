@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Dimensions, View, Text, StyleSheet, AsyncStorage, Button, ScrollView } from 'react-native';
+import { Dimensions, View, Text, StyleSheet, ScrollView } from 'react-native';
 import { Constants } from 'expo';
 import BasicStrategyStats from './BasicStrategyStats';
-import SpeedCountStats from './SpeedCountStats';
+// import SpeedCountStats from './SpeedCountStats';
 
 
 let ScreenHeight = Dimensions.get("window").height;
@@ -27,7 +27,7 @@ class MyStats extends React.Component {
             <ScrollView>
                 <View style={styles.container}>
                     <BasicStrategyStats />
-                    <SpeedCountStats />
+                    {/* <SpeedCountStats /> */}
                     
                     
                 </View>

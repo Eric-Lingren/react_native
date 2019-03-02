@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Dimensions, View, Text, StyleSheet, AsyncStorage} from 'react-native';
+import { Dimensions, View, Text, StyleSheet, AsyncStorage, Button } from 'react-native';
 import { Constants } from 'expo';
 
 
@@ -25,12 +25,17 @@ class BasicStrategyStats extends React.Component {
             percentOfSoftHandsCorrect: 0,
             percentOfSoftHandsCorrectColor: '',
             percentOfSplitHandsCorrect: 0,
-            percentOfSplitHandsCorrectColor: ''
+            percentOfSplitHandsCorrectColor: '',
+            sessionsPlayed: 0,
+            sessionsCorrect: 0,
+            percentOfSessionsCorrect: 0,
+            percentOfSessionsCorrectColor: '',
         }
     }
 
     componentDidMount(){
         this.getStatsFromStorage()
+        this.getCountingStatsFromStorage()
     }
 
     getStatsFromStorage = () => {
@@ -121,7 +126,6 @@ class BasicStrategyStats extends React.Component {
         let softHandsPlayed = this.state.softHandsPlayed 
         let softHandsCorrect = this.state.softHandsCorrect 
         let percentOfSoftHandsCorrect = Math.round( (softHandsCorrect / softHandsPlayed) * 100 )
-        console.log(typeof(percentOfSoftHandsCorrect))
         let percentOfSoftHandsCorrectColor = '#2196f3'
 
         if(percentOfSoftHandsCorrect >= 90){
@@ -163,16 +167,103 @@ class BasicStrategyStats extends React.Component {
         })
     }
 
+
+
+    //////////////////////////////////////////////////////////////////////////
+    getCountingStatsFromStorage = () => {
+        AsyncStorage.getItem("speedCountSessionsPlayed").then((speedCountSessionsPlayed) => {
+            let speedCountSessionsPlayedNum;
+            speedCountSessionsPlayed === 'NaN' || speedCountSessionsPlayed === 'null' ? speedCountSessionsPlayedNum = 0 : speedCountSessionsPlayedNum = parseInt(speedCountSessionsPlayed)
+            this.setState({sessionsPlayed: speedCountSessionsPlayedNum})
+        }).done();
+        AsyncStorage.getItem("speedCountSessionsCorrect").then((speedCountSessionsCorrect) => {
+            let speedCountSessionsCorrectNum;
+            speedCountSessionsCorrect === 'NaN' || speedCountSessionsCorrect === 'null' ? speedCountSessionsCorrectNum = 0 : speedCountSessionsCorrectNum = parseInt(speedCountSessionsCorrect)
+            this.setState({sessionsCorrect: speedCountSessionsCorrectNum}, () => this.calculateSpeedCountStats())
+        }).done();
+    }
+
+
+    calculateSpeedCountStats = () => {
+        let totalSessionsPlayed = this.state.sessionsPlayed 
+        let totalSessionsCorrect = this.state.sessionsCorrect
+        let percentOfSessionsCorrect = ( (totalSessionsCorrect / totalSessionsPlayed) * 100 )
+        let percentOfSessionsCorrectColor = '#2196f3'
+
+        if(percentOfSessionsCorrect >= 90){
+            //  Good Score
+            percentOfSessionsCorrectColor = '#49FF58'
+        } else if (percentOfSessionsCorrect <= 70){
+            // Bad Score
+            percentOfSessionsCorrectColor = '#FF0000'
+        } else {
+            //  Medium Score
+            percentOfSessionsCorrectColor = '#FBFC5F'
+        }
+        this.setState({ 
+            percentOfSessionsCorrect: percentOfSessionsCorrect,
+            percentOfSessionsCorrectColor: percentOfSessionsCorrectColor
+        })
+        
+    }
+
+    resetStats = async () => {
+        console.log('clear button pressed')
+        try {
+            await AsyncStorage.setItem('hardHandsPlayed', '0');
+        } catch (error) {}
+        try {
+            await AsyncStorage.setItem('hardHandsCorrect', '0');
+        } catch (error) {}
+        try {
+            await AsyncStorage.setItem('softHandsPlayed', '0');
+        } catch (error) {}
+        try {
+            await AsyncStorage.setItem('softHandsCorrect', '0');
+        } catch (error) {}
+        try {
+            await AsyncStorage.setItem('splitHandsPlayed', '0');
+        } catch (error) {}
+        try {
+            await AsyncStorage.setItem('splitHandsCorrect', '0');
+        } catch (error) {}
+        try {
+            await AsyncStorage.setItem('speedCountSessionsPlayed', '0');
+        } catch (error) {}
+        try {
+            await AsyncStorage.setItem('speedCountSessionsCorrect', '0');
+        } catch (error) {}
+        this.setState({
+            sessionsPlayed: 0,
+            sessionsCorrect: 0,
+            totalHandsPlayed: 0,
+            totalHandsCorrect: 0,
+            hardHandsPlayed: 0,
+            hardHandsCorrect: 0,
+            softHandsPlayed: 0,
+            softHandsCorrect: 0,
+            splitHandsPlayed: 0,
+            splitHandsCorrect: 0,
+            percentOfTotalHandsCorrect: 0,
+            percentOfHardHandsCorrect: 0,
+            percentOfSoftHandsCorrect: 0,
+            percentOfSplitHandsCorrect: 0,
+            percentOfSessionsCorrect: 0,
+        })
+    }
+
     static navigationOptions = {
         title: 'My Stats'
     };
 
     render() {
         const navigate = this.props.navigation
-        console.log(this.state.percentOfSoftHandsCorrect)
-        console.log(this.state.percentOfSoftHandsCorrectColor)
         return (
             <View style={styles.container}>
+            <View style={styles.buttonContainer}>
+                <Button color="#003D66" onPress={this.resetStats} title="Reset Stats"></Button>
+            </View>
+            
                 <View style={styles.statsContainer}>
                     <Text style={styles.headerStyles}>All Hands</Text>
                     <Text style={styles.textStyles}>Played: {this.state.totalHandsPlayed} </Text>
@@ -233,7 +324,21 @@ class BasicStrategyStats extends React.Component {
                                     backgroundColor: this.state.percentOfSplitHandsCorrectColor}}></View>
                 </View>
 
-                
+
+                <View style={styles.statsContainer}>
+                    <Text style={styles.headerStyles}>Speed Counting Drill</Text>
+                    <Text style={styles.textStyles}>Played: {this.state.sessionsPlayed} </Text>
+                    <View style={{  width: '100%', 
+                                    height: 30,
+                                    borderWidth: 1,
+                                    backgroundColor: '#2196f3',
+                                    marginBottom: 5}}>
+                    </View>
+                    <Text style={styles.textStyles}>Correct: {this.state.sessionsCorrect} </Text>
+                    <View style={{  width: `${this.state.percentOfSessionsCorrect}%`, 
+                                    height: 30, 
+                                    backgroundColor: this.state.percentOfSessionsCorrectColor}}></View>
+                </View>
                 
             </View>
         )
@@ -245,6 +350,7 @@ const styles = StyleSheet.create({
         padding: 8,
         backgroundColor: ( '#0f9b0f'),
         height: ScreenHeight,
+        marginTop: -10,
     },
     statsContainer: {
         width: ScreenWidth-50,
@@ -268,6 +374,12 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 16,
         fontWeight: 'bold',
+    },
+    buttonContainer: {
+        alignContent: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 20,
     }
 });
 export default BasicStrategyStats
