@@ -1,10 +1,12 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, Dimensions, AsyncStorage } from 'react-native';
+import { Text, View, StyleSheet, Dimensions, AsyncStorage, WebView, TouchableWithoutFeedback, Image } from 'react-native';
 import CheckBox from 'react-native-check-box';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import { Constants } from 'expo';
+import SubscribeModal from '../subscribe_modal/SubscribeModal'
 
 let ScreenHeight = Dimensions.get("window").height;
+let ScreenWidth = Dimensions.get("window").width;
 
 class CasinoRules extends React.Component {
     constructor(){
@@ -14,7 +16,8 @@ class CasinoRules extends React.Component {
             doubleAfterSplitAllowed: false,
             surrenderAllowed: false,
             dealerStandsOnSoft17: true,
-            dealerHitsOnSoft17: false
+            dealerHitsOnSoft17: false,
+            showSubscribeModal: false,
         }
     }
 
@@ -144,11 +147,26 @@ class CasinoRules extends React.Component {
         title: 'Casino Rules'
     };
 
+    toggleSubscribeModal = () => {
+        this.setState({showSubscribeModal: !this.state.showSubscribeModal})
+    }   
+
     render() {
         const {navigate} = this.props.navigation;
         return (
             
             <View style={styles.container}>
+                {this.state.showSubscribeModal 
+                ?   <View style={styles.modalContainer}>
+                        <TouchableWithoutFeedback onPress={() => this.toggleSubscribeModal()} style={{  }}>
+                            <Image
+                                source={require('../images/close_white.png')}
+                                style={{ width: 40, height: 40, marginLeft:(ScreenWidth -60), marginTop: 20, zIndex: 6, position: 'absolute'}}/>
+                        </TouchableWithoutFeedback>
+                        <SubscribeModal />
+                    </View>
+                : null
+                }
                 <View style={styles.buttonContainer}>
 
                     <CheckBox
@@ -175,7 +193,8 @@ class CasinoRules extends React.Component {
 
                     <CheckBox
                         onClick={   ()=>{ this.setState({ doubleAllowed: !this.state.doubleAllowed }, 
-                                    () => this.saveRuleInStorage('doubleAllowed' , this.state.doubleAllowed )) }}
+                                    // () => this.saveRuleInStorage('doubleAllowed' , this.state.doubleAllowed )) }}
+                                    () => this.toggleSubscribeModal() ) }}
                         isChecked={this.state.doubleAllowed}
                         rightText={"Double allowed"} 
                         checkBoxColor={'#fff'}
@@ -219,6 +238,11 @@ const styles = StyleSheet.create({
         padding: 8,
         backgroundColor: ( '#0f9b0f', '#52c234', '#52c234', '#0f9b0f'),
         height: ScreenHeight,
+    },
+    modalContainer: {
+        width: ScreenWidth + 30, 
+        marginLeft: -8,
+        marginTop: -25,
     },
     buttonContainer: {
         marginLeft: 30,
