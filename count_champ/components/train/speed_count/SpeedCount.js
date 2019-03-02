@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Text, View, StyleSheet, TextInput,  Image, Dimensions } from 'react-native';
+import { Button, Text, View, StyleSheet, TextInput,  Image, Dimensions, AsyncStorage } from 'react-native';
 import { Constants } from 'expo';
 import axios from 'axios'
 
@@ -34,6 +34,40 @@ class SpeedCount extends React.Component {
                 deckID: deckID,
             })
         })
+        this.getCountingStatsFromStorage()
+    }
+
+    componentWillUnmount = () => {
+        let speedCountSessionsPlayed = this.state.sessionsPlayed.toString()
+        let speedCountSessionsCorrect = this.state.sessionsCorrect.toString()
+        
+        this.saveStatsInStorage(speedCountSessionsPlayed, speedCountSessionsCorrect)
+    }
+
+    getCountingStatsFromStorage = () => {
+        AsyncStorage.getItem("speedCountSessionsPlayed").then((speedCountSessionsPlayed) => {
+            console.log('speed count sessions played is: ' + speedCountSessionsPlayed)
+            let speedCountSessionsPlayedNum;
+            speedCountSessionsPlayed === 'NaN' || speedCountSessionsPlayed === 'null' ? speedCountSessionsPlayedNum = 0 : speedCountSessionsPlayedNum = parseInt(speedCountSessionsPlayed)
+            this.setState({sessionsPlayed: speedCountSessionsPlayedNum})
+        }).done();
+        AsyncStorage.getItem("speedCountSessionsCorrect").then((speedCountSessionsCorrect) => {
+            console.log('speed count sessions Correct is: ' + speedCountSessionsCorrect)
+            let speedCountSessionsCorrectNum;
+            speedCountSessionsCorrect === 'NaN' || speedCountSessionsCorrect === 'null' ? speedCountSessionsCorrectNum = 0 : speedCountSessionsCorrectNum = parseInt(speedCountSessionsCorrect)
+            this.setState({sessionsCorrect: speedCountSessionsCorrectNum})
+        }).done();
+    }
+
+    saveStatsInStorage = async (speedCountSessionsPlayed, speedCountSessionsCorrect) => {
+        try {
+            await AsyncStorage.setItem('speedCountSessionsPlayed', speedCountSessionsPlayed);
+        } catch (error) {
+        }
+        try {
+            await AsyncStorage.setItem('speedCountSessionsCorrect', speedCountSessionsCorrect);
+        } catch (error) {
+        }
     }
 
     dealCard = () => {
