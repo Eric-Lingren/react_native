@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { Dimensions, View, Text, StyleSheet, AsyncStorage} from 'react-native';
 import { Constants } from 'expo';
+import SpeedCountStats from './SpeedCountStats'
 
 let ScreenHeight = Dimensions.get("window").height;
 let ScreenWidth = Dimensions.get("window").width;
 
-class MyStats extends React.Component {
+class BasicStrategyStats extends React.Component {
     constructor(){
         super()
         this.state = {
@@ -236,6 +237,8 @@ class MyStats extends React.Component {
                                     height: 30, 
                                     backgroundColor: this.state.percentOfSplitHandsCorrectColor}}></View>
                 </View>
+
+                <SpeedCountStats />
                 
             </View>
         )
@@ -272,4 +275,4 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     }
 });
-export default MyStats
+export default BasicStrategyStats

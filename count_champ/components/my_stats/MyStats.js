@@ -3,6 +3,7 @@ import { Dimensions, View, Text, StyleSheet, AsyncStorage, ScrollView } from 're
 import { Constants } from 'expo';
 import BasicStrategyStats from './BasicStrategyStats'
 
+
 let ScreenHeight = Dimensions.get("window").height;
 let ScreenWidth = Dimensions.get("window").width;
 
@@ -24,6 +25,7 @@ class MyStats extends React.Component {
             <ScrollView>
                 <View style={styles.container}>
                     <BasicStrategyStats />
+                    
                 </View>
             </ScrollView>
         )

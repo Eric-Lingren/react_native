@@ -46,13 +46,11 @@ class SpeedCount extends React.Component {
 
     getCountingStatsFromStorage = () => {
         AsyncStorage.getItem("speedCountSessionsPlayed").then((speedCountSessionsPlayed) => {
-            console.log('speed count sessions played is: ' + speedCountSessionsPlayed)
             let speedCountSessionsPlayedNum;
             speedCountSessionsPlayed === 'NaN' || speedCountSessionsPlayed === 'null' ? speedCountSessionsPlayedNum = 0 : speedCountSessionsPlayedNum = parseInt(speedCountSessionsPlayed)
             this.setState({sessionsPlayed: speedCountSessionsPlayedNum})
         }).done();
         AsyncStorage.getItem("speedCountSessionsCorrect").then((speedCountSessionsCorrect) => {
-            console.log('speed count sessions Correct is: ' + speedCountSessionsCorrect)
             let speedCountSessionsCorrectNum;
             speedCountSessionsCorrect === 'NaN' || speedCountSessionsCorrect === 'null' ? speedCountSessionsCorrectNum = 0 : speedCountSessionsCorrectNum = parseInt(speedCountSessionsCorrect)
             this.setState({sessionsCorrect: speedCountSessionsCorrectNum})
