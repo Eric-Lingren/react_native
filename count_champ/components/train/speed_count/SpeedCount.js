@@ -20,6 +20,10 @@ class SpeedCount extends React.Component {
             cardsPerSecond: 1,
             howFast: 1000,
             input: '',
+            inputAnswer: '',
+            guessWasCorrect: '',
+            sessionsPlayed: 0,
+            sessionsCorrect: 0,
         }
     }
 
@@ -36,11 +40,12 @@ class SpeedCount extends React.Component {
         this.setState({
             runningCountVisible: false,
             whatsTheCountVisible: false, 
+            inputAnswer: '',
         })
         
         let speed;
         if(this.state.input){
-            speed = ( 1000 / (parseInt(this.state.input)) )
+            speed = ( 1000 / (Number(this.state.input)) )
         } else {
             speed = 1000
         }
@@ -95,6 +100,25 @@ class SpeedCount extends React.Component {
         this.displayCount()    
     }
 
+    checkAnswer = () => {
+        let guess = Number(this.state.inputAnswer)
+        let answer = this.state.count
+        
+        if(guess === answer){
+            this.setState(prevState => ({ 
+                guessWasCorrect : 'Correct!',
+                sessionsCorrect: prevState.sessionsCorrect += 1,
+            }))
+        } else {
+            this.setState({ guessWasCorrect : 'Wrong' })
+        }
+        this.setState(prevState => ({ 
+            whatsTheCountVisible : false, 
+            count: 0,
+            sessionsPlayed: prevState.sessionsPlayed += 1
+        }))
+    }
+
     displayCount = () => {
         setTimeout ( () => {
             this.setState({
@@ -125,15 +149,29 @@ class SpeedCount extends React.Component {
                     <View >
                         <View style={styles.deckContainer}>
                             <Image style={styles.deckDisplay} source={{uri: this.state.cardsDealtImages}} />
-                            {   this.state.whatsTheCountVisible ? <Text style={styles.textStyleAnswer}>Whats The Count?</Text>
-                                : null
-                            }
-                            {   this.state.runningCountVisible ? <Text style={styles.textStyleAnswer}>{this.state.count}</Text> 
-                                : null
-                            }
+                            
                         </View>
                     </View>
                     <Button color="#000000" onPress={this.dealCard} title="Start"></Button>
+                    <View style={styles.answerContainer}>
+                        {this.state.whatsTheCountVisible 
+                        ?   <View>
+                                <Text style={styles.textStyleAnswer}>Whats The Count?</Text>
+                                <TextInput
+                                    style={{height: 40, borderColor: 'black', borderWidth: 1, borderRadius: 10, backgroundColor: 'white', opacity: 0.7, width: 100, paddingTop: 5, paddingBottom: 5, paddingLeft: 35, fontSize: 26, fontWeight: 'bold'}}
+                                    keyboardType = 'phone-pad'
+                                    maxLength={3}
+                                    onChangeText={(inputAnswer) => this.setState({inputAnswer})}
+                                    value={this.state.inputAnswer}
+                                />
+                                <Button color="#2196f3" onPress={this.checkAnswer} title="Check Answer"></Button>
+                            </View>
+                        : null
+                        }
+                        {this.state.runningCountVisible ? <Text style={styles.textStyleAnswer}>{this.state.guessWasCorrect}</Text> 
+                        : null
+                        }
+                    </View>
                     
                 </View>
             </View> 
@@ -179,6 +217,12 @@ const styles = StyleSheet.create({
         fontSize: 18, 
         fontWeight: 'bold', 
         color: 'white'
+    },
+    answerContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignContent: 'center',
+        marginBottom: 15,
     },
     textStyleAnswer: {
         fontSize: 22, 

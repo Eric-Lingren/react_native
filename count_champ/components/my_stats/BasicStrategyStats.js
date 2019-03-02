@@ -178,7 +178,7 @@ class MyStats extends React.Component {
         return (
             <View style={styles.container}>
                 <View style={styles.statsContainer}>
-                    <Text style={styles.headerStyles}>Total Hands</Text>
+                    <Text style={styles.headerStyles}>All Hands</Text>
                     <Text style={styles.textStyles}>Played: {this.state.totalHandsPlayed} </Text>
                     <View style={{  width: '100%', 
                                     height: 30,
