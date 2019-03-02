@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Dimensions, View, Text, StyleSheet, AsyncStorage} from 'react-native';
 import { Constants } from 'expo';
-import SpeedCountStats from './SpeedCountStats'
+
 
 let ScreenHeight = Dimensions.get("window").height;
 let ScreenWidth = Dimensions.get("window").width;
@@ -35,37 +35,31 @@ class BasicStrategyStats extends React.Component {
 
     getStatsFromStorage = () => {
         AsyncStorage.getItem("hardHandsPlayed").then((hardHandsPlayed) => {
-            console.log('hard hands played is: ' + hardHandsPlayed)
             let hardHandsPlayedNum;
             hardHandsPlayed === 'NaN' ? hardHandsPlayedNum = 0 : hardHandsPlayedNum = parseInt(hardHandsPlayed)
             this.setState({hardHandsPlayed: hardHandsPlayedNum})
         }).done();
         AsyncStorage.getItem("hardHandsCorrect").then((hardHandsCorrect) => {
-            console.log('hard hands Correct is: ' + hardHandsCorrect)
             let hardHandsCorrectNum;
             hardHandsCorrect === 'NaN' || hardHandsCorrect === 'null' ? hardHandsCorrectNum = 0 : hardHandsCorrectNum = parseInt(hardHandsCorrect)
             this.setState({hardHandsCorrect: hardHandsCorrectNum})
         }).done();
         AsyncStorage.getItem("softHandsPlayed").then((softHandsPlayed) => {
-            console.log('soft hands played is: ' + softHandsPlayed)
             let softHandsPlayedNum;
             softHandsPlayed === 'NaN' || softHandsPlayed === 'null' ? softHandsPlayedNum = 0 : softHandsPlayedNum = parseInt(softHandsPlayed)
             this.setState({softHandsPlayed: softHandsPlayedNum})
         }).done();
         AsyncStorage.getItem("softHandsCorrect").then((softHandsCorrect) => {
-            console.log('soft hands Correct is: ' + softHandsCorrect)
             let softHandsCorrectNum;
             softHandsCorrect === 'NaN' || softHandsCorrect === 'null' ?  softHandsCorrectNum = 0 : softHandsCorrectNum = parseInt(softHandsCorrect)
             this.setState({softHandsCorrect: softHandsCorrectNum})
         }).done();
         AsyncStorage.getItem("splitHandsPlayed").then((splitHandsPlayed) => {
-            console.log('split hands played is: ' + splitHandsPlayed)
             let splitHandsPlayedNum;
             splitHandsPlayed === 'NaN' || splitHandsPlayed === 'null' ? splitHandsPlayedNum = 0 : splitHandsPlayedNum = parseInt(splitHandsPlayed)
             this.setState({splitHandsPlayed: splitHandsPlayedNum})
         }).done();
         AsyncStorage.getItem("splitHandsCorrect").then((splitHandsCorrect) => {
-            console.log('split hands Correct is: ' + splitHandsCorrect)
             let splitHandsCorrectNum;
             splitHandsCorrect === 'NaN' || splitHandsCorrect === 'null' ? splitHandsCorrectNum = 0 : splitHandsCorrectNum = parseInt(splitHandsCorrect)
             this.setState({splitHandsCorrect: splitHandsCorrectNum}, () => this.calculateTotalHands())
@@ -84,7 +78,7 @@ class BasicStrategyStats extends React.Component {
             percentOfTotalHandsCorrectColor = '#49FF58'
         } else if (percentOfTotalHandsCorrect <= 70){
             // Bad Score
-            percentOfTotalHandsCorrectColor = 'FF0000'
+            percentOfTotalHandsCorrectColor = '#FF0000'
         } else {
             //  Medium Score
             percentOfTotalHandsCorrectColor = '#FBFC5F'
@@ -96,13 +90,14 @@ class BasicStrategyStats extends React.Component {
             percentOfTotalHandsCorrectColor: percentOfTotalHandsCorrectColor
         })
         this.calculateHardHands()
+        this.calculateSoftHands()
+        this.calculateSplitHands()
     }
 
     calculateHardHands = () => {
         let hardHandsPlayed = this.state.hardHandsPlayed 
         let hardHandsCorrect = this.state.hardHandsCorrect 
         let percentOfHardHandsCorrect = ( (hardHandsCorrect / hardHandsPlayed) * 100 )
-        console.log('percent correct: ' + percentOfHardHandsCorrect)
         let percentOfHardHandsCorrectColor = '#2196f3'
 
         if(percentOfHardHandsCorrect >= 90){
@@ -110,7 +105,7 @@ class BasicStrategyStats extends React.Component {
             percentOfHardHandsCorrectColor = '#49FF58'
         } else if (percentOfHardHandsCorrect <= 70){
             // Bad Score
-            percentOfHardHandsCorrectColor = 'FF0000'
+            percentOfHardHandsCorrectColor = '#FF0000'
         } else {
             //  Medium Score
             percentOfHardHandsCorrectColor = '#FBFC5F'
@@ -119,14 +114,14 @@ class BasicStrategyStats extends React.Component {
             percentOfHardHandsCorrect: percentOfHardHandsCorrect,
             percentOfHardHandsCorrectColor: percentOfHardHandsCorrectColor
         })
-        this.calculateSoftHands()
+        
     }
 
     calculateSoftHands = () => {
         let softHandsPlayed = this.state.softHandsPlayed 
         let softHandsCorrect = this.state.softHandsCorrect 
-        let percentOfSoftHandsCorrect = ( (softHandsCorrect / softHandsPlayed) * 100 )
-        console.log('percent correct: ' + percentOfSoftHandsCorrect)
+        let percentOfSoftHandsCorrect = Math.round( (softHandsCorrect / softHandsPlayed) * 100 )
+        console.log(typeof(percentOfSoftHandsCorrect))
         let percentOfSoftHandsCorrectColor = '#2196f3'
 
         if(percentOfSoftHandsCorrect >= 90){
@@ -134,7 +129,7 @@ class BasicStrategyStats extends React.Component {
             percentOfSoftHandsCorrectColor = '#49FF58'
         } else if (percentOfSoftHandsCorrect <= 70){
             // Bad Score
-            percentOfSoftHandsCorrectColor = 'FF0000'
+            percentOfSoftHandsCorrectColor = '#FF0000'
         } else {
             //  Medium Score
             percentOfSoftHandsCorrectColor = '#FBFC5F'
@@ -143,14 +138,13 @@ class BasicStrategyStats extends React.Component {
             percentOfSoftHandsCorrect: percentOfSoftHandsCorrect,
             percentOfSoftHandsCorrectColor: percentOfSoftHandsCorrectColor
         })
-        this.calculateSplitHands()
+        
     }
 
     calculateSplitHands = () => {
         let splitHandsPlayed = this.state.splitHandsPlayed 
         let splitHandsCorrect = this.state.splitHandsCorrect 
         let percentOfSplitHandsCorrect = ( (splitHandsCorrect / splitHandsPlayed) * 100 )
-        console.log('percent of split hands correct: ' + percentOfSplitHandsCorrect)
         let percentOfSplitHandsCorrectColor = '#2196f3'
 
         if(percentOfSplitHandsCorrect >= 90){
@@ -158,7 +152,7 @@ class BasicStrategyStats extends React.Component {
             percentOfSplitHandsCorrectColor = '#49FF58'
         } else if (percentOfSplitHandsCorrect <= 70){
             // Bad Score
-            percentOfSplitHandsCorrectColor = 'FF0000'
+            percentOfSplitHandsCorrectColor = '#FF0000'
         } else {
             //  Medium Score
             percentOfSplitHandsCorrectColor = '#FBFC5F'
@@ -175,7 +169,8 @@ class BasicStrategyStats extends React.Component {
 
     render() {
         const navigate = this.props.navigation
-        
+        console.log(this.state.percentOfSoftHandsCorrect)
+        console.log(this.state.percentOfSoftHandsCorrectColor)
         return (
             <View style={styles.container}>
                 <View style={styles.statsContainer}>
@@ -238,7 +233,7 @@ class BasicStrategyStats extends React.Component {
                                     backgroundColor: this.state.percentOfSplitHandsCorrectColor}}></View>
                 </View>
 
-                <SpeedCountStats />
+                
                 
             </View>
         )

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Dimensions, View, Text, StyleSheet, AsyncStorage} from 'react-native';
+import { Dimensions, View, Text, StyleSheet, AsyncStorage, Button} from 'react-native';
 import { Constants } from 'expo';
 
 let ScreenHeight = Dimensions.get("window").height;
@@ -13,6 +13,7 @@ class SpeedCountStats extends React.Component {
             sessionsCorrect: 0,
             percentOfSessionsCorrect: 0,
             percentOfSessionsCorrectColor: '',
+            itemsReset: false
         }
     }
 
@@ -29,7 +30,7 @@ class SpeedCountStats extends React.Component {
         AsyncStorage.getItem("speedCountSessionsCorrect").then((speedCountSessionsCorrect) => {
             let speedCountSessionsCorrectNum;
             speedCountSessionsCorrect === 'NaN' || speedCountSessionsCorrect === 'null' ? speedCountSessionsCorrectNum = 0 : speedCountSessionsCorrectNum = parseInt(speedCountSessionsCorrect)
-            this.setState({sessionsCorrect: speedCountSessionsCorrectNum})
+            this.setState({sessionsCorrect: speedCountSessionsCorrectNum}, () => this.calculateSpeedCountStats())
         }).done();
     }
 
@@ -45,7 +46,7 @@ class SpeedCountStats extends React.Component {
             percentOfSessionsCorrectColor = '#49FF58'
         } else if (percentOfSessionsCorrect <= 70){
             // Bad Score
-            percentOfSessionsCorrectColor = 'FF0000'
+            percentOfSessionsCorrectColor = '#FF0000'
         } else {
             //  Medium Score
             percentOfSessionsCorrectColor = '#FBFC5F'
@@ -53,10 +54,40 @@ class SpeedCountStats extends React.Component {
         this.setState({ 
             percentOfSessionsCorrect: percentOfSessionsCorrect,
             percentOfSessionsCorrectColor: percentOfSessionsCorrectColor
-        }, () => console.log(this.state))
+        })
         
     }
 
+    resetStats = async () => {
+        console.log('clear button pressed')
+        try {
+            await AsyncStorage.setItem('hardHandsPlayed', '0');
+        } catch (error) {}
+        try {
+            await AsyncStorage.setItem('hardHandsCorrect', '0');
+        } catch (error) {}
+        try {
+            await AsyncStorage.setItem('softHandsPlayed', '0');
+        } catch (error) {}
+        try {
+            await AsyncStorage.setItem('softHandsCorrect', '0');
+        } catch (error) {}
+        try {
+            await AsyncStorage.setItem('splitHandsPlayed', '0');
+        } catch (error) {}
+        try {
+            await AsyncStorage.setItem('splitHandsCorrect', '0');
+        } catch (error) {}
+        try {
+            await AsyncStorage.setItem('speedCountSessionsPlayed', '0');
+        } catch (error) {}
+        try {
+            await AsyncStorage.setItem('speedCountSessionsCorrect', '0');
+        } catch (error) {}
+        this.setState({
+            sessionsPlayed: 0,
+            sessionsCorrect: 0,})
+    }
 
     static navigationOptions = {
         title: 'My Stats'
@@ -79,8 +110,17 @@ class SpeedCountStats extends React.Component {
                     <Text style={styles.textStyles}>Correct: {this.state.sessionsCorrect} </Text>
                     <View style={{  width: `${this.state.percentOfSessionsCorrect}%`, 
                                     height: 30, 
-                                    backgroundColor: this.state.percentOfTotalHandsCorrectColor}}></View>
+                                    backgroundColor: this.state.percentOfSessionsCorrectColor}}></View>
                 </View>
+
+                <View style={styles.buttonContainer}>
+                    <Button
+                        title="Reset Stats"
+                        
+                        onPress={() => this.resetStats()}
+                    />
+                </View>
+                
                 
             </View>
         )
@@ -92,7 +132,8 @@ const styles = StyleSheet.create({
         padding: 8,
         backgroundColor: ( '#0f9b0f'),
         height: ScreenHeight,
-        marginTop: -25,
+        marginTop: 170,
+        marginLeft: 10,
     },
     statsContainer: {
         width: ScreenWidth-50,
@@ -115,6 +156,11 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 16,
         fontWeight: 'bold',
+    },
+    buttonContainer: {
+        alignContent: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 });
 export default SpeedCountStats

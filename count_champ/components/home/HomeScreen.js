@@ -39,20 +39,40 @@ class HomeScreen extends React.Component {
         console.log('set default casino rules function ran')
         try {
             await AsyncStorage.setItem('doubleAllowed', 'true');
-        } catch (error) {
-        }
+        } catch (error) {}
         try {
             await AsyncStorage.setItem('doubleAfterSplitAllowed', 'false');
-        } catch (error) {
-        }
+        } catch (error) {}
         try {
             await AsyncStorage.setItem('surrenderAllowed', 'false');
-        } catch (error) {
-        }
+        } catch (error) {}
         try {
             await AsyncStorage.setItem('dealerStands17', 'true');
-        } catch (error) {
-        }
+        } catch (error) {}
+        try {
+            await AsyncStorage.setItem('hardHandsPlayed', '0');
+        } catch (error) {}
+        try {
+            await AsyncStorage.setItem('hardHandsCorrect', '0');
+        } catch (error) {}
+        try {
+            await AsyncStorage.setItem('softHandsPlayed', '0');
+        } catch (error) {}
+        try {
+            await AsyncStorage.setItem('softHandsCorrect', '0');
+        } catch (error) {}
+        try {
+            await AsyncStorage.setItem('splitHandsPlayed', '0');
+        } catch (error) {}
+        try {
+            await AsyncStorage.setItem('splitHandsCorrect', '0');
+        } catch (error) {}
+        try {
+            await AsyncStorage.setItem('speedCountSessionsPlayed', '0');
+        } catch (error) {}
+        try {
+            await AsyncStorage.setItem('speedCountSessionsCorrect', '0');
+        } catch (error) {}
     };
 
     static navigationOptions = {
