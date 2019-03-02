@@ -339,130 +339,61 @@ class BasicStrategy extends React.Component {
         }
 
         if(pHand === 22){
-            console.log('the correct play is SPLIT')
-            this.setState({
-                correctPlay: 'SPLIT',
-            })
+            this.setState({ correctPlay: 'SPLIT' })
         } else if (pHand === 20){
-            console.log('the correct play is STAND')
-            this.setState({
-                correctPlay: 'STAND',
-            })
+            this.setState({ correctPlay: 'STAND' })
         }  else if(pHand === 10 && dHand <= 9){
             if (this.state.doubleAllowed === true){
-                console.log('the correct Play is DOUBLE')
-                this.setState({
-                    correctPlay: 'DOUBLE',
-                })
+                this.setState({ correctPlay: 'DOUBLE' })
             } else if (this.state.doubleAllowed === false){
-                console.log('the correct Play is HIT')
-                this.setState({
-                    correctPlay: 'HIT',
-                })
+                this.setState({ correctPlay: 'HIT' })
             } 
         }  else if(pHand === 10 && dHand > 9){
-            console.log('the correct Play is HIT')
-            this.setState({
-                correctPlay: 'HIT',
-            })
+            this.setState({ correctPlay: 'HIT' })
         }else if (pHand === 16){
             if (dHand === 11 && this.dealerStandsOnSoft17 === false && this.state.surrenderAllowed === true) {
-                console.log('the correct play is SURRENDER')
-                this.setState({
-                    correctPlay: 'SURRENDER',
-                })
+                this.setState({ correctPlay: 'SURRENDER' })
             } else {
-                console.log('the correct play is SPLIT')
-                this.setState({
-                    correctPlay: 'SPLIT',
-                })
+                this.setState({ correctPlay: 'SPLIT' })
             }
         } else if((pHand === 4 || pHand === 6) && dHand <= 3){
             if(this.state.doubleAfterSplitAllowed === true){
-                console.log('the correct play is SPLIT')
-                this.setState({
-                    correctPlay: 'SPLIT',
-                })
+                this.setState({ correctPlay: 'SPLIT' })
             } else if (this.state.doubleAfterSplitAllowed === false){
-                console.log('the correct play is HIT')
-                this.setState({
-                    correctPlay: 'HIT',
-                })
+                this.setState({ correctPlay: 'HIT' })
             }   
         } else if((pHand === 4 || pHand === 6) && dHand <= 7){
-            console.log('the correct play is SPLIT')
-            this.setState({
-                correctPlay: 'SPLIT',
-            })
+            this.setState({ correctPlay: 'SPLIT' })
         } else if((pHand === 4 || pHand === 6) && dHand <= 11){
-            console.log('the correct play is HIT')
-            this.setState({
-                correctPlay: 'HIT',
-            })
+            this.setState({ correctPlay: 'HIT' })
         } else if(pHand === 8 && dHand <= 4){
-            console.log('the correct play is HIT')
-            this.setState({
-                correctPlay: 'HIT',
-            })
+            this.setState({ correctPlay: 'HIT' })
         } else if (pHand === 8 && dHand <= 6){
             if(this.state.doubleAfterSplitAllowed === true){
-                console.log('the correct play is SPLIT')
-                this.setState({
-                    correctPlay: 'SPLIT',
-                })
+                this.setState({ correctPlay: 'SPLIT' })
             } else if (this.state.doubleAfterSplitAllowed === false){
-                console.log('the correct play is HIT')
-                this.setState({
-                    correctPlay: 'HIT',
-                })
+                this.setState({ correctPlay: 'HIT' })
             }   
         } else if (pHand === 8 && dHand <= 11){
-            console.log('the correct play is HIT')
-            this.setState({
-                correctPlay: 'HIT',
-            })
+            this.setState({ correctPlay: 'HIT' })
         } else if (pHand === 12 && dHand === 2){
             if(this.state.doubleAfterSplitAllowed === true){
-                console.log('the correct play is SPLIT')
-                this.setState({
-                    correctPlay: 'SPLIT',
-                })
+                this.setState({ correctPlay: 'SPLIT' })
             } else if (this.state.doubleAfterSplitAllowed === false){
-                console.log('the correct play is HIT')
-                this.setState({
-                    correctPlay: 'HIT',
-                })
+                this.setState({ correctPlay: 'HIT' })
             }
         } else if (pHand === 12 && dHand <= 6){
-            console.log('the correct play is SPLIT')
-            this.setState({
-                correctPlay: 'SPLIT',
-            })
+            this.setState({ correctPlay: 'SPLIT' })
         } else if (pHand === 12 && dHand <= 11){
-            console.log('the correct play is HIT')
-            this.setState({
-                correctPlay: 'HIT',
-            })
+            this.setState({ correctPlay: 'HIT' })
         } else if (pHand === 14 && dHand <= 7){
-            console.log('the correct play is SPLIT')
-            this.setState({
-                correctPlay: 'SPLIT',
-            })
+            this.setState({ correctPlay: 'SPLIT' })
         } else if (pHand === 14 && dHand <= 11){
-            console.log('the correct play is HIT')
-            this.setState({
-                correctPlay: 'HIT',
-            })
+            this.setState({ correctPlay: 'HIT' })
         } else if (pHand === 18 & (dHand === 7 || dHand === 10 || dHand === 11 ) ){
-            console.log('the correct play is STAND')
-            this.setState({
-                correctPlay: 'STAND',
-            })
+            this.setState({ correctPlay: 'STAND' })
         }  else if (pHand === 18 && dHand <= 9 ){
-            console.log('the correct play is SPLIT')
-            this.setState({
-                correctPlay: 'SPLIT',
-            })
+            this.setState({ correctPlay: 'SPLIT' })
         }
     }
     
@@ -479,187 +410,91 @@ class BasicStrategy extends React.Component {
         })
 
         if (pHand >= 20){
-            console.log('the correct play is STAND')
-            this.setState({
-                correctPlay: 'STAND',
-            })
+            this.setState({ correctPlay: 'STAND' })
         } else if (pHand === 19){
             if (this.state.dealerStandsOnSoft17 === true){
-                console.log('the correct play is STAND')
-                this.setState({
-                    correctPlay: 'STAND',
-                })
+                this.setState({ correctPlay: 'STAND' })
             } else if (this.state.dealerStandsOnSoft17 === false){
                 if(dHand === 6){
                     if (this.state.doubleAllowed === true){
-                        console.log('the correct play is DOUBLE')
-                        this.setState({
-                        correctPlay: 'DOUBLE',
-                        })
+                        this.setState({ correctPlay: 'DOUBLE' })
                     } else if (this.state.doubleAllowed === false){
-                        console.log('the correct play is STAND')
-                        this.setState({
-                        correctPlay: 'STAND',
-                        })
+                        this.setState({ correctPlay: 'STAND' })
                     }
                 } else {
-                    console.log('the correct play is STAND')
-                    this.setState({
-                    correctPlay: 'STAND',
-                    })
+                    this.setState({ correctPlay: 'STAND' })
                 }
             }  
         } else if(pHand === 13 && dHand <= 4){
-            console.log('the correct play is HIT')
-            this.setState({
-                correctPlay: 'HIT',
-            })
+            this.setState({ correctPlay: 'HIT' })
         } else if (pHand === 13 && dHand <= 6){
             if (this.state.doubleAllowed === true){
-                console.log('the correct play is DOUBLE')
-                this.setState({
-                correctPlay: 'DOUBLE',
-                })
+                this.setState({ correctPlay: 'DOUBLE' })
             } else if (this.state.doubleAllowed === false){
-                console.log('the correct play is HIT')
-                this.setState({
-                correctPlay: 'HIT',
-                })
+                this.setState({ correctPlay: 'HIT' })
             }
         } else if(pHand === 13 && dHand <= 11){
-            console.log('the correct play is HIT')
-            this.setState({
-                correctPlay: 'HIT',
-            })
+            this.setState({ correctPlay: 'HIT' })
         } else if(pHand === 14 && dHand <= 4){
-            console.log('the correct play is HIT')
-            this.setState({
-                correctPlay: 'HIT',
-            })
+            this.setState({ correctPlay: 'HIT' })
         } else if (pHand === 14 && dHand <= 6){
             if (this.state.doubleAllowed === true){
-                console.log('the correct play is DOUBLE')
-                this.setState({
-                correctPlay: 'DOUBLE',
-                })
+                this.setState({ correctPlay: 'DOUBLE' })
             } else if (this.state.doubleAllowed === false){
-                console.log('the correct play is HIT')
-                this.setState({
-                correctPlay: 'HIT',
-                })
+                this.setState({ correctPlay: 'HIT' })
             }
         } else if(pHand === 14 && dHand <= 11){
-            console.log('the correct play is HIT')
-            this.setState({
-                correctPlay: 'HIT',
-            })
+            this.setState({ correctPlay: 'HIT' })
         } else if(pHand === 15 && dHand <= 3){
-            console.log('the correct play is HIT')
-            this.setState({
-                correctPlay: 'HIT',
-            })
+            this.setState({ correctPlay: 'HIT' })
         } else if (pHand === 15 && dHand <= 6){
             if (this.state.doubleAllowed === true){
-                console.log('the correct play is DOUBLE')
-                this.setState({
-                correctPlay: 'DOUBLE',
-                })
+                this.setState({ correctPlay: 'DOUBLE' })
             } else if (this.state.doubleAllowed === false){
-                console.log('the correct play is HIT')
-                this.setState({
-                correctPlay: 'HIT',
-                })
+                this.setState({ correctPlay: 'HIT' })
             }
         } else if(pHand === 15 && dHand <= 11){
-            console.log('the correct play is HIT')
-            this.setState({
-                correctPlay: 'HIT',
-            })
+            this.setState({ correctPlay: 'HIT' })
         }  else if(pHand === 16 && dHand <= 3){
-            console.log('the correct play is HIT')
-            this.setState({
-                correctPlay: 'HIT',
-            })
+            this.setState({ correctPlay: 'HIT' })
         } else if (pHand === 16 && dHand <= 6){
             if (this.state.doubleAllowed === true){
-                console.log('the correct play is DOUBLE')
-                this.setState({
-                correctPlay: 'DOUBLE',
-                })
+                this.setState({ correctPlay: 'DOUBLE' })
             } else if (this.state.doubleAllowed === false){
-                console.log('the correct play is HIT')
-                this.setState({
-                correctPlay: 'HIT',
-                })
+                this.setState({ correctPlay: 'HIT' })
             }
         } else if(pHand === 16 && dHand <= 11){
-            console.log('the correct play is HIT')
-            this.setState({
-                correctPlay: 'HIT',
-            })
+            this.setState({ correctPlay: 'HIT' })
         } else if(pHand === 17 && dHand === 2){
-            console.log('the correct play is HIT')
-            this.setState({
-                correctPlay: 'HIT',
-            })
+            this.setState({ correctPlay: 'HIT' })
         } else if (pHand === 17 && dHand <= 6){
             if (this.state.doubleAllowed === true){
-                console.log('the correct play is DOUBLE')
-                this.setState({
-                correctPlay: 'DOUBLE',
-                })
+                this.setState({ correctPlay: 'DOUBLE' })
             } else if (this.state.doubleAllowed === false){
-                console.log('the correct play is HIT')
-                this.setState({
-                correctPlay: 'HIT',
-                })
+                this.setState({ correctPlay: 'HIT' })
             }
         } else if(pHand === 17 && dHand <= 11){
-            console.log('the correct play is HIT')
-            this.setState({
-                correctPlay: 'HIT',
-            })
+            this.setState({ correctPlay: 'HIT' })
         } else if(pHand === 18 && dHand === 2){
             if(this.dealerStandsOnSoft17 === true) {
-                console.log('the correct play is STAND')
-                this.setState({
-                    correctPlay: 'STAND',
-                })
+                this.setState({ correctPlay: 'STAND' })
             } else if (this.dealerStandsOnSoft17 === false) {
                 if(this.state.doubleAllowed === true){
-                    console.log('the correct play is DOUBLE')
-                    this.setState({
-                        correctPlay: 'DOUBLE',
-                    })
+                    this.setState({ correctPlay: 'DOUBLE' })
                 } else if (this.state.doubleAllowed === false){
-                    console.log('the correct play is STAND')
-                    this.setState({
-                        correctPlay: 'STAND',
-                    })
+                    this.setState({ correctPlay: 'STAND' })
                 }
             }
         } else if (pHand === 18 && dHand <= 6){
             if(this.state.doubleAllowed === true){
-                console.log('the correct play is DOUBLE')
-                this.setState({
-                    correctPlay: 'DOUBLE',
-                })
+                this.setState({ correctPlay: 'DOUBLE' })
             } else if (this.state.doubleAllowed === false){
-                console.log('the correct play is STAND')
-                this.setState({
-                    correctPlay: 'STAND',
-                })
+                this.setState({ correctPlay: 'STAND' }) 
             }
         } else if(pHand === 18 && dHand <= 8){
-            console.log('the correct play is STAND')
-            this.setState({
-                correctPlay: 'STAND',
-            })
+            this.setState({ correctPlay: 'STAND' })
         } else if(pHand === 18 && dHand <= 11){
-            console.log('the correct play is HIT')
-            this.setState({
-                correctPlay: 'HIT',
-            })
+            this.setState({ correctPlay: 'HIT' })
         }
     }
     
@@ -677,200 +512,95 @@ class BasicStrategy extends React.Component {
         })
 
         if (pHand <= 8 ){
-            console.log('the correct Play is HIT')
-            this.setState({
-                correctPlay: 'HIT',
-            })
+            this.setState({ correctPlay: 'HIT' })
         } else if (pHand > 17) {
-            console.log('the correct Play is STAND')
-            this.setState({
-                correctPlay: 'STAND',
-            })
+            this.setState({ correctPlay: 'STAND' })
         } else if (pHand === 17) {
             if(this.state.dealerStandsOnSoft17 === true){
-                console.log('the correct Play is STAND')
-                this.setState({
-                    correctPlay: 'STAND',
-                })
+                this.setState({ correctPlay: 'STAND' })
             }
             if(this.state.dealerStandsOnSoft17 === false){
                 if(dHand === 11 && this.state.surrenderAllowed === true){
-                    console.log('the correct Play is SURRENDER')
-                    this.setState({
-                        correctPlay: 'SURRENDER',
-                    })
+                    this.setState({ correctPlay: 'SURRENDER' })
                 } else {
-                    console.log('the correct Play is STAND')
-                    this.setState({
-                        correctPlay: 'STAND',
-                    })
+                    this.setState({ correctPlay: 'STAND' })
                 }
             }
         } else if (pHand === 9 && dHand === 2){
-            console.log('the correct Play is HIT')
-            this.setState({
-                correctPlay: 'HIT',
-            })
+            this.setState({ correctPlay: 'HIT' })
         } else if(pHand <= 9 && dHand <= 6){
             if (this.state.doubleAllowed === true){
-                console.log('the correct Play is DOUBLE')
-                this.setState({
-                    correctPlay: 'DOUBLE',
-                })
+                this.setState({ correctPlay: 'DOUBLE' })
             } else if (this.state.doubleAllowed === false){
-                console.log('the correct Play is HIT')
-                this.setState({
-                    correctPlay: 'HIT',
-                })
+                this.setState({ correctPlay: 'HIT' })
             } 
         } else if(pHand === 9 && dHand <= 11){
-            console.log('the correct Play is HIT')
-            this.setState({
-                correctPlay: 'HIT',
-            })
+            this.setState({ correctPlay: 'HIT' })
         } else if(pHand === 10 && dHand <= 9){
             if (this.state.doubleAllowed === true){
-                console.log('the correct Play is DOUBLE')
-                this.setState({
-                    correctPlay: 'DOUBLE',
-                })
+                this.setState({ correctPlay: 'DOUBLE' })
             } else if (this.state.doubleAllowed === false){
-                console.log('the correct Play is HIT')
-                this.setState({
-                    correctPlay: 'HIT',
-                })
+                this.setState({ correctPlay: 'HIT' })
             } 
         } else if (pHand === 10 && dHand <= 11){
-            console.log('the correct Play is HIT')
-            this.setState({
-                correctPlay: 'HIT',
-            })
+            this.setState({ correctPlay: 'HIT' })
         } else if (pHand === 11 && dHand <= 10){
             if (this.state.doubleAllowed === true){
-                console.log('the correct Play is DOUBLE')
-                this.setState({
-                    correctPlay: 'DOUBLE',
-                })
+                this.setState({ correctPlay: 'DOUBLE' })
             } else if (this.state.doubleAllowed === false){
-                console.log('the correct Play is HIT')
-                this.setState({
-                    correctPlay: 'HIT',
-                })
+                this.setState({ correctPlay: 'HIT' })
             } 
         } else if (pHand === 11 && dHand === 11){
             if (this.state.dealerStandsOnSoft17 === true){
-                console.log('the correct Play is HIT')
-                this.setState({
-                    correctPlay: 'HIT',
-                })
+                this.setState({ correctPlay: 'HIT' })
             } else if (this.state.dealerStandsOnSoft17 === false && this.state.doubleAllowed === true){
-                console.log('the correct Play is DOUBLE')
-                this.setState({
-                    correctPlay: 'DOUBLE',
-                })
+                this.setState({ correctPlay: 'DOUBLE' })
             }  else if (this.state.dealerStandsOnSoft17 === false && this.state.doubleAllowed === false){
-                console.log('the correct Play is HIT')
-                this.setState({
-                    correctPlay: 'HIT',
-                })
+                this.setState({ correctPlay: 'HIT' })
             } 
         } else if (pHand === 12 && dHand <= 3){
-            console.log('the correct Play is HIT')
-            this.setState({
-                correctPlay: 'HIT',
-            })
+            this.setState({ correctPlay: 'HIT' })
         } else if (pHand === 12 && dHand <= 6){
-            console.log('the correct Play is STAND')
-            this.setState({
-                correctPlay: 'STAND',
-            })
+            this.setState({ correctPlay: 'STAND' })
         } else if(pHand === 12 && dHand <= 11){
-            console.log('the correct Play is HIT')
-            this.setState({
-                correctPlay: 'HIT',
-            })
+            this.setState({ correctPlay: 'HIT' })
         } else if (pHand === 13 && dHand <= 6){
-            console.log('the correct Play is STAND')
-            this.setState({
-                correctPlay: 'STAND',
-            })
+            this.setState({ correctPlay: 'STAND' })
         } else if (pHand === 13 && dHand <= 11){
-            console.log('the correct Play is HIT')
-            this.setState({
-                correctPlay: 'HIT',
-            })
+            this.setState({ correctPlay: 'HIT' })
         } else if (pHand === 14 && dHand <= 6){
-            console.log('the correct Play is STAND')
-            this.setState({
-                correctPlay: 'STAND',
-            })
+            this.setState({ correctPlay: 'STAND' })
         } else if (pHand === 14 && dHand <= 11){
-            console.log('the correct Play is HIT')
-            this.setState({
-                correctPlay: 'HIT',
-            })
+            this.setState({ correctPlay: 'HIT' })
         } else if (pHand === 15 && dHand <= 6){
-            console.log('the correct Play is STAND')
-            this.setState({
-                correctPlay: 'STAND',
-            })
+            this.setState({ correctPlay: 'STAND' })
         } else if (pHand === 15 && dHand <= 9){
-            console.log('the correct Play is HIT')
-            this.setState({
-                correctPlay: 'HIT',
-            })
+            this.setState({ correctPlay: 'HIT' })
         } else if (pHand === 15 && dHand === 10){
             if(this.state.surrenderAllowed === true){
-                console.log('the correct Play is SURRENDER')
-                this.setState({
-                    correctPlay: 'SURRENDER',
-                })
+                this.setState({ correctPlay: 'SURRENDER' })
             } else if (this.state.surrenderAllowed === false){
-                console.log('the correct Play is HIT')
-                this.setState({
-                    correctPlay: 'HIT',
-                })
+                this.setState({ correctPlay: 'HIT' })
             }   
         } else if (pHand === 15 && dHand === 11){
             if(this.state.dealerStandsOnSoft17 === true){
-                console.log('the correct Play is HIT')
-                this.setState({
-                    correctPlay: 'HIT',
-                })
+                this.setState({ correctPlay: 'HIT' })
             } else if (this.state.dealerStandsOnSoft17 === false){
                 if(this.state.surrenderAllowed === true){
-                    console.log('the correct Play is SURRENDER')
-                    this.setState({
-                        correctPlay: 'SURRENDER',
-                    })
+                    this.setState({ correctPlay: 'SURRENDER' })
                 } else if (this.state.surrenderAllowed === false){
-                    console.log('the correct Play is HIT')
-                    this.setState({
-                        correctPlay: 'HIT',
-                    })
+                    this.setState({ correctPlay: 'HIT' })
                 } 
             }  
         } else if (pHand === 16 && dHand <= 6){
-            console.log('the correct Play is STAND')
-            this.setState({
-                correctPlay: 'STAND',
-            })
+            this.setState({ correctPlay: 'STAND' })
         } else if (pHand === 16 && dHand <= 8){
-            console.log('the correct Play is HIT')
-            this.setState({
-                correctPlay: 'HIT',
-            })
+            this.setState({ correctPlay: 'HIT' })
         }  else if (pHand === 16 && dHand <= 11){
             if(this.state.surrenderAllowed === true){
-                console.log('the correct Play is SURRENDER')
-                this.setState({
-                    correctPlay: 'SURRENDER',
-                })
+                this.setState({ correctPlay: 'SURRENDER' })
             } else if (this.state.surrenderAllowed === false){
-                console.log('the correct Play is HIT')
-                this.setState({
-                    correctPlay: 'HIT',
-                })
+                this.setState({ correctPlay: 'HIT' })
             } 
         }
     }

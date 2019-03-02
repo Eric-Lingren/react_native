@@ -22,7 +22,6 @@ class MyStats extends React.Component {
 
     render() {
         const navigate = this.props.navigation
-        console.log(ScreenHeight)
         
         return (
             <ScrollView>
