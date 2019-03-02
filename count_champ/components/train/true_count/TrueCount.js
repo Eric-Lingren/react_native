@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Text, View, StyleSheet, Image, TextInput, Dimensions } from 'react-native';
+import { Button, Text, View, StyleSheet, AsyncStorage, TextInput, Dimensions } from 'react-native';
 import { Constants } from 'expo';
 
 let ScreenHeight = Dimensions.get("window").height;
@@ -20,17 +20,33 @@ class TrueCount extends React.Component {
     }
 
     componentDidMount(){
-
+        this.getTrueCountStatsFromStorage()
     }
 
     componentWillUnmount(){
         let trueCountQuestionsPlayed = this.state.questionsPlayed.toString()
-        let trueCountQuestionsCorrect = this.state.squestionsCorrect.toString()
+        let trueCountQuestionsCorrect = this.state.questionsCorrect.toString()
         
         this.saveStatsInStorage(trueCountQuestionsPlayed, trueCountQuestionsCorrect)
     }
 
+    getTrueCountStatsFromStorage = () => {
+        AsyncStorage.getItem("trueCountQuestionsPlayed").then((trueCountQuestionsPlayed) => {
+            let trueCountQuestionsPlayedNum;
+            trueCountQuestionsPlayed === 'NaN' || trueCountQuestionsPlayed === 'null' ? trueCountQuestionsPlayedNum = 0 : trueCountQuestionsPlayedNum = parseInt(trueCountQuestionsPlayed)
+            this.setState({questionsPlayed: trueCountQuestionsPlayedNum} )
+        }).done();
+        AsyncStorage.getItem("trueCountQuestionsCorrect").then((trueCountQuestionsCorrect) => {
+            let trueCountQuestionsCorrectNum;
+            trueCountQuestionsCorrect === 'NaN' || trueCountQuestionsCorrect === 'null' ? trueCountQuestionsCorrectNum = 0 : trueCountQuestionsCorrectNum = parseInt(trueCountQuestionsCorrect)
+            this.setState({questionsCorrect: trueCountQuestionsCorrectNum})
+        }).done();
+        
+    }
+
     saveStatsInStorage = async (trueCountQuestionsPlayed, trueCountQuestionsCorrect) => {
+        console.log('questions played: ' + this.state.questionsPlayed)
+        console.log('questions correct: ' + this.state.questionsCorrect)
         try {
             await AsyncStorage.setItem('trueCountQuestionsPlayed', trueCountQuestionsPlayed);
         } catch (error) {
