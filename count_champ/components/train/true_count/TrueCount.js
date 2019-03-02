@@ -23,10 +23,24 @@ class TrueCount extends React.Component {
 
     }
 
-    componentWillMount(){
-
+    componentWillUnmount(){
+        let trueCountQuestionsPlayed = this.state.questionsPlayed.toString()
+        let trueCountQuestionsCorrect = this.state.squestionsCorrect.toString()
+        
+        this.saveStatsInStorage(trueCountQuestionsPlayed, trueCountQuestionsCorrect)
     }
-    
+
+    saveStatsInStorage = async (trueCountQuestionsPlayed, trueCountQuestionsCorrect) => {
+        try {
+            await AsyncStorage.setItem('trueCountQuestionsPlayed', trueCountQuestionsPlayed);
+        } catch (error) {
+        }
+        try {
+            await AsyncStorage.setItem('trueCountQuestionsCorrect', trueCountQuestionsCorrect);
+        } catch (error) {
+        }
+    }
+
     generateNewQuestion = () => {
         const decksLeftArray = [1,2,3,4,5,6,7,8];
         let randomDeck = decksLeftArray[Math.floor(Math.random()*decksLeftArray.length)]
