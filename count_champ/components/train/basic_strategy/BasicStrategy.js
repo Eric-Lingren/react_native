@@ -297,8 +297,6 @@ class BasicStrategy extends React.Component {
     }
 
     whatCheckHandFunctionToRun = () => {
-        console.log('check what hand function ran ')
-
         const pCard1Number = parseInt(this.state.pCard1Number)
         const pCard2Number = parseInt(this.state.pCard2Number)
     
@@ -320,6 +318,7 @@ class BasicStrategy extends React.Component {
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
     checkSplitHand = (dealerHand, playerHand) => {
+        console.log('check SPLIT hand function ran ')
         const pHand = playerHand;
         const dHand = dealerHand;
 
@@ -361,6 +360,11 @@ class BasicStrategy extends React.Component {
                     correctPlay: 'HIT',
                 })
             } 
+        }  else if(pHand === 10 && dHand > 9){
+            console.log('the correct Play is HIT')
+            this.setState({
+                correctPlay: 'HIT',
+            })
         }else if (pHand === 16){
             if (dHand === 11 && this.dealerStandsOnSoft17 === false && this.state.surrenderAllowed === true) {
                 console.log('the correct play is SURRENDER')
@@ -463,6 +467,7 @@ class BasicStrategy extends React.Component {
     }
     
     checkSoftHand = (dealerHand, playerHand) => {
+        console.log('check SOFT hand function ran ')
         const pHand = playerHand;
         const dHand = dealerHand;
 
@@ -659,6 +664,8 @@ class BasicStrategy extends React.Component {
     }
     
     checkHardHand = (dealerHand, playerHand) => {
+        console.log('check HARD hand function ran ')
+
         const pHand = playerHand;
         const dHand = dealerHand;
 

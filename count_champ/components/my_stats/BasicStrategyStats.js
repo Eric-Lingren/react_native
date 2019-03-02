@@ -277,6 +277,12 @@ class BasicStrategyStats extends React.Component {
         try {
             await AsyncStorage.setItem('speedCountSessionsCorrect', '0');
         } catch (error) {}
+        try {
+            await AsyncStorage.setItem('trueCountQuestionsPlayed', '0');
+        } catch (error) {}
+        try {
+            await AsyncStorage.setItem('trueCountQuestionsCorrect', '0');
+        } catch (error) {}
         this.setState({
             sessionsPlayed: 0,
             sessionsCorrect: 0,
@@ -293,6 +299,9 @@ class BasicStrategyStats extends React.Component {
             percentOfSoftHandsCorrect: 0,
             percentOfSplitHandsCorrect: 0,
             percentOfSessionsCorrect: 0,
+            trueCountQuestionsPlayed: 0,
+            trueCountQuestionsCorrect: 0,
+            percentOftrueCountQuestionsCorrect: 0,
         })
     }
 
@@ -370,7 +379,7 @@ class BasicStrategyStats extends React.Component {
 
 
                 <View style={styles.statsContainer}>
-                    <Text style={styles.headerStyles}>Speed Counting</Text>
+                    <Text style={styles.headerStyles}>Speed Count</Text>
                     <Text style={styles.textStyles}>Played: {this.state.sessionsPlayed} </Text>
                     <View style={{  width: '100%', 
                                     height: 30,
@@ -385,7 +394,7 @@ class BasicStrategyStats extends React.Component {
                 </View>
 
                 <View style={styles.statsContainer}>
-                    <Text style={styles.headerStyles}>True Counting</Text>
+                    <Text style={styles.headerStyles}>True Count</Text>
                     <Text style={styles.textStyles}>Played: {this.state.trueCountQuestionsPlayed} </Text>
                     <View style={{  width: '100%', 
                                     height: 30,

@@ -45,8 +45,6 @@ class TrueCount extends React.Component {
     }
 
     saveStatsInStorage = async (trueCountQuestionsPlayed, trueCountQuestionsCorrect) => {
-        console.log('questions played: ' + this.state.questionsPlayed)
-        console.log('questions correct: ' + this.state.questionsCorrect)
         try {
             await AsyncStorage.setItem('trueCountQuestionsPlayed', trueCountQuestionsPlayed);
         } catch (error) {

@@ -22,6 +22,7 @@ class MyStats extends React.Component {
 
     render() {
         const navigate = this.props.navigation
+        console.log(ScreenHeight)
         
         return (
             <ScrollView>
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
         paddingTop: Constants.statusBarHeight,
         padding: 8,
         backgroundColor: ( '#0f9b0f'),
-        height: ScreenHeight + ScreenHeight,
+        height: 1400,
         marginTop: -20,
     }
 });
