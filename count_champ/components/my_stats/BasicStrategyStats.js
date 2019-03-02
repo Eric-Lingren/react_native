@@ -30,12 +30,17 @@ class BasicStrategyStats extends React.Component {
             sessionsCorrect: 0,
             percentOfSessionsCorrect: 0,
             percentOfSessionsCorrectColor: '',
+            trueCountQuestionsPlayed: 0,
+            trueCountQuestionsCorrect: 0,
+            percentOftrueCountQuestionsCorrect: 0,
+            percentOftrueCountQuestionsCorrectColor: '',
         }
     }
 
     componentDidMount(){
         this.getStatsFromStorage()
         this.getCountingStatsFromStorage()
+        this.getTrueCountStatsFromStorage()
     }
 
     getStatsFromStorage = () => {
@@ -207,6 +212,45 @@ class BasicStrategyStats extends React.Component {
         
     }
 
+    /////////////////////////////////////////////////////////////////////////////////////
+
+    getTrueCountStatsFromStorage = () => {
+        AsyncStorage.getItem("trueCountQuestionsPlayed").then((trueCountQuestionsPlayed) => {
+            let trueCountQuestionsPlayedNum;
+            trueCountQuestionsPlayed === 'NaN' || trueCountQuestionsPlayed === 'null' ? trueCountQuestionsPlayedNum = 0 : trueCountQuestionsPlayedNum = parseInt(trueCountQuestionsPlayed)
+            this.setState({trueCountQuestionsPlayed: trueCountQuestionsPlayedNum})
+        }).done();
+        AsyncStorage.getItem("trueCountQuestionsCorrect").then((trueCountQuestionsCorrect) => {
+            let trueCountQuestionsCorrectNum;
+            trueCountQuestionsCorrect === 'NaN' || trueCountQuestionsCorrect === 'null' ? trueCountQuestionsCorrectNum = 0 : trueCountQuestionsCorrectNum = parseInt(trueCountQuestionsCorrect)
+            this.setState({trueCountQuestionsCorrect: trueCountQuestionsCorrectNum}, () => this.calculateTrueCountStats())
+        }).done();
+    }
+
+
+    calculateTrueCountStats = () => {
+        let totalTrueCountQuestionsPlayed = this.state.trueCountQuestionsPlayed 
+        let trueCountQuestionsCorrect = this.state.trueCountQuestionsCorrect
+        let percentOftrueCountQuestionsCorrect = ( (trueCountQuestionsCorrect / totalTrueCountQuestionsPlayed) * 100 )
+        let percentOftrueCountQuestionsCorrectColor = '#2196f3'
+
+        if(percentOftrueCountQuestionsCorrect >= 90){
+            //  Good Score
+            percentOftrueCountQuestionsCorrectColor = '#49FF58'
+        } else if (percentOftrueCountQuestionsCorrect <= 70){
+            // Bad Score
+            percentOftrueCountQuestionsCorrectColor = '#FF0000'
+        } else {
+            //  Medium Score
+            percentOftrueCountQuestionsCorrectColor = '#FBFC5F'
+        }
+        this.setState({ 
+            percentOftrueCountQuestionsCorrect: percentOftrueCountQuestionsCorrect,
+            percentOftrueCountQuestionsCorrectColor: percentOftrueCountQuestionsCorrectColor
+        })
+        
+    }
+
     resetStats = async () => {
         console.log('clear button pressed')
         try {
@@ -338,6 +382,21 @@ class BasicStrategyStats extends React.Component {
                     <View style={{  width: `${this.state.percentOfSessionsCorrect}%`, 
                                     height: 30, 
                                     backgroundColor: this.state.percentOfSessionsCorrectColor}}></View>
+                </View>
+
+                <View style={styles.statsContainer}>
+                    <Text style={styles.headerStyles}>True Counting</Text>
+                    <Text style={styles.textStyles}>Played: {this.state.trueCountQuestionsPlayed} </Text>
+                    <View style={{  width: '100%', 
+                                    height: 30,
+                                    borderWidth: 1,
+                                    backgroundColor: '#2196f3',
+                                    marginBottom: 5}}>
+                    </View>
+                    <Text style={styles.textStyles}>Correct: {this.state.trueCountQuestionsCorrect} </Text>
+                    <View style={{  width: `${this.state.percentOftrueCountQuestionsCorrect}%`, 
+                                    height: 30, 
+                                    backgroundColor: this.state.percentOftrueCountQuestionsCorrectColor}}></View>
                 </View>
                 
             </View>
