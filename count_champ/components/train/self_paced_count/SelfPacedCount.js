@@ -133,8 +133,8 @@ const styles = StyleSheet.create({
         marginBottom: 15,
     },
     deckDisplay: {
-        width: 250, 
-        height: 350,
+        width: 200, 
+        height: 280,
     },
     buttonContainer: {
         marginTop: 0,

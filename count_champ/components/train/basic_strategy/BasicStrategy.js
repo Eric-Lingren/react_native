@@ -135,37 +135,31 @@ class BasicStrategy extends React.Component {
 
     getStatsFromStorage = () => {
         AsyncStorage.getItem("hardHandsPlayed").then((hardHandsPlayed) => {
-            console.log('hard hands played is: ' + hardHandsPlayed)
             let hardHandsPlayedNum;
             hardHandsPlayed === 'NaN' ? hardHandsPlayedNum = 0 : hardHandsPlayedNum = parseInt(hardHandsPlayed)
             this.setState({hardHandsPlayed: hardHandsPlayedNum})
         }).done();
         AsyncStorage.getItem("hardHandsCorrect").then((hardHandsCorrect) => {
-            console.log('hard hands Correct is: ' + hardHandsCorrect)
             let hardHandsCorrectNum;
             hardHandsCorrect === 'NaN' || hardHandsCorrect === 'null' ? hardHandsCorrectNum = 0 : hardHandsCorrectNum = parseInt(hardHandsCorrect)
             this.setState({hardHandsCorrect: hardHandsCorrectNum})
         }).done();
         AsyncStorage.getItem("softHandsPlayed").then((softHandsPlayed) => {
-            console.log('soft hands played is: ' + softHandsPlayed)
             let softHandsPlayedNum;
             softHandsPlayed === 'NaN' || softHandsPlayed === 'null' ? softHandsPlayedNum = 0 : softHandsPlayedNum = parseInt(softHandsPlayed)
             this.setState({softHandsPlayed: softHandsPlayedNum})
         }).done();
         AsyncStorage.getItem("softHandsCorrect").then((softHandsCorrect) => {
-            console.log('soft hands Correct is: ' + softHandsCorrect)
             let softHandsCorrectNum;
             softHandsCorrect === 'NaN' || softHandsCorrect === 'null' ?  softHandsCorrectNum = 0 : softHandsCorrectNum = parseInt(softHandsCorrect)
             this.setState({softHandsCorrect: softHandsCorrectNum})
         }).done();
         AsyncStorage.getItem("splitHandsPlayed").then((splitHandsPlayed) => {
-            console.log('split hands played is: ' + splitHandsPlayed)
             let splitHandsPlayedNum;
             splitHandsPlayed === 'NaN' || splitHandsPlayed === 'null' ? splitHandsPlayedNum = 0 : splitHandsPlayedNum = parseInt(splitHandsPlayed)
             this.setState({splitHandsPlayed: splitHandsPlayedNum})
         }).done();
         AsyncStorage.getItem("splitHandsCorrect").then((splitHandsCorrect) => {
-            console.log('split hands Correct is: ' + splitHandsCorrect)
             let splitHandsCorrectNum;
             splitHandsCorrect === 'NaN' || splitHandsCorrect === 'null' ? splitHandsCorrectNum = 0 : splitHandsCorrectNum = parseInt(splitHandsCorrect)
             this.setState({splitHandsCorrect: splitHandsCorrectNum})

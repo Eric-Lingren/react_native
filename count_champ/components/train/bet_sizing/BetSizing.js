@@ -110,7 +110,7 @@ class BetSizing extends React.Component {
                     <View style={styles.textContainer}>
                     <Text style={styles.textStyle}>Your minumum bet size is 1 unit.</Text>
                     <Text style={styles.textStyle}>What should your bet be if... </Text>
-                    <Text style={styles.textStyle}>The true count is:  {this.state.randomCount}  ? </Text>
+                    <Text style={styles.textStyle}>The true count is:  <Text style={styles.question}>{this.state.randomCount} </Text> ? </Text>
                     </View>
                     <View style={styles.buttonContainer}>
                         <Button color="#000000" onPress={this.setAnswerTo1} title='1  hand  of  1  Unit'></Button>
@@ -171,6 +171,11 @@ const styles = StyleSheet.create({
     },
     answerButton: {
         marginTop: 25,
+    },
+    question: {
+        color: 'orange',
+        fontWeight: '900',
+        fontSize: 24,
     }
 });
 

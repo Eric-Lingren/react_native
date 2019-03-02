@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Text, View, StyleSheet, TextInput,  Image, Dimensions, AsyncStorage } from 'react-native';
+import { ScrollView, Button, Text, View, StyleSheet, TextInput,  Image, Dimensions, AsyncStorage } from 'react-native';
 import { Constants } from 'expo';
 import axios from 'axios'
 
@@ -166,6 +166,7 @@ class SpeedCount extends React.Component {
     render() {
         const {navigate} = this.props.navigation;
         return (
+            <ScrollView>
             <View style={styles.container}>
                 <View>
                     <View style={styles.textContainer}>
@@ -185,12 +186,12 @@ class SpeedCount extends React.Component {
                         </View>
                     </View>
                     <Button color="#000000" onPress={this.dealCard} title="Start"></Button>
-                    <View style={styles.answerContainer}>
+                    <View style={styles.answerWrapper}>
                         {this.state.whatsTheCountVisible 
-                        ?   <View>
+                        ?   <View style={styles.answerContainer}>
                                 <Text style={styles.textStyleAnswer}>Whats The Count?</Text>
                                 <TextInput
-                                    style={{height: 40, borderColor: 'black', borderWidth: 1, borderRadius: 10, backgroundColor: 'white', opacity: 0.7, width: 100, paddingTop: 5, paddingBottom: 5, paddingLeft: 35, fontSize: 26, fontWeight: 'bold'}}
+                                    style={{height: 40, borderColor: 'black', borderWidth: 1, borderRadius: 10, backgroundColor: 'white', opacity: 0.7, width: 100, paddingTop: 5, paddingBottom: 5, paddingLeft: 35, fontSize: 26, fontWeight: 'bold', marginBottom: 10}}
                                     keyboardType = 'phone-pad'
                                     maxLength={3}
                                     onChangeText={(inputAnswer) => this.setState({inputAnswer})}
@@ -207,6 +208,7 @@ class SpeedCount extends React.Component {
                     
                 </View>
             </View> 
+            </ScrollView>
         );
     }
 }
@@ -233,8 +235,8 @@ const styles = StyleSheet.create({
         marginBottom: 15,
     },
     deckDisplay: {
-        width: 250, 
-        height: 350,
+        width: 200, 
+        height: 280,
     },
     answers: {
         marginTop: -100,
@@ -249,6 +251,12 @@ const styles = StyleSheet.create({
         fontSize: 18, 
         fontWeight: 'bold', 
         color: 'white'
+    },
+    answerWrapper: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignContent: 'center',
+        margin: 15,
     },
     answerContainer: {
         justifyContent: 'center',

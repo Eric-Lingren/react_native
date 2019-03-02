@@ -13,10 +13,20 @@ class TrueCount extends React.Component {
             answer: 1,
             wereTheyRight: '',
             input: '',
-            showAnswerBox: false
+            showAnswerBox: false,
+            questionsPlayed: 0,
+            questionsCorrect: 0,
         }
     }
 
+    componentDidMount(){
+
+    }
+
+    componentWillMount(){
+
+    }
+    
     generateNewQuestion = () => {
         const decksLeftArray = [1,2,3,4,5,6,7,8];
         let randomDeck = decksLeftArray[Math.floor(Math.random()*decksLeftArray.length)]
@@ -41,15 +51,15 @@ class TrueCount extends React.Component {
     }
 
     checkAnswer = () => {
+        this.setState(prevState => ({ questionsPlayed: prevState.questionsPlayed += 1 }))
         let guessNumber = parseInt(this.state.input)
         if (this.state.answer === guessNumber){
-            this.setState({
+            this.setState(prevState => ({ 
                 wereTheyRight: true,
-            })
+                questionsCorrect: prevState.questionsCorrect += 1 
+            }))
         } else{
-            this.setState({
-                wereTheyRight: false
-            })
+            this.setState({ wereTheyRight: false })
         }
     }
     
@@ -63,8 +73,8 @@ class TrueCount extends React.Component {
             <View style={styles.container}>
                 <View>
                     <View style={styles.textContainer}>
-                        <Text style={styles.textStyle}> Running Count: {this.state.randomCount} </Text>
-                        <Text style={styles.textStyle}> Decks Left: {this.state.randomDeck} </Text>
+                        <Text style={styles.textStyle}> Running Count: <Text style={styles.question}> {this.state.randomCount} </Text> </Text>
+                        <Text style={styles.textStyle}> Decks Left: <Text style={styles.question}> {this.state.randomDeck}</Text> </Text>
                         <Text style={styles.textStyle}> What's the true count? (round down) </Text>
                         <TextInput
                             style={{height: 40, borderColor: 'black', borderWidth: 1, borderRadius: 10, backgroundColor: 'white', opacity: 0.7, width: 100, paddingTop: 5, paddingBottom: 5, paddingLeft: 35, fontSize: 26, fontWeight: 'bold'}}
@@ -130,6 +140,11 @@ const styles = StyleSheet.create({
         flex: 0,
         justifyContent: 'space-evenly',
         height: 120,
+    },
+    question: {
+        color: 'orange',
+        fontWeight: '900',
+        fontSize: 24,
     },
 });                                    
 

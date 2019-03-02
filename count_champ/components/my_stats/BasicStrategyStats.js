@@ -326,7 +326,7 @@ class BasicStrategyStats extends React.Component {
 
 
                 <View style={styles.statsContainer}>
-                    <Text style={styles.headerStyles}>Speed Counting Drill</Text>
+                    <Text style={styles.headerStyles}>Speed Counting</Text>
                     <Text style={styles.textStyles}>Played: {this.state.sessionsPlayed} </Text>
                     <View style={{  width: '100%', 
                                     height: 30,
