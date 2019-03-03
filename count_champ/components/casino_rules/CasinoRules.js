@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, Dimensions, AsyncStorage, WebView, TouchableWithoutFeedback, Image } from 'react-native';
+import { Text, View, StyleSheet, Dimensions, AsyncStorage, WebView, TouchableWithoutFeedback, Image, ScrollView } from 'react-native';
 import CheckBox from 'react-native-check-box';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import { Constants } from 'expo';
@@ -18,6 +18,9 @@ class CasinoRules extends React.Component {
             dealerStandsOnSoft17: true,
             dealerHitsOnSoft17: false,
             showSubscribeModal: false,
+            singleDeck: false,
+            doubleDeck: false,
+            shoe: true,
         }
     }
 
@@ -59,87 +62,136 @@ class CasinoRules extends React.Component {
             }
         }).done();
 
+        AsyncStorage.getItem("singleDeck").then((singleDeckValue) => {
+            if(singleDeckValue === 'true'){
+                this.setState({singleDeck: true})
+            } else{
+                this.setState({singleDeck: false})
+            }
+        }).done();
+
+        AsyncStorage.getItem("doubleDeck").then((doubleDeckValue) => {
+            if(doubleDeckValue === 'true'){
+                this.setState({doubleDeck: true})
+            } else{
+                this.setState({doubleDeck: false})
+            }
+        }).done();
+
+        AsyncStorage.getItem("shoe").then((shoeValue) => {
+            if(shoeValue === 'true'){
+                this.setState({shoe: true})
+            } else{
+                this.setState({shoe: false})
+            }
+        }).done();
+
         
     }
 
     saveRuleInStorage = async (rule , value) => {
+        console.log('rule is : '+ rule)
+        console.log('value is : '+ value)
         if(rule === 'doubleAllowed'){
             if(value === true){
                 try {
                     await AsyncStorage.setItem('doubleAllowed', 'true');
-                } catch (error) {
-                }
+                } catch (error) {}
             } else {
                 try {
                     await AsyncStorage.setItem('doubleAllowed', 'false');
-                } catch (error) {
-                }
+                } catch (error) {}
             }
         } else if(rule === 'doubleAfterSplitAllowed'){
             if(value === true){
                 try {
                     await AsyncStorage.setItem('doubleAfterSplitAllowed', 'true');
-                } catch (error) {
-                }
+                } catch (error) {}
             } else {
                 try {
                     await AsyncStorage.setItem('doubleAfterSplitAllowed', 'false');
-                } catch (error) {
-                }
+                } catch (error) {}
             }
         } else if(rule === 'surrenderAllowed'){
             if(value === true){
                 try {
                     await AsyncStorage.setItem('surrenderAllowed', 'true');
-                } catch (error) {
-                }
+                } catch (error) {}
             } else {
                 try {
                     await AsyncStorage.setItem('surrenderAllowed', 'false');
-                } catch (error) {
-                }
+                } catch (error) {}
             }
         } else if(rule === 'dealerStandsOnSoft17'){
             if(this.state.dealerStandsOnSoft17 === true){
                 try {
                     await AsyncStorage.setItem('dealerStandsOnSoft17', 'true');
-                } catch (error) {
-                }
+                } catch (error) {}
                 try {
                     await AsyncStorage.setItem('dealerHitsOnSoft17', 'false');
-                } catch (error) {
-                }
+                } catch (error) {}
             } else {
                 try {
                     await AsyncStorage.setItem('dealerStandsOnSoft17', 'false');
-                } catch (error) {
-                }
+                } catch (error) {}
                 try {
                     await AsyncStorage.setItem('dealerHitsOnSoft17', 'true');
-                } catch (error) {
-                }
+                } catch (error) {}
             }
         }else if(rule === 'dealerHitsOnSoft17'){
             if(this.state.dealerHitsOnSoft17 === true){
                 try {
                     await AsyncStorage.setItem('dealerHitsOnSoft17', 'true');
-                } catch (error) {
-                }
+                } catch (error) {}
                 try {
                     await AsyncStorage.setItem('dealerStandsOnSoft17', 'false');
-                } catch (error) {
-                }
+                } catch (error) {}
             } else {
                 try {
                     await AsyncStorage.setItem('dealerHitsOnSoft17', 'false');
-                } catch (error) {
-                }
+                } catch (error) {}
                 try {
                     await AsyncStorage.setItem('dealerStandsOnSoft17', 'true');
-                } catch (error) {
-                }
-            }
+                } catch (error) {}
+            } 
+        } else if(rule === 'singleDeck'){
+            if(this.state.singleDeck === true){
+                try {
+                    await AsyncStorage.setItem('singleDeck', 'true');
+                } catch (error) {}
+                try {
+                    await AsyncStorage.setItem('doubleDeck', 'false');
+                } catch (error) {}
+                try {
+                    await AsyncStorage.setItem('shoe', 'false');
+                } catch (error) {}
+            } 
+        } else if(rule === 'doubleDeck'){
+            if(this.state.doubleDeck === true){
+                try {
+                    await AsyncStorage.setItem('singleDeck', 'false');
+                } catch (error) {}
+                try {
+                    await AsyncStorage.setItem('doubleDeck', 'true');
+                } catch (error) {}
+                try {
+                    await AsyncStorage.setItem('shoe', 'false');
+                } catch (error) {}
+            } 
+        }  else if(rule === 'shoe'){
+            if(this.state.shoe === true){
+                try {
+                    await AsyncStorage.setItem('singleDeck', 'false');
+                } catch (error) {}
+                try {
+                    await AsyncStorage.setItem('doubleDeck', 'false');
+                } catch (error) {}
+                try {
+                    await AsyncStorage.setItem('shoe', 'true');
+                } catch (error) {}
+            } 
         }
+
         this.getSavedRulesFromMemory()
     };
 
@@ -154,7 +206,7 @@ class CasinoRules extends React.Component {
     render() {
         const {navigate} = this.props.navigation;
         return (
-            
+            <ScrollView>
             <View style={styles.container}>
                 {this.state.showSubscribeModal 
                 ?   <View style={styles.modalContainer}>
@@ -169,64 +221,103 @@ class CasinoRules extends React.Component {
                 }
                 <View style={styles.buttonContainer}>
 
-                    <CheckBox
-                        onClick={   ()=>{ this.setState({ dealerStandsOnSoft17: !this.state.dealerStandsOnSoft17 }, 
-                                    () => this.saveRuleInStorage('dealerStandsOnSoft17' , this.state.dealerStandsOnSoft17 )) }}
-                        isChecked={this.state.dealerStandsOnSoft17}
-                        rightText={"Dealer stands on soft 17"} 
-                        checkBoxColor={'#fff'}
-                        checkedCheckBoxColor={'#fff'}
-                        rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5}}
-                        // disabled={true}
-                    /> 
+                    <View style={styles.rulesWrapper}>
+                        <Text style={styles.rulesHeader}>Dealer Rules:</Text>
+                        <CheckBox
+                            onClick={   ()=>{ this.setState({ dealerStandsOnSoft17: !this.state.dealerStandsOnSoft17 }, 
+                                        () => this.saveRuleInStorage('dealerStandsOnSoft17' , this.state.dealerStandsOnSoft17 )) }}
+                            isChecked={this.state.dealerStandsOnSoft17}
+                            rightText={"Dealer stands on soft 17"} 
+                            checkBoxColor={'#fff'}
+                            checkedCheckBoxColor={'#fff'}
+                            rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5, paddingBottom: 5}}
+                            // disabled={true}
+                        /> 
 
-                    <CheckBox
-                        onClick={   ()=>{ this.setState({ dealerHitsOnSoft17: !this.state.dealerHitsOnSoft17 }, 
-                                    () => this.saveRuleInStorage('dealerHitsOnSoft17' , this.state.dealerHitsOnSoft17 )) }}
-                        isChecked={this.state.dealerHitsOnSoft17}
-                        rightText={"Dealer hits on soft 17"} 
-                        checkBoxColor={'#fff'}
-                        checkedCheckBoxColor={'#fff'}
-                        rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5}}
-                        // disabled={true}
-                    />
+                        <CheckBox
+                            onClick={   ()=>{ this.setState({ dealerHitsOnSoft17: !this.state.dealerHitsOnSoft17 }, 
+                                        () => this.saveRuleInStorage('dealerHitsOnSoft17' , this.state.dealerHitsOnSoft17 )) }}
+                            isChecked={this.state.dealerHitsOnSoft17}
+                            rightText={"Dealer hits on soft 17"} 
+                            checkBoxColor={'#fff'}
+                            checkedCheckBoxColor={'#fff'}
+                            rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5}}
+                            // disabled={true}
+                        />
+                    </View>
 
-                    <CheckBox
-                        onClick={   ()=>{ this.setState({ doubleAllowed: !this.state.doubleAllowed }, 
-                                    // () => this.saveRuleInStorage('doubleAllowed' , this.state.doubleAllowed )) }}
-                                    () => this.toggleSubscribeModal() ) }}
-                        isChecked={this.state.doubleAllowed}
-                        rightText={"Double allowed"} 
-                        checkBoxColor={'#fff'}
-                        checkedCheckBoxColor={'#fff'}
-                        rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5}}
-                        // disabled={true}
-                    /> 
-                    <CheckBox
-                        onClick={()=>{  this.setState({ doubleAfterSplitAllowed: !this.state.doubleAfterSplitAllowed },
-                                        () => this.saveRuleInStorage('doubleAfterSplitAllowed', this.state.doubleAfterSplitAllowed)) }}
-                        isChecked={this.state.doubleAfterSplitAllowed}
-                        rightText={"Double after split allowed"}
-                        checkBoxColor={'#fff'}
-                        checkedCheckBoxColor={'#fff'}
-                        rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5}}
-                        // disabled={true}
-                    /> 
-                    <CheckBox
-                        onClick={()=>{ this.setState({ surrenderAllowed: !this.state.surrenderAllowed },
-                            () => this.saveRuleInStorage('surrenderAllowed', this.state.surrenderAllowed)) }}
-                        isChecked={this.state.surrenderAllowed}
-                        rightText={"Surrender Allowed"}
-                        checkBoxColor={'#fff'}
-                        checkedCheckBoxColor={'#fff'}
-                        rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5}}
-                        // disabled={true}
-                    /> 
+                    <View style={styles.rulesWrapper}>
+                        <Text style={styles.rulesHeader}>Player Rules:</Text>
+                        <CheckBox
+                            onClick={   ()=>{ this.setState({ doubleAllowed: !this.state.doubleAllowed }, 
+                                        // () => this.saveRuleInStorage('doubleAllowed' , this.state.doubleAllowed )) }}
+                                        () => this.toggleSubscribeModal() ) }}
+                            isChecked={this.state.doubleAllowed}
+                            rightText={"Double allowed"} 
+                            checkBoxColor={'#fff'}
+                            checkedCheckBoxColor={'#fff'}
+                            rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5, paddingBottom: 5}}
+                            // disabled={true}
+                        /> 
+                        <CheckBox
+                            onClick={()=>{  this.setState({ doubleAfterSplitAllowed: !this.state.doubleAfterSplitAllowed },
+                                            () => this.saveRuleInStorage('doubleAfterSplitAllowed', this.state.doubleAfterSplitAllowed)) }}
+                            isChecked={this.state.doubleAfterSplitAllowed}
+                            rightText={"Double after split"}
+                            checkBoxColor={'#fff'}
+                            checkedCheckBoxColor={'#fff'}
+                            rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5, paddingBottom: 5}}
+                            // disabled={true}
+                        /> 
+                        <CheckBox
+                            onClick={()=>{ this.setState({ surrenderAllowed: !this.state.surrenderAllowed },
+                                () => this.saveRuleInStorage('surrenderAllowed', this.state.surrenderAllowed)) }}
+                            isChecked={this.state.surrenderAllowed}
+                            rightText={"Surrender Allowed"}
+                            checkBoxColor={'#fff'}
+                            checkedCheckBoxColor={'#fff'}
+                            rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5}}
+                            // disabled={true}
+                        /> 
+                    </View>
+
+                    <View style={styles.rulesWrapper}>
+                        <Text style={styles.rulesHeader}>Decks:</Text>
+                        <CheckBox
+                            onClick={   ()=>{ this.setState({ singleDeck: !this.state.singleDeck }, 
+                                        () => this.saveRuleInStorage('singleDeck' , this.state.singleDeck )) }}
+                            isChecked={this.state.singleDeck}
+                            rightText={"Single Deck"} 
+                            checkBoxColor={'#fff'}
+                            checkedCheckBoxColor={'#fff'}
+                            rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5, paddingBottom: 5}}
+                            // disabled={true}
+                        /> 
+                        <CheckBox
+                            onClick={()=>{  this.setState({ doubleDeck: !this.state.doubleDeck },
+                                            () => this.saveRuleInStorage('doubleDeck', this.state.doubleDeck)) }}
+                            isChecked={this.state.doubleDeck}
+                            rightText={"Double Deck"}
+                            checkBoxColor={'#fff'}
+                            checkedCheckBoxColor={'#fff'}
+                            rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5, paddingBottom: 5}}
+                            // disabled={true}
+                        /> 
+                        <CheckBox
+                            onClick={()=>{ this.setState({ shoe: !this.state.shoe },
+                                () => this.saveRuleInStorage('shoe', this.state.shoe)) }}
+                            isChecked={this.state.shoe}
+                            rightText={"4 - 8 Deck Shoe"}
+                            checkBoxColor={'#fff'}
+                            checkedCheckBoxColor={'#fff'}
+                            rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5}}
+                        /> 
+                    </View>
+
                 </View>
-                <Text style={{color: '#fff', fontSize: 16, textAlign: 'center', marginTop: 60}}>
-                    {/* These options are only editable in premium version */}
-                </Text>
             </View>
+            </ScrollView>
+            
 
         );
     }
@@ -237,19 +328,32 @@ const styles = StyleSheet.create({
         paddingTop: Constants.statusBarHeight,
         padding: 8,
         backgroundColor: ( '#0f9b0f', '#52c234', '#52c234', '#0f9b0f'),
-        height: ScreenHeight,
+        height: 600,
     },
     modalContainer: {
         width: ScreenWidth + 30, 
         marginLeft: -8,
         marginTop: -25,
     },
-    buttonContainer: {
-        marginLeft: 30,
-        marginTop: -30,
-        flex: 0,
-        justifyContent: 'space-evenly',
-        height: 350,
+    rulesWrapper: {
+        borderRadius: 10,
+        borderColor: 'white',
+        borderWidth: 1,
+        padding: 20,
+        paddingTop: 10,
+        backgroundColor: 'black',
+        marginLeft: 20,
+        marginRight: 20,
+        marginBottom: 20,
+        
+    },
+    rulesHeader: {
+        fontSize: 22,
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginBottom: 10,
+        textDecorationLine: 'underline',
     },
 });
 

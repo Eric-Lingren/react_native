@@ -6,7 +6,7 @@ import { Constants } from 'expo';
 let ScreenHeight = Dimensions.get("window").height;
 let ScreenWidth = Dimensions.get("window").width;
 
-class BasicStrategyStats extends React.Component {
+class StatsCharts extends React.Component {
     constructor(){
         super()
         this.state = {
@@ -515,4 +515,4 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     }
 });
-export default BasicStrategyStats
+export default StatsCharts

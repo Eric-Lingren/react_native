@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Dimensions, View, Text, StyleSheet, ScrollView } from 'react-native';
 import { Constants } from 'expo';
-import BasicStrategyStats from './BasicStrategyStats';
+import StatsCharts from './StatsCharts';
 // import SpeedCountStats from './SpeedCountStats';
 
 
@@ -26,7 +26,7 @@ class MyStats extends React.Component {
         return (
             <ScrollView>
                 <View style={styles.container}>
-                    <BasicStrategyStats />
+                    <StatsCharts />
                     {/* <SpeedCountStats /> */}
                     
                     
