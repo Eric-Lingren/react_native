@@ -33,6 +33,9 @@ class BasicStrategy extends React.Component {
             doubleAllowed: false,
             doubleAfterSplitAllowed: false,
             surrenderAllowed: false,
+            singleDeck: false,
+            doubleDeck: false,
+            shoe: true,
             ///////////////////////////////
             currentKindOfHandBeingPlayed: '',
             hardHandsPlayed: 0,
@@ -81,56 +84,44 @@ class BasicStrategy extends React.Component {
     removeItems = async () => {
         try {
             await AsyncStorage.removeItem('hardHandsPlayed');
-        } catch (error) {
-        }
+        } catch (error) {}
         try {
             await AsyncStorage.removeItem('hardHandsCorrect');
-        } catch (error) {
-        }
+        } catch (error) {}
         try {
             await AsyncStorage.removeItem('softHandsPlayed');
-        } catch (error) {
-        }
+        } catch (error) {}
         try {
             await AsyncStorage.removeItem('softHandsCorrect');
-        } catch (error) {
-        }
+        } catch (error) {}
         try {
             await AsyncStorage.removeItem('splitHandsPlayed');
-        } catch (error) {
-        }
+        } catch (error) {}
         try {
             await AsyncStorage.removeItem('splitHandsCorrect');
-        } catch (error) {
-        }
+        } catch (error) {}
     }
 
 
     saveStatsInStorage = async (hardHandsPlayed, hardHandsCorrect, softHandsPlayed, softHandsCorrect, splitHandsPlayed, splitHandsCorrect ) => {
         try {
             await AsyncStorage.setItem('hardHandsPlayed', hardHandsPlayed);
-        } catch (error) {
-        }
+        } catch (error) {}
         try {
             await AsyncStorage.setItem('hardHandsCorrect', hardHandsCorrect);
-        } catch (error) {
-        }
+        } catch (error) {}
         try {
             await AsyncStorage.setItem('softHandsPlayed', softHandsPlayed);
-        } catch (error) {
-        }
+        } catch (error) {}
         try {
             await AsyncStorage.setItem('softHandsCorrect', softHandsCorrect);
-        } catch (error) {
-        }
+        } catch (error) {}
         try {
             await AsyncStorage.setItem('splitHandsPlayed', splitHandsPlayed);
-        } catch (error) {
-        }
+        } catch (error) {}
         try {
             await AsyncStorage.setItem('splitHandsCorrect', splitHandsCorrect);
-        } catch (error) {
-        }
+        } catch (error) {}
     }
 
     getStatsFromStorage = () => {
@@ -197,6 +188,28 @@ class BasicStrategy extends React.Component {
                 this.setState({surrenderAllowed: true})
             } else{
                 this.setState({surrenderAllowed: false})
+            }
+        }).done();
+
+        AsyncStorage.getItem("singleDeck").then((singleDeckValue) => {
+            if(singleDeckValue === 'true'){
+                this.setState({singleDeck: true})
+            } else{
+                this.setState({singleDeck: false})
+            }
+        }).done();
+        AsyncStorage.getItem("doubleDeck").then((doubleDeckValue) => {
+            if(doubleDeckValue === 'true'){
+                this.setState({doubleDeck: true})
+            } else{
+                this.setState({doubleDeck: false})
+            }
+        }).done();
+        AsyncStorage.getItem("shoe").then((shoeValue) => {
+            if(shoeValue === 'true'){
+                this.setState({shoe: true})
+            } else{
+                this.setState({shoe: false})
             }
         }).done();
     }
@@ -738,16 +751,7 @@ class BasicStrategy extends React.Component {
 
     render() {
         const {navigate} = this.props.navigation;
-        // console.log('                                                           ')
-        // console.log('hard hands played: ' + this.state.hardHandsPlayed)
-        // console.log('hard hands correct: ' + this.state.hardHandsCorrect)
-        // console.log('soft hands played: ' + this.state.softHandsPlayed)
-        // console.log('soft hands correct: ' + this.state.softHandsCorrect)
-        // console.log('split hands played: ' + this.state.splitHandsPlayed)
-        // console.log('split hands correct: ' + this.state.splitHandsCorrect)
-        // console.log('                                                           ')
-
-        // console.log('currentKindOfHandBeingPlayed : ' + this.state.currentKindOfHandBeingPlayed)
+        
         return (
             <ScrollView>
                 <View style={styles.container}>

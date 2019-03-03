@@ -47,6 +47,15 @@ class HomeScreen extends React.Component {
             await AsyncStorage.setItem('dealerStands17', 'true');
         } catch (error) {}
         try {
+            await AsyncStorage.setItem('singleDeck', 'false');
+        } catch (error) {}
+        try {
+            await AsyncStorage.setItem('doubleDeck', 'false');
+        } catch (error) {}
+        try {
+            await AsyncStorage.setItem('shoe', 'true');
+        } catch (error) {}
+        try {
             await AsyncStorage.setItem('hardHandsPlayed', '0');
         } catch (error) {}
         try {
