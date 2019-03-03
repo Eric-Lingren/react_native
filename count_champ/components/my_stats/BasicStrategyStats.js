@@ -34,6 +34,10 @@ class BasicStrategyStats extends React.Component {
             trueCountQuestionsCorrect: 0,
             percentOftrueCountQuestionsCorrect: 0,
             percentOftrueCountQuestionsCorrectColor: '',
+            betSizingQuestionsPlayed: 0,
+            betSizingQuestionsCorrect: 0,
+            percentOfBetSizingQuestionsCorrect: 0,
+            percentOfBetSizingQuestionsCorrectColor: '',
         }
     }
 
@@ -41,6 +45,7 @@ class BasicStrategyStats extends React.Component {
         this.getStatsFromStorage()
         this.getCountingStatsFromStorage()
         this.getTrueCountStatsFromStorage()
+        this.getBetSizingFromStorage()
     }
 
     getStatsFromStorage = () => {
@@ -251,6 +256,42 @@ class BasicStrategyStats extends React.Component {
         
     }
 
+    getBetSizingFromStorage = () => {
+        AsyncStorage.getItem("betSizingQuestionsPlayed").then((betSizingQuestionsPlayed) => {
+            let betSizingQuestionsPlayedNum;
+            betSizingQuestionsPlayed === 'NaN' ? betSizingQuestionsPlayedNum = 0 : betSizingQuestionsPlayedNum = parseInt(betSizingQuestionsPlayed)
+            this.setState({betSizingQuestionsPlayed: betSizingQuestionsPlayedNum})
+        }).done();
+        AsyncStorage.getItem("betSizingQuestionsCorrect").then((betSizingQuestionsCorrect) => {
+            let betSizingQuestionsCorrectNum;
+            betSizingQuestionsCorrect === 'NaN' ? betSizingQuestionsCorrectNum = 0 : betSizingQuestionsCorrectNum = parseInt(betSizingQuestionsCorrect)
+            this.setState({betSizingQuestionsCorrect: betSizingQuestionsCorrectNum}, () => this.calculateBetSizingStats())
+        }).done();
+    }
+
+    calculateBetSizingStats = () => {
+        let betSizingQuestionsPlayed = this.state.betSizingQuestionsPlayed
+        let betSizingQuestionsCorrect = this.state.betSizingQuestionsCorrect
+        let percentOfBetSizingQuestionsCorrect = ( (betSizingQuestionsCorrect / betSizingQuestionsPlayed) * 100 )
+        let percentOfBetSizingQuestionsCorrectColor = '#2196f3'
+
+        if(percentOfBetSizingQuestionsCorrect >= 90){
+            //  Good Score
+            percentOfBetSizingQuestionsCorrectColor = '#49FF58'
+        } else if (percentOfBetSizingQuestionsCorrect <= 70){
+            // Bad Score
+            percentOfBetSizingQuestionsCorrectColor = '#FF0000'
+        } else {
+            //  Medium Score
+            percentOfBetSizingQuestionsCorrectColor = '#FBFC5F'
+        }
+        this.setState({ 
+            percentOfBetSizingQuestionsCorrect: percentOfBetSizingQuestionsCorrect,
+            percentOfBetSizingQuestionsCorrectColor: percentOfBetSizingQuestionsCorrectColor
+        })
+        
+    }
+
     resetStats = async () => {
         console.log('clear button pressed')
         try {
@@ -283,6 +324,12 @@ class BasicStrategyStats extends React.Component {
         try {
             await AsyncStorage.setItem('trueCountQuestionsCorrect', '0');
         } catch (error) {}
+        try {
+            await AsyncStorage.setItem('betSizingQuestionsPlayed', '0');
+        } catch (error) {}
+        try {
+            await AsyncStorage.setItem('betSizingQuestionsCorrect', '0');
+        } catch (error) {}
         this.setState({
             sessionsPlayed: 0,
             sessionsCorrect: 0,
@@ -302,6 +349,9 @@ class BasicStrategyStats extends React.Component {
             trueCountQuestionsPlayed: 0,
             trueCountQuestionsCorrect: 0,
             percentOftrueCountQuestionsCorrect: 0,
+            betSizingQuestionsPlayed: 0,
+            betSizingQuestionsCorrect: 0,
+            percentOfBetSizingQuestionsCorrect: 0,
         })
     }
 
@@ -406,6 +456,21 @@ class BasicStrategyStats extends React.Component {
                     <View style={{  width: `${this.state.percentOftrueCountQuestionsCorrect}%`, 
                                     height: 30, 
                                     backgroundColor: this.state.percentOftrueCountQuestionsCorrectColor}}></View>
+                </View>
+
+                <View style={styles.statsContainer}>
+                    <Text style={styles.headerStyles}>Bet Sizing</Text>
+                    <Text style={styles.textStyles}>Played: {this.state.betSizingQuestionsPlayed} </Text>
+                    <View style={{  width: '100%', 
+                                    height: 30,
+                                    borderWidth: 1,
+                                    backgroundColor: '#2196f3',
+                                    marginBottom: 5}}>
+                    </View>
+                    <Text style={styles.textStyles}>Correct: {this.state.betSizingQuestionsCorrect} </Text>
+                    <View style={{  width: `${this.state.percentOfBetSizingQuestionsCorrect}%`, 
+                                    height: 30, 
+                                    backgroundColor: this.state.percentOfBetSizingQuestionsCorrectColor}}></View>
                 </View>
                 
             </View>

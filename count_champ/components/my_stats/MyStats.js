@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         paddingTop: Constants.statusBarHeight,
         padding: 8,
         backgroundColor: ( '#0f9b0f'),
-        height: 1400,
+        height: 1600,
         marginTop: -20,
     }
 });
