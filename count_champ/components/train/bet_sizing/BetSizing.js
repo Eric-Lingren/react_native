@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Text, View, StyleSheet, Dimensions, ScrollView } from 'react-native';
+import { Button, Text, View, StyleSheet, Dimensions, ScrollView, AsyncStorage } from 'react-native';
 import { Constants } from 'expo';
 
 let ScreenHeight = Dimensions.get("window").height;
@@ -15,9 +15,41 @@ class BetSizing extends React.Component {
             unit4ButtonColor: '#000',
             unit8ButtonColor: '#000',
             unit16ButtonColor: '#000',
-            questionsPlayed: 0,
-            questionsCorrect: 0,
+            betSizingQuestionsPlayed: 0,
+            betSizingQuestionsCorrect: 0,
         }
+    }
+
+    componentDidMount() {
+        this.getBetSizingFromStorage()
+    }
+
+    componentWillUnmount(){
+        let betSizingQuestionsPlayed = this.state.betSizingQuestionsPlayed.toString()
+        let betSizingQuestionsCorrect = this.state.betSizingQuestionsCorrect.toString()
+        this.saveStatsInStorage(betSizingQuestionsPlayed, betSizingQuestionsCorrect)
+    }
+
+    getBetSizingFromStorage = () => {
+        AsyncStorage.getItem("betSizingQuestionsPlayed").then((betSizingQuestionsPlayed) => {
+            let betSizingQuestionsPlayedNum;
+            betSizingQuestionsPlayed === 'NaN' ? betSizingQuestionsPlayedNum = 0 : betSizingQuestionsPlayedNum = parseInt(betSizingQuestionsPlayed)
+            this.setState({betSizingQuestionsPlayed: betSizingQuestionsPlayedNum})
+        }).done();
+        AsyncStorage.getItem("betSizingQuestionsCorrect").then((betSizingQuestionsCorrect) => {
+            let betSizingQuestionsCorrectNum;
+            betSizingQuestionsCorrect === 'NaN' ? betSizingQuestionsCorrectNum = 0 : betSizingQuestionsCorrectNum = parseInt(betSizingQuestionsCorrect)
+            this.setState({betSizingQuestionsCorrect: betSizingQuestionsCorrectNum})
+        }).done();
+    }
+
+    saveStatsInStorage = async ( betSizingQuestionsPlayed, betSizingQuestionsCorrect ) => {
+        try {
+            await AsyncStorage.setItem('betSizingQuestionsPlayed', betSizingQuestionsPlayed);
+        } catch (error) {}
+        try {
+            await AsyncStorage.setItem('betSizingQuestionsCorrect', betSizingQuestionsCorrect);
+        } catch (error) {}
     }
 
     newQuestion = () => {
@@ -70,7 +102,7 @@ class BetSizing extends React.Component {
     }
 
     checkAnswer = (answer) => {
-        this.setState(prevState => ({ questionsPlayed: prevState.questionsPlayed += 1 }))
+        this.setState(prevState => ({ betSizingQuestionsPlayed: prevState.betSizingQuestionsPlayed += 1 }))
         let count = this.state.randomCount
         
         if (answer === 1 && count === 0 ){
@@ -95,7 +127,7 @@ class BetSizing extends React.Component {
 
     displayOutputCorrect = () => {
         this.setState(prevState => ({ 
-            questionsCorrect: prevState.questionsCorrect += 1,
+            betSizingQuestionsCorrect: prevState.betSizingQuestionsCorrect += 1,
         }))
     }
 
@@ -132,6 +164,8 @@ class BetSizing extends React.Component {
     
     render() {
         const {navigate} = this.props.navigation;
+        console.log('questions played : ' + this.state.betSizingQuestionsPlayed)
+        console.log('questions correct : ' + this.state.betSizingQuestionsCorrect)
         return (
             <ScrollView>
             <View style={styles.container}>
