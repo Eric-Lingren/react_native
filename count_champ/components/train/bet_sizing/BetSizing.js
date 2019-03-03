@@ -164,8 +164,7 @@ class BetSizing extends React.Component {
     
     render() {
         const {navigate} = this.props.navigation;
-        console.log('questions played : ' + this.state.betSizingQuestionsPlayed)
-        console.log('questions correct : ' + this.state.betSizingQuestionsCorrect)
+        
         return (
             <ScrollView>
             <View style={styles.container}>

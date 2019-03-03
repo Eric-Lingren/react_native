@@ -364,10 +364,18 @@ class BasicStrategy extends React.Component {
         }  else if(pHand === 10 && dHand > 9){
             this.setState({ correctPlay: 'HIT' })
         }else if (pHand === 16){
-            if (dHand === 11 && this.dealerStandsOnSoft17 === false && this.state.surrenderAllowed === true) {
+            if (dHand === 11 && !this.dealerStandsOnSoft17 && this.state.surrenderAllowed) {
                 this.setState({ correctPlay: 'SURRENDER' })
             } else {
                 this.setState({ correctPlay: 'SPLIT' })
+            }
+        } else if(pHand === 4  && dHand === 3 && this.state.singleDeck){
+                this.setState({ correctPlay: 'SPLIT' }) 
+        } else if((pHand === 6) && dHand === 8 && this.state.singleDeck){
+            if(this.state.doubleAfterSplitAllowed === true){
+                this.setState({ correctPlay: 'SPLIT' })
+            } else if (this.state.doubleAfterSplitAllowed === false){
+                this.setState({ correctPlay: 'HIT' })
             }
         } else if((pHand === 4 || pHand === 6) && dHand <= 3){
             if(this.state.doubleAfterSplitAllowed === true){
@@ -379,6 +387,18 @@ class BasicStrategy extends React.Component {
             this.setState({ correctPlay: 'SPLIT' })
         } else if((pHand === 4 || pHand === 6) && dHand <= 11){
             this.setState({ correctPlay: 'HIT' })
+        } else if(pHand === 8 && dHand === 4 && this.state.singleDeck){
+            if(this.state.doubleAfterSplitAllowed === true){
+                this.setState({ correctPlay: 'SPLIT' })
+            } else if (this.state.doubleAfterSplitAllowed === false){
+                this.setState({ correctPlay: 'HIT' })
+            }   
+        } else if(pHand === 8 && this.state.singleDeck && (dHand === 5 || dHand === 6 )){
+            if(this.state.doubleAfterSplitAllowed === true){
+                this.setState({ correctPlay: 'SPLIT' })
+            } else if (this.state.doubleAfterSplitAllowed === false){
+                this.setState({ correctPlay: 'DOUBLE' })
+            }   
         } else if(pHand === 8 && dHand <= 4){
             this.setState({ correctPlay: 'HIT' })
         } else if (pHand === 8 && dHand <= 6){
@@ -389,21 +409,53 @@ class BasicStrategy extends React.Component {
             }   
         } else if (pHand === 8 && dHand <= 11){
             this.setState({ correctPlay: 'HIT' })
-        } else if (pHand === 12 && dHand === 2){
+        } else if (pHand === 12 && dHand === 2 && this.state.shoe){
             if(this.state.doubleAfterSplitAllowed === true){
                 this.setState({ correctPlay: 'SPLIT' })
             } else if (this.state.doubleAfterSplitAllowed === false){
                 this.setState({ correctPlay: 'HIT' })
             }
+        }  else if (pHand === 12 && dHand === 2 && !this.state.shoe){
+            this.setState({ correctPlay: 'SPLIT' })
         } else if (pHand === 12 && dHand <= 6){
             this.setState({ correctPlay: 'SPLIT' })
+        } else if (pHand === 12 && dHand === 7 && !this.state.shoe){
+            if(this.state.doubleAfterSplitAllowed === true){
+                this.setState({ correctPlay: 'SPLIT' })
+            } else if (this.state.doubleAfterSplitAllowed === false){
+                this.setState({ correctPlay: 'HIT' })
+            }
         } else if (pHand === 12 && dHand <= 11){
             this.setState({ correctPlay: 'HIT' })
+        } else if (pHand === 14 && dHand === 8 && !this.state.shoe){
+            if(this.state.doubleAfterSplitAllowed === true){
+                this.setState({ correctPlay: 'SPLIT' })
+            } else if (this.state.doubleAfterSplitAllowed === false){
+                this.setState({ correctPlay: 'HIT' })
+            }
+        } else if (pHand === 14 && dHand === 10 && this.state.singleDeck){
+            if(this.state.surrenderAllowed){
+                this.setState({ correctPlay: 'SURRENDER' })
+            } else {
+                this.setState({ correctPlay: 'STAND' })
+            }
+        } else if (pHand === 14 && dHand === 11 && this.state.singleDeck && !this.state.dealerStandsOnSoft17 ){
+            if(this.state.surrenderAllowed){
+                this.setState({ correctPlay: 'SURRENDER' })
+            } else {
+                this.setState({ correctPlay: 'HIT' })
+            }
         } else if (pHand === 14 && dHand <= 7){
             this.setState({ correctPlay: 'SPLIT' })
         } else if (pHand === 14 && dHand <= 11){
             this.setState({ correctPlay: 'HIT' })
-        } else if (pHand === 18 & (dHand === 7 || dHand === 10 || dHand === 11 ) ){
+        } else if (pHand === 18 && dHand === 11 && !this.state.dealerStandsOnSoft17 && this.state.singleDeck ){
+            if(this.state.doubleAfterSplitAllowed){
+                this.setState({ correctPlay: 'SPLIT' })
+            } else {
+                this.setState({ correctPlay: 'STAND' })
+            }
+        } else if (pHand === 18 && (dHand === 7 || dHand === 10 || dHand === 11 ) ){
             this.setState({ correctPlay: 'STAND' })
         }  else if (pHand === 18 && dHand <= 9 ){
             this.setState({ correctPlay: 'SPLIT' })
@@ -427,7 +479,7 @@ class BasicStrategy extends React.Component {
         } else if (pHand === 19){
             if (this.state.dealerStandsOnSoft17 === true){
                 this.setState({ correctPlay: 'STAND' })
-            } else if (this.state.dealerStandsOnSoft17 === false){
+            } else if (this.state.dealerStandsOnSoft17 === false || (this.state.dealerStandsOnSoft17 && (this.state.singleDeck || this.state.doubleDeck))){
                 if(dHand === 6){
                     if (this.state.doubleAllowed === true){
                         this.setState({ correctPlay: 'DOUBLE' })
@@ -438,8 +490,14 @@ class BasicStrategy extends React.Component {
                     this.setState({ correctPlay: 'STAND' })
                 }
             }  
-        } else if(pHand === 13 && dHand <= 4){
+        } else if(pHand === 13 && dHand <= 4 && !this.state.singleDeck){
             this.setState({ correctPlay: 'HIT' })
+        } else if(pHand === 13 && dHand === 4 && this.state.singleDeck){
+            if (this.state.doubleAllowed === true){
+                this.setState({ correctPlay: 'DOUBLE' })
+            } else if (this.state.doubleAllowed === false){
+                this.setState({ correctPlay: 'HIT' })
+            }
         } else if (pHand === 13 && dHand <= 6){
             if (this.state.doubleAllowed === true){
                 this.setState({ correctPlay: 'DOUBLE' })
@@ -478,9 +536,15 @@ class BasicStrategy extends React.Component {
             }
         } else if(pHand === 16 && dHand <= 11){
             this.setState({ correctPlay: 'HIT' })
-        } else if(pHand === 17 && dHand === 2){
+        } else if(pHand === 17 && dHand === 2 && !this.state.singleDeck){
             this.setState({ correctPlay: 'HIT' })
-        } else if (pHand === 17 && dHand <= 6){
+        } else if(pHand === 17 && dHand === 2 && this.state.singleDeck){
+            if (this.state.doubleAllowed === true){
+                this.setState({ correctPlay: 'DOUBLE' })
+            } else if (this.state.doubleAllowed === false){
+                this.setState({ correctPlay: 'HIT' })
+            }
+        }else if (pHand === 17 && dHand <= 6){
             if (this.state.doubleAllowed === true){
                 this.setState({ correctPlay: 'DOUBLE' })
             } else if (this.state.doubleAllowed === false){
@@ -506,6 +570,8 @@ class BasicStrategy extends React.Component {
             }
         } else if(pHand === 18 && dHand <= 8){
             this.setState({ correctPlay: 'STAND' })
+        } else if(pHand === 18 && dHand === 11 && this.state.singleDeck && this.state.dealerStandsOnSoft17){
+            this.setState({ correctPlay: 'STAND' })
         } else if(pHand === 18 && dHand <= 11){
             this.setState({ correctPlay: 'HIT' })
         }
@@ -524,7 +590,13 @@ class BasicStrategy extends React.Component {
             }
         })
 
-        if (pHand <= 8 ){
+        if(pHand === 8 && this.state.singleDeck && (dHand === 5 || dHand === 6)){
+            if(this.state.doubleAllowed){
+                this.setState({ correctPlay: 'DOUBLE' })
+            } else {
+                this.setState({ correctPlay: 'HIT' })
+            }
+        } else if (pHand <= 8 ){
             this.setState({ correctPlay: 'HIT' })
         } else if (pHand > 17) {
             this.setState({ correctPlay: 'STAND' })
@@ -564,7 +636,7 @@ class BasicStrategy extends React.Component {
                 this.setState({ correctPlay: 'HIT' })
             } 
         } else if (pHand === 11 && dHand === 11){
-            if (this.state.dealerStandsOnSoft17 === true){
+            if (this.state.dealerStandsOnSoft17 === true && this.state.shoe){
                 this.setState({ correctPlay: 'HIT' })
             } else if (this.state.dealerStandsOnSoft17 === false && this.state.doubleAllowed === true){
                 this.setState({ correctPlay: 'DOUBLE' })
@@ -590,7 +662,7 @@ class BasicStrategy extends React.Component {
         } else if (pHand === 15 && dHand <= 9){
             this.setState({ correctPlay: 'HIT' })
         } else if (pHand === 15 && dHand === 10){
-            if(this.state.surrenderAllowed === true){
+            if(this.state.surrenderAllowed === true && (this.state.doubleDeck || this.state.shoe) ){
                 this.setState({ correctPlay: 'SURRENDER' })
             } else if (this.state.surrenderAllowed === false){
                 this.setState({ correctPlay: 'HIT' })
