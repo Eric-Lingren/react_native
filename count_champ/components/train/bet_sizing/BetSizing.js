@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Text, View, StyleSheet, Image, Dimensions } from 'react-native';
+import { Button, Text, View, StyleSheet, Dimensions, ScrollView } from 'react-native';
 import { Constants } from 'expo';
 
 let ScreenHeight = Dimensions.get("window").height;
@@ -9,15 +9,25 @@ class BetSizing extends React.Component {
         super()
         this.state = {
             randomCount: 0,
-            output: '',
             answer: 0,
-            showAnswer: false
+            unit1ButtonColor: '#000',
+            unit2ButtonColor: '#000',
+            unit4ButtonColor: '#000',
+            unit8ButtonColor: '#000',
+            unit16ButtonColor: '#000',
+            questionsPlayed: 0,
+            questionsCorrect: 0,
         }
     }
 
     newQuestion = () => {
         this.setState({
-            showAnswer: false
+            showAnswer: false,
+            unit1ButtonColor: '#000',
+            unit2ButtonColor: '#000',
+            unit4ButtonColor: '#000',
+            unit8ButtonColor: '#000',
+            unit16ButtonColor: '#000',
         }, () => this.generateRandomCount())
     }
 
@@ -32,70 +42,88 @@ class BetSizing extends React.Component {
     setAnswerTo1 = () => {
         this.setState({
             answer: 1
-        }, () => this.checkAnswer())
-    }
-
-    setAnswerTo1 = () => {
-        this.setState({
-            answer: 1
-        }, () => this.checkAnswer())
+        }, () => this.checkAnswer(this.state.answer))
     }
 
     setAnswerTo2 = () => {
         this.setState({
             answer: 2
-        }, () => this.checkAnswer())
+        }, () => this.checkAnswer(this.state.answer))
     }
 
     setAnswerTo4 = () => {
         this.setState({
             answer: 4
-        }, () => this.checkAnswer())
+        }, () => this.checkAnswer(this.state.answer))
     }
 
     setAnswerTo8 = () => {
         this.setState({
             answer: 8
-        }, () => this.checkAnswer())
+        }, () => this.checkAnswer(this.state.answer))
     }
 
     setAnswerTo16 = () => {
         this.setState({
             answer: 16
-        }, () => this.checkAnswer())
+        }, () => this.checkAnswer(this.state.answer))
     }
 
-    checkAnswer = () => {
-        let answer = parseInt(this.state.answer)
+    checkAnswer = (answer) => {
+        this.setState(prevState => ({ questionsPlayed: prevState.questionsPlayed += 1 }))
         let count = this.state.randomCount
-
+        
         if (answer === 1 && count === 0 ){
+            this.setState({ unit1ButtonColor: '#055902' })
             this.displayOutputCorrect()
         } else if (answer === 2 && count === 1 ){
+            this.setState({ unit2ButtonColor: '#055902' })
             this.displayOutputCorrect()
         } else if (answer === 4 && count === 2 ){
+            this.setState({ unit4ButtonColor: '#055902' })
             this.displayOutputCorrect()
         } else if (answer === 8 && count === 3 ){
+            this.setState({ unit8ButtonColor: '#055902' })
             this.displayOutputCorrect()
         } else if (answer === 16 && count === 4 ){
+            this.setState({ unit16ButtonColor: '#055902' })
             this.displayOutputCorrect()
         } else{
-            this.displayOutputIncorrect()
+            this.displayOutputIncorrect(answer)
         }
     }
 
     displayOutputCorrect = () => {
-        this.setState({
-            output: 'Correct!',
-            showAnswer: true
-        })
+        this.setState(prevState => ({ 
+            questionsCorrect: prevState.questionsCorrect += 1,
+        }))
     }
 
-    displayOutputIncorrect = () => {
-        this.setState({
-            output: 'Try Again...',
-            showAnswer: true
-        })
+    displayOutputIncorrect = (answer) => {
+        let count = this.state.randomCount
+        if(answer === 1){
+            this.setState({ unit1ButtonColor: '#ff0000' })
+        } else if (answer === 2){
+            this.setState({ unit2ButtonColor: '#ff0000' })
+        } else if (answer === 4){
+            this.setState({ unit4ButtonColor: '#ff0000' })
+        } else if (answer === 8){
+            this.setState({ unit8ButtonColor: '#ff0000' })
+        } else if (answer ===16){
+            this.setState({ unit16ButtonColor: '#ff0000' })
+        }
+
+        if(count === 0){
+            this.setState({ unit1ButtonColor: '#055902' })
+        } else if (count === 1){
+            this.setState({ unit2ButtonColor: '#055902' })
+        } else if (count === 2){
+            this.setState({ unit4ButtonColor: '#055902' })
+        } else if (count === 3){
+            this.setState({ unit8ButtonColor: '#055902' })
+        } else if (count === 4){
+            this.setState({ unit16ButtonColor: '#055902' })
+        }
     }
 
     static navigationOptions = {
@@ -105,6 +133,7 @@ class BetSizing extends React.Component {
     render() {
         const {navigate} = this.props.navigation;
         return (
+            <ScrollView>
             <View style={styles.container}>
                 <View className='container'>
                     <View style={styles.textContainer}>
@@ -113,27 +142,29 @@ class BetSizing extends React.Component {
                     <Text style={styles.textStyle}>The true count is:  <Text style={styles.question}>{this.state.randomCount} </Text> ? </Text>
                     </View>
                     <View style={styles.buttonContainer}>
-                        <Button color="#000000" onPress={this.setAnswerTo1} title='1  hand  of  1  Unit'></Button>
-                        <Button color="#000000" onPress={this.setAnswerTo2} title='1  hand  of  2  Units'></Button>
-                        <Button color="#000000" onPress={this.setAnswerTo4} title='1  hand  of  4  Units'></Button>
-                        <Button color="#000000" onPress={this.setAnswerTo8} title='1  hand  of  8  Units'></Button>
-                        <Button color="#000000" onPress={this.setAnswerTo16} title='2  hands  of  8  Units'></Button>
+                        <Button color={this.state.unit1ButtonColor} onPress={this.setAnswerTo1} title='1  hand  of  1  Unit'></Button>
+                        <Button color={this.state.unit2ButtonColor} onPress={this.setAnswerTo2} title='1  hand  of  2  Units'></Button>
+                        <Button color={this.state.unit4ButtonColor}  onPress={this.setAnswerTo4} title='1  hand  of  4  Units'></Button>
+                        <Button color={this.state.unit8ButtonColor}  onPress={this.setAnswerTo8} title='1  hand  of  8  Units'></Button>
+                        <Button color={this.state.unit16ButtonColor}  onPress={this.setAnswerTo16} title='2  hands  of  8  Units'></Button>
+                    </View>
+                    <View style={styles.answerButton}>
+                        <Button color='#2196f3' onPress={this.newQuestion} title='New Question'></Button>
                     </View>
                     
                     {
                     this.state.showAnswer ?
-                    <View>
+                    <View style={styles.answerContainer}>
                         <Text style={styles.answerStyle}> {this.state.output} </Text>
                     </View>
                     :
                     null
                     }
                     
-                    <View style={styles.answerButton}>
-                        <Button color="#000000" onPress={this.newQuestion} title='New Question'></Button>
-                    </View>
+                    
                 </View>
             </View>
+            </ScrollView>
         );
     }
 }
@@ -164,13 +195,17 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         height: 250,
     },
+    answerContainer: {
+        marginTop: 30,
+    },
     answerStyle: {
         fontSize: 22, 
         fontWeight: 'bold', 
-        color: 'white'
+        color: 'white',
+        textAlign: 'center',
     },
     answerButton: {
-        marginTop: 25,
+        marginTop: 35,
     },
     question: {
         color: 'orange',
