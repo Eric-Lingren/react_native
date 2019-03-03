@@ -38,10 +38,6 @@ const styles = StyleSheet.create({
         zIndex: 5,
     },
     textContainer: {
-        // flex: 1,
-        // justifyContent: 'center',
-        // alignItems: 'center',
-        // alignContent: 'center',
         marginTop: 200,
         padding: 25,
     },

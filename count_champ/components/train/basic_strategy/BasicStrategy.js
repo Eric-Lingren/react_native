@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { Button, Text, View, StyleSheet, Image, Dimensions, ScrollView, AsyncStorage  } from 'react-native';
+import { Button, Text, View, StyleSheet, Image, Dimensions, ScrollView, AsyncStorage, TouchableWithoutFeedback } from 'react-native';
 import { Constants } from 'expo';
 import axios from 'axios';
 
 
 let ScreenHeight = Dimensions.get("window").height;
+let ScreenWidth = Dimensions.get("window").width;
 
 class BasicStrategy extends React.Component {
     constructor(props){
@@ -52,6 +53,8 @@ class BasicStrategy extends React.Component {
             doubleButtonColor: '#2196f3',
             splitButtonColor: '#2196f3',
             surrenderButtonColor: '#2196f3',
+            showHelp: false,
+            helpImageToShow: 'shoe_dealer_hits_17/hard_10',
         }
     }
 
@@ -813,7 +816,25 @@ class BasicStrategy extends React.Component {
     }
 
     helpButton = () => {
+        // console.log(this.state.pHand)
+        let pHand = this.state.pHand
+        
+        this.setState({showHelp: !this.state.showHelp})
+        
+        //this.setState({helpImageToShow: !this.state.showHelp})
+        
+        if(this.state.shoe){
 
+        }
+        
+        if(this.state.doubleDeck){
+            
+        }
+        
+        if(this.state.singleDeck){
+            
+        }
+        
     }
 
 
@@ -865,6 +886,27 @@ class BasicStrategy extends React.Component {
                             <Button onPress={this.helpButton} title='Help' color='#2196f3'></Button>
                         </View>
                     </View>
+
+                    { this.state.showHelp ?
+                    <View style={styles.helpModalContainer}>
+                        <View style={styles.helpModal}>
+                        <TouchableWithoutFeedback onPress={() => this.helpButton()} style={{  }}>
+                            <Image
+                                source={require('../../images/close_white.png')}
+                                style={{ width: 30, height: 30, marginLeft:(ScreenWidth -60), marginTop: 10, zIndex: 6, position: 'absolute'}}/>
+                        </TouchableWithoutFeedback>
+
+                            <View style={styles.helpImageContainer}>
+                            <Image
+                                source={require(`./bs_charts/shoe_dealer_hits_17/hard_10.png`)}
+                                style={{ width: '95%', height: 120, borderRadius: 5, zIndex: 6 }}/>
+                            </View>
+                        </View>
+                    </View>
+                    : null
+                    }
+
+
                 </View>
             </ScrollView>
 
@@ -928,6 +970,28 @@ const styles = StyleSheet.create({
         height: 170,
         marginRight: 5,
         marginTop: 5,
+    },
+    helpModalContainer: {
+        flex: 1,
+        height: ScreenHeight,
+        width: ScreenWidth,
+        position: 'absolute',
+        alignItems: 'center',
+        zIndex: 5,
+    },
+    helpModal: {
+        backgroundColor: 'black',
+        opacity: 1,
+        height: ScreenHeight/3,
+        width: ScreenWidth-20,
+        borderRadius: 20,
+        zIndex: 5,
+        marginTop: 100,
+    },
+    helpImageContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 });
 
