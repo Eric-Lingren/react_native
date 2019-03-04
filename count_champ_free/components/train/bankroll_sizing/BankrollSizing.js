@@ -1,49 +1,50 @@
 import * as React from 'react';
 import { Button, Text, View, StyleSheet, Image, Dimensions } from 'react-native';
 import { Constants } from 'expo';
-import CustomDecks from './basic_strategy/CustomDecks'
 
 let ScreenHeight = Dimensions.get("window").height;
 
-class Train extends React.Component {
+class BankrollSizing extends React.Component {
     static navigationOptions = {
-        title: 'Count Champ Training'
+        title: 'Count Champ',
     };
     
     render() {
         const {navigate} = this.props.navigation;
         return (
             <View style={styles.container}>
-
-                <View style={styles.buttonContainer}>
+                <Text>
+                    Bankroll Sizing Drill did it update
+                </Text>
+                {/* <View style={styles.buttonContainer}>
                     <Button
                     title="Basic Strategy"
                     color="#000000"
-                    onPress={() => navigate('BasicStrategy', {name: 'Basic Strategy'})}
+                    onPress={() => navigate('Home', {name: 'Basic Strategy'})}
                     />
                     <Button
                     title="Self Paced Count"
                     color="#000000"
-                    onPress={() => navigate('SelfPacedCount', {name: 'Self Paced Count'})}
+                    onPress={() => navigate('Learn', {name: 'Self Paced Count'})}
                     />
                     <Button
                     title="Speed Count"
                     color="#000000"
-                    onPress={() => navigate('SpeedCount', {name: 'Speed Count'})}
+                    onPress={() => navigate('Train', {name: 'Speed Count'})}
                     />
                     <Button
                     title="True Count"
                     color="#000000"
-                    onPress={() => navigate('TrueCount', {name: 'True Count'})}
+                    onPress={() => navigate('Train', {name: 'True Count'})}
                     />
                     <Button
                     title="Bet Sizing"
                     color="#000000"
-                    onPress={() => navigate('BetSizing', {name: 'Bet Sizing'})}
+                    onPress={() => navigate('Train', {name: 'Bet Sizing'})}
                     />
-                </View>
-                <CustomDecks />
-            </View>
+                </View> */}
+        </View>
+
 
             
         );
@@ -65,4 +66,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Train
+export default BankrollSizing
