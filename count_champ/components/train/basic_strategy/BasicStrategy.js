@@ -101,14 +101,17 @@ import shoeSplit18 from './bs_charts/shoe/split_18.png'
 import shoeStandHard11 from './bs_charts/shoe_dealer_stands_17/hard_11.png'
 import shoeStandHard15 from './bs_charts/shoe_dealer_stands_17/hard_15.png'
 import shoeStandHard17 from './bs_charts/shoe_dealer_stands_17/hard_17+.png'
-import shoeStandHSoft19 from './bs_charts/shoe_dealer_stands_17/soft_19+.png'
-import shoeStandHSplit16 from './bs_charts/shoe_dealer_stands_17/split_16.png'
+import shoeStandSoft19 from './bs_charts/shoe_dealer_stands_17/soft_19+.png'
+import shoeStandSplit16 from './bs_charts/shoe_dealer_stands_17/split_16.png'
 
 //  Help images imports for shoe HIT 17
 import shoeHitHard11 from './bs_charts/shoe_dealer_hits_17/hard_11.png'
 import shoeHitHard15 from './bs_charts/shoe_dealer_hits_17/hard_15.png'
 import shoeHitHard17 from './bs_charts/shoe_dealer_hits_17/hard_17.png'
 import shoeHitHard18 from './bs_charts/shoe_dealer_hits_17/hard_18+.png'
+import shoeHitSoft19 from './bs_charts/shoe_dealer_hits_17/soft_19.png'
+import shoeHitSoft20 from './bs_charts/shoe_dealer_hits_17/soft_20+.png'
+import shoeHitSplit16 from './bs_charts/shoe_dealer_hits_17/split_16.png'
 
 
 
@@ -1021,17 +1024,67 @@ class BasicStrategy extends React.Component {
                         this.setState({ helpImageToShow: shoeSoft18 })
                         break;
                     case 19:
-                        this.setState({ helpImageToShow: shoeSoft19 })
+                        if(this.state.dealerStandsOnSoft17){
+                            this.setState({ helpImageToShow: shoeStandSoft19 })
+                        } else {
+                            this.setState({ helpImageToShow: shoeHitSoft19 })
+                        }
+                        break;
+                    case 20:
+                        if(this.state.dealerStandsOnSoft17){
+                            this.setState({ helpImageToShow: shoeStandSoft19 })
+                        } else {
+                            this.setState({ helpImageToShow: shoeHitSoft20 })
+                        }
+                        break;
+                    case 21:
+                        if(this.state.dealerStandsOnSoft17){
+                            this.setState({ helpImageToShow: shoeStandSoft19 })
+                        } else {
+                            this.setState({ helpImageToShow: shoeHitSoft20 })
+                        }
                         break;
                     default:
-                        this.setState({ helpImageToShow: shoeHard5to8 })
+                        null
                 }
             }
-
-        }
-        
+            if(handType === 'SPLIT'){
+                switch(pHand){
+                    case 4:
+                        this.setState({ helpImageToShow: shoeSplit4 })
+                        break;
+                    case 6:
+                        this.setState({ helpImageToShow: shoeSplit6 })
+                        break;
+                    case 8:
+                        this.setState({ helpImageToShow: shoeSplit8 })
+                        break;
+                    case 10:
+                        this.setState({ helpImageToShow: playerHelpHard10 })
+                        break;
+                    case 12:
+                        this.setState({ helpImageToShow: shoeSplit12 })
+                        break;
+                    case 14:
+                        this.setState({ helpImageToShow: shoeSplit14 })
+                        break;
+                    case 16:
+                        if(this.state.dealerStandsOnSoft17){
+                            this.setState({ helpImageToShow: shoeStandSplit16  })
+                        } else {
+                            this.setState({ helpImageToShow: shoeHitSplit16 })
+                        }
+                        break;
+                    case 18:
+                        this.setState({ helpImageToShow: shoeSplit18 })
+                        break;
+                    default:
+                        this.setState({ helpImageToShow: playerHelpSplitA })
+                }
+            }
+        }   
     }
-    //import shoeStandHSoft19 from './bs_charts/shoe_dealer_stands_17/soft_19+.png'
+
 
     static navigationOptions = {
         title: 'Basic Strategy Drill',
