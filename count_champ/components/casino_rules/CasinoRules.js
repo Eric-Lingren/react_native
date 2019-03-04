@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, Dimensions, AsyncStorage, WebView, TouchableWithoutFeedback, Image, ScrollView } from 'react-native';
 import CheckBox from 'react-native-check-box';
-import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import { Constants } from 'expo';
 import SubscribeModal from '../subscribe_modal/SubscribeModal'
 

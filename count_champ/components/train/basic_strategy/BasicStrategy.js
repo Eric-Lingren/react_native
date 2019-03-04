@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Button, Text, View, StyleSheet, Image, Dimensions, ScrollView, AsyncStorage, TouchableWithoutFeedback } from 'react-native';
+import CheckBox from 'react-native-check-box';
 import { Constants } from 'expo';
 import axios from 'axios';
 
@@ -1097,6 +1098,61 @@ class BasicStrategy extends React.Component {
             <ScrollView>
                 <View style={styles.container}>
                 
+
+                <View style={styles.rulesWrapper}>
+                        <Text style={styles.rulesHeader}>Choose Hand Types:</Text>
+                            
+                                <CheckBox
+                                    onClick={   ()=>{ this.setState({ dealerStandsOnSoft17: !this.state.dealerStandsOnSoft17 }, 
+                                                () => this.saveRuleInStorage('dealerStandsOnSoft17' , this.state.dealerStandsOnSoft17 )) }}
+                                    isChecked={this.state.dealerStandsOnSoft17}
+                                    rightText={"All Hands"} 
+                                    checkBoxColor={'#fff'}
+                                    checkedCheckBoxColor={'#fff'}
+                                    rightTextStyle={{ fontSize: 14, color: '#fff', paddingBottom: 5}}
+                                    // disabled={true}
+                                /> 
+                            <View style={{marginLeft: 150, marginTop: -25}}>
+                                <CheckBox
+                                    onClick={   ()=>{ this.setState({ dealerHitsOnSoft17: !this.state.dealerHitsOnSoft17 }, 
+                                                () => this.saveRuleInStorage('dealerHitsOnSoft17' , this.state.dealerHitsOnSoft17 )) }}
+                                    isChecked={this.state.dealerHitsOnSoft17}
+                                    rightText={"Hard Hands"} 
+                                    checkBoxColor={'#fff'}
+                                    checkedCheckBoxColor={'#fff'}
+                                    rightTextStyle={{ fontSize: 14, color: '#fff'}}
+                                    // disabled={true}
+                                />
+                            </View>
+                            <View style={{marginTop: 5}}>
+                                <CheckBox
+                                    onClick={   ()=>{ this.setState({ dealerHitsOnSoft17: !this.state.dealerHitsOnSoft17 }, 
+                                                () => this.saveRuleInStorage('dealerHitsOnSoft17' , this.state.dealerHitsOnSoft17 )) }}
+                                    isChecked={this.state.dealerHitsOnSoft17}
+                                    rightText={"Soft Hands"} 
+                                    checkBoxColor={'#fff'}
+                                    checkedCheckBoxColor={'#fff'}
+                                    rightTextStyle={{ fontSize: 14, color: '#fff'}}
+                                    // disabled={true}
+                                />
+                            </View>
+                            <View style={{marginLeft: 150, marginTop: -25}}>
+                                <CheckBox
+                                    onClick={   ()=>{ this.setState({ dealerHitsOnSoft17: !this.state.dealerHitsOnSoft17 }, 
+                                                () => this.saveRuleInStorage('dealerHitsOnSoft17' , this.state.dealerHitsOnSoft17 )) }}
+                                    isChecked={this.state.dealerHitsOnSoft17}
+                                    rightText={"Split Hands"} 
+                                    checkBoxColor={'#fff'}
+                                    checkedCheckBoxColor={'#fff'}
+                                    rightTextStyle={{ fontSize: 14, color: '#fff'}}
+                                    // disabled={true}
+                                />
+                            </View>
+                    </View>
+
+                        
+                    
+                
                     <Text style={styles.handLabel}>Dealer Hand</Text>
                     
                     <View style={styles.tableContainer}>
@@ -1154,6 +1210,7 @@ class BasicStrategy extends React.Component {
                     }
 
 
+                   
                 </View>
             </ScrollView>
 
@@ -1166,7 +1223,7 @@ const styles = StyleSheet.create({
         paddingTop: Constants.statusBarHeight,
         padding: 8,
         backgroundColor: ( '#0f9b0f', '#52c234', '#52c234', '#0f9b0f'),
-        height: 700,
+        height: 900,
     },
     buttonWrapper: {
         flex: 1,
@@ -1233,12 +1290,33 @@ const styles = StyleSheet.create({
         width: ScreenWidth-20,
         borderRadius: 20,
         zIndex: 5,
-        marginTop: 100,
+        marginTop: 225,
     },
     helpImageContainer: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    rulesWrapper: {
+        borderRadius: 10,
+        borderColor: 'white',
+        borderWidth: 1,
+        paddingTop: 5,
+        paddingLeft: 20,
+        backgroundColor: 'black',
+        marginLeft: 10,
+        marginRight: 10,
+        marginBottom: 20,
+        height: 100,
+        
+    },
+    rulesHeader: {
+        fontSize: 18,
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginBottom: 10,
+        textDecorationLine: 'underline',
     },
 });
 
