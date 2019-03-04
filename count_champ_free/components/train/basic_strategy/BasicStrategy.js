@@ -3,6 +3,7 @@ import { Button, Text, View, StyleSheet, Image, Dimensions, ScrollView, AsyncSto
 import CheckBox from 'react-native-check-box';
 import { Constants } from 'expo';
 import axios from 'axios';
+import SubscribeModal from '../../subscribe_modal/SubscribeModal'
 
 // //  Help images imports for all decks
 // import playerHelpHard10 from './bs_charts/universal_images/hard_10.png'
@@ -123,6 +124,7 @@ class BasicStrategy extends React.Component {
     constructor(props){
         super(props)
         this.state = {
+            showSubscribeModal: false,
             deckID: '',
             dealerHand: '',
             dealerImages: 'string',
@@ -1352,6 +1354,10 @@ class BasicStrategy extends React.Component {
     // }
 
 
+    toggleSubscribeModal = () => {
+        this.setState({showSubscribeModal: !this.state.showSubscribeModal})
+    } 
+
     static navigationOptions = {
         title: 'Basic Strategy Drill',
     };
@@ -1363,13 +1369,24 @@ class BasicStrategy extends React.Component {
         
         return (
             <ScrollView>
+
                 <View style={styles.container}>
-                
+                {this.state.showSubscribeModal 
+                ?   <View style={styles.modalContainer}>
+                        <TouchableWithoutFeedback onPress={() => this.toggleSubscribeModal()} >
+                            <Image
+                                source={require('../../images/close_white.png')}
+                                style={{ width: 40, height: 40, marginLeft:(ScreenWidth -60), marginTop: 20, zIndex: 20, position: 'absolute'}}/>
+                        </TouchableWithoutFeedback>
+                        <SubscribeModal />
+                    </View>
+                : null
+                }
 
                 <View style={styles.rulesWrapper}>
-                        <Text style={styles.rulesHeader}>Choose Hand Types:</Text>
+                        <Text style={styles.rulesHeader}>Choose Hand Type:</Text>
                                 <CheckBox
-                                    onClick={()=>{ this.setState({ playAllHands: !this.state.playAllHands, playHardHands: false, playSplitHands: false, playSoftHands: false }) }}
+                                    onClick={() => this.toggleSubscribeModal()}
                                     isChecked={this.state.playAllHands}
                                     rightText={"All Hands"} 
                                     checkBoxColor={'#fff'}
@@ -1379,7 +1396,7 @@ class BasicStrategy extends React.Component {
                                 /> 
                             <View style={{marginLeft: 150, marginTop: -25}}>
                                 <CheckBox
-                                    onClick={()=>{ this.setState({ playHardHands: !this.state.playHardHands, playAllHands: false, playSplitHands: false, playSoftHands: false}) }}
+                                    onClick={ () => this.toggleSubscribeModal() }
                                     isChecked={this.state.playHardHands}
                                     rightText={"Hard Hands"} 
                                     checkBoxColor={'#fff'}
@@ -1390,7 +1407,7 @@ class BasicStrategy extends React.Component {
                             </View>
                             <View style={{marginTop: 5}}>
                                 <CheckBox
-                                    onClick={   ()=>{ this.setState({ playSoftHands: !this.state.playSoftHands, playAllHands: false, playHardHands: false, playSplitHands: false }) }}
+                                    onClick={ () => this.toggleSubscribeModal() }
                                     isChecked={this.state.playSoftHands}
                                     rightText={"Soft Hands"} 
                                     checkBoxColor={'#fff'}
@@ -1401,7 +1418,7 @@ class BasicStrategy extends React.Component {
                             </View>
                             <View style={{marginLeft: 150, marginTop: -25}}>
                                 <CheckBox
-                                    onClick={   ()=>{ this.setState({ playSplitHands: !this.state.playSplitHands, playAllHands: false, playHardHands: false, playSoftHands: false }) }}
+                                    onClick= {() => this.toggleSubscribeModal() }
                                     isChecked={this.state.playSplitHands}
                                     rightText={"Split Hands"} 
                                     checkBoxColor={'#fff'}
@@ -1435,7 +1452,7 @@ class BasicStrategy extends React.Component {
                     </View>
 
                     <Text style={styles.handLabel}>Player Hand</Text>
-                    <Button onPress={this.dealCard} width='50' color='#000000' title='Deal'></Button>
+                    <Button onPress={this.dealCard} width='50' color='#000000' title='Deal' ></Button>
                     
                     <Text style={styles.handLabel}> Choose the correct play:</Text>
                     <View style={styles.buttonWrapper}>
@@ -1579,6 +1596,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginBottom: 10,
         textDecorationLine: 'underline',
+    },
+    modalContainer: {
+        width: ScreenWidth + 30, 
+        marginLeft: -8,
+        marginTop: -25,
+        zIndex: 50,
     },
 });
 

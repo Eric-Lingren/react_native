@@ -1,13 +1,16 @@
 import * as React from 'react';
 import { Button, Text, View, StyleSheet, Dimensions, ScrollView, AsyncStorage } from 'react-native';
 import { Constants } from 'expo';
+import SubscribeModal from '../../subscribe_modal/SubscribeModal';
 
 let ScreenHeight = Dimensions.get("window").height;
+let ScreenWidth = Dimensions.get("window").width;
 
 class BetSizing extends React.Component {
     constructor(){
         super()
         this.state = {
+            showSubscribeModal: true,
             randomCount: 0,
             answer: 0,
             unit1ButtonColor: '#000',
@@ -168,13 +171,20 @@ class BetSizing extends React.Component {
         return (
             <ScrollView>
             <View style={styles.container}>
-                <View className='container'>
+                {this.state.showSubscribeModal 
+                ?   <View style={styles.modalContainer}>
+                        <SubscribeModal />
+                    </View>
+                : null
+                }
+
+                <View>
                     <View style={styles.textContainer}>
                     <Text style={styles.textStyle}>Your minumum bet size is 1 unit.</Text>
                     <Text style={styles.textStyle}>What should your bet be if... </Text>
                     <Text style={styles.textStyle}>The true count is:  <Text style={styles.question}>{this.state.randomCount} </Text> ? </Text>
                     </View>
-                    <View style={styles.buttonContainer}>
+                    {/* <View style={styles.buttonContainer}>
                         <Button color={this.state.unit1ButtonColor} onPress={this.setAnswerTo1} title='1  hand  of  1  Unit'></Button>
                         <Button color={this.state.unit2ButtonColor} onPress={this.setAnswerTo2} title='1  hand  of  2  Units'></Button>
                         <Button color={this.state.unit4ButtonColor}  onPress={this.setAnswerTo4} title='1  hand  of  4  Units'></Button>
@@ -183,7 +193,7 @@ class BetSizing extends React.Component {
                     </View>
                     <View style={styles.answerButton}>
                         <Button color='#2196f3' onPress={this.newQuestion} title='New Question'></Button>
-                    </View>
+                    </View> */}
                     
                     {
                     this.state.showAnswer ?
@@ -244,7 +254,12 @@ const styles = StyleSheet.create({
         color: 'orange',
         fontWeight: '900',
         fontSize: 24,
-    }
+    },
+    modalContainer: {
+        width: ScreenWidth + 30, 
+        marginLeft: -8,
+        marginTop: -25,
+    },
 });
 
 export default BetSizing

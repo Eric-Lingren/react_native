@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         height: ScreenHeight,
         width: ScreenWidth,
-        zIndex: 5,
+        zIndex: 10,
     },
     textContainer: {
         marginTop: 200,
