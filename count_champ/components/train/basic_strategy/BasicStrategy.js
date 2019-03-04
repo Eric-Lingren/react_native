@@ -3,6 +3,114 @@ import { Button, Text, View, StyleSheet, Image, Dimensions, ScrollView, AsyncSto
 import { Constants } from 'expo';
 import axios from 'axios';
 
+//  Help images imports for all decks
+import playerHelpHard10 from './bs_charts/universal_images/hard_10.png'
+import playerHelpHard12 from './bs_charts/universal_images/hard_12.png'
+import playerHelpHard13 from './bs_charts/universal_images/hard_13.png'
+import playerHelpHard14 from './bs_charts/universal_images/hard_14.png'
+import playerHelpSplitA from './bs_charts/universal_images/split_A.png'
+
+//  Help images imports for all Single Deck
+import sdHard5to7 from './bs_charts/single_deck/hard_5-7.png'
+import sdHard8 from './bs_charts/single_deck/hard_8.png'
+import sdHard9 from './bs_charts/single_deck/hard_9.png'
+import sdHard10 from './bs_charts/single_deck/hard_10.png'
+import sdHard11 from './bs_charts/single_deck/hard_11.png'
+import sdHard12 from './bs_charts/single_deck/hard_12.png'
+import sdHard13 from './bs_charts/single_deck/hard_13.png'
+import sdHard14 from './bs_charts/single_deck/hard_14.png'
+import sdHard16 from './bs_charts/single_deck/hard_16.png'
+import sdHard18 from './bs_charts/single_deck/hard_18+.png'
+import sdSoft13 from './bs_charts/single_deck/soft_13.png'
+import sdSoft14 from './bs_charts/single_deck/soft_14.png'
+import sdSoft15 from './bs_charts/single_deck/soft_15.png'
+import sdSoft16 from './bs_charts/single_deck/soft_16.png'
+import sdSoft17 from './bs_charts/single_deck/soft_17.png'
+import sdSoft19 from './bs_charts/single_deck/soft_19.png'
+import sdSoft20 from './bs_charts/single_deck/soft_20+.png'
+import sdSplit4 from './bs_charts/single_deck/split_4.png'
+import sdSplit6 from './bs_charts/single_deck/split_6.png'
+import sdSplit8 from './bs_charts/single_deck/split_8.png'
+import sdSplit12 from './bs_charts/single_deck/split_12.png'
+import sdSplit14 from './bs_charts/single_deck/split_14.png'
+import sdSplit16 from './bs_charts/single_deck/split_16.png'
+
+//  Help images imports for STAND Single Deck
+import sdStandHard15 from './bs_charts/singleDeck_dealer_stands_17/hard_15.png'
+import sdStandHard17 from './bs_charts/singleDeck_dealer_stands_17/hard_17.png'
+import sdStandSoft18 from './bs_charts/singleDeck_dealer_stands_17/soft_18.png'
+import sdStandSplit18 from './bs_charts/singleDeck_dealer_stands_17/split_18.png'
+
+//  Help images imports for HIT Single Deck
+import sdHitHard15 from './bs_charts/singleDeck_dealer_hits_17/hard_15.png'
+import sdHitHard17 from './bs_charts/singleDeck_dealer_hits_17/hard_17.png'
+import sdHitSoft18 from './bs_charts/singleDeck_dealer_hits_17/soft_18.png'
+import sdHitSplit18 from './bs_charts/singleDeck_dealer_hits_17/split_18.png'
+
+//  Help images imports for all Double Deck
+import ddHard5to8 from './bs_charts/double_deck/hard_5-8.png'
+import ddHard9 from './bs_charts/double_deck/hard_9.png'
+import ddHard11 from './bs_charts/double_deck/hard_11.png'
+import ddHard16 from './bs_charts/double_deck/hard_16.png'
+import ddHard18 from './bs_charts/double_deck/hard_18+.png'
+import ddSoft13 from './bs_charts/double_deck/soft_13.png'
+import ddSoft14 from './bs_charts/double_deck/soft_14.png'
+import ddSoft15 from './bs_charts/double_deck/soft_15.png'
+import ddSoft16 from './bs_charts/double_deck/soft_16.png'
+import ddSoft17 from './bs_charts/double_deck/soft_17.png'
+import ddSoft20 from './bs_charts/double_deck/soft_20+.png'
+import ddSplit4 from './bs_charts/double_deck/split_4.png'
+import ddSplit6 from './bs_charts/double_deck/split_6.png'
+import ddSplit8 from './bs_charts/double_deck/split_8.png'
+import ddSplit12 from './bs_charts/double_deck/split_12.png'
+import ddSplit14 from './bs_charts/double_deck/split_14.png'
+import ddSplit18 from './bs_charts/double_deck/split_18.png'
+
+//  Help images imports for double deck STAND 17 
+import ddStandHard15 from './bs_charts/doubleDeck_dealer_stands_17/hard_15.png'
+import ddStandHard17 from './bs_charts/doubleDeck_dealer_stands_17/hard_17.png'
+import ddStandSoft18 from './bs_charts/doubleDeck_dealer_stands_17/soft_18.png'
+import ddStandSoft19 from './bs_charts/doubleDeck_dealer_stands_17/soft_19.png'
+import ddStandSplit16 from './bs_charts/doubleDeck_dealer_stands_17/split_16.png'
+
+//  Help images imports for double deck HIT 17 
+import ddHitHard15 from './bs_charts/doubleDeck_dealer_hits_17/hard_15.png'
+import ddHitHard17 from './bs_charts/doubleDeck_dealer_hits_17/hard_17.png'
+import ddHitSoft18 from './bs_charts/doubleDeck_dealer_hits_17/soft_18.png'
+import ddHitSoft19 from './bs_charts/doubleDeck_dealer_hits_17/soft_19.png'
+import ddHitSplit16 from './bs_charts/doubleDeck_dealer_hits_17/split_16.png'
+
+//  Help images imports for all shoes 
+import shoeHard5to8 from './bs_charts/shoe/hard_5-8.png'
+import shoeHard9 from './bs_charts/shoe/hard_9.png'
+import shoeHard16 from './bs_charts/shoe/hard_16.png'
+import shoeSoft13 from './bs_charts/shoe/soft_13.png'
+import shoeSoft14 from './bs_charts/shoe/soft_14.png'
+import shoeSoft15 from './bs_charts/shoe/soft_15.png'
+import shoeSoft16 from './bs_charts/shoe/soft_16.png'
+import shoeSoft17 from './bs_charts/shoe/soft_17.png'
+import shoeSoft18 from './bs_charts/shoe/soft_18.png'
+import shoeSplit4 from './bs_charts/shoe/split_4.png'
+import shoeSplit6 from './bs_charts/shoe/split_6.png'
+import shoeSplit8 from './bs_charts/shoe/split_8.png'
+import shoeSplit12 from './bs_charts/shoe/split_12.png'
+import shoeSplit14 from './bs_charts/shoe/split_14.png'
+import shoeSplit18 from './bs_charts/shoe/split_18.png'
+
+//  Help images imports for shoe STAND 17 
+import shoeStandHard11 from './bs_charts/shoe_dealer_stands_17/hard_11.png'
+import shoeStandHard15 from './bs_charts/shoe_dealer_stands_17/hard_15.png'
+import shoeStandHard17 from './bs_charts/shoe_dealer_stands_17/hard_17+.png'
+import shoeStandHSoft19 from './bs_charts/shoe_dealer_stands_17/soft_19+.png'
+import shoeStandHSplit16 from './bs_charts/shoe_dealer_stands_17/split_16.png'
+
+//  Help images imports for shoe HIT 17
+import shoeHitHard11 from './bs_charts/shoe_dealer_hits_17/hard_11.png'
+import shoeHitHard15 from './bs_charts/shoe_dealer_hits_17/hard_15.png'
+import shoeHitHard17 from './bs_charts/shoe_dealer_hits_17/hard_17.png'
+import shoeHitHard18 from './bs_charts/shoe_dealer_hits_17/hard_18+.png'
+
+
 
 let ScreenHeight = Dimensions.get("window").height;
 let ScreenWidth = Dimensions.get("window").width;
@@ -54,7 +162,7 @@ class BasicStrategy extends React.Component {
             splitButtonColor: '#2196f3',
             surrenderButtonColor: '#2196f3',
             showHelp: false,
-            helpImageToShow: 'shoe_dealer_hits_17/hard_10',
+            helpImageToShow: playerHelpHard10,
         }
     }
 
@@ -816,23 +924,83 @@ class BasicStrategy extends React.Component {
     }
 
     helpButton = () => {
-        // console.log(this.state.pHand)
         let pHand = this.state.pHand
-        
+        let handType = this.state.currentKindOfHandBeingPlayed
         this.setState({showHelp: !this.state.showHelp})
-        
-        //this.setState({helpImageToShow: !this.state.showHelp})
-        
-        if(this.state.shoe){
 
-        }
-        
-        if(this.state.doubleDeck){
-            
-        }
-        
-        if(this.state.singleDeck){
-            
+        console.log(handType)
+        console.log(pHand)
+
+        console.log('dealer stands on soft 17: ' + this.state.dealerStandsOnSoft17)
+
+        if(this.state.shoe){
+            if(handType === 'HARD'){
+                console.log('shoe hard hand')
+            switch(pHand){
+                case 9:
+                    this.setState({ helpImageToShow: shoeHard9 })
+                    break;
+                case 10:
+                    this.setState({ helpImageToShow: playerHelpHard10 })
+                    break;
+                case 11:
+                    if(this.state.dealerStandsOnSoft17){
+                        this.setState({ helpImageToShow: shoeStandHard11 })
+                    } else {
+                        this.setState({ helpImageToShow: shoeHitHard11 })
+                    }
+                    break;
+                case 12:
+                    this.setState({ helpImageToShow: playerHelpHard12 })
+                    break;
+                case 13:
+                    this.setState({ helpImageToShow: playerHelpHard13 })
+                    break;
+                case 14:
+                    this.setState({ helpImageToShow: playerHelpHard14 })
+                    break;
+                case 15:
+                    if(this.state.dealerStandsOnSoft17){
+                        this.setState({ helpImageToShow: shoeStandHard15 })
+                    } else {
+                        this.setState({ helpImageToShow: shoeHitHard15 })
+                    }
+                    break;
+                case 16:
+                    this.setState({ helpImageToShow: shoeHard16 })
+                    break;
+                case 17:
+                    if(this.state.dealerStandsOnSoft17){
+                        this.setState({ helpImageToShow: shoeStandHard17 })
+                    } else {
+                        this.setState({ helpImageToShow: shoeHitHard17 })
+                    }
+                    break;
+                case 18:
+                    if(this.state.dealerStandsOnSoft17){
+                        this.setState({ helpImageToShow: shoeStandHard17 })
+                    } else {
+                        this.setState({ helpImageToShow: shoeHitHard18 })
+                    }
+                    break;
+                case 19:
+                    if(this.state.dealerStandsOnSoft17){
+                        this.setState({ helpImageToShow: shoeStandHard17 })
+                    } else {
+                        this.setState({ helpImageToShow: shoeHitHard18 })
+                    }
+                    break;
+                case 20:
+                    if(this.state.dealerStandsOnSoft17){
+                        this.setState({ helpImageToShow: shoeStandHard17 })
+                    } else {
+                        this.setState({ helpImageToShow: shoeHitHard18 })
+                    }
+                    break;
+                default:
+                    this.setState({ helpImageToShow: shoeHard5to8 })
+                }
+            } 
         }
         
     }
@@ -898,8 +1066,8 @@ class BasicStrategy extends React.Component {
 
                             <View style={styles.helpImageContainer}>
                             <Image
-                                source={require(`./bs_charts/shoe_dealer_hits_17/hard_10.png`)}
-                                style={{ width: '95%', height: 120, borderRadius: 5, zIndex: 6 }}/>
+                                source={this.state.helpImageToShow}
+                                style={{ width: 320, height: 120, resizeMode: 'contain', marginTop: 25, borderRadius: 2, zIndex: 6 }}/>
                             </View>
                         </View>
                     </View>
