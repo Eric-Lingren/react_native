@@ -935,7 +935,6 @@ class BasicStrategy extends React.Component {
 
         if(this.state.shoe){
             if(handType === 'HARD'){
-                console.log('shoe hard hand')
             switch(pHand){
                 case 9:
                     this.setState({ helpImageToShow: shoeHard9 })
@@ -1001,10 +1000,38 @@ class BasicStrategy extends React.Component {
                     this.setState({ helpImageToShow: shoeHard5to8 })
                 }
             } 
+            if(handType === 'SOFT'){
+                switch(pHand){
+                    case 13:
+                        this.setState({ helpImageToShow: shoeSoft13 })
+                        break;
+                    case 14:
+                        this.setState({ helpImageToShow: shoeSoft14 })
+                        break;
+                    case 15:
+                        this.setState({ helpImageToShow: shoeSoft15 })
+                        break;
+                    case 16:
+                        this.setState({ helpImageToShow: shoeSoft16 })
+                        break;
+                    case 17:
+                        this.setState({ helpImageToShow: shoeSoft17 })
+                        break;
+                    case 18:
+                        this.setState({ helpImageToShow: shoeSoft18 })
+                        break;
+                    case 19:
+                        this.setState({ helpImageToShow: shoeSoft19 })
+                        break;
+                    default:
+                        this.setState({ helpImageToShow: shoeHard5to8 })
+                }
+            }
+
         }
         
     }
-
+    //import shoeStandHSoft19 from './bs_charts/shoe_dealer_stands_17/soft_19+.png'
 
     static navigationOptions = {
         title: 'Basic Strategy Drill',
@@ -1046,7 +1073,6 @@ class BasicStrategy extends React.Component {
                             <Button onPress={this.checkDoubleButton} title='Double' color={this.state.doubleButtonColor}></Button>
                             <Button onPress={this.checkSurrenderButton} title='Surrender' color={this.state.surrenderButtonColor}></Button>
                             
-                            {/* <Button onPress={this.checkStats} title='Check Stats'></Button> */}
                         </View>
                         <View style={styles.buttonContainerRight}>
                             <Button onPress={this.checkStandButton} title='Stand' color={this.state.standButtonColor}></Button>
