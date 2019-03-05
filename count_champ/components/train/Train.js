@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Button, Text, View, StyleSheet, Image, Dimensions } from 'react-native';
 import { Constants } from 'expo';
-import CustomDecks from './basic_strategy/CustomDecks'
 
 let ScreenHeight = Dimensions.get("window").height;
 
@@ -42,7 +41,6 @@ class Train extends React.Component {
                     onPress={() => navigate('BetSizing', {name: 'Bet Sizing'})}
                     />
                 </View>
-                <CustomDecks />
             </View>
 
             
