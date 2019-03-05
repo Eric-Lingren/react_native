@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Text, View, StyleSheet, Image, Dimensions } from 'react-native';
+import { Button, View, StyleSheet, Dimensions } from 'react-native';
 import { Constants } from 'expo';
 
 let ScreenHeight = Dimensions.get("window").height;
