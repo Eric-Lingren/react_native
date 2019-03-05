@@ -254,31 +254,7 @@ class BasicStrategy extends React.Component {
         let splitHandsCorrect = this.state.splitHandsCorrect.toString()
         
         this.saveStatsInStorage(hardHandsPlayed, hardHandsCorrect, softHandsPlayed, softHandsCorrect, splitHandsPlayed, splitHandsCorrect )
-
-        // this.removeItems()
     }
-
-    removeItems = async () => {
-        try {
-            await AsyncStorage.removeItem('hardHandsPlayed');
-        } catch (error) {}
-        try {
-            await AsyncStorage.removeItem('hardHandsCorrect');
-        } catch (error) {}
-        try {
-            await AsyncStorage.removeItem('softHandsPlayed');
-        } catch (error) {}
-        try {
-            await AsyncStorage.removeItem('softHandsCorrect');
-        } catch (error) {}
-        try {
-            await AsyncStorage.removeItem('splitHandsPlayed');
-        } catch (error) {}
-        try {
-            await AsyncStorage.removeItem('splitHandsCorrect');
-        } catch (error) {}
-    }
-
 
     saveStatsInStorage = async (hardHandsPlayed, hardHandsCorrect, softHandsPlayed, softHandsCorrect, splitHandsPlayed, splitHandsCorrect ) => {
         try {
@@ -335,7 +311,6 @@ class BasicStrategy extends React.Component {
     }
 
     getSavedRulesFromMemory = () =>{
-
         AsyncStorage.getItem("dealerStandsOnSoft17").then((dealerStandsOnSoft17Value) => {
             if(dealerStandsOnSoft17Value === 'true'){
                 this.setState({dealerStandsOnSoft17: true, dealerHitsOnSoft17: false} )
@@ -442,7 +417,6 @@ class BasicStrategy extends React.Component {
         let randomCardIndex1 = Math.floor(Math.random() * 52 )
         let randomCardIndex2 = Math.floor(Math.random() * 48 )
         let randomCardIndex3 = Math.floor(Math.random() * 48 )
-
         let dealerCardValue = this.state.deck[randomCardIndex1].value
         let playerCardValue1 = this.state.deck[randomCardIndex2].value
         let playerCardValue2 = this.state.deck[randomCardIndex3].value
@@ -478,7 +452,6 @@ class BasicStrategy extends React.Component {
         let randomCardIndex1 = Math.floor(Math.random() * 52 )
         let randomCardIndex2 = Math.floor(Math.random() * 52 )
         let randomCardIndex3 = Math.floor(Math.random() * 52 )
-
         let dealerCardValue = this.state.deck[randomCardIndex1].value
         let playerCardValue1 = this.state.deck[randomCardIndex2].value
         let playerCardValue2 = this.state.deck[randomCardIndex3].value
@@ -514,7 +487,6 @@ class BasicStrategy extends React.Component {
         let randomCardIndex1 = Math.floor(Math.random() * 52 )
         let randomCardIndex2 = Math.floor(Math.random() * 52 )
         let randomCardIndex3 = Math.floor(Math.random() * 4 )
-
         let dealerCardValue = this.state.deck[randomCardIndex1].value
         let dealerCardImage = this.state.deck[randomCardIndex1].image
         let playerCardValue1 = this.state.deck[randomCardIndex2].value
@@ -526,7 +498,6 @@ class BasicStrategy extends React.Component {
     }
 
     checkCustomSoftHandShuffle = (dealerCardValue, playerCardValue1, playerCardValue2, dealerCardImage, playerCardImage1, playerCardImage2) => {
-        
         this.setState({
             dealerHand: dealerCardValue,
             dealerImages: dealerCardImage,
@@ -624,10 +595,6 @@ class BasicStrategy extends React.Component {
         }
 
     }
-
-    //////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////
 
     checkSplitHand = (dealerHand, playerHand) => {
         const pHand = playerHand;
@@ -1110,7 +1077,7 @@ class BasicStrategy extends React.Component {
         let pHand = this.state.pHand
         let handType = this.state.currentKindOfHandBeingPlayed
         this.setState({showHelp: !this.state.showHelp})
-
+        
         ////////////////////////////////////////////////
         ///           Help shown for Shoe           ///
         //////////////////////////////////////////////
@@ -1316,214 +1283,213 @@ class BasicStrategy extends React.Component {
                         this.setState({ helpImageToShow: ddHard5to8 })
                     }
                 } 
-                if(handType === 'SOFT'){
-                    switch(pHand){
-                        case 13:
-                            this.setState({ helpImageToShow: ddSoft13 })
-                            break;
-                        case 14:
-                            this.setState({ helpImageToShow: ddSoft14 })
-                            break;
-                        case 15:
-                            this.setState({ helpImageToShow: ddSoft15 })
-                            break;
-                        case 16:
-                            this.setState({ helpImageToShow: ddSoft16 })
-                            break;
-                        case 17:
-                            this.setState({ helpImageToShow: ddSoft17 })
-                            break;
-                        case 18:
-                            if(this.state.dealerStandsOnSoft17){
-                                this.setState({ helpImageToShow: ddStandSoft18 })
-                            } else {
-                                this.setState({ helpImageToShow: ddHitSoft18 })
-                            }
-                            break;
-                        case 19:
-                            if(this.state.dealerStandsOnSoft17){
-                                this.setState({ helpImageToShow: ddStandSoft19 })
-                            } else {
-                                this.setState({ helpImageToShow: ddHitSoft19 })
-                            }
-                            break;
-                        case 20:
-                            this.setState({ helpImageToShow: ddSoft20})
-                            break;
-                        case 21:
-                            this.setState({ helpImageToShow: ddSoft20})
-                            break;
-                        default:
-                            null
-                    }
+            if(handType === 'SOFT'){
+                switch(pHand){
+                    case 13:
+                        this.setState({ helpImageToShow: ddSoft13 })
+                        break;
+                    case 14:
+                        this.setState({ helpImageToShow: ddSoft14 })
+                        break;
+                    case 15:
+                        this.setState({ helpImageToShow: ddSoft15 })
+                        break;
+                    case 16:
+                        this.setState({ helpImageToShow: ddSoft16 })
+                        break;
+                    case 17:
+                        this.setState({ helpImageToShow: ddSoft17 })
+                        break;
+                    case 18:
+                        if(this.state.dealerStandsOnSoft17){
+                            this.setState({ helpImageToShow: ddStandSoft18 })
+                        } else {
+                            this.setState({ helpImageToShow: ddHitSoft18 })
+                        }
+                        break;
+                    case 19:
+                        if(this.state.dealerStandsOnSoft17){
+                            this.setState({ helpImageToShow: ddStandSoft19 })
+                        } else {
+                            this.setState({ helpImageToShow: ddHitSoft19 })
+                        }
+                        break;
+                    case 20:
+                        this.setState({ helpImageToShow: ddSoft20})
+                        break;
+                    case 21:
+                        this.setState({ helpImageToShow: ddSoft20})
+                        break;
+                    default:
+                        null
                 }
-                if(handType === 'SPLIT'){
-                    switch(pHand){
-                        case 4:
-                            this.setState({ helpImageToShow: ddSplit4 })
-                            break;
-                        case 6:
-                            this.setState({ helpImageToShow: ddSplit6 })
-                            break;
-                        case 8:
-                            this.setState({ helpImageToShow: ddSplit8 })
-                            break;
-                        case 10:
-                            this.setState({ helpImageToShow: playerHelpHard10 })
-                            break;
-                        case 12:
-                            this.setState({ helpImageToShow: ddSplit12 })
-                            break;
-                        case 14:
-                            this.setState({ helpImageToShow: ddSplit14 })
-                            break;
-                        case 16:
-                            if(this.state.dealerStandsOnSoft17){
-                                this.setState({ helpImageToShow: ddStandSplit16  })
-                            } else {
-                                this.setState({ helpImageToShow: ddHitSplit16 })
-                            }
-                            break;
-                        case 18:
-                            this.setState({ helpImageToShow: ddSplit18 })
-                            break;
-                        default:
-                            this.setState({ helpImageToShow: playerHelpSplitA })
-                    }
-                }
-                
             }
+            if(handType === 'SPLIT'){
+                switch(pHand){
+                    case 4:
+                        this.setState({ helpImageToShow: ddSplit4 })
+                        break;
+                    case 6:
+                        this.setState({ helpImageToShow: ddSplit6 })
+                        break;
+                    case 8:
+                        this.setState({ helpImageToShow: ddSplit8 })
+                        break;
+                    case 10:
+                        this.setState({ helpImageToShow: playerHelpHard10 })
+                        break;
+                    case 12:
+                        this.setState({ helpImageToShow: ddSplit12 })
+                        break;
+                    case 14:
+                        this.setState({ helpImageToShow: ddSplit14 })
+                        break;
+                    case 16:
+                        if(this.state.dealerStandsOnSoft17){
+                            this.setState({ helpImageToShow: ddStandSplit16  })
+                        } else {
+                            this.setState({ helpImageToShow: ddHitSplit16 })
+                        }
+                        break;
+                    case 18:
+                        this.setState({ helpImageToShow: ddSplit18 })
+                        break;
+                    default:
+                        this.setState({ helpImageToShow: playerHelpSplitA })
+                }
+            }
+        }
 
             ////////////////////////////////////////////////
             ///        Help shown for Single Deck       ///
             //////////////////////////////////////////////
-            if(this.state.singleDeck){
-                if(handType === 'HARD'){
-                    switch(pHand){
-                        case 8:
-                            this.setState({ helpImageToShow: sdHard8 })
-                            break;
-                        case 9:
-                            this.setState({ helpImageToShow: sdHard9 })
-                            break;
-                        case 10:
-                            this.setState({ helpImageToShow: sdHard10 })
-                            break;
-                        case 11:
-                            this.setState({ helpImageToShow: sdHard11 })
-                            break;
-                        case 12:
-                            this.setState({ helpImageToShow: sdHard12 })
-                            break;
-                        case 13:
-                            this.setState({ helpImageToShow: sdHard13 })
-                            break;
-                        case 14:
-                            this.setState({ helpImageToShow: sdHard14 })
-                            break;
-                        case 15:
-                            if(this.state.dealerStandsOnSoft17){
-                                this.setState({ helpImageToShow: sdStandHard15 })
-                            } else {
-                                this.setState({ helpImageToShow: sdHitHard15 })
-                            }
-                            break;
-                        case 16:
-                            this.setState({ helpImageToShow: sdHard16 })
-                            break;
-                        case 17:
-                            if(this.state.dealerStandsOnSoft17){
-                                this.setState({ helpImageToShow: sdStandHard17 })
-                            } else {
-                                this.setState({ helpImageToShow: sdHitHard17 })
-                            }
-                            break;
-                        case 18:
-                            this.setState({ helpImageToShow: sdHard18 })
-                            break;
-                        case 19:
-                            this.setState({ helpImageToShow: sdHard18  })
-                            break;
-                        case 20:
-                            this.setState({ helpImageToShow: sdHard18  })
-                            break;
-                        default:
-                            this.setState({ helpImageToShow: sdHard5to7 })
+        if(this.state.singleDeck){
+            if(handType === 'HARD'){
+                switch(pHand){
+                    case 8:
+                        this.setState({ helpImageToShow: sdHard8 })
+                        break;
+                    case 9:
+                        this.setState({ helpImageToShow: sdHard9 })
+                        break;
+                    case 10:
+                        this.setState({ helpImageToShow: sdHard10 })
+                        break;
+                    case 11:
+                        this.setState({ helpImageToShow: sdHard11 })
+                        break;
+                    case 12:
+                        this.setState({ helpImageToShow: sdHard12 })
+                        break;
+                    case 13:
+                        this.setState({ helpImageToShow: sdHard13 })
+                        break;
+                    case 14:
+                        this.setState({ helpImageToShow: sdHard14 })
+                        break;
+                    case 15:
+                        if(this.state.dealerStandsOnSoft17){
+                            this.setState({ helpImageToShow: sdStandHard15 })
+                        } else {
+                            this.setState({ helpImageToShow: sdHitHard15 })
                         }
-                    } 
-
-                    if(handType === 'SOFT'){
-                        switch(pHand){
-                            case 13:
-                                this.setState({ helpImageToShow: sdSoft13 })
-                                break;
-                            case 14:
-                                this.setState({ helpImageToShow: sdSoft14 })
-                                break;
-                            case 15:
-                                this.setState({ helpImageToShow: sdSoft15 })
-                                break;
-                            case 16:
-                                this.setState({ helpImageToShow: sdSoft16 })
-                                break;
-                            case 17:
-                                this.setState({ helpImageToShow: sdSoft17 })
-                                break;
-                            case 18:
-                                if(this.state.dealerStandsOnSoft17){
-                                    this.setState({ helpImageToShow: sdStandSoft18 })
-                                } else {
-                                    this.setState({ helpImageToShow: sdHitSoft18 })
-                                }
-                                break;
-                            case 19:
-                                this.setState({ helpImageToShow: sdStandSoft19 })
-                                break;
-                            case 20:
-                                this.setState({ helpImageToShow: sdSoft20})
-                                break;
-                            case 21:
-                                this.setState({ helpImageToShow: sdSoft20})
-                                break;
-                            default:
-                                null
+                        break;
+                    case 16:
+                        this.setState({ helpImageToShow: sdHard16 })
+                        break;
+                    case 17:
+                        if(this.state.dealerStandsOnSoft17){
+                            this.setState({ helpImageToShow: sdStandHard17 })
+                        } else {
+                            this.setState({ helpImageToShow: sdHitHard17 })
                         }
-                    }
-                    if(handType === 'SPLIT'){
-                        switch(pHand){
-                            case 4:
-                                this.setState({ helpImageToShow: sdSplit4 })
-                                break;
-                            case 6:
-                                this.setState({ helpImageToShow: sdSplit6 })
-                                break;
-                            case 8:
-                                this.setState({ helpImageToShow: sdSplit8 })
-                                break;
-                            case 10:
-                                this.setState({ helpImageToShow: playerHelpHard10 })
-                                break;
-                            case 12:
-                                this.setState({ helpImageToShow: sdSplit12 })
-                                break;
-                            case 14:
-                                this.setState({ helpImageToShow: sdSplit14 })
-                                break;
-                            case 16:
-                                this.setState({ helpImageToShow: sdStandSplit16  })
-                                break;
-                            case 18:
-                                if(this.state.dealerStandsOnSoft17){
-                                    this.setState({ helpImageToShow: sdStandSplit18 })
-                                } else {
-                                    this.setState({ helpImageToShow: sdHitSplit18 })
-                                }
-                                break;
-                            default:
-                                this.setState({ helpImageToShow: playerHelpSplitA })
-                        }
-                    }
+                        break;
+                    case 18:
+                        this.setState({ helpImageToShow: sdHard18 })
+                        break;
+                    case 19:
+                        this.setState({ helpImageToShow: sdHard18  })
+                        break;
+                    case 20:
+                        this.setState({ helpImageToShow: sdHard18  })
+                        break;
+                    default:
+                        this.setState({ helpImageToShow: sdHard5to7 })
                 }
+            } 
+
+            if(handType === 'SOFT'){
+                switch(pHand){
+                    case 13:
+                        this.setState({ helpImageToShow: sdSoft13 })
+                        break;
+                    case 14:
+                        this.setState({ helpImageToShow: sdSoft14 })
+                        break;
+                    case 15:
+                        this.setState({ helpImageToShow: sdSoft15 })
+                        break;
+                    case 16:
+                        this.setState({ helpImageToShow: sdSoft16 })
+                        break;
+                    case 17:
+                        this.setState({ helpImageToShow: sdSoft17 })
+                        break;
+                    case 18:
+                        if(this.state.dealerStandsOnSoft17){
+                            this.setState({ helpImageToShow: sdStandSoft18 })
+                        } else {
+                            this.setState({ helpImageToShow: sdHitSoft18 })
+                        }
+                        break;
+                    case 19:
+                        this.setState({ helpImageToShow: sdStandSoft19 })
+                        break;
+                    case 20:
+                        this.setState({ helpImageToShow: sdSoft20})
+                        break;
+                    case 21:
+                        this.setState({ helpImageToShow: sdSoft20})
+                        break;
+                    default:
+                        null
+                }
+            }
+            if(handType === 'SPLIT'){
+                switch(pHand){
+                    case 4:
+                        this.setState({ helpImageToShow: sdSplit4 })
+                        break;
+                    case 6:
+                        this.setState({ helpImageToShow: sdSplit6 })
+                        break;
+                    case 8:
+                        this.setState({ helpImageToShow: sdSplit8 })
+                        break;
+                    case 10:
+                        this.setState({ helpImageToShow: playerHelpHard10 })
+                        break;
+                    case 12:
+                        this.setState({ helpImageToShow: sdSplit12 })
+                        break;
+                    case 14:
+                        this.setState({ helpImageToShow: sdSplit14 })
+                        break;
+                    case 16:
+                        this.setState({ helpImageToShow: sdStandSplit16  })
+                        break;
+                    case 18:
+                        if(this.state.dealerStandsOnSoft17){
+                            this.setState({ helpImageToShow: sdStandSplit18 })
+                        } else {
+                            this.setState({ helpImageToShow: sdHitSplit18 })
+                        }
+                        break;
+                    default:
+                        this.setState({ helpImageToShow: playerHelpSplitA })
+                }
+            }
+        }
     }
 
 
