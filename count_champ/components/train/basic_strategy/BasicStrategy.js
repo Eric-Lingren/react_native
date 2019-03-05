@@ -403,7 +403,7 @@ class BasicStrategy extends React.Component {
             this.dealHardHand()
         }else if(this.state.playSoftHands){
             console.log('run soft hands')
-            
+            this.dealSoftHand()
         }else {
             console.log('run split hands')
             this.dealSplitHand()
@@ -517,6 +517,41 @@ class BasicStrategy extends React.Component {
             }, () => this.showCardData() )
         }
     }
+
+    dealSoftHand = () => {
+        console.log('deal soft hand function ran')
+        let randomCardIndex1 = Math.floor(Math.random() * 52 )
+        let randomCardIndex2 = Math.floor(Math.random() * 52 )
+        let randomCardIndex3 = Math.floor(Math.random() * 4 )
+
+        let dealerCardValue = this.state.deck[randomCardIndex1].value
+        let dealerCardImage = this.state.deck[randomCardIndex1].image
+        let playerCardValue1 = this.state.deck[randomCardIndex2].value
+        let playerCardImage1 = this.state.deck[randomCardIndex2].image
+        let playerCardValue2 = this.state.aces[randomCardIndex3].value
+        let playerCardImage2 = this.state.aces[randomCardIndex3].image
+
+        this.checkCustomSoftHandShuffle(dealerCardValue, playerCardValue1, playerCardValue2, dealerCardImage, playerCardImage1, playerCardImage2)
+    }
+
+    checkCustomSoftHandShuffle = (dealerCardValue, playerCardValue1, playerCardValue2, dealerCardImage, playerCardImage1, playerCardImage2) => {
+        
+        this.setState({
+            dealerHand: dealerCardValue,
+            dealerImages: dealerCardImage,
+            playerCard1: playerCardValue1, 
+            playerCard2: playerCardValue2,
+            playerImage1: playerCardImage1, 
+            playerImage2: playerCardImage2,
+            selectedButtonColor: '',
+            hitButtonColor: '',
+            standButtonColor: '',
+            doubleButtonColor: '',
+            splitButtonColor: '',
+            surrenderButtonColor: '',
+        }, () => this.showCardData() )
+    }
+
 
 
     showCardData = () => {
