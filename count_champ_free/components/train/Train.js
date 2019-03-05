@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Button, Text, View, StyleSheet, Image, Dimensions } from 'react-native';
+import { Button, Text, View, StyleSheet, Dimensions } from 'react-native';
 import { Constants } from 'expo';
+// import { AdMobBanner } from 'react-native-admob';
 
 let ScreenHeight = Dimensions.get("window").height;
 
@@ -41,6 +42,13 @@ class Train extends React.Component {
                     onPress={() => navigate('BetSizing', {name: 'Bet Sizing'})}
                     />
                 </View>
+
+                {/* <AdMobBanner
+  bannerSize="fullBanner"
+  adUnitID="your-admob-unit-id"
+  testDeviceID="EMULATOR"
+  didFailToReceiveAdWithError={this.bannerError} /> */}
+
             </View>
 
             

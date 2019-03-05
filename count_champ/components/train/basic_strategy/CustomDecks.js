@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, Dimensions } from 'react-native';
 import { Constants } from 'expo';
-import BasicStrategy from './BasicStrategy.js'
+// import BasicStrategy from '../../../../count_champ_free/components/train/basic_strategy/BasicStrategy.js'
 
 let ScreenHeight = Dimensions.get("window").height;
 let ScreenWidth = Dimensions.get("window").width;
@@ -226,16 +226,34 @@ class CustomDecks extends React.Component {
 
 
     dealHardHand = () => {
-        console.log('hard hand was dealt')
+        let randomCardIndex1 = Math.floor(Math.random() * 52 )
+        let randomCardIndex2 = Math.floor(Math.random() * 52 )
+        let randomCardIndex3 = Math.floor(Math.random() * 52 )
+
+        if(randomCardIndex1 === randomCardIndex2 || randomCardIndex2 === randomCardIndex3 || randomCardIndex1 === randomCardIndex3){
+            this.dealHardHand()
+        }
+
+        let randomDealerCard = this.state.deck[randomCardIndex1].value
+        let randomPlayerCard1 = this.state.deck[randomCardIndex2].value
+        let randomPlayerCard2 = this.state.deck[randomCardIndex3].value
+        console.log(randomDealerCard)
+        console.log(randomPlayerCard1)
+        console.log(randomPlayerCard2)
+
     }
+
+
     static navigationOptions = {
         header: null
     };
 
     render() {
-        const {navigate} = this.props.navigation;
+
         return (
-            <BasicStrategy dealHardHand={this.dealHardHand}/>
+            <View>
+                {this.dealHardHand()}
+            </View>
         );
     }
 }
