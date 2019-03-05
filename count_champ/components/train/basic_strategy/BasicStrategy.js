@@ -171,6 +171,66 @@ class BasicStrategy extends React.Component {
             playHardHands: false,
             playSoftHands: false,
             playSplitHands: false,
+            deck: [
+                { "value": "6", "image": "https://deckofcardsapi.com/static/img/6H.png" },
+                { "value": "QUEEN", "image": "https://deckofcardsapi.com/static/img/QH.png" },
+                { "value": "JACK", "image": "https://deckofcardsapi.com/static/img/JC.png" },
+                { "value": "QUEEN", "image": "https://deckofcardsapi.com/static/img/QD.png" },
+                { "value": "2", "image": "https://deckofcardsapi.com/static/img/2D.png" },
+                { "value": "3", "image": "https://deckofcardsapi.com/static/img/3D.png" },
+                { "value": "QUEEN", "image": "https://deckofcardsapi.com/static/img/QS.png" },
+                { "value": "5", "image": "https://deckofcardsapi.com/static/img/5C.png" },
+                { "value": "9", "image": "https://deckofcardsapi.com/static/img/9D.png" },
+                { "value": "4", "image": "https://deckofcardsapi.com/static/img/4D.png" },
+                { "value": "7", "image": "https://deckofcardsapi.com/static/img/7S.png" },
+                { "value": "10", "image": "https://deckofcardsapi.com/static/img/0H.png" },
+                { "value": "KING", "image": "https://deckofcardsapi.com/static/img/KD.png" },
+                { "value": "6", "image": "https://deckofcardsapi.com/static/img/6S.png" },
+                { "value": "JACK", "image": "https://deckofcardsapi.com/static/img/JD.png" },
+                { "value": "5", "image": "https://deckofcardsapi.com/static/img/5S.png" },
+                { "value": "QUEEN", "image": "https://deckofcardsapi.com/static/img/QC.png" },
+                { "value": "10", "image": "https://deckofcardsapi.com/static/img/0D.png" },
+                { "value": "8", "image": "https://deckofcardsapi.com/static/img/8S.png" },
+                { "value": "KING", "image": "https://deckofcardsapi.com/static/img/KS.png" },
+                { "value": "2", "image": "https://deckofcardsapi.com/static/img/2C.png" },
+                { "value": "2", "image": "https://deckofcardsapi.com/static/img/2S.png" },
+                { "value": "4", "image": "https://deckofcardsapi.com/static/img/4C.png" },
+                { "value": "3", "image": "https://deckofcardsapi.com/static/img/3S.png" },
+                { "value": "2", "image": "https://deckofcardsapi.com/static/img/2H.png" },
+                { "value": "9", "image": "https://deckofcardsapi.com/static/img/9H.png" },
+                { "value": "7", "image": "https://deckofcardsapi.com/static/img/7H.png" },
+                { "value": "5", "image": "https://deckofcardsapi.com/static/img/5D.png" },
+                { "value": "10", "image": "https://deckofcardsapi.com/static/img/0S.png" },
+                { "value": "4", "image": "https://deckofcardsapi.com/static/img/4S.png" },
+                { "value": "KING", "image": "https://deckofcardsapi.com/static/img/KH.png" },
+                { "value": "4", "image": "https://deckofcardsapi.com/static/img/4H.png" },
+                { "value": "JACK", "image": "https://deckofcardsapi.com/static/img/JH.png" },
+                { "value": "8", "image": "https://deckofcardsapi.com/static/img/8D.png" },
+                { "value": "JACK", "image": "https://deckofcardsapi.com/static/img/JS.png" },
+                { "value": "5", "image": "https://deckofcardsapi.com/static/img/5H.png" },
+                { "value": "6", "image": "https://deckofcardsapi.com/static/img/6D.png" },
+                { "value": "KING", "image": "https://deckofcardsapi.com/static/img/KC.png" },
+                { "value": "10", "image": "https://deckofcardsapi.com/static/img/0C.png" },
+                { "value": "9", "image": "https://deckofcardsapi.com/static/img/9S.png" },
+                { "value": "8", "image": "https://deckofcardsapi.com/static/img/8C.png" },
+                { "value": "7", "image": "https://deckofcardsapi.com/static/img/7C.png" },
+                { "value": "3", "image": "https://deckofcardsapi.com/static/img/3H.png" },
+                { "value": "8", "image": "https://deckofcardsapi.com/static/img/8H.png" },
+                { "value": "7", "image": "https://deckofcardsapi.com/static/img/7D.png" },
+                { "value": "3", "image": "https://deckofcardsapi.com/static/img/3C.png" },
+                { "value": "9", "image": "https://deckofcardsapi.com/static/img/9C.png" },
+                { "value": "6", "image": "https://deckofcardsapi.com/static/img/6C.png" },
+                { "value": "ACE", "image": "https://deckofcardsapi.com/static/img/AS.png" },
+                { "value": "ACE", "image": "https://deckofcardsapi.com/static/img/aceDiamonds.png" },
+                { "value": "ACE", "image": "https://deckofcardsapi.com/static/img/AH.png" },
+                { "value": "ACE", "image": "https://deckofcardsapi.com/static/img/AC.png" }
+            ],
+            aces: [
+                { "value": "ACE", "image": "https://deckofcardsapi.com/static/img/AS.png" },
+                { "value": "ACE", "image": "https://deckofcardsapi.com/static/img/aceDiamonds.png" },
+                { "value": "ACE", "image": "https://deckofcardsapi.com/static/img/AH.png" },
+                { "value": "ACE", "image": "https://deckofcardsapi.com/static/img/AC.png" }
+            ],
         }
     }
 
@@ -333,10 +393,25 @@ class BasicStrategy extends React.Component {
         }).done();
     }
 
+    whichDeckToDealFrom = () => {
+        console.log('which deck to deal from ran')
+        if(this.state.playAllHands){
+            console.log('run play all hands')
+            this.dealCard()
+        } else if(this.state.playHardHands){
+            console.log('run hard hands')
+            this.dealHardHand()
+        }else if(this.state.playSoftHands){
+            console.log('run soft hands')
+            
+        }else {
+            console.log('run split hands')
+            this.dealSplitHand()
+        }
+    }
 
     dealCard = () => {
         axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=3`).then(response => {
-            
             const dealerCardValue = response.data.cards[0].value  
             const playerCardValue1 = response.data.cards[1].value  
             const playerCardValue2 = response.data.cards[2].value  
@@ -358,14 +433,94 @@ class BasicStrategy extends React.Component {
                 doubleButtonColor: '',
                 splitButtonColor: '',
                 surrenderButtonColor: '',
-            }, () => this.showCardData() )
+            }, () => this.checkIfDeckNeedsToBeShuffled() )
         })
     }
-    showCardData = () => {
+
+    checkIfDeckNeedsToBeShuffled = () => {
         if(this.state.remainingCardsInDeck <= 5){
             axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/shuffle/`).then(response => {
             })
         }
+        this.showCardData()
+    }
+
+    dealHardHand = () => {
+        let randomCardIndex1 = Math.floor(Math.random() * 52 )
+        let randomCardIndex2 = Math.floor(Math.random() * 48 )
+        let randomCardIndex3 = Math.floor(Math.random() * 48 )
+
+        let dealerCardValue = this.state.deck[randomCardIndex1].value
+        let playerCardValue1 = this.state.deck[randomCardIndex2].value
+        let playerCardValue2 = this.state.deck[randomCardIndex3].value
+        let dealerCardImage = this.state.deck[randomCardIndex1].image
+        let playerCardImage1 = this.state.deck[randomCardIndex2].image
+        let playerCardImage2 = this.state.deck[randomCardIndex3].image
+
+        this.checkCustomHardHandShuffle(dealerCardValue, playerCardValue1, playerCardValue2, dealerCardImage, playerCardImage1, playerCardImage2)
+    }
+
+    checkCustomHardHandShuffle = (dealerCardValue, playerCardValue1, playerCardValue2, dealerCardImage, playerCardImage1, playerCardImage2) => {
+        if(playerCardValue1 === playerCardValue2){
+            this.dealHardHand()
+        } else{
+            this.setState({
+                dealerHand: dealerCardValue,
+                dealerImages: dealerCardImage,
+                playerCard1: playerCardValue1, 
+                playerCard2: playerCardValue2,
+                playerImage1: playerCardImage1, 
+                playerImage2: playerCardImage2,
+                selectedButtonColor: '',
+                hitButtonColor: '',
+                standButtonColor: '',
+                doubleButtonColor: '',
+                splitButtonColor: '',
+                surrenderButtonColor: '',
+            }, () => this.showCardData() )
+        }
+    }
+
+    dealSplitHand = () => {
+        console.log('deal split hand function ran')
+        let randomCardIndex1 = Math.floor(Math.random() * 52 )
+        let randomCardIndex2 = Math.floor(Math.random() * 52 )
+        let randomCardIndex3 = Math.floor(Math.random() * 52 )
+
+        let dealerCardValue = this.state.deck[randomCardIndex1].value
+        let playerCardValue1 = this.state.deck[randomCardIndex2].value
+        let playerCardValue2 = this.state.deck[randomCardIndex3].value
+        let dealerCardImage = this.state.deck[randomCardIndex1].image
+        let playerCardImage1 = this.state.deck[randomCardIndex2].image
+        let playerCardImage2 = this.state.deck[randomCardIndex3].image
+
+        this.checkCustomSplitHandShuffle(dealerCardValue, playerCardValue1, playerCardValue2, dealerCardImage, playerCardImage1, playerCardImage2)
+    }
+
+    checkCustomSplitHandShuffle = (dealerCardValue, playerCardValue1, playerCardValue2, dealerCardImage, playerCardImage1, playerCardImage2) => {
+        if(playerCardValue1 !== playerCardValue2){
+            this.dealSplitHand()
+        } else{
+            this.setState({
+                dealerHand: dealerCardValue,
+                dealerImages: dealerCardImage,
+                playerCard1: playerCardValue1, 
+                playerCard2: playerCardValue2,
+                playerImage1: playerCardImage1, 
+                playerImage2: playerCardImage2,
+                selectedButtonColor: '',
+                hitButtonColor: '',
+                standButtonColor: '',
+                doubleButtonColor: '',
+                splitButtonColor: '',
+                surrenderButtonColor: '',
+            }, () => this.showCardData() )
+        }
+    }
+
+
+    showCardData = () => {
+        console.log('show card data function ran')
         const dCard = this.state.dealerHand;
         let dCardNumber = 0
         const pCard1 = this.state.playerCard1;
@@ -429,6 +584,7 @@ class BasicStrategy extends React.Component {
     }
 
     whatCheckHandFunctionToRun = () => {
+        console.log('check which hand to run function ran')
         const pCard1Number = parseInt(this.state.pCard1Number)
         const pCard2Number = parseInt(this.state.pCard2Number)
     
@@ -1358,8 +1514,6 @@ class BasicStrategy extends React.Component {
 
     render() {
         const {navigate} = this.props.navigation;
-
-        console.log(this.props.dealHardHand)
         
         return (
             <ScrollView>
@@ -1435,7 +1589,7 @@ class BasicStrategy extends React.Component {
                     </View>
 
                     <Text style={styles.handLabel}>Player Hand</Text>
-                    <Button onPress={this.dealCard} width='50' color='#000000' title='Deal'></Button>
+                    <Button onPress={this.whichDeckToDealFrom} width='50' color='#000000' title='Deal'></Button>
                     
                     <Text style={styles.handLabel}> Choose the correct play:</Text>
                     <View style={styles.buttonWrapper}>
