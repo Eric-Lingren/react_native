@@ -17,10 +17,6 @@ class CustomDecks extends React.Component {
                     "image": "https://deckofcardsapi.com/static/img/6H.png"
                 },
                 {
-                    "value": "ACE",
-                    "image": "https://deckofcardsapi.com/static/img/AC.png"
-                },
-                {
                     "value": "QUEEN",
                     "image": "https://deckofcardsapi.com/static/img/QH.png"
                 },
@@ -67,10 +63,6 @@ class CustomDecks extends React.Component {
                 {
                     "value": "KING",
                     "image": "https://deckofcardsapi.com/static/img/KD.png"
-                },
-                {
-                    "value": "ACE",
-                    "image": "https://deckofcardsapi.com/static/img/AH.png"
                 },
                 {
                     "value": "6",
@@ -157,10 +149,6 @@ class CustomDecks extends React.Component {
                     "image": "https://deckofcardsapi.com/static/img/8D.png"
                 },
                 {
-                    "value": "ACE",
-                    "image": "https://deckofcardsapi.com/static/img/aceDiamonds.png"
-                },
-                {
                     "value": "JACK",
                     "image": "https://deckofcardsapi.com/static/img/JS.png"
                 },
@@ -213,34 +201,114 @@ class CustomDecks extends React.Component {
                     "image": "https://deckofcardsapi.com/static/img/9C.png"
                 },
                 {
+                    "value": "6",
+                    "image": "https://deckofcardsapi.com/static/img/6C.png"
+                },
+                {
                     "value": "ACE",
                     "image": "https://deckofcardsapi.com/static/img/AS.png"
                 },
                 {
-                    "value": "6",
-                    "image": "https://deckofcardsapi.com/static/img/6C.png"
+                    "value": "ACE",
+                    "image": "https://deckofcardsapi.com/static/img/aceDiamonds.png"
+                },
+                {
+                    "value": "ACE",
+                    "image": "https://deckofcardsapi.com/static/img/AH.png"
+                },
+                {
+                    "value": "ACE",
+                    "image": "https://deckofcardsapi.com/static/img/AC.png"
                 }
-            ]
+            ],
+            aces: [
+                {
+                    "value": "ACE",
+                    "image": "https://deckofcardsapi.com/static/img/AS.png"
+                },
+                {
+                    "value": "ACE",
+                    "image": "https://deckofcardsapi.com/static/img/aceDiamonds.png"
+                },
+                {
+                    "value": "ACE",
+                    "image": "https://deckofcardsapi.com/static/img/AH.png"
+                },
+                {
+                    "value": "ACE",
+                    "image": "https://deckofcardsapi.com/static/img/AC.png"
+                }
+            ],
+            dealCards: true
         }
     }
 
 
     dealHardHand = () => {
         let randomCardIndex1 = Math.floor(Math.random() * 52 )
-        let randomCardIndex2 = Math.floor(Math.random() * 52 )
-        let randomCardIndex3 = Math.floor(Math.random() * 52 )
-
-        if(randomCardIndex1 === randomCardIndex2 || randomCardIndex2 === randomCardIndex3 || randomCardIndex1 === randomCardIndex3){
-            this.dealHardHand()
-        }
+        let randomCardIndex2 = Math.floor(Math.random() * 48 )
+        let randomCardIndex3 = Math.floor(Math.random() * 48 )
 
         let randomDealerCard = this.state.deck[randomCardIndex1].value
         let randomPlayerCard1 = this.state.deck[randomCardIndex2].value
         let randomPlayerCard2 = this.state.deck[randomCardIndex3].value
-        console.log(randomDealerCard)
-        console.log(randomPlayerCard1)
-        console.log(randomPlayerCard2)
 
+        this.checkHardHand(randomDealerCard, randomPlayerCard1, randomPlayerCard2)
+    }
+
+    checkHardHand = (randomDealerCard, randomPlayerCard1, randomPlayerCard2) => {
+        if(randomPlayerCard1 === randomPlayerCard2){
+            this.dealHardHand()
+        } else{
+            console.log(` random dealer card is : ${randomDealerCard}`)
+            console.log(` random player card 1 is : ${randomPlayerCard1}`)
+            console.log(` random Player card 2 is : ${randomPlayerCard2}`)
+            console.log('----------------------------------------------')
+        }
+
+    }
+
+    dealSplitHand = () => {
+        let randomCardIndex1 = Math.floor(Math.random() * 52 )
+        let randomCardIndex2 = Math.floor(Math.random() * 52 )
+        let randomCardIndex3 = Math.floor(Math.random() * 52 )
+
+        let randomDealerCard = this.state.deck[randomCardIndex1].value
+        let randomPlayerCard1 = this.state.deck[randomCardIndex2].value
+        let randomPlayerCard2 = this.state.deck[randomCardIndex3].value
+
+        this.checkSplitHand(randomDealerCard, randomPlayerCard1, randomPlayerCard2)
+    }
+
+    checkSplitHand = (randomDealerCard, randomPlayerCard1, randomPlayerCard2) => {
+        if(randomPlayerCard1 !== randomPlayerCard2){
+            this.dealSplitHand()
+        } else{
+            console.log(` random dealer card is : ${randomDealerCard}`)
+            console.log(` random player card 1 is : ${randomPlayerCard1}`)
+            console.log(` random Player card 2 is : ${randomPlayerCard2}`)
+            console.log('----------------------------------------------')
+        }
+
+    }
+
+    dealSoftHand = () => {
+        let randomCardIndex1 = Math.floor(Math.random() * 52 )
+        let randomCardIndex2 = Math.floor(Math.random() * 52 )
+        let randomCardIndex3 = Math.floor(Math.random() * 4 )
+
+        let randomDealerCard = this.state.deck[randomCardIndex1].value
+        let randomPlayerCard1 = this.state.deck[randomCardIndex2].value
+        let randomPlayerCard2 = this.state.aces[randomCardIndex3].value
+
+        this.checkSoftHand(randomDealerCard, randomPlayerCard1, randomPlayerCard2)
+    }
+
+    checkSoftHand = (randomDealerCard, randomPlayerCard1, randomPlayerCard2) => {
+            console.log(` random dealer card is : ${randomDealerCard}`)
+            console.log(` random player card 1 is : ${randomPlayerCard1}`)
+            console.log(` random Player card 2 is : ${randomPlayerCard2}`)
+            console.log('----------------------------------------------')
     }
 
 
@@ -252,7 +320,9 @@ class CustomDecks extends React.Component {
 
         return (
             <View>
-                {this.dealHardHand()}
+                {/* {this.dealHardHand()} */}
+                {/* {this.dealSplitHand()} */}
+                {this.dealSoftHand()}
             </View>
         );
     }
