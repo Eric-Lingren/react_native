@@ -15,49 +15,49 @@ class Learn extends React.Component {
             <View style={styles.container}>
                 <View style={styles.buttonContainer}>
                     <Button
-                        title="Level 0: How To Play"
+                        title="Level 0:  How To Play"
+                        color="#000000"
+                        onPress={() => navigate('HowToPlay', {name: 'How To Play'})}
+                        />
+                    <Button
+                        title="Level 1:  Fundamentals"
+                        color="#000000"
+                        onPress={() => navigate('Fundamentals', {name: 'Fundamentals'})}
+                        />
+                    <Button
+                        title="Level 2:  Basic Strategy"
+                        color="#000000"
+                        onPress={() => navigate('LearnBasicStrategy', {name: 'Learn Basic Strategy'})}
+                        />
+                    <Button
+                        title="Level 3:  Counting Cards"
+                        color="#000000"
+                        onPress={() => navigate('CountingCards', {name: 'Counting Cards'})}
+                        />
+                    <Button
+                        title="Level 4:  Running Count vs True Count"
+                        color="#000000"
+                        onPress={() => navigate('RunningCountVsTrueCount', {name: 'Running Count vs True Count'})}
+                        />
+                    <Button
+                        title="Level 5:  How to Bet"
+                        color="#000000"
+                        onPress={() => navigate('HowToBet', {name: 'How to Bet'})}
+                        />
+                    <Button
+                        title="Level 6:  Bankroll Sizing"
                         color="#000000"
                         onPress={() => navigate('BankrollSizing', {name: 'Bankroll Sizing'})}
                         />
                     <Button
-                        title="Level 1: Fundamentals"
+                        title="Level 7:  What’s Next"
                         color="#000000"
-                        onPress={() => navigate('BankrollSizing', {name: 'Bankroll Sizing'})}
-                        />
-                    <Button
-                        title="Level 2: Basic Strategy"
-                        color="#000000"
-                        onPress={() => navigate('BankrollSizing', {name: 'Bankroll Sizing'})}
-                        />
-                    <Button
-                        title="Level 3: Counting Cards"
-                        color="#000000"
-                        onPress={() => navigate('BankrollSizing', {name: 'Bankroll Sizing'})}
-                        />
-                    <Button
-                        title="Level 4: Running Count vs True Count"
-                        color="#000000"
-                        onPress={() => navigate('BankrollSizing', {name: 'Bankroll Sizing'})}
-                        />
-                    <Button
-                        title="Level 5: How to Bet"
-                        color="#000000"
-                        onPress={() => navigate('BankrollSizing', {name: 'Bankroll Sizing'})}
-                        />
-                    <Button
-                        title="Level 5: Bankroll Sizing"
-                        color="#000000"
-                        onPress={() => navigate('BankrollSizing', {name: 'Bankroll Sizing'})}
-                        />
-                    <Button
-                        title="Level 6: What’s Next"
-                        color="#000000"
-                        onPress={() => navigate('BankrollSizing', {name: 'Bankroll Sizing'})}
+                        onPress={() => navigate('WhatsNext', {name: 'Whats Next'})}
                         />
                     <Button
                         title="Glossary of Terms"
                         color="#000000"
-                        onPress={() => navigate('BankrollSizing', {name: 'Bankroll Sizing'})}
+                        onPress={() => navigate('Glossary', {name: 'Glossary'})}
                         />
                 </View>
             </View>
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
         height: 700,
     },
     buttonContainer: {
-        marginTop: 25,
+        marginTop: 0,
         flex: 0,
         justifyContent: 'space-evenly',
         height: 550,
