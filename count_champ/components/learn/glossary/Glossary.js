@@ -24,7 +24,7 @@ class Glossary extends React.Component {
                             86'd : 
                         </Text>
                         <Text style={styles.definition}>
-                            Being banned from playing by the casino, generally due to suspected advantage play (legal methods of play used to gain advantage; however, still frowned upon by casinos)
+                            Being banned from playing by the casino, generally due to suspected advantage play.
                         </Text>
                     </View>
 
