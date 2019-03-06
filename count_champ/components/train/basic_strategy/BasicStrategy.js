@@ -1609,9 +1609,6 @@ class BasicStrategy extends React.Component {
                     </View>
                     : null
                     }
-
-
-                   
                 </View>
             </ScrollView>
 

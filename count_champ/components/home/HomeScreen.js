@@ -180,10 +180,10 @@ const styles = StyleSheet.create({
         borderColor: 'white',
     },
     buttonContainer: {
-        marginTop: 100,
+        marginTop: 15,
         flex: 0,
         justifyContent: 'space-evenly',
-        height: 120,
+        height: 170,
     },
 });
 
