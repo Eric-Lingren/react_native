@@ -67,9 +67,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         textDecorationLine: 'underline',
     },
-    item: {
-        marginBottom: 25,
-    },
     subheader: {
         color: '#fff',
         fontSize: 18,
