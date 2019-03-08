@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Text, View, StyleSheet, Dimensions, AsyncStorage, WebView, TouchableWithoutFeedback, Image, ScrollView } from 'react-native';
 import CheckBox from 'react-native-check-box';
 import { Constants } from 'expo';
-import SubscribeModal from '../subscribe_modal/SubscribeModal'
+// import SubscribeModal from '../subscribe_modal/SubscribeModal'
 
 let ScreenHeight = Dimensions.get("window").height;
 let ScreenWidth = Dimensions.get("window").width;
@@ -207,7 +207,7 @@ class CasinoRules extends React.Component {
         return (
             <ScrollView>
             <View style={styles.container}>
-                {this.state.showSubscribeModal 
+                {/* {this.state.showSubscribeModal 
                 ?   <View style={styles.modalContainer}>
                         <TouchableWithoutFeedback onPress={() => this.toggleSubscribeModal()} style={{  }}>
                             <Image
@@ -217,7 +217,7 @@ class CasinoRules extends React.Component {
                         <SubscribeModal />
                     </View>
                 : null
-                }
+                } */}
                 <View style={styles.buttonContainer}>
 
                     <View style={styles.rulesWrapper}>
