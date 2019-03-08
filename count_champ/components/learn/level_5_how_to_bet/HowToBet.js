@@ -52,19 +52,65 @@ class HowToBet extends React.Component {
                     First, before you start play, you have to determine your betting unit. Then, when you have the advantage and the count’s favorable, you bet in multiples of your betting unit according to the count. 
                 </Text>
                 <Text style={styles.paragraph}>
-                    Your maximum bet should be at least 4 times, preferably 8 times, your betting unit. Your maximum bet can be higher if it won’t get you kicked out of the casino. Never bet more than 1/4 of the money you have on you on one round, because you always want to have enough money to be able to split and double down.
+                    Your maximum bet should be at least 4 times your minimum bet, but preferably 8 times your betting unit. Your maximum bet can eve be up to 12 times if it won’t get you kicked out of the casino. 
                 </Text>
                 <Text style={styles.subheader}>
                     Optimal Betting
                 </Text>
                 <Text style={styles.paragraph}>
-                    Subtract 1 from the true count to determine how many units to bet. Multiply the number of units to bet by your betting unit.
+                    For a rule of thumb, you can subtract 1 from the true count to determine how many units to bet.  You should be more conserative if the casino has worse player rules and more agressive if the casino has favorable rules.
                 </Text>
                 <Text style={styles.paragraph}>
-                    For Example, your betting unit is $100, running count is +10, and true count is +5, then the optimal bet would be 4 X $100 which gives us $400.
+                    For optimal betting in a game with good rules you want to vary from 1 - 12 units.  Here is an example:
                 </Text>
+                <Text style={styles.list}>
+                    True Count -1 (or lower) :   1 unit (or leave)
+                </Text>
+                <Text style={styles.list}>
+                    True Count 0 :   1 unit
+                </Text>
+                <Text style={styles.list}>
+                    True Count 1 :   2 units
+                </Text>
+                <Text style={styles.list}>
+                    True Count 2 :   3 units
+                </Text>
+                <Text style={styles.list}>
+                    True Count 3 :   4 units
+                </Text>
+                <Text style={styles.list}>
+                    True Count 4 :   5 units
+                </Text>
+                <Text style={styles.list}>
+                    True Count 5 :   6 units
+                </Text>
+                <Text style={styles.list}>
+                    True Count 6 :   2 hands of 6 units
+                </Text>
+                <Text style={styles.list}>
+                    (If you cant play 2 hands beacuse the table is full, you should play 1 hand of 13 units)
+                </Text>
+
                 <Text style={styles.paragraph}>
-                    Play two hands at a time on spots next to each other, and bet that amount per hand. If you’re the only player at the table, or if you can only play 1 hand, bet 25% more on one hand.
+                    For betting with less risk and lower payoff or if the casiono has less favorable player rules, you want to vary from 1 - 8 units.  Here is an example:
+                </Text>
+                <Text style={styles.list}>
+                    True Count -1 (or lower) :   1 unit (or leave)
+                </Text>
+                <Text style={styles.list}>
+                    True Count 0 :   1 unit
+                </Text>
+                <Text style={styles.list}>
+                    True Count 1 :   2 units
+                </Text>
+                <Text style={styles.list}>
+                    True Count 2 :   4 units
+                </Text>
+                <Text style={styles.list}>
+                    True Count 3 :   2 hands of 4 units
+                </Text>
+                <Text style={styles.list}>
+                    (If you cant play 2 hands beacuse the table is full, you should play 1 hand of 5 units)
                 </Text>
             </View> 
             </ScrollView>
@@ -77,7 +123,7 @@ const styles = StyleSheet.create({
         paddingTop: Constants.statusBarHeight,
         padding: 8,
         backgroundColor: ( '#0f9b0f', '#52c234', '#52c234', '#0f9b0f'),
-        height: 1700,
+        height: 1930,
     },
     subheader: {
         color: '#fff',
@@ -90,6 +136,11 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 16,
         padding: 10,
+    },
+    list: {
+        color: '#fff',
+        fontSize: 16,
+        padding: 0,
     },
 });
 

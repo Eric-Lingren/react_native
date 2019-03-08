@@ -20,7 +20,8 @@ import CountingCards from './components/learn/level_3_counting_cards/CountingCar
 import RunningCountVsTrueCount from './components/learn/level_4_running_count_vs_true_count/RunningCountVsTrueCount'
 import HowToBet from './components/learn/level_5_how_to_bet/HowToBet'
 import BankrollSizing from './components/learn/level_6_bankroll_sizing/BankrollSizing'
-import WhatsNext from './components/learn/level_7_whats_next/WhatsNext'
+import HowMuchMoney from './components/learn/level_7_how_much_money/HowMuchMoney'
+import WhatsNext from './components/learn/level_8_whats_next/WhatsNext'
 
 
 import {createStackNavigator, createAppContainer} from 'react-navigation';
@@ -48,6 +49,7 @@ const MainNavigator = createStackNavigator({
   RunningCountVsTrueCount: {screen: RunningCountVsTrueCount},
   HowToBet: {screen: HowToBet},
   BankrollSizing: {screen: BankrollSizing},
+  HowMuchMoney: {screen: HowMuchMoney},
   WhatsNext: {screen: WhatsNext},
 });
 

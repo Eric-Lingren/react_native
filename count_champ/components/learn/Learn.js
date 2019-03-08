@@ -50,7 +50,12 @@ class Learn extends React.Component {
                         onPress={() => navigate('BankrollSizing', {name: 'Bankroll Sizing'})}
                         />
                     <Button
-                        title="Level 7:  What’s Next"
+                        title="Level 7:  How Much $ Can I Make?"
+                        color="#000000"
+                        onPress={() => navigate('HowMuchMoney', {name: 'How Much Money'})}
+                        />
+                    <Button
+                        title="Level 8:  What’s Next"
                         color="#000000"
                         onPress={() => navigate('WhatsNext', {name: 'Whats Next'})}
                         />
