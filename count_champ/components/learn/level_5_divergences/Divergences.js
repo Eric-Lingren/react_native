@@ -21,7 +21,7 @@ class Divergences extends React.Component {
                         Don't bother learning your divergences until you can play blackjack perfectly and getting bored with the game.  They will cause you to loose more money than you will make unless your game is perfect.
                     </Text>
                     <Text style={styles.paragraph}>
-                        When we have a perfect game, our betting spread based on the count will account for 60%-80% of all our profits.  Playing divergences will account for the remaining 20%-40% of your profits.
+                        When we have a perfect game, our betting spread based on the count will account for 60%-80% of all our profits.  Playing divergences will account for the remaining 20%-40% of your profits. Please read Blackjack Attack by Don Schlesinger for far more detailed information on divergences.
                     </Text>
                     <Text style={styles.paragraph}>
                         There are well over 100 different divergences to learn, but there are only 22 that will account for the majority of your profits.  These are called the illustrious 18 and the Fab 4.  Master these before you move on to learning the others.  We have a training drill to help you learn the illustrious 18, and the others will be coming soon.
@@ -45,7 +45,7 @@ class Divergences extends React.Component {
                         Player 14 vs Dealer 10: 
                     </Text>
                     <Text style={styles.subparagraph}>
-                        Surrender if true count is 3+.  Else Hit.   
+                        Surrender if true count is 4+.  Else Hit.   
                     </Text>
                     <Text style={styles.term}>
                         Player 15 vs Dealer 10: 
@@ -72,103 +72,135 @@ class Divergences extends React.Component {
                     <Text style={styles.term}>
                         Take Insurance:
                     </Text>
-                    <Text style={styles.subparagraph}>
-                        When true count is 3+.
-                    </Text>
+                        <Text style={styles.subparagraph}>
+                            When true count is 3+. This play alone accounts for 33% of all the deviations profits.
+                        </Text>
                     <Text style={styles.term}>
                         Player 16 vs Dealer 10:
                     </Text>
-                    <Text style={styles.subparagraph}>
-                        Surrender if possible.  Otherwise Hit when true count is 0- (0 or less). Stand at true count 1+ (1 or more).
-                    </Text>
+                        <Text style={styles.subparagraph}>
+                            Surrender if possible.  Otherwise Hit when true count is 0- (0 or less). Stand at true count 1+ (1 or more).
+                        </Text>
                     <Text style={styles.term}>
                         Player 15 vs Dealer 10:
                     </Text>
-                    <Text style={styles.subparagraph}>
-                        Surrender if possible.  Otherwise Stand when true count is 4+ (4 or more). Hit at true count 3- (3 or less).
-                    </Text>
+                        <Text style={styles.subparagraph}>
+                            Surrender if possible.  Otherwise Stand when true count is 4+ (4 or more). Hit at true count 3- (3 or less).
+                        </Text>
                     <Text style={styles.term}>
                         Player 10, 10 vs Dealer 5:
                     </Text>
-                    <Text style={styles.subparagraph}>
-                        Split if count is 5+.  Stand at count 4-.
-                    </Text>
+                        <Text style={styles.subparagraph}>
+                            Split if count is 5+.  Stand at count 4-.
+                        </Text>
                     <Text style={styles.term}>
                         Player 10, 10 vs Dealer 6:
                     </Text>
-                    <Text style={styles.subparagraph}>
-                        Split if count is 4+.  Stand at count 3-.
-                    </Text>
+                        <Text style={styles.subparagraph}>
+                            Split if count is 4+.  Stand at count 3-.
+                        </Text>
                     <Text style={styles.term}>
                         Player 10 vs Dealer 10:
                     </Text>
-                    <Text style={styles.subparagraph}>
-                        Double if count is is 4+.  Hit at count 3-.
-                    </Text>
+                        <Text style={styles.subparagraph}>
+                            Double if count is is 4+.  Hit at count 3-.
+                        </Text>
                     <Text style={styles.term}>
                         Player 12 vs Dealer 3:
                     </Text>
-                    <Text style={styles.subparagraph}>
-                        Stand if count is 2+.  Hit at count 1-.
-                    </Text>
+                        <Text style={styles.subparagraph}>
+                            Stand if count is 2+.  Hit at count 1-.
+                        </Text>
                     <Text style={styles.term}>
                         Player 12 vs Dealer 2:
                     </Text>
-                    <Text style={styles.subparagraph}>
-                        Stand if count is 3+.  Hit at count 2-.
-                    </Text>
+                        <Text style={styles.subparagraph}>
+                            Stand if count is 3+.  Hit at count 2-.
+                        </Text>
                     <Text style={styles.term}>
                         Player 11 vs Dealer A:
                     </Text>
-                    <Text style={styles.subparagraph}>
-                        Double if count is 1+.  Hit at count 0-.
-                    </Text>
+                        <Text style={styles.subparagraph}>
+                            Double if count is 1+.  Hit at count 0-.
+                        </Text>
                     <Text style={styles.term}>
                         Player 9 vs Dealer 2:
                     </Text>
-                    <Text style={styles.subparagraph}>
-                        Double if count is 1+.  Hit at count 0-.
-                    </Text>
+                        <Text style={styles.subparagraph}>
+                            Double if count is 1+.  Hit at count 0-.
+                        </Text>
                     <Text style={styles.term}>
                         Player 10 vs Dealer A:
                     </Text>
-                    <Text style={styles.subparagraph}>
-                        Double if count is 4+.  Hit at count 3-.
-                    </Text>
+                        <Text style={styles.subparagraph}>
+                            Double if count is 4+.  Hit at count 3-.
+                        </Text>
                     <Text style={styles.term}>
                         Player 9 vs Dealer 7:
                     </Text>
-                    <Text style={styles.subparagraph}>
-                        Double if count is 3+.  Hit at count 2-.
-                    </Text>
+                        <Text style={styles.subparagraph}>
+                            Double if count is 3+.  Hit at count 2-.
+                        </Text>
                     <Text style={styles.term}>
                         Player 16 vs Dealer 9:
                     </Text>
-                    <Text style={styles.subparagraph}>
-                        Always surrender if possible.  If not available, stand if count is 5+.  Hit at count 4-.
+                        <Text style={styles.subparagraph}>
+                            Always surrender if possible.  If not available, stand if count is 5+.  Hit at count 4-.
+                        </Text>
+                    <Text style={styles.term}>
+                    Player 13 vs Dealer 2:
                     </Text>
+                        <Text style={styles.subparagraph}>
+                            Hit if count is -1-.  Stand at count 0+.
+                        </Text>
+                    <Text style={styles.term}>
+                    Player 12 vs Dealer 4:
+                    </Text>
+                        <Text style={styles.subparagraph}>
+                            Hit if count is 0-.  Stand at count 1+.
+                        </Text>
+                    <Text style={styles.term}>
+                    Player 12 vs Dealer 5:
+                    </Text>
+                        <Text style={styles.subparagraph}>
+                            Hit if count is -2-.  Stand at count -1+.
+                        </Text>
+                    <Text style={styles.term}>
+                    Player 12 vs Dealer 6:
+                    </Text>
+                        <Text style={styles.subparagraph}>
+                            Hit if count is -1- and stand at count 0+ in S17 games. (changes to -3 in H17 games)
+                        </Text>
+                    <Text style={styles.term}>
+                    Player 13 vs Dealer 3:
+                    </Text>
+                        <Text style={styles.subparagraph}>
+                            Hit if count is -2 and stand at count -1+.
+                        </Text>
 
 
 
 
-
+                    <Text style={styles.subheader}>
+                        A footnote on abbreviations... 
+                    </Text>
                     <Text style={styles.paragraph}>
-                        A footnote on abbreviations... Count is assumed to be a positive number unless denoted as a negative. 
+                        Count is assumed to be a positive number unless denoted as a negative. 
                     </Text>
                     <Text style={styles.paragraph}>
                         4 is plus four and -4 is minus four.  Symbol after the number is used to denote which direction the rule takes effect. 
                     </Text>
                     <Text style={styles.paragraph}>
-                        EXAMPLE:  4+ would be read 'rule is effective at a count of plus four and above'.  
+                        EXAMPLE:  4+ would be read "rule is effective at a count of plus four and above".  
                     </Text>
                     <Text style={styles.paragraph}>
-                        EXAMPLE:  4- would be read 'rule effective at a count of plus four and below'.
+                        EXAMPLE:  4- would be read "rule is effective at a count of plus four and below".
                     </Text>
                     <Text style={styles.paragraph}>
-                        EXAMPLE:  -2- would be read 'rule effective at a count of minus two and below'.
+                        EXAMPLE:  -2- would be read "rule is effective at a count of minus two and below".
                     </Text>
                     <Text style={styles.paragraph}>
-                        EXAMPLE:  -2+ would be read 'rule effective at a count of minus two and above'.
+                        EXAMPLE:  -2+ would be read "rule is effective at a count of minus two and above".
                     </Text>
                 </View> 
             </ScrollView>
@@ -181,7 +213,7 @@ const styles = StyleSheet.create({
         paddingTop: Constants.statusBarHeight,
         padding: 8,
         backgroundColor: ( '#0f9b0f', '#52c234', '#52c234', '#0f9b0f'),
-        height: 3000,
+        height: 3550,
     },
     subheader: {
         color: '#fff',
