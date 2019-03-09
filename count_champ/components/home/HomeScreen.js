@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Button, Text, View, StyleSheet, Image, Dimensions, TouchableWithoutFeedback, AsyncStorage } from 'react-native';
 import { Constants } from 'expo';
 import homeLogo from './blackjackLogo.jpg';
-import closeIcon from './close.png'
 import Menubar from '../menubar/Menubar';
 
 let ScreenHeight = Dimensions.get("window").height;
@@ -99,25 +98,25 @@ class HomeScreen extends React.Component {
 
     render() {
         const {navigate} = this.props.navigation;
-        //console.log(navigate)
         return (
             <View style={styles.container}>
-            { this.state.sideMenuShowing ? 
-                    <View style={styles.menuContainer}>
-                        <Menubar navigation={navigate} /> 
-                        <TouchableWithoutFeedback onPress={() => this.toggleMenu()}>
-                            <Image
-                                source={require('./close.png')}
-                                style={{ width: 40, height: 40, marginLeft:(this.state.menuIconMargin +10), marginTop: 30}}/>
-                        </TouchableWithoutFeedback>
-                    </View>
-                    : 
+            {   this.state.sideMenuShowing 
+                ? 
+                <View style={styles.menuContainer}>
+                    <Menubar navigation={navigate} /> 
                     <TouchableWithoutFeedback onPress={() => this.toggleMenu()}>
                         <Image
-                            source={require('./menu.png')}
-                            style={{ width: 50, height: 50, marginLeft: this.state.menuIconMargin}}/>
+                            source={require('./close.png')}
+                            style={{ width: 40, height: 40, marginLeft:(this.state.menuIconMargin +10), marginTop: 30}}/>
                     </TouchableWithoutFeedback>
-                    }
+                </View>
+                : 
+                <TouchableWithoutFeedback onPress={() => this.toggleMenu()}>
+                    <Image
+                        source={require('./menu.png')}
+                        style={{ width: 50, height: 50, marginLeft: this.state.menuIconMargin}}/>
+                </TouchableWithoutFeedback>
+            }
 
                 <View>
                     <Text style={styles.paragraph}>
@@ -143,8 +142,6 @@ class HomeScreen extends React.Component {
                     onPress={() => navigate('Train', {name: 'Train'})}
                     />
                 </View>
-                
-                
             </View>
         );
     }

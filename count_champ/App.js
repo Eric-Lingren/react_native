@@ -1,4 +1,3 @@
-import * as React from 'react';
 import HomeScreen from './components/home/HomeScreen'
 import Learn from './components/learn/Learn'
 import Train from './components/train/Train'
@@ -18,13 +17,12 @@ import Fundamentals from './components/learn/level_1_fundamentals/Fundamentals'
 import LearnBasicStrategy from './components/learn/level_2_basic_strategy/BasicStrategy'
 import CountingCards from './components/learn/level_3_counting_cards/CountingCards'
 import RunningCountVsTrueCount from './components/learn/level_4_running_count_vs_true_count/RunningCountVsTrueCount'
-import HowToBet from './components/learn/level_5_how_to_bet/HowToBet'
-import BankrollSizing from './components/learn/level_6_bankroll_sizing/BankrollSizing'
-import HowMuchMoney from './components/learn/level_7_how_much_money/HowMuchMoney'
-import WhatsNext from './components/learn/level_8_whats_next/WhatsNext'
-
-
-import {createStackNavigator, createAppContainer} from 'react-navigation';
+import Divergences from './components/learn/level_5_divergences/Divergences'
+import HowToBet from './components/learn/level_6_how_to_bet/HowToBet'
+import BankrollSizing from './components/learn/level_7_bankroll_sizing/BankrollSizing'
+import HowMuchMoney from './components/learn/level_8_how_much_money/HowMuchMoney'
+import WhatsNext from './components/learn/level_9_whats_next/WhatsNext'
+import {createStackNavigator, createAppContainer} from 'react-navigation'
 
 const MainNavigator = createStackNavigator({
   
@@ -47,6 +45,7 @@ const MainNavigator = createStackNavigator({
   LearnBasicStrategy: {screen: LearnBasicStrategy},
   CountingCards: {screen: CountingCards},
   RunningCountVsTrueCount: {screen: RunningCountVsTrueCount},
+  Divergences: {screen: Divergences},
   HowToBet: {screen: HowToBet},
   BankrollSizing: {screen: BankrollSizing},
   HowMuchMoney: {screen: HowMuchMoney},
