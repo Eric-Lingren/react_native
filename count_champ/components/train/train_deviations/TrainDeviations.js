@@ -32,6 +32,7 @@ class TrainDeviations extends React.Component {
             minus2ButtonColor: '#2196f3',
             minus3ButtonColor: '#2196f3',
             correctIndex: 10,
+            checkAnswer: false,
             deck: [
                 { "value": "6", "image": "https://deckofcardsapi.com/static/img/6H.png" },
                 { "value": "QUEEN", "image": "https://deckofcardsapi.com/static/img/QH.png" },
@@ -278,9 +279,6 @@ class TrainDeviations extends React.Component {
         let dealerCardsArray = this.state.deck.filter(card =>  card.value.includes(randomDealerString) )
         let randomDealerIndex =  Math.floor(Math.random()*4)
         let dealerCard = dealerCardsArray[randomDealerIndex]
-        
-        // console.log(randomPlayerHand )
-        // console.log(dealerCard)
 
         this.setState({
             dealerHand: dealerCard.value,
@@ -367,10 +365,11 @@ class TrainDeviations extends React.Component {
         let dHand = this.state.dHand
         console.log('player hand : ' + pHand)
         console.log('dealer hand : ' + dHand)
-        // console.log(this.state.shoe)
         console.log('dealer hits 17: ' + this.state.dealerHitsOnSoft17)
+        console.log('surrender allowed : ' + this.state.surrenderAllowed)
 
         if(this.state.surrenderAllowed){
+            console.log('answeres set')
             if(this.state.shoe){
                 if(pHand === 15){
                     if(dHand === 11){
@@ -480,17 +479,136 @@ class TrainDeviations extends React.Component {
                     }
                 }
             } else if(this.state.doubleDeck){
-
+                if(pHand === 16){
+                    if(dHand === 10){
+                        this.setState({correctIndex: 0})
+                    } else if(dHand === 9){
+                        this.setState({correctIndex: 5})
+                    }
+                } else if (pHand === 15){
+                    this.setState({correctIndex: 4})
+                } else if (pHand === 13){
+                    if(dHand === 2){
+                        this.setState({correctIndex: 0})
+                    } else if(dHand === 3){
+                        this.setState({correctIndex: -2})
+                    }
+                }else if (pHand === 12){
+                    if(dHand === 2){
+                        this.setState({correctIndex: 4})
+                    } else if(dHand === 3){
+                        this.setState({correctIndex: 3})
+                    } else if(dHand === 4){
+                        this.setState({correctIndex: 0})
+                    } else if(dHand === 5){
+                        this.setState({correctIndex: -1})
+                    } else if(dHand === 6){
+                        if(this.state.dealerHitsOnSoft17){
+                            this.setState({correctIndex: -3})
+                        }else{
+                            this.setState({correctIndex: 0})
+                        }
+                    }
+                }else if (pHand === 11){
+                    if(this.state.dealerHitsOnSoft17){
+                        this.setState({correctIndex: -1})
+                    }else{
+                        this.setState({correctIndex: 0})
+                    }
+                }else if (pHand === 10){
+                    if(dHand === 11) {
+                        this.setState({correctIndex: 3})
+                    }else if(dHand === 10) {
+                        this.setState({correctIndex: 4})
+                    }
+                }else if (pHand === 9){
+                    if(dHand === 2){
+                        this.setState({correctIndex: 1})
+                    }
+                    if(dHand === 7){
+                        this.setState({correctIndex: 4})
+                    }
+                }else if (pHand === 20){
+                    if(dHand === 5){
+                        this.setState({correctIndex: 5})
+                    }
+                    if(dHand === 6){
+                        if(this.state.dealerHitsOnSoft17){
+                            this.setState({correctIndex: 4})
+                        }else{
+                            this.setState({correctIndex: 5})
+                        }
+                    }
+                }
             } else if(this.state.singleDeck){
-
+                if(pHand === 16){
+                    if(dHand === 10){
+                        this.setState({correctIndex: 0})
+                    } else if(dHand === 9){
+                        this.setState({correctIndex: 5})
+                    }
+                } else if (pHand === 15){
+                    this.setState({correctIndex: 4})
+                } else if (pHand === 13){
+                    if(dHand === 2){
+                        this.setState({correctIndex: 0})
+                    } else if(dHand === 3){
+                        this.setState({correctIndex: -1})
+                    }
+                }else if (pHand === 12){
+                    if(dHand === 2){
+                        this.setState({correctIndex: 4})
+                    } else if(dHand === 3){
+                        this.setState({correctIndex: 3})
+                    } else if(dHand === 4){
+                        this.setState({correctIndex: 1})
+                    } else if(dHand === 5){
+                        this.setState({correctIndex: 0})
+                    } else if(dHand === 6){
+                        if(this.state.dealerHitsOnSoft17){
+                            this.setState({correctIndex: -2})
+                        }else{
+                            this.setState({correctIndex: 1})
+                        }
+                    }
+                }else if (pHand === 11){
+                    if(this.state.dealerHitsOnSoft17){
+                        this.setState({correctIndex: -2})
+                    }else{
+                        this.setState({correctIndex: -1})
+                    }
+                }else if (pHand === 10){
+                    if(dHand === 11) {
+                        this.setState({correctIndex: 2})
+                    }else if(dHand === 10) {
+                        this.setState({correctIndex: 3})
+                    }
+                }else if (pHand === 9){
+                    if(dHand === 2){
+                        this.setState({correctIndex: 1})
+                    }
+                    if(dHand === 7){
+                        this.setState({correctIndex: 3})
+                    }
+                }else if (pHand === 20){
+                    if(dHand === 5){
+                        this.setState({correctIndex: 5})
+                    }
+                    if(dHand === 6){
+                        this.setState({correctIndex: 5})
+                    }
+                }
             }
         }
     }
 
+    checkAnswer = () => {
+        console.log('correct Index is : ' + this.state.correctIndex)
+    }
     checkPlus5Button = () => {
         let pHand = this.state.pHand
         let dHand = this.state.dHand
-
+        console.log('correct Index is : ' + this.state.correctIndex)
     }
 
     checkPlus4Button = () => {
