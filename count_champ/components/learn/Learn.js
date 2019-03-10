@@ -40,9 +40,9 @@ class Learn extends React.Component {
                         onPress={() => navigate('RunningCountVsTrueCount', {name: 'Running Count vs True Count'})}
                         />
                     <Button
-                        title="Level 5:  Divergences & Illustrious 18"
+                        title="Level 5:  Deviations & Illustrious 18"
                         color="#000000"
-                        onPress={() => navigate('Divergences', {name: 'Divergences'})}
+                        onPress={() => navigate('Deviations', {name: 'Deviations'})}
                         />
                     <Button
                         title="Level 6:  How to Bet"

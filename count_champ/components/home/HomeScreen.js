@@ -90,6 +90,12 @@ class HomeScreen extends React.Component {
         try {
             await AsyncStorage.setItem('betSizingQuestionsCorrect', '0');
         } catch (error) {}
+        try {
+            await AsyncStorage.setItem('deviationsPlayed', '0');
+        } catch (error) {}
+        try {
+            await AsyncStorage.setItem('deviationsCorrect', '0');
+        } catch (error) {}
     };
 
     static navigationOptions = {

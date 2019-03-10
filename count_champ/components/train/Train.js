@@ -31,6 +31,11 @@ class Train extends React.Component {
                     onPress={() => navigate('SpeedCount', {name: 'Speed Count'})}
                     />
                     <Button
+                    title="Deviations"
+                    color="#000000"
+                    onPress={() => navigate('TrainDeviations', {name: 'Train Deviations'})}
+                    />
+                    <Button
                     title="True Count"
                     color="#000000"
                     onPress={() => navigate('TrueCount', {name: 'True Count'})}
