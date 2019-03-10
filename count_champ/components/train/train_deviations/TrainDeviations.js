@@ -22,6 +22,16 @@ class TrainDeviations extends React.Component {
             singleDeck: false,
             doubleDeck: false,
             shoe: true,
+            plus5ButtonColor: '#2196f3',
+            plus4ButtonColor: '#2196f3',
+            plus3ButtonColor: '#2196f3',
+            plus2ButtonColor: '#2196f3',
+            plus1ButtonColor: '#2196f3',
+            pus0ButtonColor: '#2196f3',
+            minus1ButtonColor: '#2196f3',
+            minus2ButtonColor: '#2196f3',
+            minus3ButtonColor: '#2196f3',
+            correctIndex: 10,
             deck: [
                 { "value": "6", "image": "https://deckofcardsapi.com/static/img/6H.png" },
                 { "value": "QUEEN", "image": "https://deckofcardsapi.com/static/img/QH.png" },
@@ -341,16 +351,185 @@ class TrainDeviations extends React.Component {
 
         //  Sums the 2 player cards into 1 hand value
         const pHand = parseInt(pCard1Number) +  parseInt(pCard2Number)
-        const dHand = dCardNumber
-
+        const dHand = parseInt(dCardNumber)
+        
         //  Sets state of values parsed above for other functions to access.
         this.setState({
             pHand: pHand,
             dHand: dHand,
             pCard1Number: pCard1Number,
             pCard2Number: pCard2Number,
-        })
+        }, () => this.calculateAnswer() )
     }
+
+    calculateAnswer = () => {
+        let pHand = this.state.pHand
+        let dHand = this.state.dHand
+        console.log('player hand : ' + pHand)
+        console.log('dealer hand : ' + dHand)
+        // console.log(this.state.shoe)
+        console.log('dealer hits 17: ' + this.state.dealerHitsOnSoft17)
+
+        if(this.state.surrenderAllowed){
+            if(this.state.shoe){
+                if(pHand === 15){
+                    if(dHand === 11){
+                        this.setState({correctIndex: -2})
+                    } else if(dHand === 10){
+                        this.setState({correctIndex: 0})
+                    } else if(dHand === 9){
+                        this.setState({correctIndex: 3})
+                    }
+                }else if(pHand === 14){
+                    this.setState({correctIndex: 4})
+                }
+            } else if(this.state.doubleDeck){
+                if(pHand === 15){
+                    if(dHand === 11){
+                        this.setState({correctIndex: -1})
+                    } else if(dHand === 10){
+                        this.setState({correctIndex: 0})
+                    } else if(dHand === 9){
+                        this.setState({correctIndex: 3})
+                    }
+                }else if(pHand === 14){
+                    this.setState({correctIndex: 4})
+                }
+            } else if(this.state.singleDeck){
+                if(pHand === 15){
+                    if(dHand === 11){
+                        if(this.state.dealerHitsOnSoft17){
+                            this.setState({correctIndex: -2})
+                        }else{
+                            this.setState({correctIndex: 0})
+                        }
+                    } else if(dHand === 10){
+                        this.setState({correctIndex: 0})
+                    } else if(dHand === 9){
+                        this.setState({correctIndex: 2})
+                    }
+                }else if(pHand === 14){
+                    this.setState({correctIndex: 4})
+                }
+            }
+        }else if(!this.state.surrenderAllowed) {
+            if(this.state.shoe){
+                if(pHand === 16){
+                    if(dHand === 10){
+                        this.setState({correctIndex: 0})
+                    } else if(dHand === 9){
+                        this.setState({correctIndex: 5})
+                    }
+                } else if (pHand === 15){
+                    this.setState({correctIndex: 4})
+                } else if (pHand === 13){
+                    if(dHand === 2){
+                        this.setState({correctIndex: 0})
+                    } else if(dHand === 3){
+                        this.setState({correctIndex: -2})
+                    }
+                }else if (pHand === 12){
+                    if(dHand === 2){
+                        this.setState({correctIndex: 4})
+                    } else if(dHand === 3){
+                        this.setState({correctIndex: 2})
+                    } else if(dHand === 4){
+                        this.setState({correctIndex: 0})
+                    } else if(dHand === 5){
+                        this.setState({correctIndex: -1})
+                    } else if(dHand === 6){
+                        if(this.state.dealerHitsOnSoft17){
+                            this.setState({correctIndex: -3})
+                        }else{
+                            this.setState({correctIndex: -1})
+                        }
+                    }
+                }else if (pHand === 11){
+                    if(this.state.dealerHitsOnSoft17){
+                        this.setState({correctIndex: 0})
+                    }else{
+                        this.setState({correctIndex: 1})
+                    }
+                }else if (pHand === 10){
+                    if(dHand === 11) {
+                        if(this.state.dealerHitsOnSoft17){
+                            this.setState({correctIndex: 3})
+                        }else{
+                            this.setState({correctIndex: 4})
+                        }
+                    }else if(dHand === 10) {
+                        this.setState({correctIndex: 4})
+                    }
+                }else if (pHand === 9){
+                    if(dHand === 2){
+                        this.setState({correctIndex: 1})
+                    }
+                    if(dHand === 7){
+                        this.setState({correctIndex: 4})
+                    }
+                }else if (pHand === 20){
+                    if(dHand === 5){
+                        this.setState({correctIndex: 5})
+                    }
+                    if(dHand === 6){
+                        if(this.state.dealerHitsOnSoft17){
+                            this.setState({correctIndex: 4})
+                        }else{
+                            this.setState({correctIndex: 5})
+                        }
+                    }
+                }
+            } else if(this.state.doubleDeck){
+
+            } else if(this.state.singleDeck){
+
+            }
+        }
+    }
+
+    checkPlus5Button = () => {
+        let pHand = this.state.pHand
+        let dHand = this.state.dHand
+
+    }
+
+    checkPlus4Button = () => {
+    
+    }
+
+    checkPlus3Button = () => {
+    
+    }
+
+    checkPlus2Button = () => {
+    
+    }
+
+    checkPlus1Button = () => {
+    
+    }
+
+    checkPlus0Button = () => {
+    
+    }
+
+    checkMinus1Button = () => {
+    
+    }
+
+    checkMinus2Button = () => {
+    
+    }
+
+    checkMinus3Button = () => {
+    
+    }
+
+    helpButton = () => {
+    
+    }
+
+
 
     static navigationOptions = {
         title: 'Deviations'
@@ -360,50 +539,50 @@ class TrainDeviations extends React.Component {
         const {navigate} = this.props.navigation;
         return (
             <ScrollView>
-                <View style={styles.container}>
-                <Text style={styles.handLabel}>Dealer Hand</Text>
-                    
-                    <View style={styles.tableContainer}>
-                        <Image
-                            style={styles.cardDisplay}
-                            source={{uri: this.state.dealerImages}}
-                        />
-                        <View style={styles.playerHandContainer}>
-                        <Image
-                            style={styles.cardDisplay}
-                            source={{uri: this.state.playerImage1}}
-                        />
-                        <Image
-                            style={styles.cardDisplay}
-                            source={{uri: this.state.playerImage2}}
-                        />
-                        </View>
-                    </View>
-
-                    <Text style={styles.handLabel}>Player Hand</Text>
-                    <Button onPress={this.dealHand} width='50' color='#000000' title='Deal'></Button>
-                    
-                    <Text style={styles.handLabel}> Choose the count for deviating:</Text>
-
-
-                    <View style={styles.buttonWrapper}>
-                        <View style={styles.buttonContainerLeft}>
-                            <Button onPress={this.checkHitButton} title='+ 5' color={this.state.hitButtonColor}></Button>
-                            <Button onPress={this.checkDoubleButton} title='+ 3' color={this.state.doubleButtonColor}></Button>
-                            <Button onPress={this.checkSurrenderButton} title='+ 1' color={this.state.surrenderButtonColor}></Button>
-                            <Button onPress={this.checkSurrenderButton} title='- 1' color={this.state.surrenderButtonColor}></Button>
-                            <Button onPress={this.checkSurrenderButton} title='- 3' color={this.state.surrenderButtonColor}></Button>
-                            
-                        </View>
-                        <View style={styles.buttonContainerRight}>
-                            <Button onPress={this.checkStandButton} title='+ 4' color={this.state.standButtonColor}></Button>
-                            <Button onPress={this.checkSplitButton} title='+ 2' color={this.state.splitButtonColor}></Button>
-                            <Button onPress={this.helpButton} title='0' color='#2196f3'></Button>
-                            <Button onPress={this.checkSurrenderButton} title='- 2' color={this.state.surrenderButtonColor}></Button>
-                            <Button onPress={this.checkSurrenderButton} title='Help' color={this.state.surrenderButtonColor}></Button>
-                        </View>
+            <View style={styles.container}>
+            <Text style={styles.handLabel}>Dealer Hand</Text>
+                
+                <View style={styles.tableContainer}>
+                    <Image
+                        style={styles.cardDisplay}
+                        source={{uri: this.state.dealerImages}}
+                    />
+                    <View style={styles.playerHandContainer}>
+                    <Image
+                        style={styles.cardDisplay}
+                        source={{uri: this.state.playerImage1}}
+                    />
+                    <Image
+                        style={styles.cardDisplay}
+                        source={{uri: this.state.playerImage2}}
+                    />
                     </View>
                 </View>
+
+                <Text style={styles.handLabel}>Player Hand</Text>
+                <Button onPress={this.dealHand} width='50' color='#000000' title='Deal'></Button>
+                
+                <Text style={styles.handLabel}> Choose the count for deviating:</Text>
+
+
+                <View style={styles.buttonWrapper}>
+                    <View style={styles.buttonContainerLeft}>
+                        <Button onPress={this.checkPlus5Button} title='+ 5' color={this.state.plus5ButtonColor}></Button>
+                        <Button onPress={this.checkPlus4Button} title='+ 4' color={this.state.plus4ButtonColor}></Button>
+                        <Button onPress={this.checkPlus3Button} title='+ 3' color={this.state.plus3ButtonColor}></Button>
+                        <Button onPress={this.checkPlus2Button} title='+ 2' color={this.state.plus2ButtonColor}></Button>
+                        <Button onPress={this.checkPlus1Button} title='+ 1' color={this.state.plus1ButtonColor}></Button>
+                        
+                    </View>
+                    <View style={styles.buttonContainerRight}>
+                        <Button onPress={this.checkPlus0Button} title='0' color={this.state.plus0ButtonColor}></Button>
+                        <Button onPress={this.checkMinus1Button} title='- 1' color={this.state.minus1ButtonColor}></Button>
+                        <Button onPress={this.checkMinus2Button} title='- 2' color={this.state.minus2ButtonColor}></Button>
+                        <Button onPress={this.checkMinus3Button} title='- 3' color={this.state.minus3ButtonColor}></Button>
+                        <Button onPress={this.helpButton} title='Help'color='#2196f3' ></Button>
+                    </View>
+                </View>
+            </View>
             </ScrollView>
             
         );
