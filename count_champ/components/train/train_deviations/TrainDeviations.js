@@ -176,6 +176,8 @@ class TrainDeviations extends React.Component {
 
 
     saveStatsInStorage = async (deviationsPlayed, deviationsCorrect ) => {
+        console.log('played: ' + deviationsPlayed)
+        console.log('Correct: ' + deviationsCorrect)
         try {
             await AsyncStorage.setItem('deviationsPlayed', deviationsPlayed);
         } catch (error) {}
@@ -426,6 +428,12 @@ class TrainDeviations extends React.Component {
         let pHand = this.state.pHand
         let dHand = this.state.dHand
 
+        this.setState(prevState => {
+            return{
+                deviationsPlayed: prevState.deviationsPlayed += 1
+            }
+        })
+
         if(!this.state.fab4RuleSelected){
             if(this.state.shoe){
                 if(pHand === 16){
@@ -620,7 +628,12 @@ class TrainDeviations extends React.Component {
     checkPlus5Button = () => {
         let index = this.state.correctIndex
         if(index === 5){
-            this.setState({plus5ButtonColor: '#055902'})
+            this.setState(prevState => {
+                return{
+                    deviationsCorrect: prevState.deviationsCorrect += 1,
+                    plus5ButtonColor: '#055902'
+                }
+            })
         }else if(index === 4){
             this.setState({plus5ButtonColor: '#ff0000', plus4ButtonColor: '#055902'})
         }else if(index === 3){
@@ -644,7 +657,12 @@ class TrainDeviations extends React.Component {
     checkPlus4Button = () => {
         let index = this.state.correctIndex
         if(index === 4){
-            this.setState({plus4ButtonColor: '#055902'})
+            this.setState(prevState => {
+                return{
+                    deviationsCorrect: prevState.deviationsCorrect += 1,
+                    plus4ButtonColor: '#055902'
+                }
+            })
         }else if(index === 5){
             this.setState({plus4ButtonColor: '#ff0000', plus5ButtonColor: '#055902'})
         }else if(index === 3){
@@ -667,7 +685,12 @@ class TrainDeviations extends React.Component {
     checkPlus3Button = () => {
         let index = this.state.correctIndex
         if(index === 3){
-            this.setState({plus3ButtonColor: '#055902'})
+            this.setState(prevState => {
+                return{
+                    deviationsCorrect: prevState.deviationsCorrect += 1,
+                    plus3ButtonColor: '#055902'
+                }
+            })
         }else if(index === 5){
             this.setState({plus3ButtonColor: '#ff0000', plus5ButtonColor: '#055902'})
         }else if(index === 4){
@@ -690,7 +713,12 @@ class TrainDeviations extends React.Component {
     checkPlus2Button = () => {
         let index = this.state.correctIndex
         if(index === 2){
-            this.setState({plus2ButtonColor: '#055902'})
+            this.setState(prevState => {
+                return{
+                    deviationsCorrect: prevState.deviationsCorrect += 1,
+                    plus2ButtonColor: '#055902'
+                }
+            })
         }else if(index === 5){
             this.setState({plus2ButtonColor: '#ff0000', plus5ButtonColor: '#055902'})
         }else if(index === 4){
@@ -713,7 +741,12 @@ class TrainDeviations extends React.Component {
     checkPlus1Button = () => {
         let index = this.state.correctIndex
         if(index === 1){
-            this.setState({plus1ButtonColor: '#055902'})
+            this.setState(prevState => {
+                return{
+                    deviationsCorrect: prevState.deviationsCorrect += 1,
+                    plus1ButtonColor: '#055902'
+                }
+            })
         }else if(index === 5){
             this.setState({plus1ButtonColor: '#ff0000', plus5ButtonColor: '#055902'})
         }else if(index === 4){
@@ -736,7 +769,12 @@ class TrainDeviations extends React.Component {
     checkPlus0Button = () => {
         let index = this.state.correctIndex
         if(index === 0){
-            this.setState({plus0ButtonColor: '#055902'})
+            this.setState(prevState => {
+                return{
+                    deviationsCorrect: prevState.deviationsCorrect += 1,
+                    plus0ButtonColor: '#055902'
+                }
+            })
         }else if(index === 5){
             this.setState({plus0ButtonColor: '#ff0000', plus5ButtonColor: '#055902'})
         }else if(index === 4){
@@ -759,7 +797,12 @@ class TrainDeviations extends React.Component {
     checkMinus1Button = () => {
         let index = this.state.correctIndex
         if(index === -1){
-            this.setState({minus1ButtonColor: '#055902'})
+            this.setState(prevState => {
+                return{
+                    deviationsCorrect: prevState.deviationsCorrect += 1,
+                    minus1ButtonColor: '#055902'
+                }
+            })
         }else if(index === 5){
             this.setState({minus1ButtonColor: '#ff0000', plus5ButtonColor: '#055902'})
         }else if(index === 4){
@@ -782,7 +825,12 @@ class TrainDeviations extends React.Component {
     checkMinus2Button = () => {
         let index = this.state.correctIndex
         if(index === -2){
-            this.setState({minus2ButtonColor: '#055902'})
+            this.setState(prevState => {
+                return{
+                    deviationsCorrect: prevState.deviationsCorrect += 1,
+                    minus2ButtonColor: '#055902'
+                }
+            })
         }else if(index === 5){
             this.setState({minus2ButtonColor: '#ff0000', plus5ButtonColor: '#055902'})
         }else if(index === 4){
@@ -805,7 +853,12 @@ class TrainDeviations extends React.Component {
     checkMinus3Button = () => {
         let index = this.state.correctIndex
         if(index === -3){
-            this.setState({minus3ButtonColor: '#055902'})
+            this.setState(prevState => {
+                return{
+                    deviationsCorrect: prevState.deviationsCorrect += 1,
+                    minus3ButtonColor: '#055902'
+                }
+            })
         }else if(index === 5){
             this.setState({minus3ButtonColor: '#ff0000', plus5ButtonColor: '#055902'})
         }else if(index === 4){
