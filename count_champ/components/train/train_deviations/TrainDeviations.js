@@ -176,8 +176,6 @@ class TrainDeviations extends React.Component {
 
 
     saveStatsInStorage = async (deviationsPlayed, deviationsCorrect ) => {
-        console.log('played: ' + deviationsPlayed)
-        console.log('Correct: ' + deviationsCorrect)
         try {
             await AsyncStorage.setItem('deviationsPlayed', deviationsPlayed);
         } catch (error) {}

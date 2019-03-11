@@ -38,6 +38,10 @@ class StatsCharts extends React.Component {
             betSizingQuestionsCorrect: 0,
             percentOfBetSizingQuestionsCorrect: 0,
             percentOfBetSizingQuestionsCorrectColor: '',
+            deviationsPlayed: 0,
+            deviationsCorrect: 0,
+            percentOfDeviationQuestionsCorrect: 0,
+            percentOfDeviationQuestionsCorrectColor: '',
         }
     }
 
@@ -46,6 +50,7 @@ class StatsCharts extends React.Component {
         this.getCountingStatsFromStorage()
         this.getTrueCountStatsFromStorage()
         this.getBetSizingFromStorage()
+        this.getDeviationStatsFromStorage()
     }
 
     getStatsFromStorage = () => {
@@ -79,7 +84,6 @@ class StatsCharts extends React.Component {
             splitHandsCorrect === 'NaN' || splitHandsCorrect === 'null' ? splitHandsCorrectNum = 0 : splitHandsCorrectNum = parseInt(splitHandsCorrect)
             this.setState({splitHandsCorrect: splitHandsCorrectNum}, () => this.calculateTotalHands())
         }).done();
-        
     }
 
     calculateTotalHands = () => {
@@ -292,6 +296,42 @@ class StatsCharts extends React.Component {
         
     }
 
+    getDeviationStatsFromStorage = () => {
+        AsyncStorage.getItem("deviationsPlayed").then((deviationsPlayed) => {
+            let deviationsPlayedNum;
+            deviationsPlayed === 'NaN' ? deviationsPlayedNum = 0 : deviationsPlayedNum = parseInt(deviationsPlayed)
+            this.setState({deviationsPlayed: deviationsPlayedNum})
+        }).done();
+        AsyncStorage.getItem("deviationsCorrect").then((deviationsCorrect) => {
+            let deviationsCorrectNum;
+            deviationsCorrect === 'NaN' || deviationsCorrect === 'null' ? deviationsCorrectNum = 0 : deviationsCorrectNum = parseInt(deviationsCorrect)
+            this.setState({deviationsCorrect: deviationsCorrectNum}, () => this.calculateDeviationStats())
+        }).done();
+    }
+
+    calculateDeviationStats = () => {
+        let deviationsPlayed = this.state.deviationsPlayed
+        let deviationsCorrect = this.state.deviationsCorrect
+        let percentOfDeviationQuestionsCorrect = ( (deviationsCorrect / deviationsPlayed) * 100 )
+        let percentOfDeviationQuestionsCorrectColor = '#2196f3'
+
+        if(percentOfDeviationQuestionsCorrect >= 90){
+            //  Good Score
+            percentOfDeviationQuestionsCorrectColor = '#49FF58'
+        } else if (percentOfDeviationQuestionsCorrect <= 70){
+            // Bad Score
+            percentOfDeviationQuestionsCorrectColor = '#FF0000'
+        } else {
+            //  Medium Score
+            percentOfDeviationQuestionsCorrectColor = '#FBFC5F'
+        }
+        this.setState({ 
+            percentOfDeviationQuestionsCorrect: percentOfDeviationQuestionsCorrect,
+            percentOfDeviationQuestionsCorrectColor: percentOfDeviationQuestionsCorrectColor
+        })
+        
+    }
+
     resetStats = async () => {
         console.log('clear button pressed')
         try {
@@ -330,6 +370,12 @@ class StatsCharts extends React.Component {
         try {
             await AsyncStorage.setItem('betSizingQuestionsCorrect', '0');
         } catch (error) {}
+        try {
+            await AsyncStorage.setItem('deviationsPlayed', '0');
+        } catch (error) {}
+        try {
+            await AsyncStorage.setItem('deviationsCorrect', '0');
+        } catch (error) {}
         this.setState({
             sessionsPlayed: 0,
             sessionsCorrect: 0,
@@ -352,6 +398,9 @@ class StatsCharts extends React.Component {
             betSizingQuestionsPlayed: 0,
             betSizingQuestionsCorrect: 0,
             percentOfBetSizingQuestionsCorrect: 0,
+            deviationsQuestionsPlayed: 0,
+            deviationsQuestionsCorrect: 0,
+            percentOfDeviationsQuestionsCorrect: 0,
         })
     }
 
@@ -471,6 +520,21 @@ class StatsCharts extends React.Component {
                     <View style={{  width: `${this.state.percentOfBetSizingQuestionsCorrect}%`, 
                                     height: 30, 
                                     backgroundColor: this.state.percentOfBetSizingQuestionsCorrectColor}}></View>
+                </View>
+
+                <View style={styles.statsContainer}>
+                    <Text style={styles.headerStyles}>Deviations</Text>
+                    <Text style={styles.textStyles}>Played: {this.state.deviationsPlayed} </Text>
+                    <View style={{  width: '100%', 
+                                    height: 30,
+                                    borderWidth: 1,
+                                    backgroundColor: '#2196f3',
+                                    marginBottom: 5}}>
+                    </View>
+                    <Text style={styles.textStyles}>Correct: {this.state.deviationsCorrect} </Text>
+                    <View style={{  width: `${this.state.percentOfDeviationQuestionsCorrect}%`, 
+                                    height: 30, 
+                                    backgroundColor: this.state.percentOfDeviationQuestionsCorrectColor}}></View>
                 </View>
                 
             </View>
