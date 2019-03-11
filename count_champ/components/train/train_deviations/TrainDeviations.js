@@ -27,12 +27,13 @@ class TrainDeviations extends React.Component {
             plus3ButtonColor: '#2196f3',
             plus2ButtonColor: '#2196f3',
             plus1ButtonColor: '#2196f3',
-            pus0ButtonColor: '#2196f3',
+            plus0ButtonColor: '#2196f3',
             minus1ButtonColor: '#2196f3',
             minus2ButtonColor: '#2196f3',
             minus3ButtonColor: '#2196f3',
             correctIndex: 10,
             checkAnswer: false,
+            fab4RuleSelected: false,
             deck: [
                 { "value": "6", "image": "https://deckofcardsapi.com/static/img/6H.png" },
                 { "value": "QUEEN", "image": "https://deckofcardsapi.com/static/img/QH.png" },
@@ -287,12 +288,16 @@ class TrainDeviations extends React.Component {
             playerCard2: randomPlayerHand.card2,
             playerImage1: randomPlayerHand.image1, 
             playerImage2: randomPlayerHand.image2,
-            // selectedButtonColor: '',
-            // hitButtonColor: '',
-            // standButtonColor: '',
-            // doubleButtonColor: '',
-            // splitButtonColor: '',
-            // surrenderButtonColor: '',
+            correctIndex:10,
+            plus5ButtonColor: '#2196f3',
+            plus4ButtonColor: '#2196f3',
+            plus3ButtonColor: '#2196f3',
+            plus2ButtonColor: '#2196f3',
+            plus1ButtonColor: '#2196f3',
+            plus0ButtonColor: '#2196f3',
+            minus1ButtonColor: '#2196f3',
+            minus2ButtonColor: '#2196f3',
+            minus3ButtonColor: '#2196f3',
         }, () => this.showCardData() )
     }
 
@@ -357,61 +362,71 @@ class TrainDeviations extends React.Component {
             dHand: dHand,
             pCard1Number: pCard1Number,
             pCard2Number: pCard2Number,
-        }, () => this.calculateAnswer() )
+        }, () => this.checkFab4Rule() )
     }
 
-    calculateAnswer = () => {
+    checkFab4Rule = () => {
         let pHand = this.state.pHand
         let dHand = this.state.dHand
-        console.log('player hand : ' + pHand)
-        console.log('dealer hand : ' + dHand)
-        console.log('dealer hits 17: ' + this.state.dealerHitsOnSoft17)
-        console.log('surrender allowed : ' + this.state.surrenderAllowed)
 
         if(this.state.surrenderAllowed){
-            console.log('answeres set')
             if(this.state.shoe){
                 if(pHand === 15){
                     if(dHand === 11){
-                        this.setState({correctIndex: -2})
+                        this.setState({correctIndex: -2, fab4RuleSelected: true}, () => this.calculateAnswer())
                     } else if(dHand === 10){
-                        this.setState({correctIndex: 0})
+                        this.setState({correctIndex: 0, fab4RuleSelected: true}, () => this.calculateAnswer())
                     } else if(dHand === 9){
-                        this.setState({correctIndex: 3})
+                        this.setState({correctIndex: 3, fab4RuleSelected: true}, () => this.calculateAnswer())
                     }
                 }else if(pHand === 14){
-                    this.setState({correctIndex: 4})
+                    this.setState({correctIndex: 4, fab4RuleSelected: true}, () => this.calculateAnswer())
+                }else {
+                    this.setState({fab4RuleSelected: false}, () => this.calculateAnswer())
                 }
             } else if(this.state.doubleDeck){
                 if(pHand === 15){
                     if(dHand === 11){
-                        this.setState({correctIndex: -1})
+                        this.setState({correctIndex: -1, fab4RuleSelected: true}, () => this.calculateAnswer())
                     } else if(dHand === 10){
-                        this.setState({correctIndex: 0})
+                        this.setState({correctIndex: 0, fab4RuleSelected: true}, () => this.calculateAnswer())
                     } else if(dHand === 9){
-                        this.setState({correctIndex: 3})
+                        this.setState({correctIndex: 3, fab4RuleSelected: true})
                     }
                 }else if(pHand === 14){
-                    this.setState({correctIndex: 4})
+                    this.setState({correctIndex: 4, fab4RuleSelected: true}, () => this.calculateAnswer())
+                }else {
+                    this.setState({fab4RuleSelected: false}, () => this.calculateAnswer())
                 }
             } else if(this.state.singleDeck){
                 if(pHand === 15){
                     if(dHand === 11){
                         if(this.state.dealerHitsOnSoft17){
-                            this.setState({correctIndex: -2})
+                            this.setState({correctIndex: -2, fab4RuleSelected: true}, () => this.calculateAnswer())
                         }else{
-                            this.setState({correctIndex: 0})
+                            this.setState({correctIndex: 0, fab4RuleSelected: true}, () => this.calculateAnswer())
                         }
                     } else if(dHand === 10){
-                        this.setState({correctIndex: 0})
+                        this.setState({correctIndex: 0, fab4RuleSelected: true}, () => this.calculateAnswer())
                     } else if(dHand === 9){
-                        this.setState({correctIndex: 2})
+                        this.setState({correctIndex: 2, fab4RuleSelected: true}, () => this.calculateAnswer())
                     }
                 }else if(pHand === 14){
-                    this.setState({correctIndex: 4})
+                    this.setState({correctIndex: 4, fab4RuleSelected: true}, () => this.calculateAnswer())
+                }else {
+                    this.setState({fab4RuleSelected: false}, () => this.calculateAnswer())
                 }
             }
-        }else if(!this.state.surrenderAllowed) {
+        }else {
+            this.setState({fab4RuleSelected: false}, () => this.calculateAnswer())
+        }
+    }
+
+    calculateAnswer = () => {
+        let pHand = this.state.pHand
+        let dHand = this.state.dHand
+
+        if(!this.state.fab4RuleSelected){
             if(this.state.shoe){
                 if(pHand === 16){
                     if(dHand === 10){
@@ -602,45 +617,212 @@ class TrainDeviations extends React.Component {
         }
     }
 
-    checkAnswer = () => {
-        console.log('correct Index is : ' + this.state.correctIndex)
-    }
     checkPlus5Button = () => {
-        let pHand = this.state.pHand
-        let dHand = this.state.dHand
-        console.log('correct Index is : ' + this.state.correctIndex)
+        let index = this.state.correctIndex
+        if(index === 5){
+            this.setState({plus5ButtonColor: '#055902'})
+        }else if(index === 4){
+            this.setState({plus5ButtonColor: '#ff0000', plus4ButtonColor: '#055902'})
+        }else if(index === 3){
+            this.setState({plus5ButtonColor: '#ff0000', plus3ButtonColor: '#055902'})
+        }else if(index === 2){
+            this.setState({plus5ButtonColor: '#ff0000', plus2ButtonColor: '#055902'})
+        }else if(index === 1){
+            this.setState({plus5ButtonColor: '#ff0000', plus1ButtonColor: '#055902'})
+        }else if(index === 0){
+            this.setState({plus5ButtonColor: '#ff0000', plus0ButtonColor: '#055902'})
+        }else if(index === -1){
+            this.setState({plus5ButtonColor: '#ff0000', minus1ButtonColor: '#055902'})
+        }else if(index === -2){
+            this.setState({plus5ButtonColor: '#ff0000', minus2ButtonColor: '#055902'})
+        }else if(index === -3){
+            this.setState({plus5ButtonColor: '#ff0000', minus3ButtonColor: '#055902'})
+        }
+        
     }
 
     checkPlus4Button = () => {
-    
+        let index = this.state.correctIndex
+        if(index === 4){
+            this.setState({plus4ButtonColor: '#055902'})
+        }else if(index === 5){
+            this.setState({plus4ButtonColor: '#ff0000', plus5ButtonColor: '#055902'})
+        }else if(index === 3){
+            this.setState({plus4ButtonColor: '#ff0000', plus3ButtonColor: '#055902'})
+        }else if(index === 2){
+            this.setState({plus4ButtonColor: '#ff0000', plus2ButtonColor: '#055902'})
+        }else if(index === 1){
+            this.setState({plus4ButtonColor: '#ff0000', plus1ButtonColor: '#055902'})
+        }else if(index === 0){
+            this.setState({plus4ButtonColor: '#ff0000', plus0ButtonColor: '#055902'})
+        }else if(index === -1){
+            this.setState({plus4ButtonColor: '#ff0000', minus1ButtonColor: '#055902'})
+        }else if(index === -2){
+            this.setState({plus4ButtonColor: '#ff0000', minus2ButtonColor: '#055902'})
+        }else if(index === -3){
+            this.setState({plus4ButtonColor: '#ff0000', minus3ButtonColor: '#055902'})
+        }
     }
 
     checkPlus3Button = () => {
-    
+        let index = this.state.correctIndex
+        if(index === 3){
+            this.setState({plus3ButtonColor: '#055902'})
+        }else if(index === 5){
+            this.setState({plus3ButtonColor: '#ff0000', plus5ButtonColor: '#055902'})
+        }else if(index === 4){
+            this.setState({plus3ButtonColor: '#ff0000', plus4ButtonColor: '#055902'})
+        }else if(index === 2){
+            this.setState({plus3ButtonColor: '#ff0000', plus2ButtonColor: '#055902'})
+        }else if(index === 1){
+            this.setState({plus3ButtonColor: '#ff0000', plus1ButtonColor: '#055902'})
+        }else if(index === 0){
+            this.setState({plus3ButtonColor: '#ff0000', plus0ButtonColor: '#055902'})
+        }else if(index === -1){
+            this.setState({plus3ButtonColor: '#ff0000', minus1ButtonColor: '#055902'})
+        }else if(index === -2){
+            this.setState({plus3ButtonColor: '#ff0000', minus2ButtonColor: '#055902'})
+        }else if(index === -3){
+            this.setState({plus3ButtonColor: '#ff0000', minus3ButtonColor: '#055902'})
+        }
     }
 
     checkPlus2Button = () => {
-    
+        let index = this.state.correctIndex
+        if(index === 2){
+            this.setState({plus2ButtonColor: '#055902'})
+        }else if(index === 5){
+            this.setState({plus2ButtonColor: '#ff0000', plus5ButtonColor: '#055902'})
+        }else if(index === 4){
+            this.setState({plus2ButtonColor: '#ff0000', plus4ButtonColor: '#055902'})
+        }else if(index === 3){
+            this.setState({plus2ButtonColor: '#ff0000', plus3ButtonColor: '#055902'})
+        }else if(index === 1){
+            this.setState({plus2ButtonColor: '#ff0000', plus1ButtonColor: '#055902'})
+        }else if(index === 0){
+            this.setState({plus2ButtonColor: '#ff0000', plus0ButtonColor: '#055902'})
+        }else if(index === -1){
+            this.setState({plus2ButtonColor: '#ff0000', minus1ButtonColor: '#055902'})
+        }else if(index === -2){
+            this.setState({plus2ButtonColor: '#ff0000', minus2ButtonColor: '#055902'})
+        }else if(index === -3){
+            this.setState({plus2ButtonColor: '#ff0000', minus3ButtonColor: '#055902'})
+        }
     }
 
     checkPlus1Button = () => {
-    
+        let index = this.state.correctIndex
+        if(index === 1){
+            this.setState({plus1ButtonColor: '#055902'})
+        }else if(index === 5){
+            this.setState({plus1ButtonColor: '#ff0000', plus5ButtonColor: '#055902'})
+        }else if(index === 4){
+            this.setState({plus1ButtonColor: '#ff0000', plus4ButtonColor: '#055902'})
+        }else if(index === 3){
+            this.setState({plus1ButtonColor: '#ff0000', plus3ButtonColor: '#055902'})
+        }else if(index === 2){
+            this.setState({plus1ButtonColor: '#ff0000', plus2ButtonColor: '#055902'})
+        }else if(index === 0){
+            this.setState({plus1ButtonColor: '#ff0000', plus0ButtonColor: '#055902'})
+        }else if(index === -1){
+            this.setState({plus1ButtonColor: '#ff0000', minus1ButtonColor: '#055902'})
+        }else if(index === -2){
+            this.setState({plus1ButtonColor: '#ff0000', minus2ButtonColor: '#055902'})
+        }else if(index === -3){
+            this.setState({plus1ButtonColor: '#ff0000', minus3ButtonColor: '#055902'})
+        }
     }
 
     checkPlus0Button = () => {
-    
+        let index = this.state.correctIndex
+        if(index === 0){
+            this.setState({plus0ButtonColor: '#055902'})
+        }else if(index === 5){
+            this.setState({plus0ButtonColor: '#ff0000', plus5ButtonColor: '#055902'})
+        }else if(index === 4){
+            this.setState({plus0ButtonColor: '#ff0000', plus4ButtonColor: '#055902'})
+        }else if(index === 3){
+            this.setState({plus0ButtonColor: '#ff0000', plus3ButtonColor: '#055902'})
+        }else if(index === 2){
+            this.setState({plus0ButtonColor: '#ff0000', plus2ButtonColor: '#055902'})
+        }else if(index === 1){
+            this.setState({plus0ButtonColor: '#ff0000', plus1ButtonColor: '#055902'})
+        }else if(index === -1){
+            this.setState({plus0ButtonColor: '#ff0000', minus1ButtonColor: '#055902'})
+        }else if(index === -2){
+            this.setState({plus0ButtonColor: '#ff0000', minus2ButtonColor: '#055902'})
+        }else if(index === -3){
+            this.setState({plus0ButtonColor: '#ff0000', minus3ButtonColor: '#055902'})
+        }
     }
 
     checkMinus1Button = () => {
-    
+        let index = this.state.correctIndex
+        if(index === -1){
+            this.setState({minus1ButtonColor: '#055902'})
+        }else if(index === 5){
+            this.setState({minus1ButtonColor: '#ff0000', plus5ButtonColor: '#055902'})
+        }else if(index === 4){
+            this.setState({minus1ButtonColor: '#ff0000', plus4ButtonColor: '#055902'})
+        }else if(index === 3){
+            this.setState({minus1ButtonColor: '#ff0000', plus3ButtonColor: '#055902'})
+        }else if(index === 2){
+            this.setState({minus1ButtonColor: '#ff0000', plus2ButtonColor: '#055902'})
+        }else if(index === 0){
+            this.setState({minus1ButtonColor: '#ff0000', plus0ButtonColor: '#055902'})
+        }else if(index === 1){
+            this.setState({minus1ButtonColor: '#ff0000', plus1ButtonColor: '#055902'})
+        }else if(index === -2){
+            this.setState({minus1ButtonColor: '#ff0000', minus2ButtonColor: '#055902'})
+        }else if(index === -3){
+            this.setState({minus1ButtonColor: '#ff0000', minus3ButtonColor: '#055902'})
+        }
     }
 
     checkMinus2Button = () => {
-    
+        let index = this.state.correctIndex
+        if(index === -2){
+            this.setState({minus2ButtonColor: '#055902'})
+        }else if(index === 5){
+            this.setState({minus2ButtonColor: '#ff0000', plus5ButtonColor: '#055902'})
+        }else if(index === 4){
+            this.setState({minus2ButtonColor: '#ff0000', plus4ButtonColor: '#055902'})
+        }else if(index === 3){
+            this.setState({minus2ButtonColor: '#ff0000', plus3ButtonColor: '#055902'})
+        }else if(index === 2){
+            this.setState({minus2ButtonColor: '#ff0000', plus2ButtonColor: '#055902'})
+        }else if(index === 0){
+            this.setState({minus2ButtonColor: '#ff0000', plus0ButtonColor: '#055902'})
+        }else if(index === -1){
+            this.setState({minus2ButtonColor: '#ff0000', plus1ButtonColor: '#055902'})
+        }else if(index === 1){
+            this.setState({minus2ButtonColor: '#ff0000', plus1ButtonColor: '#055902'})
+        }else if(index === -3){
+            this.setState({minus2ButtonColor: '#ff0000', minus3ButtonColor: '#055902'})
+        }
     }
 
     checkMinus3Button = () => {
-    
+        let index = this.state.correctIndex
+        if(index === -3){
+            this.setState({minus3ButtonColor: '#055902'})
+        }else if(index === 5){
+            this.setState({minus3ButtonColor: '#ff0000', plus5ButtonColor: '#055902'})
+        }else if(index === 4){
+            this.setState({minus3ButtonColor: '#ff0000', plus4ButtonColor: '#055902'})
+        }else if(index === 3){
+            this.setState({minus3ButtonColor: '#ff0000', plus3ButtonColor: '#055902'})
+        }else if(index === 2){
+            this.setState({minus3ButtonColor: '#ff0000', plus2ButtonColor: '#055902'})
+        }else if(index === 1){
+            this.setState({minus3ButtonColor: '#ff0000', plus1ButtonColor: '#055902'})
+        }else if(index === 0){
+            this.setState({minus3ButtonColor: '#ff0000', plus0ButtonColor: '#055902'})
+        }else if(index === -1){
+            this.setState({minus3ButtonColor: '#ff0000', minus1ButtonColor: '#055902'})
+        }else if(index === -2){
+            this.setState({minus3ButtonColor: '#ff0000', minus2ButtonColor: '#055902'})
+        }
     }
 
     helpButton = () => {
