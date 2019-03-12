@@ -191,9 +191,9 @@ class CasinoRules extends React.Component {
         title: 'Casino Rules'
     };
 
-    toggleSubscribeModal = () => {
-        this.setState({showSubscribeModal: !this.state.showSubscribeModal})
-    }   
+    // toggleSubscribeModal = () => {
+    //     this.setState({showSubscribeModal: !this.state.showSubscribeModal})
+    // }   
 
     render() {
         const {navigate} = this.props.navigation;
@@ -228,7 +228,7 @@ class CasinoRules extends React.Component {
                             <Text style={styles.rulesHeader}>Player Rules:</Text>
                             <CheckBox
                                 onClick={   ()=>{ this.setState({ doubleAllowed: !this.state.doubleAllowed }, 
-                                            () => this.toggleSubscribeModal() ) }}
+                                            () => this.saveRuleInStorage('doubleAllowed', this.state.doubleAllowed)) }}
                                 isChecked={this.state.doubleAllowed}
                                 rightText={"Double allowed"} 
                                 checkBoxColor={'#fff'}

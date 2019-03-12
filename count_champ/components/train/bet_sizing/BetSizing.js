@@ -12,9 +12,11 @@ class BetSizing extends React.Component {
             answer: 0,
             unit1ButtonColor: '#000',
             unit2ButtonColor: '#000',
+            unit3ButtonColor: '#000',
             unit4ButtonColor: '#000',
-            unit8ButtonColor: '#000',
-            unit16ButtonColor: '#000',
+            unit5ButtonColor: '#000',
+            unit6ButtonColor: '#000',
+            unit12ButtonColor: '#000',
             betSizingQuestionsPlayed: 0,
             betSizingQuestionsCorrect: 0,
         }
@@ -57,18 +59,36 @@ class BetSizing extends React.Component {
             showAnswer: false,
             unit1ButtonColor: '#000',
             unit2ButtonColor: '#000',
+            unit3ButtonColor: '#000',
             unit4ButtonColor: '#000',
-            unit8ButtonColor: '#000',
-            unit16ButtonColor: '#000',
+            unit5ButtonColor: '#000',
+            unit6ButtonColor: '#000',
+            unit12ButtonColor: '#000',
         }, () => this.generateRandomCount())
     }
 
     generateRandomCount = () => {
-        const betCountArray = [0,1,2,3,4]
-        let randomCount = betCountArray[Math.floor(Math.random()*betCountArray.length)]
-        this.setState({
-            randomCount: randomCount,
-        })
+        const betCountArray = [0,1,2,3,4,5,6]
+        let randomCount;
+        randomCount = betCountArray[Math.floor(Math.random()*betCountArray.length)]
+        if(this.state.randomCount !== randomCount){
+            this.setState({
+                randomCount: randomCount,
+            })
+        } else {
+            randomCount = betCountArray[Math.floor(Math.random()*betCountArray.length)]
+            if(this.state.randomCount !== randomCount){
+                this.setState({
+                    randomCount: randomCount,
+                })
+            } else {
+                randomCount = betCountArray[Math.floor(Math.random()*betCountArray.length)]
+                this.setState({
+                    randomCount: randomCount,
+                })
+            }
+            
+        }
     }
 
     setAnswerTo1 = () => {
@@ -83,21 +103,32 @@ class BetSizing extends React.Component {
         }, () => this.checkAnswer(this.state.answer))
     }
 
+    setAnswerTo3 = () => {
+        this.setState({
+            answer: 3
+        }, () => this.checkAnswer(this.state.answer))
+    }
+
     setAnswerTo4 = () => {
         this.setState({
             answer: 4
         }, () => this.checkAnswer(this.state.answer))
     }
 
-    setAnswerTo8 = () => {
+    setAnswerTo5 = () => {
         this.setState({
-            answer: 8
+            answer: 5
+        }, () => this.checkAnswer(this.state.answer))
+    }
+    setAnswerTo6 = () => {
+        this.setState({
+            answer: 6
         }, () => this.checkAnswer(this.state.answer))
     }
 
-    setAnswerTo16 = () => {
+    setAnswerTo12 = () => {
         this.setState({
-            answer: 16
+            answer: 12
         }, () => this.checkAnswer(this.state.answer))
     }
 
@@ -111,14 +142,20 @@ class BetSizing extends React.Component {
         } else if (answer === 2 && count === 1 ){
             this.setState({ unit2ButtonColor: '#055902' })
             this.displayOutputCorrect()
-        } else if (answer === 4 && count === 2 ){
+        } else if (answer === 3 && count === 2 ){
+            this.setState({ unit3ButtonColor: '#055902' })
+            this.displayOutputCorrect()
+        } else if (answer === 4 && count === 3 ){
             this.setState({ unit4ButtonColor: '#055902' })
             this.displayOutputCorrect()
-        } else if (answer === 8 && count === 3 ){
-            this.setState({ unit8ButtonColor: '#055902' })
+        } else if (answer === 5 && count === 4 ){
+            this.setState({ unit5ButtonColor: '#055902' })
             this.displayOutputCorrect()
-        } else if (answer === 16 && count === 4 ){
-            this.setState({ unit16ButtonColor: '#055902' })
+        } else if (answer === 6 && count === 5 ){
+            this.setState({ unit6ButtonColor: '#055902' })
+            this.displayOutputCorrect()
+        } else if (answer === 12 && count === 6 ){
+            this.setState({ unit12ButtonColor: '#055902' })
             this.displayOutputCorrect()
         } else{
             this.displayOutputIncorrect(answer)
@@ -137,12 +174,16 @@ class BetSizing extends React.Component {
             this.setState({ unit1ButtonColor: '#ff0000' })
         } else if (answer === 2){
             this.setState({ unit2ButtonColor: '#ff0000' })
+        } else if (answer === 3){
+            this.setState({ unit3ButtonColor: '#ff0000' })
         } else if (answer === 4){
             this.setState({ unit4ButtonColor: '#ff0000' })
-        } else if (answer === 8){
-            this.setState({ unit8ButtonColor: '#ff0000' })
-        } else if (answer ===16){
-            this.setState({ unit16ButtonColor: '#ff0000' })
+        } else if (answer === 5){
+            this.setState({ unit5ButtonColor: '#ff0000' })
+        } else if (answer === 6){
+            this.setState({ unit6ButtonColor: '#ff0000' })
+        } else if (answer === 12){
+            this.setState({ unit12ButtonColor: '#ff0000' })
         }
 
         if(count === 0){
@@ -150,11 +191,15 @@ class BetSizing extends React.Component {
         } else if (count === 1){
             this.setState({ unit2ButtonColor: '#055902' })
         } else if (count === 2){
-            this.setState({ unit4ButtonColor: '#055902' })
+            this.setState({ unit3ButtonColor: '#055902' })
         } else if (count === 3){
-            this.setState({ unit8ButtonColor: '#055902' })
+            this.setState({ unit4ButtonColor: '#055902' })
         } else if (count === 4){
-            this.setState({ unit16ButtonColor: '#055902' })
+            this.setState({ unit5ButtonColor: '#055902' })
+        } else if (count === 5){
+            this.setState({ unit6ButtonColor: '#055902' })
+        } else if (count === 6){
+            this.setState({ unit12ButtonColor: '#055902' })
         }
     }
 
@@ -177,9 +222,11 @@ class BetSizing extends React.Component {
                     <View style={styles.buttonContainer}>
                         <Button color={this.state.unit1ButtonColor} onPress={this.setAnswerTo1} title='1  hand  of  1  Unit'></Button>
                         <Button color={this.state.unit2ButtonColor} onPress={this.setAnswerTo2} title='1  hand  of  2  Units'></Button>
+                        <Button color={this.state.unit3ButtonColor}  onPress={this.setAnswerTo3} title='1  hand  of  3  Units'></Button>
                         <Button color={this.state.unit4ButtonColor}  onPress={this.setAnswerTo4} title='1  hand  of  4  Units'></Button>
-                        <Button color={this.state.unit8ButtonColor}  onPress={this.setAnswerTo8} title='1  hand  of  8  Units'></Button>
-                        <Button color={this.state.unit16ButtonColor}  onPress={this.setAnswerTo16} title='2  hands  of  8  Units'></Button>
+                        <Button color={this.state.unit5ButtonColor}  onPress={this.setAnswerTo5} title='1  hand  of  5  Units'></Button>
+                        <Button color={this.state.unit6ButtonColor}  onPress={this.setAnswerTo6} title='1  hand  of  6  Units'></Button>
+                        <Button color={this.state.unit12ButtonColor}  onPress={this.setAnswerTo12} title='2  hands  of  6  Units'></Button>
                     </View>
                     <View style={styles.answerButton}>
                         <Button color='#2196f3' onPress={this.newQuestion} title='New Question'></Button>
@@ -226,7 +273,7 @@ const styles = StyleSheet.create({
         marginTop: 0,
         flex: 0,
         justifyContent: 'space-evenly',
-        height: 250,
+        height: 350,
     },
     answerContainer: {
         marginTop: 30,

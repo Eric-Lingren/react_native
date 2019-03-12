@@ -100,7 +100,7 @@ class SpeedCount extends React.Component {
         setTimeout( ()=> { 
             clearInterval(timerId)
             this.countIsFinished()
-        }, 5000)  
+        }, 30000)  
     }
     
     whatsTheCount = () => {
