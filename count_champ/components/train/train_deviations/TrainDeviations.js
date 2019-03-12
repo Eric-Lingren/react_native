@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, View, Text, Image, StyleSheet, Dimensions, AsyncStorage, ScrollView } from 'react-native';
+import { Button, View, Text, Image, StyleSheet, Dimensions, AsyncStorage, ScrollView, TouchableWithoutFeedback } from 'react-native';
 import { Constants } from 'expo';
 
 let ScreenHeight = Dimensions.get("window").height;
@@ -34,6 +34,7 @@ class TrainDeviations extends React.Component {
             correctIndex: 10,
             checkAnswer: false,
             fab4RuleSelected: false,
+            showHelp: false,
             deck: [
                 { "value": "6", "image": "https://deckofcardsapi.com/static/img/6H.png" },
                 { "value": "QUEEN", "image": "https://deckofcardsapi.com/static/img/QH.png" },
@@ -877,7 +878,8 @@ class TrainDeviations extends React.Component {
     }
 
     helpButton = () => {
-    
+    console.log('help was pressed')
+    this.setState({showHelp: !this.state.showHelp})
     }
 
 
@@ -933,6 +935,27 @@ class TrainDeviations extends React.Component {
                         <Button onPress={this.helpButton} title='Help'color='#2196f3' ></Button>
                     </View>
                 </View>
+
+                { this.state.showHelp ?
+                    <View style={styles.helpModalContainer}>
+                        <View style={styles.helpModal}>
+                        <TouchableWithoutFeedback onPress={() => this.helpButton()} style={{  }}>
+                            <Image
+                                source={require('../../images/close_white.png')}
+                                style={{ width: 30, height: 30, marginLeft:(ScreenWidth -60), marginTop: 10, zIndex: 6, position: 'absolute'}}/>
+                        </TouchableWithoutFeedback>
+
+                            <View style={styles.helpImageContainer}>
+                            <Image
+                                source={this.state.helpImageToShow}
+                                style={{ width: 320, height: 120, resizeMode: 'contain', marginTop: 25, borderRadius: 2, zIndex: 6 }}/>
+                            </View>
+                        </View>
+                    </View>
+                    : null
+                    }
+
+
             </View>
             </ScrollView>
             
@@ -1012,7 +1035,7 @@ const styles = StyleSheet.create({
         width: ScreenWidth-20,
         borderRadius: 20,
         zIndex: 5,
-        marginTop: 225,
+        marginTop: 150,
     },
     helpImageContainer: {
         flex: 1,

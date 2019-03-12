@@ -22,14 +22,14 @@ class HowToPlay extends React.Component {
                     </Text>
 
                     <Text style={styles.paragraph}>
-                        Don’t be intimidated if there is a full table of people playing; you only have to beat the Dealer, not the other Players. They’re just trying to beat the Dealer too. Any and every Player can beat the Dealer on every hand (although I wouldn’t bet on it : )
+                        Don’t be intimidated if there is a full table of people playing;  You only have to beat the Dealer, not the other Players. They’re just trying to beat the Dealer too. Any and every Player can beat the Dealer on every hand - although I wouldn’t bet on it : )
                     </Text>
 
                     <Text style={styles.paragraph}>
                         There are only three ways the game is won:
-                        Get 21 points with your first two cards, without a dealer getting 21 as well.
+                        Get 21 points with your first two cards, without the dealer getting 21 as well.
                         Reach a final score higher than the dealer without exceeding 21 points.
-                        The dealer’s hand exceeds 21 points, without yours doing the same.
+                        The dealers hand exceeds 21 points, without yours doing the same.
                     </Text>
 
 
@@ -53,21 +53,21 @@ class HowToPlay extends React.Component {
                     Hand Values:
                     </Text>
                     <Text style={styles.paragraph}>
-                    Hand values are equal to the values of each card
+                    Hand values are equal to the values of each card. 
                     A Blackjack (an Ace and any 10-point card) trumps all other 21-point hands.
                     </Text>
 
                     <Text style={styles.subheader}>
-                    How the Game is Played
+                    How the Game is Played:
                     </Text>
 
                     <Text style={styles.paragraph}>
                     To be included in a hand, a Player must lay out an initial bet.
-                    The Dealer will deal two cards to each player who has placed a bet.
+                    The Dealer will deal two cards to each player who has placed a bet face up (unless it is a pitch game).  Dont touch the cards!
                     The Dealer takes two cards as well. One of the Dealer’s cards is placed face up. The Dealer’s facedown card is called a "hole card."
                     </Text>
                     <Text style={styles.paragraph}>
-                    Once all initial cards are dealt, if the Dealer has an Ace showing, a side bet called “Insurance” is offered to Players. If the Dealer’s hole card is any 10-point card, the side wager pays 2-to-1. (note: Insurance Wagers may not exceed half the original wager).
+                    Once all initial cards are dealt, if the Dealer has an Ace showing a side bet called “Insurance” is offered to Players. If the Dealer’s hole card is any 10-point card, insurance will pay 2-to-1. (note: Insurance wagers may not exceed half the original wager).
                     </Text>
                     <Text style={styles.paragraph}>
                     The Dealer will check his hole card at this time. If the Dealer has a blackjack, all wagers lose, except those who:
@@ -79,7 +79,7 @@ class HowToPlay extends React.Component {
                     The following options are available to each Player:
                     </Text>
                     <Text style={styles.paragraph}>
-                    Stand - Player indicates wants no more cards
+                    Stand - Player indicates they want no more cards
                     </Text>
                     <Text style={styles.paragraph}>
                     Hit - Player asks for additional card(s)
@@ -120,12 +120,12 @@ class HowToPlay extends React.Component {
                     Soft 17 occurs when the Dealer has an Ace and any number of additional cards totalling six points. House rules determine if the Dealer hits on soft 17.
                     </Text>
                     <Text style={styles.subheader}>
-                    Outcomes
+                    Outcomes:
                     </Text>
                     <Text style={styles.paragraph}>
                     If the Dealer’s hands exceeds 21, any Player(s) who didn’t bust, wins.
                     If the Dealer does not bust, then any Player(s) with higher points that the Dealer win.
-                    A true blackjack, earned with the 1st 2 cards, pays out 1.5x the Player’s wager.
+                    A true blackjack, earned with the 1st 2 cards, pays out 1.5x the Player’s wager (some casinos pay 6:5 rather than 1: 1.5 on a blackjack.  Dont play these games.).
                     When a Player ties the Dealer, which is called a push, the Player’s bet remains on the table. The Player may choose to use it in the next round, or take it back.
                     </Text>
                 </View> 
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
         paddingTop: Constants.statusBarHeight,
         padding: 8,
         backgroundColor: ( '#0f9b0f', '#52c234', '#52c234', '#0f9b0f'),
-        height: 2550,
+        height: 2700,
         marginTop: -20,
     },
     header: {
