@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
         borderColor: 'white',
     },
     buttonContainer: {
-        marginTop: 15,
+        marginTop: 10,
         flex: 0,
         justifyContent: 'space-evenly',
         height: 170,

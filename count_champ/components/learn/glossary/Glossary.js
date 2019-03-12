@@ -41,6 +41,15 @@ class Glossary extends React.Component {
                         </Text>
                     </View>
 
+                    <View style={styles.item}>
+                        <Text style={styles.term}>
+                            AP (Advantaged Player) : 
+                        </Text>
+                        <Text style={styles.definition}>
+                            A player who has an advantage in the casino, usually because of counting cards. 
+                        </Text>
+                    </View>
+
                     <Text style={styles.header}>
                         B
                     </Text>
@@ -201,6 +210,15 @@ class Glossary extends React.Component {
 
                     <View style={styles.item}>
                         <Text style={styles.term}>
+                            Ploppy : 
+                        </Text>
+                        <Text style={styles.definition}>
+                            A typical blackjack player who has false beliefs about the game, and through those beliefs they sometimes cause or enables the casino to make the game tougher to win at. 
+                        </Text>
+                    </View>
+
+                    <View style={styles.item}>
+                        <Text style={styles.term}>
                             Push : 
                         </Text>
                         <Text style={styles.definition}>
@@ -303,7 +321,7 @@ const styles = StyleSheet.create({
         paddingTop: Constants.statusBarHeight,
         padding: 8,
         backgroundColor: ( '#0f9b0f', '#52c234', '#52c234', '#0f9b0f'),
-        height: 3020,
+        height: 3230,
     },
     header: {
         color: '#fff',
