@@ -27,6 +27,11 @@ class HomeScreen extends React.Component {
         }).done();
     }
 
+    componentWillUnmount(){
+        console.log('component unmounted')
+    }
+
+    
     toggleMenu = () => {
         this.state.sideMenuShowing ? this.setState({sideMenuShowing: false, menuIconMargin: menuIconMargin}) : this.setState({sideMenuShowing: true, menuIconMargin: (ScreenWidth * .24)})
     }
@@ -140,7 +145,7 @@ class HomeScreen extends React.Component {
                     <Button
                     title="Learn"
                     color="#000000"
-                    onPress={() => navigate('Learn', {name: 'Learn'})}
+                    onPress={() => navigate('Learn', {name: 'Learn'}) }
                     />
                     <Button
                     title="Train"
