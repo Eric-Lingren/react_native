@@ -15,16 +15,16 @@ class HowMuchMoney extends React.Component {
             <ScrollView>
             <View style={styles.container}>
                 <Text style={styles.subheader}>
-                    The question everyone wants to know
+                    The question everyone wants to know!
                 </Text>
                 <Text style={styles.paragraph}>
-                    Unfortunately, like everything in this game there are not definitive answers because of variance, but there are some rules of thumb.
+                    Unfortunately, like everything in this game, there are not definitive answers due to variance; BUT there are some general rules of thumb to follow.
                 </Text>
                 <Text style={styles.paragraph}>
-                    To put it simply you will make approximately 2x your minimum bet for every hour played.  However this will depend on your bet spread, how often the count is in your favor, if you play during all counts or walk away during negative counts, what the rules are, etc.
+                    To put it simply, you will make approximately 2x your minimum bet for every hour played.  However, this will depend on your bet spread, how often the count is in your favor, if you play during all counts or walk away during negative counts, what the rules are, etc.
                 </Text>
                 <Text style={styles.paragraph}>
-                    Lets break it down a little more though...  If you are playing a perfect game with a 1 - 12 spread and favorable rules, here are some specific guidelines:
+                    Lets break it down a little more...  If you are playing a perfect game with a 1 - 12 spread and favorable rules, here are some specific guidelines:
                 </Text>
                 <Text style={styles.term}>
                     $1,000 Bankroll : 

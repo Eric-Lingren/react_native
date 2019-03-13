@@ -46,7 +46,7 @@ class Glossary extends React.Component {
                             AP (Advantaged Player) : 
                         </Text>
                         <Text style={styles.definition}>
-                            A player who has an advantage in the casino, usually because of counting cards. 
+                            A Player who has an advantage in the casino, usually because of counting cards. 
                         </Text>
                     </View>
 
@@ -121,7 +121,7 @@ class Glossary extends React.Component {
                             Even Money : 
                         </Text>
                         <Text style={styles.definition}>
-                            A version of Insurance, where the player can opt for a 1:1 payout When the dealer shows an ace and the player has a blackjack.
+                            A version of Insurance, where the Player can opt for a 1:1 payout When the Dealer shows an ace and the Player has a blackjack.
                         </Text>
                     </View>
 
@@ -134,7 +134,7 @@ class Glossary extends React.Component {
                             First Base : 
                         </Text>
                         <Text style={styles.definition}>
-                            The player spot at the table located to the dealer's left, who is first to receive cards and first to play.
+                            The Player spot at the table located to the Dealer's left, who is first to receive cards and first to play.
                         </Text>
                     </View>
 
@@ -143,7 +143,7 @@ class Glossary extends React.Component {
                             Five Card Charlie : 
                         </Text>
                         <Text style={styles.definition}>
-                            A hand that contains 5 cards without busting and may receive a bonus or automatic win.
+                            A hand that contains 5 cards without busting, which may receive a bonus or automatic win.
                         </Text>
                     </View>
 
@@ -187,7 +187,7 @@ class Glossary extends React.Component {
                             Insurance : 
                         </Text>
                         <Text style={styles.definition}>
-                            If the Dealer’s shown card is an Ace, a side bet is offered to players, of whether the Dealer has blackjack. Payout for an insurance bet is 2:1. Players lose the wager if the Dealer does not have blackjack.  There are only a few situations where are should you take insurance as a card counter.
+                            If the Dealer’s shown card is an Ace, a side bet is offered to Players, of whether the Dealer has blackjack. Payout for an insurance bet is 2:1. Players lose the wager if the Dealer does not have blackjack.  There are only a few situations where are should you take insurance as a card counter.
                         </Text>
                     </View>
 
@@ -213,7 +213,7 @@ class Glossary extends React.Component {
                             Ploppy : 
                         </Text>
                         <Text style={styles.definition}>
-                            A typical blackjack player who has false beliefs about the game, and through those beliefs they sometimes cause or enables the casino to make the game tougher to win at. 
+                            A typical blackjack Player who has false beliefs about the game, and through those beliefs they sometimes cause or enables the casino to make the game tougher to win at. 
                         </Text>
                     </View>
 
@@ -222,7 +222,7 @@ class Glossary extends React.Component {
                             Push : 
                         </Text>
                         <Text style={styles.definition}>
-                            A tie. The player and dealer have hands with the same total.
+                            A tie. The Player and Dealer have hands with the same total.
                         </Text>
                     </View>
 
@@ -253,7 +253,7 @@ class Glossary extends React.Component {
                             Split : 
                         </Text>
                         <Text style={styles.definition}>
-                            If a player is dealt two cards of the same rank, he can choose to play each of them separately, putting up a bet for each one.
+                            If a Player is dealt two cards of the same rank, he can choose to play each of them separately, putting up a bet for each one.
                         </Text>
                     </View>
 
@@ -293,7 +293,7 @@ class Glossary extends React.Component {
                             Third Base : 
                         </Text>
                         <Text style={styles.definition}>
-                            The betting spot located to the Dealer's right hand side, who is last to play.
+                            The betting spot at the table, located to the Dealer's right hand side, who is last to play.
                         </Text>
                     </View>
 

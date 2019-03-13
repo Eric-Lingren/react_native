@@ -15,7 +15,7 @@ class BankrollSizing extends React.Component {
             <ScrollView>
                 <View style={styles.container}>
                     <Text style={styles.paragraph}>
-                        You can have the biggest bankroll in the world, but if you cant play a perfect game with perfect counting and perfect basic strategy you will evenutally loose everything.
+                        You can have the biggest bankroll in the world, but if you can't play a perfect game, with perfect counting and perfect basic strategy, you will evenutally lose everything.
                     </Text>
                     <Text style={styles.paragraph}>
                         Your bankroll is what you’re willing to invest in yourself as a blackjack player. 
@@ -36,7 +36,7 @@ class BankrollSizing extends React.Component {
                         200 Betting Units: 
                     </Text>
                     <Text style={styles.subparagraph}>
-                        40% Risk of Ruin. That means that 4/10 players will loose all of their money. The other 6/10 card counters get lucky with positive variance and have success.
+                        40% Risk of Ruin. That means that 4/10 players will lose all of their money. The other 6/10 card counters get lucky with positive variance and have success.
                     </Text>
                     <Text style={styles.term}>
                         400 Units:

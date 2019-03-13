@@ -20,7 +20,7 @@ class RunningCountVsTrueCount extends React.Component {
                 </Text>
                 <Text style={styles.paragraph}>
                     Again, this is not complex. Simply divide the running count by how many decks are left to be played! 
-                    We know what our running count is but how many decks remain?
+                    We know what our running count is, but how many decks remain?
                 </Text>
                 <Text style={styles.paragraph}>
                     You can estimate how many decks remain by looking at how many cards are in the discard tray. Generally casinos use a 6-deck shoe, but make sure to ask how many decks are being used if you are unsure.

@@ -63,31 +63,31 @@ class CountingCards extends React.Component {
                     Recap Example:
                 </Text>
                 <Text style={styles.paragraph}>
-                    Every time a card is layed down on the table, you add its value to maintain what is called a running count. You always want to start counting at the beginning of a shoe, starting with 0.
+                    Every time a card is played, you add its value to maintain what is called a running count. You always want to start counting at the beginning of a shoe, starting with 0.
                 </Text>
                 <Text style={styles.paragraph}>
                     The 4 is a low card. Plus 1.
                 </Text>
                 <Text style={styles.paragraph}>
-                    The 8 is worth 0, so the count stays at plus 1.
+                    The 8 is worth 0, so the count stays at Plus 1.
                 </Text>
                 <Text style={styles.paragraph}>
-                    The 5 is worth 1, so the count goes to plus 2.
+                    The 5 is worth 1, so the count goes to Plus 2.
                 </Text>
                 <Text style={styles.paragraph}>
-                    Another low card 3 brings us to plus 3.
+                    Another low card 3 brings us to Plus 3.
                 </Text>
                 <Text style={styles.paragraph}>
-                    Deal a 9.  Those are zero so we stay at plus 3.
+                    Deal a 9.  Those are zero so we stay at Plus 3.
                 </Text>
                 <Text style={styles.paragraph}>
-                    An Ace is minus 1. The count drops to plus 2.
+                    An Ace is minus 1. The count drops to Plus 2.
                 </Text>
                 <Text style={styles.paragraph}>
-                    The 2 is worth 1 and brings us to plus 3.
+                    The 2 is worth 1 and brings us to Plus 3.
                 </Text>
                 <Text style={styles.paragraph}>
-                    The Jack is worth minus 1, so our running count goes down to plus 2.
+                    The Jack is worth minus 1, so our running count goes down to Plus 2.
                 </Text>
                 <Text style={styles.paragraph}>
                     4 takes it to Plus 3.

@@ -48,7 +48,7 @@ class Fundamentals extends React.Component {
                         The chances of winning each hand, played over several rounds, becomes skewed by the cards removed from the deck.
                     </Text>
                     <Text style={styles.paragraph}>
-                        Be Alert - Avoid alcohol, etc.
+                        Be Alert - Avoid alcohol, be well rested and focused!
                     </Text>
                     <Text style={styles.paragraph}>
                         Practice makes perfect!

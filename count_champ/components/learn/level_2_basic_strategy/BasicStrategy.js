@@ -52,7 +52,7 @@ class BasicStrategy extends React.Component {
                     Hard 17 or more - Stand
                 </Text>
                 <Text style={styles.paragraph}>
-                Soft 19 or more - Stand
+                    Soft 19 or more - Stand
                 </Text>
                 <Text style={styles.paragraph}>
                     16 against 10 - Surrender

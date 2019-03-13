@@ -88,11 +88,11 @@ class HowToBet extends React.Component {
                     True Count 6 :   2 hands of 6 units
                 </Text>
                 <Text style={styles.list}>
-                    (If you cant play 2 hands beacuse the table is full, you should play 1 hand of 13 units)
+                    (If you can't play 2 hands beacuse the table is full, you should play 1 hand of 13 units)
                 </Text>
 
                 <Text style={styles.paragraph}>
-                    For betting with less risk and lower payoff or if the casiono has less favorable player rules, you want to vary from 1 - 8 units.  Here is an example:
+                    For betting with less risk and lower payoff, or if the casiono has less favorable player rules, you want to vary from 1 - 8 units.  Here is an example:
                 </Text>
                 <Text style={styles.list}>
                     True Count -1 (or lower) :   1 unit (or leave)
@@ -110,7 +110,7 @@ class HowToBet extends React.Component {
                     True Count 3 :   2 hands of 4 units
                 </Text>
                 <Text style={styles.list}>
-                    (If you cant play 2 hands beacuse the table is full, you should play 1 hand of 5 units)
+                    (If you can't play 2 hands because the table is full, you should play 1 hand of 5 units)
                 </Text>
             </View> 
             </ScrollView>

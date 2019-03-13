@@ -39,7 +39,7 @@ class HowToPlay extends React.Component {
                     <Text style={styles.paragraph}>
                     Cards Used:
                     52-card deck(s) are used (jokers are removed).
-                    One to Eight decks may be used.
+                    One to Eight decks of cards may be used.
                     </Text>
 
                     <Text style={styles.paragraph}>
@@ -70,8 +70,7 @@ class HowToPlay extends React.Component {
                     Once all initial cards are dealt, if the Dealer has an Ace showing a side bet called “Insurance” is offered to Players. If the Dealer’s hole card is any 10-point card, insurance will pay 2-to-1. (note: Insurance wagers may not exceed half the original wager).
                     </Text>
                     <Text style={styles.paragraph}>
-                    The Dealer will check his hole card at this time. If the Dealer has a blackjack, all wagers lose, except those who:
-                    took the insurance bet or those players who also have a blackjack, resulting in a push.
+                    The Dealer will check his hole card at this time. If the Dealer has a blackjack, all wagers lose, except those who took the insurance bet or those players who also have a blackjack, resulting in a push.
                     If the Dealer does not have a blackjack, play continues normally.
                     </Text>
                     <Text style={styles.paragraph}>
