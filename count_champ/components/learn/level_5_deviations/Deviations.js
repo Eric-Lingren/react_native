@@ -2,7 +2,11 @@ import * as React from 'react';
 import { Button, Text, View, StyleSheet, Image, Dimensions, ScrollView } from 'react-native';
 import { Constants } from 'expo';
 
+import all_fab4 from './charts/all_fab4.png'
+import all_illustrious18 from './charts/all_illustrious18.png'
+
 let ScreenHeight = Dimensions.get("window").height;
+let ScreenWidth = Dimensions.get("window").width;
 
 class Deviations extends React.Component {
     static navigationOptions = {
@@ -202,6 +206,16 @@ class Deviations extends React.Component {
                     <Text style={styles.paragraph}>
                         EXAMPLE:  -2+ would be read "rule is effective at a count of minus two and above".
                     </Text>
+
+                    <Image
+                    style={styles.fabImage}
+                    source={all_fab4}
+                    />
+                    <Image
+                    style={styles.illustriousImage}
+                    source={all_illustrious18}
+                    />
+
                 </View> 
             </ScrollView>
         );
@@ -213,7 +227,7 @@ const styles = StyleSheet.create({
         paddingTop: Constants.statusBarHeight,
         padding: 8,
         backgroundColor: ( '#0f9b0f', '#52c234', '#52c234', '#0f9b0f'),
-        height: 3550,
+        height: 4300,
     },
     subheader: {
         color: '#fff',
@@ -244,6 +258,20 @@ const styles = StyleSheet.create({
         fontSize: 16,
         paddingLeft: 25,
         paddingRight: 10,
+    },
+    fabImage: {
+        width: ScreenWidth - 55,
+        height: 170,
+        marginLeft: 15,
+        marginBottom: 50,
+        borderRadius: 10,
+    },
+    illustriousImage: {
+        width: ScreenWidth - 50,
+        height: 505,
+        marginLeft: 15,
+        marginBottom: 50,
+        borderRadius: 10,
     },
 });
 

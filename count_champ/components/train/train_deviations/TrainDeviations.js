@@ -2,6 +2,28 @@ import * as React from 'react';
 import { Button, View, Text, Image, StyleSheet, Dimensions, AsyncStorage, ScrollView, TouchableWithoutFeedback } from 'react-native';
 import { Constants } from 'expo';
 
+import fab14v10 from './charts/fab_14v10.png'
+import fab15v9 from './charts/fab_15v9.png'
+import fab15v10 from './charts/fab_15v10.png'
+import fab15vA from './charts/fab_15vA.png'
+import illustrious9v2 from './charts/illustrious_9v2.png'
+import illustrious9v7 from './charts/illustrious_9v7.png'
+import illustrious10v10 from './charts/illustrious_10v10.png'
+import illustrious10vA from './charts/illustrious_10vA.png'
+import illustrious11vA from './charts/illustrious_11vA.png'
+import illustrious12v2 from './charts/illustrious_12v2.png'
+import illustrious12v3 from './charts/illustrious_12v3.png'
+import illustrious12v4 from './charts/illustrious_12v4.png'
+import illustrious12v5 from './charts/illustrious_12v5.png'
+import illustrious12v6 from './charts/illustrious_12v6.png'
+import illustrious13v2 from './charts/illustrious_13v2.png'
+import illustrious13v3 from './charts/illustrious_13v3.png'
+import illustrious15v10 from './charts/illustrious_15v10.png'
+import illustrious16v9 from './charts/illustrious_16v9.png'
+import illustrious16v10 from './charts/illustrious_16v10.png'
+import illustrious20v5 from './charts/illustrious_20v5.png'
+import illustrious20v6 from './charts/illustrious_20v6.png'
+
 let ScreenHeight = Dimensions.get("window").height;
 let ScreenWidth = Dimensions.get("window").width;
 
@@ -35,6 +57,7 @@ class TrainDeviations extends React.Component {
             checkAnswer: false,
             fab4RuleSelected: false,
             showHelp: false,
+            helpImageToShow: '',
             deck: [
                 { "value": "6", "image": "https://deckofcardsapi.com/static/img/6H.png" },
                 { "value": "QUEEN", "image": "https://deckofcardsapi.com/static/img/QH.png" },
@@ -878,10 +901,95 @@ class TrainDeviations extends React.Component {
     }
 
     helpButton = () => {
-    console.log('help was pressed')
     this.setState({showHelp: !this.state.showHelp})
+    let surrenderAllowed = this.state.surrenderAllowed
+    let pHand = this.state.pHand
+    let dHand = this.state.dHand
+
+    console.log('surrender ' + surrenderAllowed)
+    console.log('player hand ' + pHand)
+    console.log('dealer hand ' + dHand)
+        
+        if(surrenderAllowed){
+            switch(pHand){
+                case 14:
+                    this.setState({ helpImageToShow: fab14v10 })
+                    break;
+                case 15:
+                    if(surrenderAllowed){
+                        if(dHand === 9){
+                            this.setState({ helpImageToShow: fab15v9 })
+                        } else if(dHand === 10){
+                            this.setState({ helpImageToShow: fab15v10 })
+                        } else if(dHand === 11){
+                            this.setState({ helpImageToShow: fab15vA })
+                        }
+                    } else{
+                        this.setState({ helpImageToShow: illustrious15v10})
+                    }
+                    break;
+                case 9:
+                    if(dHand === 2){
+                        this.setState({ helpImageToShow: illustrious9v2 })
+                    } else if(dHand === 7){
+                        this.setState({ helpImageToShow: illustrious9v7 })
+                    }
+                    break;
+                case 10:
+                    if(dHand === 10){
+                        this.setState({ helpImageToShow: illustrious10v10 })
+                    } else if(dHand === 11){
+                        this.setState({ helpImageToShow: illustrious10vA })
+                    }
+                    break;
+                case 12:
+                    if(dHand === 2){
+                        this.setState({ helpImageToShow: illustrious12v2 })
+                    } else if(dHand === 3){
+                        this.setState({ helpImageToShow: illustrious12v3 })
+                    } else if(dHand === 4){
+                        this.setState({ helpImageToShow: illustrious12v4 })
+                    } else if(dHand === 5){
+                        this.setState({ helpImageToShow: illustrious12v5 })
+                    } else if(dHand === 6){
+                        this.setState({ helpImageToShow: illustrious12v6 })
+                    }
+                    break;
+                case 13:
+                    if(dHand === 2){
+                        this.setState({ helpImageToShow: illustrious13v2 })
+                    } else if(dHand === 3){
+                        this.setState({ helpImageToShow: illustrious13v3 })
+                    }
+                    break;
+                case 16:
+                    if(dHand === 9){
+                        this.setState({ helpImageToShow: illustrious16v9 })
+                    } else if(dHand === 10){
+                        this.setState({ helpImageToShow: illustrious16v10 })
+                    }
+                    break;
+                case 20:
+                    if(dHand === 5){
+                        this.setState({ helpImageToShow: illustrious20v5 })
+                    } else if(dHand === 6){
+                        this.setState({ helpImageToShow: illustrious20v6 })
+                    }
+                    break;
+                default:
+                    this.setState({ helpImageToShow: illustrious11vA })
+            }
+        }
+
+
     }
 
+    // import illustrious16v9 from './charts/illustrious_16v9.png'
+    // import illustrious16v10 from './charts/illustrious_16v10.png'
+    // import illustrious20v5 from './charts/illustrious_20v5.png'
+    // import illustrious20v6 from './charts/illustrious_20v6.png'
+    
+    // import illustrious11vA from './charts/illustrious_11vA.png'
 
 
     static navigationOptions = {
