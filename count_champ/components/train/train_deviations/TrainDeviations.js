@@ -905,10 +905,6 @@ class TrainDeviations extends React.Component {
     let surrenderAllowed = this.state.surrenderAllowed
     let pHand = this.state.pHand
     let dHand = this.state.dHand
-
-    console.log('surrender ' + surrenderAllowed)
-    console.log('player hand ' + pHand)
-    console.log('dealer hand ' + dHand)
         
         if(surrenderAllowed){
             switch(pHand){
@@ -983,14 +979,6 @@ class TrainDeviations extends React.Component {
 
 
     }
-
-    // import illustrious16v9 from './charts/illustrious_16v9.png'
-    // import illustrious16v10 from './charts/illustrious_16v10.png'
-    // import illustrious20v5 from './charts/illustrious_20v5.png'
-    // import illustrious20v6 from './charts/illustrious_20v6.png'
-    
-    // import illustrious11vA from './charts/illustrious_11vA.png'
-
 
     static navigationOptions = {
         title: 'Deviations'

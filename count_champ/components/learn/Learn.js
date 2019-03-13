@@ -30,7 +30,7 @@ class Learn extends React.Component {
                         onPress={() => navigate('LearnBasicStrategy', {name: 'Learn Basic Strategy'})}
                         />
                     <Button
-                        title="Level 3:  Counting Cards"
+                        title="Level 3:  Running Count"
                         color="#000000"
                         onPress={() => navigate('CountingCards', {name: 'Counting Cards'})}
                         />

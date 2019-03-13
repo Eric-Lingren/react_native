@@ -24,7 +24,7 @@ class HowMuchMoney extends React.Component {
                     To put it simply you will make approximately 2x your minimum bet for every hour played.  However this will depend on your bet spread, how often the count is in your favor, if you play during all counts or walk away during negative counts, what the rules are, etc.
                 </Text>
                 <Text style={styles.paragraph}>
-                    Lets break it down a little more though...  If you are playing a perfect game with a 1 - 12 spread here are some specific guidelines:
+                    Lets break it down a little more though...  If you are playing a perfect game with a 1 - 12 spread and favorable rules, here are some specific guidelines:
                 </Text>
                 <Text style={styles.term}>
                     $1,000 Bankroll : 
@@ -39,13 +39,19 @@ class HowMuchMoney extends React.Component {
                     $10/hr but with a 2% risk of ruin and a $5 minimum bet. 
                 </Text>
                 <Text style={styles.subparagraph}>
-                    $16/hr with a $10 minimum bet and are alright with a 10% chance of risk of ruin.    
+                    or 
+                </Text>
+                <Text style={styles.subparagraph}>
+                    $16/hr with a $10 minimum bet and a 10% chance of risk of ruin.    
                 </Text>
                 <Text style={styles.term}>
                     $10,000 Bankroll : 
                 </Text>
                 <Text style={styles.subparagraph}>
                     $16/hr with a $10 minimum bet and a 1% risk of ruin.  
+                </Text>
+                <Text style={styles.subparagraph}>
+                    or 
                 </Text>
                 <Text style={styles.subparagraph}>
                     $33/hr with a $20 minimum bet and a 10% risk of ruin.  
@@ -79,7 +85,7 @@ const styles = StyleSheet.create({
         paddingTop: Constants.statusBarHeight,
         padding: 8,
         backgroundColor: ( '#0f9b0f', '#52c234', '#52c234', '#0f9b0f'),
-        height: 1100,
+        height: 1160,
     },
     subheader: {
         color: '#fff',

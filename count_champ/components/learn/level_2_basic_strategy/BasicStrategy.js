@@ -22,10 +22,10 @@ class BasicStrategy extends React.Component {
             <ScrollView>
             <View style={styles.container}>
                 <Text style={styles.paragraph}>
-                    Blackjack is based on mathematical odds
+                    Blackjack is based on mathematical odds.
                 </Text>
                 <Text style={styles.paragraph}>
-                    That’s good! That means there are decisions that can be made on each hand to sway the advantage in your favor.
+                    That’s good! It means there are decisions that can be made on each hand to sway the advantage in your favor.
                 </Text>
                 <Text style={styles.paragraph}>
                     Basic strategy is the mathematically correct play for any combination of cards.
@@ -34,7 +34,7 @@ class BasicStrategy extends React.Component {
                     There are 312 different play combinations to remember and every one is different. You can practice them all on the training page! Make sure to reference a basic strategy chart. Once you can play basic strategy perfectly on every hand, you will reduce the casino advantage from about 10% to 0.5%.
                 </Text>
                 <Text style={styles.paragraph}>
-                    Here are some general rules of thumb you can use to start memorizing the charts (they may not be accurate for every deck size or rule combination):
+                    Here are some general rules of thumb you can use to start memorizing the charts (they may not be accurate for every deck size or rule combination but serve as a good guideline):
                 </Text>
                 <Text style={styles.paragraph}>
                     Two 8’s - Split
@@ -84,7 +84,7 @@ class BasicStrategy extends React.Component {
                     source={shoe_dh17}
                 />
                 <Image
-                    style={styles.bsImage}
+                    style={styles.bsImage_stand17}
                     source={shoe_ds17}
                 />
                 <Image
@@ -132,6 +132,13 @@ const styles = StyleSheet.create({
     bsImage: {
         width: ScreenWidth - 50,
         height: 795,
+        marginLeft: 15,
+        marginBottom: 50,
+        borderRadius: 10,
+    },
+    bsImage_stand17: {
+        width: ScreenWidth - 50,
+        height: 850,
         marginLeft: 15,
         marginBottom: 50,
         borderRadius: 10,

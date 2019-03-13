@@ -6,7 +6,7 @@ let ScreenHeight = Dimensions.get("window").height;
 
 class CountingCards extends React.Component {
     static navigationOptions = {
-        title: 'Learn Counting Cards',
+        title: 'Learn Running Count',
     };
     
     render() {
@@ -18,10 +18,13 @@ class CountingCards extends React.Component {
                     Anyone can learn card counting!
                 </Text>
                 <Text style={styles.paragraph}>
-                    Card counting is not a mysterious and magical skill.  Counting cards is simply keeping track of what cards have already been played in order to better predict the cards that will be played in the future.
+                    The purpose of a running count is to keep track of the historical cards that have already been dealt.
                 </Text>
                 <Text style={styles.paragraph}>
-                    You will always utilize Basic Strategy to make your playing decisions; counting cards enhances your ability to make strategic moves by keeping track of what cards are left in the deck.
+                    Card counting is not a mysterious or magical skill.  Counting cards is simply keeping track of what cards have already been played in order to better predict the cards that will be played in the future.
+                </Text>
+                <Text style={styles.paragraph}>
+                    You will always utilize Basic Strategy to make your playing decisions;  Counting cards enhances your ability to make strategic moves by keeping track of what cards are left in the deck.
                 </Text>
                 <Text style={styles.paragraph}>
                     Learning basic strategy is actually much more complex than learning to count cards so if you have already done that, the hard part is out of the way!

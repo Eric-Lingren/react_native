@@ -15,7 +15,7 @@ class BankrollSizing extends React.Component {
             <ScrollView>
                 <View style={styles.container}>
                     <Text style={styles.paragraph}>
-                        You can have the biggest bankroll in the world, but if you cant play a perfect game with perfect counting and perfect basic strategy you will evenutally loose all your money.
+                        You can have the biggest bankroll in the world, but if you cant play a perfect game with perfect counting and perfect basic strategy you will evenutally loose everything.
                     </Text>
                     <Text style={styles.paragraph}>
                         Your bankroll is what you’re willing to invest in yourself as a blackjack player. 
@@ -24,16 +24,16 @@ class BankrollSizing extends React.Component {
                         How do I not go broke?
                     </Text>
                     <Text style={styles.paragraph}>
-                        The short answer is that your betting unit should be 1/1000 of your total bankroll.  This means you need a $5000 bankroll for a $5 minimum bet.
+                        The short answer is that your betting unit should be 1/1000 of your total bankroll.  Your bankroll is 1000 units and your bet size is 1 unit. This means you need a $5000 bankroll for a $5 minimum bet.
                     </Text>
                     <Text style={styles.subheader}>
                         Lets break down the numbers
                     </Text>
                     <Text style={styles.paragraph}>
-                        Assuming perfect play, standard rules and a 1-12 bet spread, here are some risk guidelines:
+                        Assuming perfect play, standard rules and a 1-12 bet spread, here are some bankroll sizing risk guidelines:
                     </Text>
                     <Text style={styles.term}>
-                        200 betting Units: 
+                        200 Betting Units: 
                     </Text>
                     <Text style={styles.subparagraph}>
                         40% Risk of Ruin. That means that 4/10 players will loose all of their money. The other 6/10 card counters get lucky with positive variance and have success.

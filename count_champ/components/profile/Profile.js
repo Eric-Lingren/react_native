@@ -27,7 +27,7 @@ class Profile extends React.Component {
                     </Text>
                 </View>
                 <View>
-                    <Text style={styles.textStyles}>
+                    <Text style={styles.textStyles2}>
                         Thank you for your subscription!  We appreciate it!
                     </Text>
                 </View>
@@ -45,9 +45,19 @@ const styles = StyleSheet.create({
     textStyles: {
         color: 'white',
         fontSize: 20,
-        fontWeight: 'bold',
         textAlign: 'center',
         marginBottom: 40,
+        paddingLeft: 10,
+        paddingRight: 10,
+    },
+    textStyles2: {
+        color: 'white',
+        fontSize: 20,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginTop: 60,
+        paddingLeft: 10,
+        paddingRight: 10,
     }
 });
 export default Profile

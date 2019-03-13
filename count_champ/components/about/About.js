@@ -18,7 +18,7 @@ class About extends React.Component {
             <View style={styles.container}>
                 <View>
                     <Text style={styles.textStyles}>
-                        All content and drills are property of and copyrighted by Count Champ LLC
+                        All content and drills are property of and copyrighted by Card Champ LLC
                     </Text>
                 </View>
                 <View>
@@ -56,14 +56,16 @@ const styles = StyleSheet.create({
     textStyles: {
         color: 'white',
         fontSize: 20,
-        fontWeight: 'bold',
         marginBottom: 20,
+        paddingLeft: 10,
+        paddingRight: 10,
     },
     URLtextStyles: {
         color: 'blue',
         fontSize: 20,
         fontWeight: 'bold',
-        textAlign: 'center'
+        textAlign: 'center',
+        textDecorationLine: 'underline',
     }
 });
 export default About

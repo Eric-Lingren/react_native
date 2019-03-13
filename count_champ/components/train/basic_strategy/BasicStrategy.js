@@ -1559,7 +1559,7 @@ const styles = StyleSheet.create({
         paddingTop: Constants.statusBarHeight,
         padding: 8,
         backgroundColor: ( '#0f9b0f', '#52c234', '#52c234', '#0f9b0f'),
-        height: 900,
+        height: 800,
     },
     buttonWrapper: {
         flex: 1,
