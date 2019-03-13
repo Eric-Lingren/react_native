@@ -1,8 +1,8 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 11672,
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
   "expoServerNgrokUrl": "https://dp-bgf.anonymous.count-champ.exp.direct",
   "packagerNgrokUrl": "https://packager.dp-bgf.anonymous.count-champ.exp.direct",
   "ngrokPid": 15904
