@@ -1,8 +1,7 @@
 {
   "expo": {
-    "name": "CountChamp",
-    "description": "",
-    "slug": "CountChamp",
+    "name": "TestProject",
+    "slug": "TestProject",
     "privacy": "public",
     "sdkVersion": "32.0.0",
     "platforms": [
@@ -10,9 +9,13 @@
       "android"
     ],
     "version": "1.0.0",
-    "icon": "./assets/images/premium_logo.png",
     "orientation": "portrait",
-    
+    "icon": "./assets/images/icon.png",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
     "updates": {
       "fallbackToCacheTimeout": 0
     },

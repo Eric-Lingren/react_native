@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Count Champ",
-    "icon": "./assets/images/premium_logo.png",
+    "icon": "./assets/images/icon.png",
     "version": "1.0.0",
     "slug": "expo.io/@ericlingren/count-champ",
     "sdkVersion": "32.0.0",
@@ -23,22 +23,16 @@
   "jest": {
     "preset": "jest-expo"
   },
-  "version": "1.0.0",
-  "description": "Blackjack card counting trainer",
-  "author": "CardChampLLC",
-  "private": false,
-  "main": "node_modules/expo/AppEntry.js",
   "dependencies": {
-    "axios": "^0.18.0",
+    "@expo/samples": "2.1.1",
     "expo": "^32.0.0",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
-    "react-native-check-box": "^2.1.7",
-    "react-native-paper": "2.2.8",
-    "react-navigation": "^3.3.0"
+    "react-navigation": "^3.0.9"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0",
     "jest-expo": "^32.0.0"
-  }
+  },
+  "private": true
 }
