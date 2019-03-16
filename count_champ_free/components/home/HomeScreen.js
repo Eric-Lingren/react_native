@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Button, Text, View, StyleSheet, Image, Dimensions, TouchableWithoutFeedback, AsyncStorage } from 'react-native';
 import { Constants } from 'expo';
 import homeLogo from './blackjackLogo.jpg';
-import closeIcon from './close.png'
+import closeIcon from './close.png';
 import Menubar from '../menubar/Menubar';
 
 let ScreenHeight = Dimensions.get("window").height;
