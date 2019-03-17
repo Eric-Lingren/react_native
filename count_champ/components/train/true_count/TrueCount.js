@@ -40,8 +40,7 @@ class TrueCount extends React.Component {
             let trueCountQuestionsCorrectNum;
             trueCountQuestionsCorrect === 'NaN' || trueCountQuestionsCorrect === 'null' ? trueCountQuestionsCorrectNum = 0 : trueCountQuestionsCorrectNum = parseInt(trueCountQuestionsCorrect)
             this.setState({questionsCorrect: trueCountQuestionsCorrectNum})
-        }).done();
-        
+        }).done();       
     }
 
     saveStatsInStorage = async (trueCountQuestionsPlayed, trueCountQuestionsCorrect) => {
@@ -193,4 +192,4 @@ const styles = StyleSheet.create({
     },
 });                                    
 
-export default TrueCount
+export default TrueCount 
