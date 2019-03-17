@@ -17,10 +17,10 @@ class Fundamentals extends React.Component {
                     <Text style={styles.paragraph}>
                         Gambling games rely sole on luck. Blackjack is unique in that although you have no control of the cards that are dealt, it allows Players the opportunity to strategically play each hand to minimize the casinos odds. This user-interaction makes Blackjack the game with the best probabilities in any casino...if you know how to play correctly.
                     </Text>
-                    <Text style={styles.paragraph}>
+                    <Text style={styles.textStyleCenter}>
                         Blackjack is beatable!
                     </Text>
-                    <Text style={styles.paragraph}>
+                    <Text style={styles.textStyleCenter}>
                         Here are some tips to get you started:
                     </Text>
                     <Text style={styles.subheader}>
@@ -47,10 +47,16 @@ class Fundamentals extends React.Component {
                         The suit of the cards is irrelevant.
                         The chances of winning each hand, played over several rounds, becomes skewed by the cards removed from the deck.
                     </Text>
-                    <Text style={styles.paragraph}>
-                        Be Alert - Avoid alcohol, be well rested and focused!
+                    <Text style={styles.subheader}>
+                        Be Alert
                     </Text>
-                    <Text style={styles.paragraph}>
+                    <Text style={styles.paragraph}>        
+                        Avoid alcohol.
+                    </Text>
+                    <Text style={styles.paragraph}>        
+                        Be well rested and focused!
+                    </Text>
+                    <Text style={styles.subheader}>
                         Practice makes perfect!
                     </Text>
                 </View> 
@@ -65,6 +71,7 @@ const styles = StyleSheet.create({
         padding: 8,
         backgroundColor: ( '#0f9b0f', '#52c234', '#52c234', '#0f9b0f'),
         height: 1000,
+        marginBottom: 20,
     },
     header: {
         color: '#ffb600',
@@ -85,6 +92,14 @@ const styles = StyleSheet.create({
         fontSize: 16,
         padding: 10,
     },
+    textStyleCenter: {
+        color: '#ffb600',
+        fontSize: 20,
+        padding: 10,
+        textAlign: 'center',
+        fontStyle: 'italic',
+    },
+
 });
 
 export default Fundamentals
