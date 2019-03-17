@@ -89,11 +89,11 @@ class SpeedCount extends React.Component {
                 const cardValue = response.data.cards[0].value
                 this.setState(prevState => {
                     return {
-                    cardsDealt: [...prevState.cardsDealt, oneCardDealt],
-                    cardsDealtImages: cardImage,
-                    cardsDealtValues: [...prevState.cardsDealtValues, cardValue],
-                    currentCardValue: cardValue,
-                }
+                        cardsDealt: [...prevState.cardsDealt, oneCardDealt],
+                        cardsDealtImages: cardImage,
+                        cardsDealtValues: [...prevState.cardsDealtValues, cardValue],
+                        currentCardValue: cardValue,
+                    }
                 }, () => this.whatsTheCount() )
             })
         },speed)
@@ -142,7 +142,7 @@ class SpeedCount extends React.Component {
                 sessionsCorrect: prevState.sessionsCorrect += 1,
             }))
         } else {
-            this.setState({ guessWasCorrect : 'Wrong' })
+            this.setState({ guessWasCorrect : 'Incorrect, Try Again!' })
         }
         this.setState(prevState => ({ 
             whatsTheCountVisible : false, 
@@ -170,7 +170,10 @@ class SpeedCount extends React.Component {
             <View style={styles.container}>
                 <View>
                     <View style={styles.textContainer}>
-                        <Text style={styles.textStyle}>Cards Per Second:</Text> 
+                        <Text style={styles.textStyleTitle}>Practice your Card Counting Abilities</Text>
+                    </View>
+                    <View style={styles.selectionsContainer}>
+                        <Text style={styles.textStyle}>Select How Many Cards Per Second:</Text> 
                         <TextInput
                             style={{height: 40, borderColor: 'black', borderWidth: 1, borderRadius: 10, backgroundColor: 'white', opacity: 0.7, width: 100, paddingTop: 5, paddingBottom: 5, paddingLeft: 35, fontSize: 26, fontWeight: 'bold'}}
                             keyboardType = 'phone-pad'
@@ -179,11 +182,9 @@ class SpeedCount extends React.Component {
                             value={this.state.input}
                         />
                     </View>
-                    <View >
-                        <View style={styles.deckContainer}>
-                            <Image style={styles.deckDisplay} source={{uri: this.state.cardsDealtImages}} />
-                            
-                        </View>
+                    <View style={styles.textContainer}>
+                        <Text style={styles.textStyleTime}>*Cards will run for 30 seconds, then you will be asked to enter the Count</Text>
+                    </View>
                     </View>
                     <Button color="#000000" onPress={this.dealCard} title="Start"></Button>
                     <View style={styles.answerWrapper}>
@@ -192,12 +193,14 @@ class SpeedCount extends React.Component {
                                 <Text style={styles.textStyleAnswer}>Whats The Count?</Text>
                                 <TextInput
                                     style={{height: 40, borderColor: 'black', borderWidth: 1, borderRadius: 10, backgroundColor: 'white', opacity: 0.7, width: 100, paddingTop: 5, paddingBottom: 5, paddingLeft: 35, fontSize: 26, fontWeight: 'bold', marginBottom: 10}}
+                                    // placeholder='1'
+                                    // placeholderTextColor="#00ff00"
                                     keyboardType = 'phone-pad'
                                     maxLength={3}
                                     onChangeText={(inputAnswer) => this.setState({inputAnswer})}
                                     value={this.state.inputAnswer}
                                 />
-                                <Button color="#2196f3" onPress={this.checkAnswer} title="Check Answer"></Button>
+                                <Button color="blue" onPress={this.checkAnswer} title="Check Answer"></Button>
                             </View>
                         : null
                         }
@@ -205,7 +208,10 @@ class SpeedCount extends React.Component {
                         : null
                         }
                     </View>
-                    
+                    <View >
+                        <View style={styles.deckContainer}>
+                            <Image style={styles.deckDisplay} source={{uri: this.state.cardsDealtImages}} />          
+                        </View>
                 </View>
             </View> 
             </ScrollView>
@@ -221,6 +227,14 @@ const styles = StyleSheet.create({
         height: ScreenHeight,
     },
     textContainer: {
+        marginTop: -20,
+        flex: 0,
+        justifyContent: 'space-evenly',
+        height: 80,
+        alignItems: 'center',
+        alignContent: 'center',
+    },
+    selectionsContainer: {
         marginTop: -20,
         flex: 0,
         justifyContent: 'space-evenly',
@@ -248,9 +262,20 @@ const styles = StyleSheet.create({
         height: 350,
     },
     textStyle: {
-        fontSize: 18, 
+        fontSize: 20, 
         fontWeight: 'bold', 
         color: 'white'
+    },
+    textStyleTitle: {
+        marginTop: -15,
+        fontSize: 22, 
+        fontWeight: 'bold', 
+        color: 'blue',
+    },
+    textStyleTime: {
+        fontSize: 16, 
+        fontWeight: 'bold', 
+        color: 'blue',
     },
     answerWrapper: {
         justifyContent: 'center',
