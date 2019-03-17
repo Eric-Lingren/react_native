@@ -216,9 +216,9 @@ class BetSizing extends React.Component {
                 <View className='container'>
                     <View style={styles.questionContainer}>
                         <Text style={styles.textStyle}>Press to Select a:</Text>
-                        <View style={styles.answerButton}>
-                            <Button color='blue' onPress={this.newQuestion} title='New Question'></Button>
-                        </View>
+                    </View>
+                    <View style={styles.answerButton}>
+                        <Button color='blue' onPress={this.newQuestion} title='New Question'></Button>
                     </View>
                     <View style={styles.trueContainer}>
                         <Text style={styles.textStyle}>If the True Count is: <Text style={styles.question}>{this.state.randomCount} </Text>  
@@ -278,7 +278,7 @@ const styles = StyleSheet.create({
         alignContent: 'center',
     },
     howMuchContainer: {
-        marginTop: 20,
+        marginTop: 10,
         flex: 0,
         // justifyContent: 'space-evenly',
         height: 70,
@@ -286,7 +286,7 @@ const styles = StyleSheet.create({
         alignContent: 'center',
     },
     selectContainer: {
-        marginTop: 0,
+        marginTop: -10,
         flex: 0,
         justifyContent: 'space-evenly',
         height: 70,
@@ -317,7 +317,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     answerButton: {
-        marginTop: 5,
+        marginTop: -20,
     },
     question: {
         color: 'orange',
