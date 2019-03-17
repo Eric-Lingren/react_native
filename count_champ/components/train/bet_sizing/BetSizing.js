@@ -137,25 +137,25 @@ class BetSizing extends React.Component {
         let count = this.state.randomCount
         
         if (answer === 1 && count === 0 ){
-            this.setState({ unit1ButtonColor: '#055902' })
+            this.setState({ unit1ButtonColor: '#00ff00' })
             this.displayOutputCorrect()
         } else if (answer === 2 && count === 1 ){
-            this.setState({ unit2ButtonColor: '#055902' })
+            this.setState({ unit2ButtonColor: '#00ff00' })
             this.displayOutputCorrect()
         } else if (answer === 3 && count === 2 ){
-            this.setState({ unit3ButtonColor: '#055902' })
+            this.setState({ unit3ButtonColor: '#00ff00' })
             this.displayOutputCorrect()
         } else if (answer === 4 && count === 3 ){
-            this.setState({ unit4ButtonColor: '#055902' })
+            this.setState({ unit4ButtonColor: '#00ff00' })
             this.displayOutputCorrect()
         } else if (answer === 5 && count === 4 ){
-            this.setState({ unit5ButtonColor: '#055902' })
+            this.setState({ unit5ButtonColor: '#00ff00' })
             this.displayOutputCorrect()
         } else if (answer === 6 && count === 5 ){
-            this.setState({ unit6ButtonColor: '#055902' })
+            this.setState({ unit6ButtonColor: '#00ff00' })
             this.displayOutputCorrect()
         } else if (answer === 12 && count === 6 ){
-            this.setState({ unit12ButtonColor: '#055902' })
+            this.setState({ unit12ButtonColor: '#00ff00' })
             this.displayOutputCorrect()
         } else{
             this.displayOutputIncorrect(answer)
@@ -187,19 +187,19 @@ class BetSizing extends React.Component {
         }
 
         if(count === 0){
-            this.setState({ unit1ButtonColor: '#055902' })
+            this.setState({ unit1ButtonColor: '#00ff00' })
         } else if (count === 1){
-            this.setState({ unit2ButtonColor: '#055902' })
+            this.setState({ unit2ButtonColor: '#00ff00' })
         } else if (count === 2){
-            this.setState({ unit3ButtonColor: '#055902' })
+            this.setState({ unit3ButtonColor: '#00ff00' })
         } else if (count === 3){
-            this.setState({ unit4ButtonColor: '#055902' })
+            this.setState({ unit4ButtonColor: '#00ff00' })
         } else if (count === 4){
-            this.setState({ unit5ButtonColor: '#055902' })
+            this.setState({ unit5ButtonColor: '#00ff00' })
         } else if (count === 5){
-            this.setState({ unit6ButtonColor: '#055902' })
+            this.setState({ unit6ButtonColor: '#00ff00' })
         } else if (count === 6){
-            this.setState({ unit12ButtonColor: '#055902' })
+            this.setState({ unit12ButtonColor: '#00ff00' })
         }
     }
 
@@ -214,19 +214,21 @@ class BetSizing extends React.Component {
             <ScrollView>
             <View style={styles.container}>
                 <View className='container'>
-                    <View style={styles.selectContainer}>
+                    <View style={styles.questionContainer}>
                         <Text style={styles.textStyle}>Press to Select a:</Text>
                         <View style={styles.answerButton}>
                             <Button color='blue' onPress={this.newQuestion} title='New Question'></Button>
                         </View>
+                    </View>
+                    <View style={styles.trueContainer}>
                         <Text style={styles.textStyle}>If the True Count is: <Text style={styles.question}>{this.state.randomCount} </Text>  
                         </Text>
                     </View>
-                    <View style={styles.textContainer}>
+                    <View style={styles.howMuchContainer}>
                         <Text style={styles.textStyle}>How much should you bet?</Text>
                         <Text style={styles.textStyle2} >(minumum bet size is 1 unit)</Text>
                     </View>
-                    <View style={styles.textContainer}>
+                    <View style={styles.selectContainer}>
                         <Text style={styles.textStyle}>Select how much you should bet:</Text>
                     </View>
                     <View style={styles.buttonContainer}>
@@ -238,7 +240,6 @@ class BetSizing extends React.Component {
                         <Button color={this.state.unit6ButtonColor}  onPress={this.setAnswerTo6} title='1  hand  of  6  Units'></Button>
                         <Button color={this.state.unit12ButtonColor}  onPress={this.setAnswerTo12} title='2  hands  of  6  Units'></Button>
                     </View>
-
                     {
                     this.state.showAnswer ?
                     <View style={styles.answerContainer}>
@@ -246,9 +247,7 @@ class BetSizing extends React.Component {
                     </View>
                     :
                     null
-                    }
-                    
-                    
+                    }                    
                 </View>
             </View>
             </ScrollView>
@@ -263,11 +262,34 @@ const styles = StyleSheet.create({
         backgroundColor: ( '#0f9b0f', '#52c234', '#52c234', '#0f9b0f'),
         height: ScreenHeight,
     },
-    selectContainer: {
-        marginTop: -20,
+    questionContainer: {
         flex: 0,
         justifyContent: 'space-evenly',
-        height: 150,
+        height: 100,
+        alignItems: 'center',
+        alignContent: 'center',
+    },
+    trueContainer: {
+        marginTop: 10,
+        flex: 0,
+        justifyContent: 'space-evenly',
+        height: 70,
+        alignItems: 'center',
+        alignContent: 'center',
+    },
+    howMuchContainer: {
+        marginTop: 20,
+        flex: 0,
+        // justifyContent: 'space-evenly',
+        height: 70,
+        alignItems: 'center',
+        alignContent: 'center',
+    },
+    selectContainer: {
+        marginTop: 0,
+        flex: 0,
+        justifyContent: 'space-evenly',
+        height: 70,
         alignItems: 'center',
         alignContent: 'center',
     },
@@ -301,6 +323,7 @@ const styles = StyleSheet.create({
         color: 'orange',
         fontWeight: '900',
         fontSize: 24,
+        marginTop: 10,
     }
 });
 

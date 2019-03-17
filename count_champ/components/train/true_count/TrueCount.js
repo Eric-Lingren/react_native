@@ -100,11 +100,11 @@ class TrueCount extends React.Component {
         return (
             <View style={styles.container}>
                 <View>
-                <View style={styles.textContainer}>
+                    <View style={styles.textContainer}>
                         <Text style={styles.textStyle}>Press to Select a:</Text>
-                        <View style={styles.buttonContainer}>
-                            <Button color='blue' onPress={this.generateNewQuestion} title='New Question'></Button>
-                        </View>
+                    </View>
+                    <View style={styles.questionContainer}>
+                        <Button color='blue' onPress={this.generateNewQuestion} title='New Question'></Button>
                     </View>
                     <View style={styles.textContainer}>
                         <Text style={styles.textStyle2}>If the</Text>
@@ -122,7 +122,7 @@ class TrueCount extends React.Component {
                             value={this.state.input}
                         />
                     </View>                    
-                    <View style={styles.buttonContainer}>
+                    <View>
                         <Button color="blue" onPress={this.clickCheck} title="Check Answer"></Button>
                     </View>
                     {
@@ -180,11 +180,11 @@ const styles = StyleSheet.create({
         fontWeight: 'bold', 
         color: 'red',
     },
-    buttonContainer: {
-        marginTop: 0,
+    questionContainer: {
+        marginTop: -70,
         flex: 0,
         justifyContent: 'space-evenly',
-        height: 120,
+        height: 90,
     },
     question: {
         color: 'orange',
