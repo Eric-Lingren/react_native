@@ -185,7 +185,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#daa520'
     },
-
     imageContainer: {
         justifyContent: 'center',
         alignItems: 'center',
