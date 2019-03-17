@@ -214,10 +214,20 @@ class BetSizing extends React.Component {
             <ScrollView>
             <View style={styles.container}>
                 <View className='container'>
+                    <View style={styles.selectContainer}>
+                        <Text style={styles.textStyle}>Press to Select a:</Text>
+                        <View style={styles.answerButton}>
+                            <Button color='blue' onPress={this.newQuestion} title='New Question'></Button>
+                        </View>
+                        <Text style={styles.textStyle}>If the True Count is: <Text style={styles.question}>{this.state.randomCount} </Text>  
+                        </Text>
+                    </View>
                     <View style={styles.textContainer}>
-                    <Text style={styles.textStyle}>Your minumum bet size is 1 unit.</Text>
-                    <Text style={styles.textStyle}>What should your bet be if... </Text>
-                    <Text style={styles.textStyle}>The true count is:  <Text style={styles.question}>{this.state.randomCount} </Text> ? </Text>
+                        <Text style={styles.textStyle}>How much should you bet?</Text>
+                        <Text style={styles.textStyle2} >(minumum bet size is 1 unit)</Text>
+                    </View>
+                    <View style={styles.textContainer}>
+                        <Text style={styles.textStyle}>Select how much you should bet:</Text>
                     </View>
                     <View style={styles.buttonContainer}>
                         <Button color={this.state.unit1ButtonColor} onPress={this.setAnswerTo1} title='1  hand  of  1  Unit'></Button>
@@ -228,10 +238,7 @@ class BetSizing extends React.Component {
                         <Button color={this.state.unit6ButtonColor}  onPress={this.setAnswerTo6} title='1  hand  of  6  Units'></Button>
                         <Button color={this.state.unit12ButtonColor}  onPress={this.setAnswerTo12} title='2  hands  of  6  Units'></Button>
                     </View>
-                    <View style={styles.answerButton}>
-                        <Button color='#2196f3' onPress={this.newQuestion} title='New Question'></Button>
-                    </View>
-                    
+
                     {
                     this.state.showAnswer ?
                     <View style={styles.answerContainer}>
@@ -256,7 +263,7 @@ const styles = StyleSheet.create({
         backgroundColor: ( '#0f9b0f', '#52c234', '#52c234', '#0f9b0f'),
         height: ScreenHeight,
     },
-    textContainer: {
+    selectContainer: {
         marginTop: -20,
         flex: 0,
         justifyContent: 'space-evenly',
@@ -268,6 +275,9 @@ const styles = StyleSheet.create({
         fontSize: 18, 
         fontWeight: 'bold', 
         color: 'white'
+    },
+    textStyle2: {
+        color: 'blue',
     },
     buttonContainer: {
         marginTop: 0,
@@ -285,7 +295,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     answerButton: {
-        marginTop: 35,
+        marginTop: 5,
     },
     question: {
         color: 'orange',

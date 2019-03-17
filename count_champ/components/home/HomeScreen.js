@@ -1,13 +1,12 @@
 import * as React from 'react';
 import { Button, Text, View, StyleSheet, Image, Dimensions, TouchableWithoutFeedback, AsyncStorage } from 'react-native';
 import { Constants } from 'expo';
-import homeLogo from './blackjackLogo.jpg';
+import homeLogo from './blackjack1.jpg';
 import Menubar from '../menubar/Menubar';
 
 let ScreenHeight = Dimensions.get("window").height;
 let ScreenWidth = Dimensions.get("window").width;
 let menuIconMargin = (ScreenWidth - 65)
-
 
 class HomeScreen extends React.Component {
     constructor(){

@@ -95,15 +95,25 @@ class TrueCount extends React.Component {
         title: 'True Count Drill',
     };
     
-    render() {
+    render() { 
         const {navigate} = this.props.navigation;
         return (
             <View style={styles.container}>
                 <View>
+                <View style={styles.textContainer}>
+                        <Text style={styles.textStyle}>Press to Select a:</Text>
+                        <View style={styles.buttonContainer}>
+                            <Button color='blue' onPress={this.generateNewQuestion} title='New Question'></Button>
+                        </View>
+                    </View>
                     <View style={styles.textContainer}>
+                        <Text style={styles.textStyle2}>If the</Text>
                         <Text style={styles.textStyle}> Running Count: <Text style={styles.question}> {this.state.randomCount} </Text> </Text>
+                        <Text style={styles.textStyle2}>and there are</Text>
                         <Text style={styles.textStyle}> Decks Left: <Text style={styles.question}> {this.state.randomDeck}</Text> </Text>
-                        <Text style={styles.textStyle}> What's the true count? (round down) </Text>
+                    </View>
+                    <View style={styles.textContainer}>
+                        <Text style={styles.textStyle}> What is the true count? (round down) </Text>
                         <TextInput
                             style={{height: 40, borderColor: 'black', borderWidth: 1, borderRadius: 10, backgroundColor: 'white', opacity: 0.7, width: 100, paddingTop: 5, paddingBottom: 5, paddingLeft: 35, fontSize: 26, fontWeight: 'bold'}}
                             keyboardType = 'phone-pad'
@@ -111,16 +121,14 @@ class TrueCount extends React.Component {
                             onChangeText={(input) => this.setState({input})}
                             value={this.state.input}
                         />
-                    </View>
-                    
+                    </View>                    
                     <View style={styles.buttonContainer}>
-                        <Button color="#000000" onPress={this.generateNewQuestion} title="New Question"></Button>
-                        <Button color="#000000" onPress={this.clickCheck} title="Check Answer"></Button>
+                        <Button color="blue" onPress={this.clickCheck} title="Check Answer"></Button>
                     </View>
                     {
                         this.state.showAnswerBox ?
                         <View style={styles.answerContainer}>
-                            { this.state.wereTheyRight ? <Text style={styles.answerStyle}>Correct!</Text> : <Text style={styles.answerStyle}>Answer Was: {this.state.answer}</Text>
+                            { this.state.wereTheyRight ? <Text style={styles.correctStyle}>Correct!</Text> : <Text style={styles.wrongStyle}>Sorry, the Correct Answer Was: {this.state.answer}</Text>
                             }
                         </View>
                         :
@@ -143,7 +151,7 @@ const styles = StyleSheet.create({
         marginTop: 0,
         flex: 0,
         justifyContent: 'space-evenly',
-        height: 200,
+        height: 140,
         alignItems: 'center',
         alignContent: 'center',
     },
@@ -152,16 +160,25 @@ const styles = StyleSheet.create({
         fontWeight: 'bold', 
         color: 'white'
     },
+    textStyle2: {
+        color: 'blue',
+        fontSize: 16,
+    },
     answerContainer: {
         marginTop: 0,
         flex: 0,
         alignItems: 'center',
         alignContent: 'center',
     },
-    answerStyle: {
+    correctStyle: {
         fontSize: 22, 
         fontWeight: 'bold', 
-        color: 'white'
+        color: 'blue',
+    },
+    wrongStyle: {
+        fontSize: 20, 
+        fontWeight: 'bold', 
+        color: 'red',
     },
     buttonContainer: {
         marginTop: 0,
