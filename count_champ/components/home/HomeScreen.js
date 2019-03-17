@@ -116,34 +116,37 @@ class HomeScreen extends React.Component {
                     <Menubar navigation={navigate} /> 
                     <TouchableWithoutFeedback onPress={() => this.toggleMenu()}>
                         <Image
-                            source={require('./close.png')}
+                            source={require('./close-gold.png')}
                             style={{ width: 40, height: 40, marginLeft:(this.state.menuIconMargin +10), marginTop: 30}}/>
                     </TouchableWithoutFeedback>
                 </View>
                 : 
                 <TouchableWithoutFeedback onPress={() => this.toggleMenu()}>
                     <Image
-                        source={require('./menu.png')}
+                        source={require('./menuGold.png')}
                         style={{ width: 50, height: 50, marginLeft: this.state.menuIconMargin}}/>
                 </TouchableWithoutFeedback>
             }
 
                 <View>
                     <Text style={styles.paragraph}>
-                        So You Want To Be A Card Counter...
+                        Welcome to
+                    </Text>
+                    <Text style={styles.countChamp}>
+                        Count Champ
                     </Text>
                     <View style={styles.imageContainer}>
                         <Image style={styles.image} source={homeLogo} alt='' ></Image>
                     </View>
                     <Text style={styles.paragraph}>
-                        You Better Start By Learning!
+                    Learn How to Count Cards and Win at Blackjack! 
                     </Text>
                 </View>
                 
                 <View style={styles.buttonContainer}>
                     <Button
                     title="Learn"
-                    color="#000000"
+                    color="#daa520"
                     onPress={() => navigate('Learn', {name: 'Learn'}) }
                     />
                     <Button
@@ -173,8 +176,16 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         textAlign: 'center',
-        color: 'white'
+        color: '#daa520'
     },
+    countChamp: {
+        marginBottom: 20,
+        fontSize: 40,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        color: '#daa520'
+    },
+
     imageContainer: {
         justifyContent: 'center',
         alignItems: 'center',
