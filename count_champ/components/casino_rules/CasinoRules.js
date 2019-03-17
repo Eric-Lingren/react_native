@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, Dimensions, AsyncStorage, ScrollView } from 'react-native';
+import { Text, View, StyleSheet, Dimensions, AsyncStorage, ScrollView, TouchableWithoutFeedback, Image } from 'react-native';
 import CheckBox from 'react-native-check-box';
 import { Constants } from 'expo';
+import SubscribeModal from '../subscribe_modal/SubscribeModal'
 
 let ScreenWidth = Dimensions.get("window").width;
 
@@ -191,21 +192,37 @@ class CasinoRules extends React.Component {
         title: 'Casino Rules'
     };
 
-    // toggleSubscribeModal = () => {
-    //     this.setState({showSubscribeModal: !this.state.showSubscribeModal})
-    // }   
+    toggleSubscribeModal = () => {
+        this.setState({showSubscribeModal: !this.state.showSubscribeModal})
+    }   
 
     render() {
         const {navigate} = this.props.navigation;
         return (
             <ScrollView>
                 <View style={styles.container}>
+
+                    {this.state.showSubscribeModal 
+                    ?   <View style={styles.modalContainer}>
+                            <TouchableWithoutFeedback onPress={() => this.toggleSubscribeModal()} >
+                                <Image
+                                    source={require('../images/close_white.png')}
+                                    style={{ width: 40, height: 40, marginLeft:(ScreenWidth -60), marginTop: 20, zIndex: 20, position: 'absolute'}}/>
+                            </TouchableWithoutFeedback>
+                            <SubscribeModal />
+                        </View>
+                    : null
+                    }
+
                     <View style={styles.buttonContainer}>
                         <View style={styles.rulesWrapper}>
                             <Text style={styles.rulesHeader}>Dealer Rules:</Text>
                             <CheckBox
-                                onClick={   ()=>{ this.setState({ dealerStandsOnSoft17: !this.state.dealerStandsOnSoft17 }, 
-                                            () => this.saveRuleInStorage('dealerStandsOnSoft17' , this.state.dealerStandsOnSoft17 )) }}
+                                onClick={   
+                                    // ()=> this.toggleSubscribeModal()
+                                    ()=>{ this.setState({ dealerStandsOnSoft17: !this.state.dealerStandsOnSoft17 }, 
+                                    () => this.saveRuleInStorage('dealerStandsOnSoft17', this.state.dealerStandsOnSoft17))}
+                                }
                                 isChecked={this.state.dealerStandsOnSoft17}
                                 rightText={"Dealer stands on soft 17"} 
                                 checkBoxColor={'#fff'}
@@ -214,8 +231,11 @@ class CasinoRules extends React.Component {
                             /> 
 
                             <CheckBox
-                                onClick={   ()=>{ this.setState({ dealerHitsOnSoft17: !this.state.dealerHitsOnSoft17 }, 
-                                            () => this.saveRuleInStorage('dealerHitsOnSoft17' , this.state.dealerHitsOnSoft17 )) }}
+                                onClick={   
+                                    // ()=> this.toggleSubscribeModal()
+                                    ()=>{ this.setState({ dealerHitsOnSoft17: !this.state.dealerHitsOnSoft17 }, 
+                                    () => this.saveRuleInStorage('dealerHitsOnSoft17' , this.state.dealerHitsOnSoft17))}
+                                }
                                 isChecked={this.state.dealerHitsOnSoft17}
                                 rightText={"Dealer hits on soft 17"} 
                                 checkBoxColor={'#fff'}
@@ -227,8 +247,11 @@ class CasinoRules extends React.Component {
                         <View style={styles.rulesWrapper}>
                             <Text style={styles.rulesHeader}>Player Rules:</Text>
                             <CheckBox
-                                onClick={   ()=>{ this.setState({ doubleAllowed: !this.state.doubleAllowed }, 
-                                            () => this.saveRuleInStorage('doubleAllowed', this.state.doubleAllowed)) }}
+                                onClick={   
+                                    // ()=> this.toggleSubscribeModal()
+                                    ()=>{ this.setState({ doubleAllowed: !this.state.doubleAllowed }, 
+                                    () => this.saveRuleInStorage('doubleAllowed', this.state.doubleAllowed))}
+                                }
                                 isChecked={this.state.doubleAllowed}
                                 rightText={"Double allowed"} 
                                 checkBoxColor={'#fff'}
@@ -236,8 +259,11 @@ class CasinoRules extends React.Component {
                                 rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5, paddingBottom: 5}}
                             /> 
                             <CheckBox
-                                onClick={()=>{  this.setState({ doubleAfterSplitAllowed: !this.state.doubleAfterSplitAllowed },
-                                                () => this.saveRuleInStorage('doubleAfterSplitAllowed', this.state.doubleAfterSplitAllowed)) }}
+                                onClick={
+                                    // ()=> this.toggleSubscribeModal()
+                                    ()=>{  this.setState({ doubleAfterSplitAllowed: !this.state.doubleAfterSplitAllowed },
+                                    () => this.saveRuleInStorage('doubleAfterSplitAllowed', this.state.doubleAfterSplitAllowed))}
+                                }
                                 isChecked={this.state.doubleAfterSplitAllowed}
                                 rightText={"Double after split"}
                                 checkBoxColor={'#fff'}
@@ -245,8 +271,11 @@ class CasinoRules extends React.Component {
                                 rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5, paddingBottom: 5}}
                             /> 
                             <CheckBox
-                                onClick={()=>{ this.setState({ surrenderAllowed: !this.state.surrenderAllowed },
-                                    () => this.saveRuleInStorage('surrenderAllowed', this.state.surrenderAllowed)) }}
+                                onClick={
+                                    // ()=> this.toggleSubscribeModal()
+                                    ()=>{ this.setState({ surrenderAllowed: !this.state.surrenderAllowed },
+                                    () => this.saveRuleInStorage('surrenderAllowed', this.state.surrenderAllowed))}
+                                }
                                 isChecked={this.state.surrenderAllowed}
                                 rightText={"Surrender Allowed"}
                                 checkBoxColor={'#fff'}
@@ -258,8 +287,11 @@ class CasinoRules extends React.Component {
                         <View style={styles.rulesWrapper}>
                             <Text style={styles.rulesHeader}>Decks:</Text>
                             <CheckBox
-                                onClick={   ()=>{ this.setState({ singleDeck: !this.state.singleDeck }, 
-                                            () => this.saveRuleInStorage('singleDeck' , this.state.singleDeck )) }}
+                                onClick={   
+                                    // ()=> this.toggleSubscribeModal()
+                                    ()=>{ this.setState({ singleDeck: !this.state.singleDeck }, 
+                                    () => this.saveRuleInStorage('singleDeck' , this.state.singleDeck ))}
+                                }
                                 isChecked={this.state.singleDeck}
                                 rightText={"Single Deck"} 
                                 checkBoxColor={'#fff'}
@@ -267,8 +299,11 @@ class CasinoRules extends React.Component {
                                 rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5, paddingBottom: 5}} 
                             /> 
                             <CheckBox
-                                onClick={()=>{  this.setState({ doubleDeck: !this.state.doubleDeck },
-                                                () => this.saveRuleInStorage('doubleDeck', this.state.doubleDeck)) }}
+                                onClick={
+                                    // ()=> this.toggleSubscribeModal()
+                                    ()=>{  this.setState({ doubleDeck: !this.state.doubleDeck },
+                                    () => this.saveRuleInStorage('doubleDeck', this.state.doubleDeck))}
+                                }
                                 isChecked={this.state.doubleDeck}
                                 rightText={"Double Deck"}
                                 checkBoxColor={'#fff'}
@@ -276,8 +311,11 @@ class CasinoRules extends React.Component {
                                 rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5, paddingBottom: 5}} 
                             /> 
                             <CheckBox
-                                onClick={()=>{ this.setState({ shoe: !this.state.shoe },
-                                    () => this.saveRuleInStorage('shoe', this.state.shoe)) }}
+                                onClick={
+                                    // ()=> this.toggleSubscribeModal()
+                                    ()=>{ this.setState({ shoe: !this.state.shoe },
+                                    () => this.saveRuleInStorage('shoe', this.state.shoe))}
+                                }
                                 isChecked={this.state.shoe}
                                 rightText={"4 - 8 Deck Shoe"}
                                 checkBoxColor={'#fff'}

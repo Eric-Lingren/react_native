@@ -1,8 +1,15 @@
 import * as React from 'react';
 import { Button, Text, View, StyleSheet, AsyncStorage, TextInput, Dimensions } from 'react-native';
 import { Constants } from 'expo';
-
+import SubscribeModal from '../../subscribe_modal/SubscribeModal';
 let ScreenHeight = Dimensions.get("window").height;
+let ScreenWidth = Dimensions.get("window").width;
+
+/////////////////////////////////////////////////////////////////////////////////////////
+////                                                                                 ////
+////  To change from premium to free change this.state.showSubscriberModal to true   ////
+////                                                                                 ////
+/////////////////////////////////////////////////////////////////////////////////////////
 
 class TrueCount extends React.Component {
     constructor(){
@@ -16,6 +23,7 @@ class TrueCount extends React.Component {
             showAnswerBox: false,
             questionsPlayed: 0,
             questionsCorrect: 0,
+            showSubscribeModal: false,
         }
     }
 
@@ -98,6 +106,12 @@ class TrueCount extends React.Component {
         const {navigate} = this.props.navigation;
         return (
             <View style={styles.container}>
+                {this.state.showSubscribeModal 
+                    ?   <View style={styles.modalContainer}>
+                            <SubscribeModal />
+                        </View>
+                    : null
+                }
                 <View>
                     <View style={styles.textContainer}>
                         <Text style={styles.textStyle}>Press to Select a:</Text>
@@ -120,10 +134,15 @@ class TrueCount extends React.Component {
                             onChangeText={(input) => this.setState({input})}
                             value={this.state.input}
                         />
-                    </View>                    
-                    <View>
-                        <Button color="blue" onPress={this.clickCheck} title="Check Answer"></Button>
                     </View>
+                    {this.state.showSubscribeModal 
+                        ?   null
+                        : 
+                        <View style={styles.buttonContainer}>
+                            <Button color="#000000" onPress={this.generateNewQuestion} title="New Question"></Button>
+                            <Button color="#000000" onPress={this.clickCheck} title="Check Answer"></Button>
+                        </View>
+                    }
                     {
                         this.state.showAnswerBox ?
                         <View style={styles.answerContainer}>
@@ -189,6 +208,11 @@ const styles = StyleSheet.create({
         color: 'orange',
         fontWeight: '900',
         fontSize: 24,
+    },
+    modalContainer: {
+        width: ScreenWidth + 30, 
+        marginLeft: -8,
+        marginTop: -25,
     },
 });                                    
 

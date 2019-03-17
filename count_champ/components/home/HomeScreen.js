@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, Text, View, StyleSheet, Image, Dimensions, TouchableWithoutFeedback, AsyncStorage } from 'react-native';
 import { Constants } from 'expo';
-import homeLogo from './blackjack1.jpg';
+import homeLogo from './premium_logo.png';
 import Menubar from '../menubar/Menubar';
 
 let ScreenHeight = Dimensions.get("window").height;
@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
     image: {
         borderRadius: 10,
         width: 300,
-        height: 200,
+        height: 300,
         borderWidth: 1,
         borderColor: 'white',
     },
