@@ -118,14 +118,14 @@ const styles = StyleSheet.create({
         height: 6200,
     },
     subheader: {
-        color: '#fff',
+        color: '#ffb600',
         fontSize: 18,
         fontWeight: 'bold',
         textAlign: 'center',
         marginTop: 15,
     },
     paragraph: {
-        color: '#fff',
+        color: '#ffb600',
         fontSize: 16,
         padding: 10,
     },

@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
         marginTop: -20,
     },
     header: {
-        color: '#fff',
+        color: '#ffb600',
         fontSize: 28,
         fontWeight: 'bold',
         textAlign: 'center',
@@ -152,14 +152,14 @@ const styles = StyleSheet.create({
         marginBottom: 25,
     },
     subheader: {
-        color: '#fff',
+        color: '#ffb600',
         fontSize: 18,
         fontWeight: 'bold',
         textAlign: 'center',
         marginTop: 15,
     },
     paragraph: {
-        color: '#fff',
+        color: '#ffb600',
         fontSize: 16,
         padding: 10,
     },

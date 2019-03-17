@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
         marginTop: -15,
         fontSize: 22, 
         fontWeight: 'bold', 
-        color: '#daa520',   
+        color: '#ffb600',   
     },
 });
 
