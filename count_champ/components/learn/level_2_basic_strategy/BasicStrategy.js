@@ -84,7 +84,7 @@ class BasicStrategy extends React.Component {
                     source={shoe_dh17}
                 />
                 <Image
-                    style={styles.bsImage_stand17}
+                    style={styles.bsImage}
                     source={shoe_ds17}
                 />
                 <Image
@@ -96,11 +96,11 @@ class BasicStrategy extends React.Component {
                     source={dd_ds17}
                 />
                 <Image
-                    style={styles.bsImage}
+                    style={styles.bsImage2}
                     source={sd_dh17}
                 />
                 <Image
-                    style={styles.bsImage}
+                    style={styles.bsImage2}
                     source={sd_ds17}
                 />
 
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
         paddingTop: Constants.statusBarHeight,
         padding: 8,
         backgroundColor: ( '#0f9b0f', '#52c234', '#52c234', '#0f9b0f'),
-        height: 6200,
+        height: 7800,
     },
     subheader: {
         color: '#ffb600',
@@ -130,18 +130,20 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     bsImage: {
-        width: ScreenWidth - 50,
-        height: 795,
-        marginLeft: 15,
+        width: ScreenWidth - 25,
+        padding: 15,
+        height: 1050,
+        marginLeft: 7,
         marginBottom: 50,
-        borderRadius: 10,
+        borderRadius: 3,
     },
-    bsImage_stand17: {
-        width: ScreenWidth - 50,
-        height: 850,
-        marginLeft: 15,
+    bsImage2: {
+        width: ScreenWidth - 25,
+        padding: 15,
+        height: 1050,
+        marginLeft: 7,
         marginBottom: 50,
-        borderRadius: 10,
+        borderRadius: 3,
     }
 });
 
