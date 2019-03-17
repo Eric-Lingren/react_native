@@ -3,8 +3,8 @@
   "webpackServerPort": null,
   "expoServerNgrokUrl": "https://sx-a8a.anonymous.count-champ.exp.direct",
   "packagerNgrokUrl": "https://packager.sx-a8a.anonymous.count-champ.exp.direct",
-  "ngrokPid": 25503,
+  "ngrokPid": 27467,
   "devToolsPort": 19002,
-  "packagerPort": 19003,
-  "packagerPid": 25486
+  "packagerPort": null,
+  "packagerPid": null
 }

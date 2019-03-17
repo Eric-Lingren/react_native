@@ -78,7 +78,6 @@ class BasicStrategy extends React.Component {
                 <Text style={styles.paragraph}>
                     If your hand doesn’t match any above situations AND the dealer is showing 7 to Ace - Hit
                 </Text>
-
                 <Image
                     style={styles.bsImage}
                     source={shoe_dh17}
@@ -96,11 +95,11 @@ class BasicStrategy extends React.Component {
                     source={dd_ds17}
                 />
                 <Image
-                    style={styles.bsImage2}
+                    style={styles.bsImage}
                     source={sd_dh17}
                 />
                 <Image
-                    style={styles.bsImage2}
+                    style={styles.bsImage}
                     source={sd_ds17}
                 />
 
@@ -134,16 +133,9 @@ const styles = StyleSheet.create({
         padding: 15,
         height: 1050,
         marginLeft: 7,
-        marginBottom: 50,
+        marginBottom: 30,
         borderRadius: 3,
-    },
-    bsImage2: {
-        width: ScreenWidth - 25,
-        padding: 15,
-        height: 1050,
-        marginLeft: 7,
-        marginBottom: 50,
-        borderRadius: 3,
+        resizeMode: 'contain',
     }
 });
 
