@@ -89,6 +89,9 @@ class SelfPacedCount extends React.Component {
     render() {
         return (
             <View style={styles.container}>
+                <View style={styles.textContainer}>
+                    <Text style={styles.textStyleTitle}>Practice your Card Counting Abilities</Text>
+                </View>
                 <View className='trainingWrapper'>
                     <View style={styles.deckContainer}>
                         <Image
@@ -147,8 +150,20 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: "#ffffff",
         textAlign: 'center',
-
-
+    },
+    textContainer: {
+        marginTop: -20,
+        flex: 0,
+        justifyContent: 'space-evenly',
+        height: 80,
+        alignItems: 'center',
+        alignContent: 'center',
+    },
+    textStyleTitle: {
+        marginTop: -15,
+        fontSize: 22, 
+        fontWeight: 'bold', 
+        color: '#daa520',   
     },
 });
 
