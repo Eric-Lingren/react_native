@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
   "expoServerPort": 19000,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": "https://sx-a8a.anonymous.count-champ.exp.direct",
-  "packagerNgrokUrl": "https://packager.sx-a8a.anonymous.count-champ.exp.direct",
-  "ngrokPid": 14675,
+  "packagerPort": 19001,
+  "packagerPid": 24032,
+  "expoServerNgrokUrl": "https://sx-a8a.ericlingren.count-champ.exp.direct",
+  "packagerNgrokUrl": "https://packager.sx-a8a.ericlingren.count-champ.exp.direct",
+  "ngrokPid": 26132,
   "webpackServerPort": null
 }
