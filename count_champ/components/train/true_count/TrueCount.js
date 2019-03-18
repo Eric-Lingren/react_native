@@ -139,7 +139,7 @@ class TrueCount extends React.Component {
                         ?   null
                         : 
                         <View style={styles.buttonContainer}>
-                            <Button color="#000000" onPress={this.generateNewQuestion} title="New Question"></Button>
+                            {/* <Button color="#000000" onPress={this.generateNewQuestion} title="New Question"></Button> */}
                             <Button color="#000000" onPress={this.clickCheck} title="Check Answer"></Button>
                         </View>
                     }
@@ -182,6 +182,12 @@ const styles = StyleSheet.create({
         color: 'blue',
         fontSize: 16,
     },
+    buttonContainer: {
+        marginTop: 0,
+        flex: 0,
+        justifyContent: 'space-evenly',
+        height: 120,
+    },
     answerContainer: {
         marginTop: 0,
         flex: 0,
@@ -213,6 +219,9 @@ const styles = StyleSheet.create({
         width: ScreenWidth + 30, 
         marginLeft: -8,
         marginTop: -25,
+    },
+    Button: {
+        margin: 5,
     },
 });                                    
 
