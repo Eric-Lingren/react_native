@@ -1,10 +1,10 @@
 {
-  "devToolsPort": 19002,
   "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 21480,
+  "webpackServerPort": null,
   "expoServerNgrokUrl": "https://sx-a8a.ericlingren.count-champ.exp.direct",
   "packagerNgrokUrl": "https://packager.sx-a8a.ericlingren.count-champ.exp.direct",
-  "ngrokPid": 20056,
-  "webpackServerPort": null
+  "ngrokPid": 22028,
+  "devToolsPort": 19002,
+  "packagerPort": 19001,
+  "packagerPid": 23376
 }
