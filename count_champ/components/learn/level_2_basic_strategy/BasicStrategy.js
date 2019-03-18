@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
         paddingTop: Constants.statusBarHeight,
         padding: 8,
         backgroundColor: ( '#0f9b0f', '#52c234', '#52c234', '#0f9b0f'),
-        height: 6200,
+        height: 6300,
     },
     subheader: {
         color: '#fff',
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
         marginTop: 15,
     },
     paragraph: {
-        color: '#fff',
+        color: '#ffb600',
         fontSize: 16,
         padding: 10,
     },
