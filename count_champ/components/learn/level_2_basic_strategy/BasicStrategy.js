@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, Image, Dimensions, ScrollView } from 'react-native';
-import { Constants } from 'expo';
+import { Constants, AdMobBanner } from 'expo';
 import shoe_dh17 from './charts/shoe_dh17.png'
 import shoe_ds17 from './charts/shoe_ds17.png'
 import dd_dh17 from './charts/dd_dh17.png'
@@ -19,6 +19,7 @@ class BasicStrategy extends React.Component {
     render() {
         const {navigate} = this.props.navigation;
         return (
+            <View>
             <ScrollView>
             <View style={styles.container}>
                 <Text style={styles.paragraph}>
@@ -106,6 +107,14 @@ class BasicStrategy extends React.Component {
 
             </View> 
             </ScrollView>
+                <AdMobBanner
+                        bannerSize="fullBanner"
+                        adUnitID="ca-app-pub-3940256099942544/6300978111" // Test ID, Replace with your-admob-unit-id
+                        testDeviceID="EMULATOR"
+                        onDidFailToReceiveAdWithError={this.bannerError} 
+                        style={{width: ScreenWidth, paddingLeft:0, marginLeft: 0, position: 'absolute', bottom: 0 }}
+                    />
+            </View>
         );
     }
 }
@@ -125,7 +134,7 @@ const styles = StyleSheet.create({
         marginTop: 15,
     },
     paragraph: {
-        color: '#ffb600',
+        color: '#fff',
         fontSize: 16,
         padding: 10,
     },

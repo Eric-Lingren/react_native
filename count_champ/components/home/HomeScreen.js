@@ -1,24 +1,13 @@
 import * as React from 'react';
 import { Button, Text, View, StyleSheet, Image, Dimensions, TouchableWithoutFeedback, AsyncStorage } from 'react-native';
-import { Constants, AdMobBanner, AdMobInterstitial, AdMobRewarded } from 'expo';
+import { Constants, AdMobBanner } from 'expo';
 import homeLogo from './blackjackLogo.jpg';
 import Menubar from '../menubar/Menubar';
-import { BottomNavigation } from 'react-native-paper';
 
 let ScreenHeight = Dimensions.get("window").height;
 let ScreenWidth = Dimensions.get("window").width;
 let menuIconMargin = (ScreenWidth - 65)
 
-
-const ADUNITID = `ca-app-pub-1425926517331745~6816357585`;
-const BANNER_ID = `ca-app-pub-1425926517331745/4139536433`;
-const INTERSTITIAL_ID = `ca-app-pub-1425926517331745/1141181467`;
-const REWARDED_ID = `ca-app-pub-1425926517331745/3923257478`;
-
-AdMobInterstitial.setAdUnitID(INTERSTITIAL_ID);
-AdMobInterstitial.setTestDeviceID("EMULATOR");
-AdMobRewarded.setAdUnitID(REWARDED_ID);
-AdMobRewarded.setTestDeviceID("EMULATOR");
 
 
 class HomeScreen extends React.Component {
@@ -167,9 +156,10 @@ class HomeScreen extends React.Component {
                 </View>
                 <AdMobBanner
                     bannerSize="fullBanner"
-                    adUnitID={BANNER_ID}
-                    didFailToReceiveAdWithError={this.bannerError}
-                    style={{paddingLeft:-8, marginLeft: -10, position: 'absolute', bottom: 0 }}
+                    adUnitID="ca-app-pub-3940256099942544/6300978111" // Test ID, Replace with your-admob-unit-id
+                    testDeviceID="EMULATOR"
+                    onDidFailToReceiveAdWithError={this.bannerError} 
+                    style={{width: ScreenWidth, paddingLeft:0, marginLeft: 0, position: 'absolute', bottom: 0 }}
                 />
             </View>
             

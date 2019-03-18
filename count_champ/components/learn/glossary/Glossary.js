@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Button, Text, View, StyleSheet, Image, Dimensions, ScrollView } from 'react-native';
-import { Constants } from 'expo';
+import { Constants, AdMobBanner, } from 'expo';
 
 let ScreenHeight = Dimensions.get("window").height;
+let ScreenWidth = Dimensions.get("window").width;
 
 class Glossary extends React.Component {
     static navigationOptions = {
@@ -12,6 +13,7 @@ class Glossary extends React.Component {
     render() {
         const {navigate} = this.props.navigation;
         return (
+            <View>
             <ScrollView>
                 <View style={styles.container}>
                     
@@ -311,7 +313,18 @@ class Glossary extends React.Component {
                     </View>
 
                 </View> 
+
+                
+
             </ScrollView>
+                <AdMobBanner
+                    bannerSize="fullBanner"
+                    adUnitID="ca-app-pub-3940256099942544/6300978111" // Test ID, Replace with your-admob-unit-id
+                    testDeviceID="EMULATOR"
+                    onDidFailToReceiveAdWithError={this.bannerError} 
+                    style={{width: ScreenWidth, paddingLeft:0, marginLeft: 0, position: 'absolute', bottom: 0 }}
+                />
+            </View>
         );
     }
 }
@@ -321,7 +334,7 @@ const styles = StyleSheet.create({
         paddingTop: Constants.statusBarHeight,
         padding: 8,
         backgroundColor: ( '#0f9b0f', '#52c234', '#52c234', '#0f9b0f'),
-        height: 3230,
+        height: 3330,
     },
     header: {
         color: '#fff',
