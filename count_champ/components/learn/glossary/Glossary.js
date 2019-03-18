@@ -324,7 +324,7 @@ const styles = StyleSheet.create({
         height: 3230,
     },
     header: {
-        color: '#fff',
+        color: '#ffb600',
         fontSize: 28,
         fontWeight: 'bold',
         textAlign: 'center',
@@ -334,12 +334,12 @@ const styles = StyleSheet.create({
         marginBottom: 25,
     },
     term: {
-        color: '#fff',
+        color: '#ffb600',
         fontSize: 18,
         fontWeight: 'bold'
     },
     definition: {
-        color: '#fff',
+        color: '#ffb600',
         fontSize: 16,
         paddingLeft: 25,
     },
