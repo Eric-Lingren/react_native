@@ -901,83 +901,82 @@ class TrainDeviations extends React.Component {
     }
 
     helpButton = () => {
+        
     this.setState({showHelp: !this.state.showHelp})
     let surrenderAllowed = this.state.surrenderAllowed
     let pHand = this.state.pHand
     let dHand = this.state.dHand
         
-        if(surrenderAllowed){
-            switch(pHand){
-                case 14:
+        switch(pHand){
+            case 14:
+                if(surrenderAllowed){
                     this.setState({ helpImageToShow: fab14v10 })
-                    break;
-                case 15:
-                    if(surrenderAllowed){
-                        if(dHand === 9){
-                            this.setState({ helpImageToShow: fab15v9 })
-                        } else if(dHand === 10){
-                            this.setState({ helpImageToShow: fab15v10 })
-                        } else if(dHand === 11){
-                            this.setState({ helpImageToShow: fab15vA })
-                        }
-                    } else{
-                        this.setState({ helpImageToShow: illustrious15v10})
-                    }
-                    break;
-                case 9:
-                    if(dHand === 2){
-                        this.setState({ helpImageToShow: illustrious9v2 })
-                    } else if(dHand === 7){
-                        this.setState({ helpImageToShow: illustrious9v7 })
-                    }
-                    break;
-                case 10:
-                    if(dHand === 10){
-                        this.setState({ helpImageToShow: illustrious10v10 })
-                    } else if(dHand === 11){
-                        this.setState({ helpImageToShow: illustrious10vA })
-                    }
-                    break;
-                case 12:
-                    if(dHand === 2){
-                        this.setState({ helpImageToShow: illustrious12v2 })
-                    } else if(dHand === 3){
-                        this.setState({ helpImageToShow: illustrious12v3 })
-                    } else if(dHand === 4){
-                        this.setState({ helpImageToShow: illustrious12v4 })
-                    } else if(dHand === 5){
-                        this.setState({ helpImageToShow: illustrious12v5 })
-                    } else if(dHand === 6){
-                        this.setState({ helpImageToShow: illustrious12v6 })
-                    }
-                    break;
-                case 13:
-                    if(dHand === 2){
-                        this.setState({ helpImageToShow: illustrious13v2 })
-                    } else if(dHand === 3){
-                        this.setState({ helpImageToShow: illustrious13v3 })
-                    }
-                    break;
-                case 16:
+                }
+                break;
+            case 15:
+                if(surrenderAllowed){
                     if(dHand === 9){
-                        this.setState({ helpImageToShow: illustrious16v9 })
+                        this.setState({ helpImageToShow: fab15v9 })
                     } else if(dHand === 10){
-                        this.setState({ helpImageToShow: illustrious16v10 })
+                        this.setState({ helpImageToShow: fab15v10 })
+                    } else if(dHand === 11){
+                        this.setState({ helpImageToShow: fab15vA })
                     }
-                    break;
-                case 20:
-                    if(dHand === 5){
-                        this.setState({ helpImageToShow: illustrious20v5 })
-                    } else if(dHand === 6){
-                        this.setState({ helpImageToShow: illustrious20v6 })
-                    }
-                    break;
-                default:
-                    this.setState({ helpImageToShow: illustrious11vA })
-            }
+                } else{
+                    this.setState({ helpImageToShow: illustrious15v10})
+                }
+                break;
+            case 9:
+                if(dHand === 2){
+                    this.setState({ helpImageToShow: illustrious9v2 })
+                } else if(dHand === 7){
+                    this.setState({ helpImageToShow: illustrious9v7 })
+                }
+                break;
+            case 10:
+                if(dHand === 10){
+                    this.setState({ helpImageToShow: illustrious10v10 })
+                } else if(dHand === 11){
+                    this.setState({ helpImageToShow: illustrious10vA })
+                }
+                break;
+            case 12:
+                if(dHand === 2){
+                    this.setState({ helpImageToShow: illustrious12v2 })
+                } else if(dHand === 3){
+                    this.setState({ helpImageToShow: illustrious12v3 })
+                } else if(dHand === 4){
+                    this.setState({ helpImageToShow: illustrious12v4 })
+                } else if(dHand === 5){
+                    this.setState({ helpImageToShow: illustrious12v5 })
+                } else if(dHand === 6){
+                    this.setState({ helpImageToShow: illustrious12v6 })
+                }
+                break;
+            case 13:
+                if(dHand === 2){
+                    this.setState({ helpImageToShow: illustrious13v2 })
+                } else if(dHand === 3){
+                    this.setState({ helpImageToShow: illustrious13v3 })
+                }
+                break;
+            case 16:
+                if(dHand === 9){
+                    this.setState({ helpImageToShow: illustrious16v9 })
+                } else if(dHand === 10){
+                    this.setState({ helpImageToShow: illustrious16v10 })
+                }
+                break;
+            case 20:
+                if(dHand === 5){
+                    this.setState({ helpImageToShow: illustrious20v5 })
+                } else if(dHand === 6){
+                    this.setState({ helpImageToShow: illustrious20v6 })
+                }
+                break;
+            default:
+                this.setState({ helpImageToShow: illustrious11vA })
         }
-
-
     }
 
     static navigationOptions = {
