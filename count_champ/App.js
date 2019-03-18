@@ -24,6 +24,9 @@ import BankrollSizing from './components/learn/level_7_bankroll_sizing/BankrollS
 import HowMuchMoney from './components/learn/level_8_how_much_money/HowMuchMoney'
 import WhatsNext from './components/learn/level_9_whats_next/WhatsNext'
 import {createStackNavigator, createAppContainer} from 'react-navigation'
+import { AdMobBanner, AdMobInterstitial, AdMobRewarded, PublisherBanner } from "expo";
+
+
 
 const MainNavigator = createStackNavigator({
   

@@ -1,21 +1,24 @@
-import * as React from "react";
-import {
-  Button,
-  Text,
-  View,
-  StyleSheet,
-  Image,
-  Dimensions,
-  TouchableWithoutFeedback,
-  AsyncStorage
-} from "react-native";
-import { Constants } from "expo";
-import homeLogo from "./logo2.png";
-import Menubar from "../menubar/Menubar";
+import * as React from 'react';
+import { Button, Text, View, StyleSheet, Image, Dimensions, TouchableWithoutFeedback, AsyncStorage } from 'react-native';
+import { Constants, AdMobBanner, AdMobInterstitial, AdMobRewarded } from 'expo';
+import homeLogo from './blackjackLogo.jpg';
+import Menubar from '../menubar/Menubar';
+import { BottomNavigation } from 'react-native-paper';
 
 let ScreenHeight = Dimensions.get("window").height;
 let ScreenWidth = Dimensions.get("window").width;
 let menuIconMargin = ScreenWidth - 65;
+
+const ADUNITID = `ca-app-pub-1425926517331745~6816357585`;
+const BANNER_ID = `ca-app-pub-1425926517331745/4139536433`;
+const INTERSTITIAL_ID = `ca-app-pub-1425926517331745/1141181467`;
+const REWARDED_ID = `ca-app-pub-1425926517331745/3923257478`;
+
+AdMobInterstitial.setAdUnitID(INTERSTITIAL_ID);
+AdMobInterstitial.setTestDeviceID("EMULATOR");
+AdMobRewarded.setAdUnitID(REWARDED_ID);
+AdMobRewarded.setTestDeviceID("EMULATOR");
+
 
 class HomeScreen extends React.Component {
   constructor() {
@@ -165,21 +168,40 @@ class HomeScreen extends React.Component {
           </Text>
         </View>
 
-        <View style={styles.buttonContainer}>
-          <Button
-            title="Learn"
-            color="#ffb600"
-            onPress={() => navigate("Learn", { name: "Learn" })}
-          />
-          <Button
-            title="Train"
-            color="#000000"
-            onPress={() => navigate("Train", { name: "Train" })}
-          />
-        </View>
-      </View>
-    );
-  }
+                <View>
+                    <Text style={styles.paragraph}>
+                        So You Want To Be A Card Counter...
+                    </Text>
+                    <View style={styles.imageContainer}>
+                        <Image style={styles.image} source={homeLogo} alt='' ></Image>
+                    </View>
+                    <Text style={styles.paragraph}>
+                        You Better Start By Learning!
+                    </Text>
+                </View>
+                
+                <View style={styles.buttonContainer}>
+                    <Button
+                    title="Learn"
+                    color="#000000"
+                    onPress={() => navigate('Learn', {name: 'Learn'}) }
+                    />
+                    <Button
+                    title="Train"
+                    color="#000000"
+                    onPress={() => navigate('Train', {name: 'Train'})}
+                    />
+                </View>
+                <AdMobBanner
+                    bannerSize="fullBanner"
+                    adUnitID={BANNER_ID}
+                    didFailToReceiveAdWithError={this.bannerError}
+                    style={{paddingLeft:-8, marginLeft: -10, position: 'absolute', bottom: 0 }}
+                />
+            </View>
+            
+        );
+    }
 }
 
 const styles = StyleSheet.create({

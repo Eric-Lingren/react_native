@@ -11,10 +11,10 @@
 =======
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 22316,
+  "packagerPid": 21012,
   "expoServerNgrokUrl": "https://sx-a8a.ericlingren.count-champ.exp.direct",
   "packagerNgrokUrl": "https://packager.sx-a8a.ericlingren.count-champ.exp.direct",
-  "ngrokPid": 5444,
+  "ngrokPid": 212,
   "webpackServerPort": null
 >>>>>>> master
 }
