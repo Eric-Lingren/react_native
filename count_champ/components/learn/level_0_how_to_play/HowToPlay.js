@@ -1,8 +1,24 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, Dimensions, ScrollView } from 'react-native';
-import { Constants } from 'expo';
+import { Constants, AdMobBanner, AdMobInterstitial, AdMobRewarded } from 'expo';
 
 let ScreenHeight = Dimensions.get("window").height;
+let ScreenWidth = Dimensions.get("window").width;
+
+
+
+const ADUNITID = `ca-app-pub-1425926517331745~6816357585`;
+const BANNER_ID = `ca-app-pub-1425926517331745/4139536433`;
+const INTERSTITIAL_ID = `ca-app-pub-1425926517331745/1141181467`;
+const REWARDED_ID = `ca-app-pub-1425926517331745/3923257478`;
+
+
+
+AdMobInterstitial.setAdUnitID(INTERSTITIAL_ID);
+AdMobInterstitial.setTestDeviceID("EMULATOR");
+AdMobRewarded.setAdUnitID(REWARDED_ID);
+AdMobRewarded.setTestDeviceID("EMULATOR");
+
 
 class HowToPlay extends React.Component {
     static navigationOptions = {
@@ -12,6 +28,7 @@ class HowToPlay extends React.Component {
     render() {
         const {navigate} = this.props.navigation;
         return (
+            <View>
             <ScrollView>
                 <View style={styles.container}>
                     <Text style={styles.subheader}>
@@ -127,8 +144,17 @@ class HowToPlay extends React.Component {
                     A true blackjack, earned with the 1st 2 cards, pays out 1.5x the Player’s wager (some casinos pay 6:5 rather than 1: 1.5 on a blackjack.  Dont play these games.).
                     When a Player ties the Dealer, which is called a push, the Player’s bet remains on the table. The Player may choose to use it in the next round, or take it back.
                     </Text>
+                    
                 </View> 
             </ScrollView>
+
+                <AdMobBanner
+                    bannerSize="fullBanner"
+                    adUnitID={BANNER_ID}
+                    didFailToReceiveAdWithError={this.bannerError}
+                    style={{width: ScreenWidth, paddingLeft:0, marginLeft: 0, position: 'absolute', bottom: 0 }}
+                />
+            </View>
         );
     }
 }
