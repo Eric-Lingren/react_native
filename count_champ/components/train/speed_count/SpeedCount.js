@@ -25,24 +25,32 @@ class SpeedCount extends React.Component {
             sessionsPlayed: 0,
             sessionsCorrect: 0,
             durationInput: '',
+            deck: []
         }
     }
 
     componentDidMount(){
+        this.getDeck()
+        this.getCountingStatsFromStorage()
+    }
+
+    getDeck = () => {
         axios.get('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=10').then(response => {
             const deckID = response.data.deck_id;
-            console.log(response.data)
             this.setState({
                 deckID: deckID,
-            })
+            }, () => this.setDeck())
         })
-        this.getCountingStatsFromStorage()
+    }
+    setDeck = () => {
+        axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=520`).then(response => {
+                this.setState({deck: response.data.cards})
+            })
     }
 
     componentWillUnmount = () => {
         let speedCountSessionsPlayed = this.state.sessionsPlayed.toString()
         let speedCountSessionsCorrect = this.state.sessionsCorrect.toString()
-        
         this.saveStatsInStorage(speedCountSessionsPlayed, speedCountSessionsCorrect)
     }
 
@@ -75,6 +83,7 @@ class SpeedCount extends React.Component {
             runningCountVisible: false,
             whatsTheCountVisible: false, 
             inputAnswer: '',
+            guessWasCorrect: '',
         })
         
         let speed;
@@ -85,18 +94,20 @@ class SpeedCount extends React.Component {
         }
 
         let duration = this.state.durationInput
-        console.log(duration)
         if(this.state.durationInput){
             duration = ( 1000 * (Number(this.state.durationInput)) )
         } else {
             duration = 30000
         }
 
+        let deck = this.state.deck
+        let index = 0
         const timerId = setInterval(()=>{
-            axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=1`).then(response => {
-                const oneCardDealt = response.data.cards[0].code;
-                const cardImage = response.data.cards[0].image
-                const cardValue = response.data.cards[0].value
+            // for(let i = 0; i < deck.length; i++ ) {
+                console.log('iteration' + [index])
+                const oneCardDealt = deck[index].code;
+                const cardImage = deck[index].image
+                const cardValue = deck[index].value
                 this.setState(prevState => {
                     return {
                         cardsDealt: [...prevState.cardsDealt, oneCardDealt],
@@ -105,13 +116,58 @@ class SpeedCount extends React.Component {
                         currentCardValue: cardValue,
                     }
                 }, () => this.whatsTheCount() )
-            })
+                index += 1
+            // }
         },speed)
         setTimeout( ()=> { 
             clearInterval(timerId)
             this.countIsFinished()
         }, duration)  
     }
+
+
+    // dealCard = () => {
+    //     this.setState({
+    //         runningCountVisible: false,
+    //         whatsTheCountVisible: false, 
+    //         inputAnswer: '',
+    //     })
+        
+    //     let speed;
+    //     if(this.state.input){
+    //         speed = ( 1000 / (Number(this.state.input)) )
+    //     } else {
+    //         speed = 1000
+    //     }
+
+    //     let duration = this.state.durationInput
+    //     console.log(duration)
+    //     if(this.state.durationInput){
+    //         duration = ( 1000 * (Number(this.state.durationInput)) )
+    //     } else {
+    //         duration = 30000
+    //     }
+
+    //     const timerId = setInterval(()=>{
+    //         axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=1`).then(response => {
+    //             const oneCardDealt = response.data.cards[0].code;
+    //             const cardImage = response.data.cards[0].image
+    //             const cardValue = response.data.cards[0].value
+    //             this.setState(prevState => {
+    //                 return {
+    //                     cardsDealt: [...prevState.cardsDealt, oneCardDealt],
+    //                     cardsDealtImages: cardImage,
+    //                     cardsDealtValues: [...prevState.cardsDealtValues, cardValue],
+    //                     currentCardValue: cardValue,
+    //                 }
+    //             }, () => this.whatsTheCount() )
+    //         })
+    //     },speed)
+    //     setTimeout( ()=> { 
+    //         clearInterval(timerId)
+    //         this.countIsFinished()
+    //     }, duration)  
+    // }
     
     whatsTheCount = () => {
         //  if card value is 10 or greater, count is subtracted by 1
@@ -144,6 +200,7 @@ class SpeedCount extends React.Component {
     }
 
     checkAnswer = () => {
+        this.getDeck()
         let guess = Number(this.state.inputAnswer)
         let answer = this.state.count
         
