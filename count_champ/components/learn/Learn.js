@@ -19,6 +19,7 @@ class Learn extends React.Component {
                         type='primary'
                         backgroundColor='#000'
                         textColor='#FFDF00'
+                        textSize={16}
                         raiseLevel={0}
                         stretch={true}
                         height={40}
@@ -26,68 +27,138 @@ class Learn extends React.Component {
                     >
                         Level 0:  How To Play
                     </AwesomeButton>
+                    
                     <AwesomeButton
                         type='primary'
                         backgroundColor='#000'
                         textColor='#FFDF00'
+                        textSize={16}
                         raiseLevel={0}
                         stretch={true}
                         height={40}
-                        onPress={() => navigate('HowToPlay', {name: 'How To Play'})}
-                    >
-                        Level 0:  How To Play
-                    </AwesomeButton>
-                    <Button
-                        title="Level 1:  Fundamentals"
-                        color="#ffb600"
                         onPress={() => navigate('Fundamentals', {name: 'Fundamentals'})}
-                        />
-                    <Button
-                        title="Level 2:  Basic Strategy"
-                        color="#ffb600"
+                    >
+                        Level 1:  Fundamentals
+                    </AwesomeButton>
+                    
+                    <AwesomeButton
+                        type='primary'
+                        backgroundColor='#000'
+                        textColor='#FFDF00'
+                        textSize={16}
+                        raiseLevel={0}
+                        stretch={true}
+                        height={40}
                         onPress={() => navigate('LearnBasicStrategy', {name: 'Learn Basic Strategy'})}
-                        />
-                    <Button
-                        title="Level 3:  Running Count"
-                        color="#ffb600"
+                    >
+                        Level 2:  Basic Strategy
+                    </AwesomeButton>
+
+                    <AwesomeButton
+                        type='primary'
+                        backgroundColor='#000'
+                        textColor='#FFDF00'
+                        textSize={16}
+                        raiseLevel={0}
+                        stretch={true}
+                        height={40}
                         onPress={() => navigate('CountingCards', {name: 'Counting Cards'})}
-                        />
-                    <Button
-                        title="Level 4:  Running Count vs True Count"
-                        color="#ffb600"
+                    >
+                        Level 3:  Running Count
+                    </AwesomeButton>
+                    
+                    <AwesomeButton
+                        type='primary'
+                        backgroundColor='#000'
+                        textColor='#FFDF00'
+                        textSize={16}
+                        raiseLevel={0}
+                        stretch={true}
+                        height={40}
                         onPress={() => navigate('RunningCountVsTrueCount', {name: 'Running Count vs True Count'})}
-                        />
-                    <Button
-                        title="Level 5:  Deviations & Illustrious 18"
-                        color="#ffb600"
+                    >
+                        Level 4:  Running Count vs True Count
+                    </AwesomeButton>
+
+                    <AwesomeButton
+                        type='primary'
+                        backgroundColor='#000'
+                        textColor='#FFDF00'
+                        textSize={16}
+                        raiseLevel={0}
+                        stretch={true}
+                        height={40}
                         onPress={() => navigate('Deviations', {name: 'Deviations'})}
-                        />
-                    <Button
-                        title="Level 6:  How to Bet"
-                        color="#ffb600"
+                    >
+                        Level 5:  Deviations & Illustrious 18
+                    </AwesomeButton>
+
+                    <AwesomeButton
+                        type='primary'
+                        backgroundColor='#000'
+                        textColor='#FFDF00'
+                        textSize={16}
+                        raiseLevel={0}
+                        stretch={true}
+                        height={40}
                         onPress={() => navigate('HowToBet', {name: 'How to Bet'})}
-                        />
-                    <Button
-                        title="Level 7:  Bankroll Sizing"
-                        color="#ffb600"
+                    >
+                        Level 6:  How to Bet
+                    </AwesomeButton>
+                    
+                    <AwesomeButton
+                        type='primary'
+                        backgroundColor='#000'
+                        textColor='#FFDF00'
+                        textSize={16}
+                        raiseLevel={0}
+                        stretch={true}
+                        height={40}
                         onPress={() => navigate('BankrollSizing', {name: 'Bankroll Sizing'})}
-                        />
-                    <Button
-                        title="Level 8:  How Much $ Can I Make?"
-                        color="#ffb600"
+                    >
+                        Level 7:  Bankroll Sizing
+                    </AwesomeButton>
+                    
+                    <AwesomeButton
+                        type='primary'
+                        backgroundColor='#000'
+                        textColor='#FFDF00'
+                        textSize={16}
+                        raiseLevel={0}
+                        stretch={true}
+                        height={40}
                         onPress={() => navigate('HowMuchMoney', {name: 'How Much Money'})}
-                        />
-                    <Button
-                        title="Level 9:  What’s Next"
-                        color="#ffb600"
+                    >
+                        Level 8:  How Much $ Can I Make?
+                    </AwesomeButton>
+                    
+                    <AwesomeButton
+                        type='primary'
+                        backgroundColor='#000'
+                        textColor='#FFDF00'
+                        textSize={16}
+                        raiseLevel={0}
+                        stretch={true}
+                        height={40}
                         onPress={() => navigate('WhatsNext', {name: 'Whats Next'})}
-                        />
-                    <Button
-                        style={styles.buttonStyle}
-                        title="Glossary of Terms"
-                        color="#ffb600"
+                    >
+                        Level 9:  What’s Next
+                    </AwesomeButton>
+                    
+                    <AwesomeButton
+                        type='primary'
+                        backgroundColor='#000'
+                        textColor='#FFDF00'
+                        textSize={16}
+                        raiseLevel={0}
+                        stretch={true}
+                        height={40}
                         onPress={() => navigate('Glossary', {name: 'Glossary'})}
-                        />
+                    >
+                        Glossary of Terms
+                    </AwesomeButton>
+
+                    
                 </View>
             </View>
             </ScrollView>

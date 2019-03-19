@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
         marginTop: -20,
     },
     header: {
-        color: '#ffb600',
+        color: '#fff',
         fontSize: 28,
         fontWeight: 'bold',
         textAlign: 'center',
@@ -172,14 +172,14 @@ const styles = StyleSheet.create({
         marginBottom: 25,
     },
     subheader: {
-        color: '#ffb600',
+        color: '#fff',
         fontSize: 18,
         fontWeight: 'bold',
         textAlign: 'center',
         marginTop: 15,
     },
     paragraph: {
-        color: '#ffb600',
+        color: '#fff',
         fontSize: 16,
         padding: 10,
     },

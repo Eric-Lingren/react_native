@@ -342,7 +342,7 @@ const styles = StyleSheet.create({
         height: 3330,
     },
     header: {
-        color: '#ffb600',
+        color: '#fff',
         fontSize: 28,
         fontWeight: 'bold',
         textAlign: 'center',
@@ -352,12 +352,12 @@ const styles = StyleSheet.create({
         marginBottom: 25,
     },
     term: {
-        color: '#ffb600',
+        color: '#fff',
         fontSize: 18,
         fontWeight: 'bold'
     },
     definition: {
-        color: '#ffb600',
+        color: '#fff',
         fontSize: 16,
         paddingLeft: 25,
     },
