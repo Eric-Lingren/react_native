@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ScrollView, Button, Text, View, StyleSheet, TextInput,  Image, Dimensions, AsyncStorage } from 'react-native';
 import { Constants, AdMobInterstitial } from 'expo';
 import axios from 'axios'
+import AwesomeButton from 'react-native-really-awesome-button';
 
 const INTERSTITIAL_ID = `ca-app-pub-9918224509174617/8466949434`;
 AdMobInterstitial.setAdUnitID(INTERSTITIAL_ID);
@@ -198,6 +199,9 @@ class SpeedCount extends React.Component {
         title: 'Speed Count Drill',
     };
     
+    test = () => {
+        console.log('test button')
+    }
     render() {
         const {navigate} = this.props.navigation;
         return (
@@ -229,7 +233,21 @@ class SpeedCount extends React.Component {
                         />
                     </View>
                 </View>
-                    <Button color="#000000" onPress={this.dealCard} title="Start"></Button>
+                    {/* <Button color="#000000" onPress={this.dealCard} title="Start"></Button> */}
+
+                    <AwesomeButton
+                        type='primary'
+                        backgroundColor='#000'
+                        textColor='#FFDF00'
+                        textSize={16}
+                        raiseLevel={0}
+                        stretch={true}
+                        height={40}
+                        onPress={this.dealCard}
+                        >
+                        START
+                    </AwesomeButton>
+
                     <View style={styles.answerWrapper}>
                         {this.state.whatsTheCountVisible 
                         ?   <View style={styles.answerContainer}>
@@ -243,7 +261,16 @@ class SpeedCount extends React.Component {
                                     onChangeText={(inputAnswer) => this.setState({inputAnswer})}
                                     value={this.state.inputAnswer}
                                 />
-                                <Button color="blue" onPress={this.checkAnswer} title="Check Answer"></Button>
+                                <AwesomeButton
+                                    backgroundColor='#FFDF00'
+                                    textColor='#000'
+                                    textSize={16}
+                                    raiseLevel={0}
+                                    height={40}
+                                    onPress={this.checkAnswer}
+                                    >
+                                    Check Answer
+                                </AwesomeButton>
                             </View>
                         : null
                         }
