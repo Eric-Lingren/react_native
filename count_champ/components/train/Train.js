@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Button, View, StyleSheet, Dimensions } from 'react-native';
+import { View, StyleSheet, Dimensions } from 'react-native';
 import { Constants } from 'expo';
+import AwesomeButton from 'react-native-really-awesome-button';
 
 let ScreenHeight = Dimensions.get("window").height;
 
@@ -13,38 +14,84 @@ class Train extends React.Component {
         const {navigate} = this.props.navigation;
         return (
             <View style={styles.container}>
-
                 <View style={styles.buttonContainer}>
-                    <Button
-                    title="Basic Strategy"
-                    color="#000000"
-                    onPress={() => navigate('BasicStrategy', {name: 'Basic Strategy'})}
-                    />
-                    <Button
-                    title="Self Paced Count"
-                    color="#000000"
-                    onPress={() => navigate('SelfPacedCount', {name: 'Self Paced Count'})}
-                    />
-                    <Button
-                    title="Speed Count"
-                    color="#000000"
-                    onPress={() => navigate('SpeedCount', {name: 'Speed Count'})}
-                    />
-                    <Button
-                    title="Deviations"
-                    color="#000000"
-                    onPress={() => navigate('TrainDeviations', {name: 'Train Deviations'})}
-                    />
-                    <Button
-                    title="True Count"
-                    color="#000000"
-                    onPress={() => navigate('TrueCount', {name: 'True Count'})}
-                    />
-                    <Button
-                    title="Bet Sizing"
-                    color="#000000"
-                    onPress={() => navigate('BetSizing', {name: 'Bet Sizing'})}
-                    />
+                    <AwesomeButton
+                        type='primary'
+                        backgroundColor='#FFDF00'
+                        textColor='#000'
+                        textSize={16}
+                        raiseLevel={0}
+                        stretch={true}
+                        height={40}
+                        onPress={() => navigate('BasicStrategy', {name: 'Basic Strategy'})}
+                        >
+                        Basic Strategy
+                    </AwesomeButton>
+
+                    <AwesomeButton
+                        type='primary'
+                        backgroundColor='#FFDF00'
+                        textColor='#000'
+                        textSize={16}
+                        raiseLevel={0}
+                        stretch={true}
+                        height={40}
+                        onPress={() => navigate('SelfPacedCount', {name: 'Self Paced Count'})}
+                        >
+                        Self Paced Count
+                    </AwesomeButton>
+
+                    <AwesomeButton
+                        type='primary'
+                        backgroundColor='#FFDF00'
+                        textColor='#000'
+                        textSize={16}
+                        raiseLevel={0}
+                        stretch={true}
+                        height={40}
+                        onPress={() => navigate('SpeedCount', {name: 'Speed Count'})}
+                        >
+                        Speed Count
+                    </AwesomeButton>
+
+                    <AwesomeButton
+                        type='primary'
+                        backgroundColor='#FFDF00'
+                        textColor='#000'
+                        textSize={16}
+                        raiseLevel={0}
+                        stretch={true}
+                        height={40}
+                        onPress={() => navigate('TrainDeviations', {name: 'Train Deviations'})}
+                        >
+                        Deviations
+                    </AwesomeButton>
+
+                    <AwesomeButton
+                        type='primary'
+                        backgroundColor='#FFDF00'
+                        textColor='#000'
+                        textSize={16}
+                        raiseLevel={0}
+                        stretch={true}
+                        height={40}
+                        onPress={() => navigate('TrueCount', {name: 'True Count'})}
+                        >
+                        True Count
+                    </AwesomeButton>
+
+                    <AwesomeButton
+                        type='primary'
+                        backgroundColor='#FFDF00'
+                        textColor='#000'
+                        textSize={16}
+                        raiseLevel={0}
+                        stretch={true}
+                        height={40}
+                        onPress={() => navigate('BetSizing', {name: 'Bet Sizing'})}
+                        >
+                        Bet Sizing
+                    </AwesomeButton>
                 </View>
             </View>
 
@@ -61,10 +108,10 @@ const styles = StyleSheet.create({
         height: ScreenHeight,
     },
     buttonContainer: {
-        marginTop: 100,
+        marginTop: 60,
         flex: 0,
         justifyContent: 'space-evenly',
-        height: 350,
+        height: 400,
     },
 });
 

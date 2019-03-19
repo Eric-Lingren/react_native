@@ -2,8 +2,8 @@ import * as React from 'react';
 import { ScrollView, Button, Text, View, StyleSheet, TextInput,  Image, Dimensions, AsyncStorage } from 'react-native';
 import { Constants, AdMobInterstitial } from 'expo';
 import axios from 'axios'
-// ca-app-pub-9918224509174617/8466949434
-const INTERSTITIAL_ID = `ca-app-pub-1425926517331745/1141181467`;
+
+const INTERSTITIAL_ID = `ca-app-pub-9918224509174617/8466949434`;
 AdMobInterstitial.setAdUnitID(INTERSTITIAL_ID);
 AdMobInterstitial.setTestDeviceID("EMULATOR");
 
@@ -107,8 +107,6 @@ class SpeedCount extends React.Component {
         let deck = this.state.deck
         let index = 0
         const timerId = setInterval(()=>{
-            // for(let i = 0; i < deck.length; i++ ) {
-                console.log('iteration' + [index])
                 const oneCardDealt = deck[index].code;
                 const cardImage = deck[index].image
                 const cardValue = deck[index].value
@@ -121,57 +119,12 @@ class SpeedCount extends React.Component {
                     }
                 }, () => this.whatsTheCount() )
                 index += 1
-            // }
         },speed)
         setTimeout( ()=> { 
             clearInterval(timerId)
             this.countIsFinished()
         }, duration)  
     }
-
-
-    // dealCard = () => {
-    //     this.setState({
-    //         runningCountVisible: false,
-    //         whatsTheCountVisible: false, 
-    //         inputAnswer: '',
-    //     })
-        
-    //     let speed;
-    //     if(this.state.input){
-    //         speed = ( 1000 / (Number(this.state.input)) )
-    //     } else {
-    //         speed = 1000
-    //     }
-
-    //     let duration = this.state.durationInput
-    //     console.log(duration)
-    //     if(this.state.durationInput){
-    //         duration = ( 1000 * (Number(this.state.durationInput)) )
-    //     } else {
-    //         duration = 30000
-    //     }
-
-    //     const timerId = setInterval(()=>{
-    //         axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=1`).then(response => {
-    //             const oneCardDealt = response.data.cards[0].code;
-    //             const cardImage = response.data.cards[0].image
-    //             const cardValue = response.data.cards[0].value
-    //             this.setState(prevState => {
-    //                 return {
-    //                     cardsDealt: [...prevState.cardsDealt, oneCardDealt],
-    //                     cardsDealtImages: cardImage,
-    //                     cardsDealtValues: [...prevState.cardsDealtValues, cardValue],
-    //                     currentCardValue: cardValue,
-    //                 }
-    //             }, () => this.whatsTheCount() )
-    //         })
-    //     },speed)
-    //     setTimeout( ()=> { 
-    //         clearInterval(timerId)
-    //         this.countIsFinished()
-    //     }, duration)  
-    // }
     
     whatsTheCount = () => {
         //  if card value is 10 or greater, count is subtracted by 1
@@ -221,8 +174,16 @@ class SpeedCount extends React.Component {
             count: 0,
             sessionsPlayed: prevState.sessionsPlayed += 1
         }))
-        this.openInterstitial()
+
+// >>>>>>>>>>>>>  Re-comment this in for the popup ad
+        // this.openInterstitial()
     }
+
+// >>>>>>>>>>>>>  Re-comment this in for the popup ad
+    // openInterstitial = async () => {
+    //     await AdMobInterstitial.requestAdAsync();
+    //     await AdMobInterstitial.showAdAsync();
+    // };
 
     displayCount = () => {
         setTimeout ( () => {
@@ -232,10 +193,6 @@ class SpeedCount extends React.Component {
         }, 3000)  
     }
 
-    openInterstitial = async () => {
-        await AdMobInterstitial.requestAdAsync();
-        await AdMobInterstitial.showAdAsync();
-    };
 
     static navigationOptions = {
         title: 'Speed Count Drill',

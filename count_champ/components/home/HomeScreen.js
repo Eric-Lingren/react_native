@@ -210,6 +210,7 @@ class HomeScreen extends React.Component {
                       type='primary'
                       backgroundColor='#000'
                       textColor='#FFDF00'
+                      textSize={20}
                       raiseLevel={0}
                       stretch={true}
                       height={40}
@@ -222,6 +223,7 @@ class HomeScreen extends React.Component {
                       type='primary'
                       backgroundColor='#FFDF00'
                       textColor='#000'
+                      textSize={20}
                       raiseLevel={0}
                       stretch={true}
                       height={40}
