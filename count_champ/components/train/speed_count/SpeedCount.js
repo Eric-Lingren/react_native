@@ -1,7 +1,11 @@
 import * as React from 'react';
 import { ScrollView, Button, Text, View, StyleSheet, TextInput,  Image, Dimensions, AsyncStorage } from 'react-native';
-import { Constants } from 'expo';
+import { Constants, AdMobInterstitial } from 'expo';
 import axios from 'axios'
+// ca-app-pub-9918224509174617/8466949434
+const INTERSTITIAL_ID = `ca-app-pub-1425926517331745/1141181467`;
+AdMobInterstitial.setAdUnitID(INTERSTITIAL_ID);
+AdMobInterstitial.setTestDeviceID("EMULATOR");
 
 let ScreenHeight = Dimensions.get("window").height;
 
@@ -217,6 +221,7 @@ class SpeedCount extends React.Component {
             count: 0,
             sessionsPlayed: prevState.sessionsPlayed += 1
         }))
+        this.openInterstitial()
     }
 
     displayCount = () => {
@@ -226,6 +231,11 @@ class SpeedCount extends React.Component {
             }) 
         }, 3000)  
     }
+
+    openInterstitial = async () => {
+        await AdMobInterstitial.requestAdAsync();
+        await AdMobInterstitial.showAdAsync();
+    };
 
     static navigationOptions = {
         title: 'Speed Count Drill',

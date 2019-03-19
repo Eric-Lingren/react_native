@@ -2,7 +2,9 @@ import * as React from 'react';
 import { Button, Text, View, StyleSheet, Image, Dimensions, TouchableWithoutFeedback, AsyncStorage } from 'react-native';
 import { Constants, AdMobBanner } from 'expo';
 import homeLogo from './blackjackLogo.jpg';
+import logo2 from './logo2.png';
 import Menubar from '../menubar/Menubar';
+import AwesomeButton from 'react-native-really-awesome-button';
 
 let ScreenHeight = Dimensions.get("window").height;
 let ScreenWidth = Dimensions.get("window").width;
@@ -116,6 +118,10 @@ class HomeScreen extends React.Component {
     return;
   }
 
+  test = () => {
+    console.log('test press')
+  }
+
   static navigationOptions = {
     header: null
   };
@@ -153,11 +159,11 @@ class HomeScreen extends React.Component {
         )}
 
         <View>
-          {/* <Text style={styles.paragraph}>Welcome to</Text> */}
+          <Text style={styles.paragraph1}>Welcome to</Text>
           <View style={styles.imageContainer}>
-            <Image style={styles.image} source={homeLogo} alt="" />
+            <Image style={styles.image} source={logo2} alt="" />
           </View>
-          <Text style={styles.paragraph}>
+          <Text style={styles.paragraph2}>
             Learn How to Count Cards and Win at Blackjack!
           </Text>
         </View>
@@ -175,7 +181,7 @@ class HomeScreen extends React.Component {
                 </View> */}
                 
                 <View style={styles.buttonContainer}>
-                    <Button
+                    {/* <Button
                     title="Learn"
                     color="#000000"
                     onPress={() => navigate('Learn', {name: 'Learn'}) }
@@ -185,6 +191,45 @@ class HomeScreen extends React.Component {
                     color="#000000"
                     onPress={() => navigate('Train', {name: 'Train'})}
                     />
+                    <AwesomeButton
+                    type='primary'
+                    backgroundColor='#000'
+                    textColor='#FFDF00'
+                    raiseLevel='0'
+                    stretch='true'
+                    height={40}
+                    onPress={
+                      () => this.test()
+                    }
+                    >
+                    SAMPLE TEXT
+                    </AwesomeButton> */}
+
+
+                    <AwesomeButton
+                      type='primary'
+                      backgroundColor='#000'
+                      textColor='#FFDF00'
+                      raiseLevel={0}
+                      stretch={true}
+                      height={40}
+                      onPress={() => navigate('Learn', {name: 'Learn'}) }
+                      >
+                      LEARN
+                    </AwesomeButton>
+
+                    <AwesomeButton
+                      type='primary'
+                      backgroundColor='#FFDF00'
+                      textColor='#000'
+                      raiseLevel={0}
+                      stretch={true}
+                      height={40}
+                      onPress={() => navigate('Train', {name: 'Train'})}
+                      >
+                      TRAIN
+                    </AwesomeButton>
+
                 </View>
                 {/* <AdMobBanner
                     bannerSize="fullBanner"
@@ -210,12 +255,20 @@ const styles = StyleSheet.create({
   menuContainer: {
     marginTop: -20
   },
-  paragraph: {
+  paragraph1: {
+    marginTop: -5,
+    marginBottom: 24,
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#FFF",
+  },
+  paragraph2: {
     margin: 24,
     fontSize: 18,
     fontWeight: "bold",
     textAlign: "center",
-    color: "#ffb600"
+    color: "#fff",
   },
   countChamp: {
     marginBottom: 20,
@@ -230,7 +283,7 @@ const styles = StyleSheet.create({
   },
   image: {
     borderRadius: 10,
-    width: 300,
+    width: 250,
     height: 250,
     borderWidth: 1,
     borderColor: "white"

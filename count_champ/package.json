@@ -27,7 +27,6 @@
   "description": "Blackjack card counting trainer",
   "author": "CardChampLLC",
   "private": false,
-  "main": "node_modules/expo/AppEntry.js",
   "dependencies": {
     "axios": "^0.18.0",
     "expo": "^32.0.0",
@@ -35,6 +34,7 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-check-box": "^2.1.7",
     "react-native-paper": "2.2.8",
+    "react-native-really-awesome-button": "^1.4.2",
     "react-navigation": "^3.3.0"
   },
   "devDependencies": {

@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     textStyles: {
-        color: '#daa520',
+        color: '#FFDF00',
         fontSize: 22,
         fontWeight: 'bold',
         textDecorationLine: 'underline',

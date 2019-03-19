@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Text, Button, View, StyleSheet, Dimensions, ScrollView } from 'react-native';
-// import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base'
 import { Constants } from 'expo';
+import AwesomeButton from 'react-native-really-awesome-button';
 
 let ScreenHeight = Dimensions.get("window").height;
 
@@ -15,11 +15,28 @@ class Learn extends React.Component {
             <ScrollView>
             <View style={styles.container}>
                 <View style={styles.buttonContainer}>
-                    <Button
-                        title="Level 0:  How To Play"
-                        color="#ffb600"
+                    <AwesomeButton
+                        type='primary'
+                        backgroundColor='#000'
+                        textColor='#FFDF00'
+                        raiseLevel={0}
+                        stretch={true}
+                        height={40}
                         onPress={() => navigate('HowToPlay', {name: 'How To Play'})}
-                        />
+                    >
+                        Level 0:  How To Play
+                    </AwesomeButton>
+                    <AwesomeButton
+                        type='primary'
+                        backgroundColor='#000'
+                        textColor='#FFDF00'
+                        raiseLevel={0}
+                        stretch={true}
+                        height={40}
+                        onPress={() => navigate('HowToPlay', {name: 'How To Play'})}
+                    >
+                        Level 0:  How To Play
+                    </AwesomeButton>
                     <Button
                         title="Level 1:  Fundamentals"
                         color="#ffb600"
