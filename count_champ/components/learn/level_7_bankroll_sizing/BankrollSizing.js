@@ -10,6 +10,11 @@ class BankrollSizing extends React.Component {
         title: 'Learn Bankroll Sizing',
     };
     
+    bannerError() {
+        console.log("An error");
+        return;
+    }
+
     render() {
         const {navigate} = this.props.navigation;
         return (
@@ -60,13 +65,13 @@ class BankrollSizing extends React.Component {
                     </Text>
                 </View>
             </ScrollView>
-                <AdMobBanner
-                        bannerSize="fullBanner"
-                        adUnitID="ca-app-pub-3940256099942544/6300978111" // Test ID, Replace with your-admob-unit-id
-                        testDeviceID="EMULATOR"
-                        onDidFailToReceiveAdWithError={this.bannerError} 
-                        style={{width: ScreenWidth, paddingLeft:0, marginLeft: 0, position: 'absolute', bottom: 0 }}
-                    />
+                {/* <AdMobBanner
+                    bannerSize="fullBanner"
+                    adUnitID="ca-app-pub-9918224509174617/8198931096" 
+                    testDeviceID="EMULATOR"
+                    onDidFailToReceiveAdWithError={this.bannerError} 
+                    style={{width: ScreenWidth, paddingLeft:0, marginLeft: 0, position: 'absolute', bottom: 0 }}
+                /> */}
             </View>
 
             

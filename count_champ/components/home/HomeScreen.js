@@ -111,6 +111,11 @@ class HomeScreen extends React.Component {
     } catch (error) {}
   };
 
+  bannerError() {
+    console.log("An error");
+    return;
+  }
+
   static navigationOptions = {
     header: null
   };
@@ -181,13 +186,13 @@ class HomeScreen extends React.Component {
                     onPress={() => navigate('Train', {name: 'Train'})}
                     />
                 </View>
-                <AdMobBanner
+                {/* <AdMobBanner
                     bannerSize="fullBanner"
-                    adUnitID="ca-app-pub-3940256099942544/6300978111" // Test ID, Replace with your-admob-unit-id
+                    adUnitID="ca-app-pub-9918224509174617/8198931096" 
                     testDeviceID="EMULATOR"
                     onDidFailToReceiveAdWithError={this.bannerError} 
-                    style={{width: ScreenWidth, paddingLeft:0, marginLeft: 0, position: 'absolute', bottom: 0 }}
-                />
+                    style={{width: ScreenWidth, paddingLeft:0, marginLeft: 0, position: 'absolute', bottom: -1 }}
+                /> */}
             </View>
             
         );
