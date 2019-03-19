@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Button, View, StyleSheet, Dimensions, ScrollView } from 'react-native';
+import { Text, Button, View, StyleSheet, Dimensions, ScrollView } from 'react-native';
+// import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base'
 import { Constants } from 'expo';
 
 let ScreenHeight = Dimensions.get("window").height;
@@ -65,6 +66,7 @@ class Learn extends React.Component {
                         onPress={() => navigate('WhatsNext', {name: 'Whats Next'})}
                         />
                     <Button
+                        style={styles.buttonStyle}
                         title="Glossary of Terms"
                         color="#ffb600"
                         onPress={() => navigate('Glossary', {name: 'Glossary'})}
@@ -88,6 +90,10 @@ const styles = StyleSheet.create({
         flex: 0,
         justifyContent: 'space-evenly',
         height: 550,
+    },
+    buttonStyle: {
+        backgroundColor: '#fff',
+        color: '#fff',
     },
 });
 

@@ -24,12 +24,14 @@ class SpeedCount extends React.Component {
             guessWasCorrect: '',
             sessionsPlayed: 0,
             sessionsCorrect: 0,
+            durationInput: '',
         }
     }
 
     componentDidMount(){
-        axios.get('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=8').then(response => {
+        axios.get('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=10').then(response => {
             const deckID = response.data.deck_id;
+            console.log(response.data)
             this.setState({
                 deckID: deckID,
             })
@@ -82,6 +84,14 @@ class SpeedCount extends React.Component {
             speed = 1000
         }
 
+        let duration = this.state.durationInput
+        console.log(duration)
+        if(this.state.durationInput){
+            duration = ( 1000 * (Number(this.state.durationInput)) )
+        } else {
+            duration = 30000
+        }
+
         const timerId = setInterval(()=>{
             axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=1`).then(response => {
                 const oneCardDealt = response.data.cards[0].code;
@@ -100,7 +110,7 @@ class SpeedCount extends React.Component {
         setTimeout( ()=> { 
             clearInterval(timerId)
             this.countIsFinished()
-        }, 30000)  
+        }, duration)  
     }
     
     whatsTheCount = () => {
@@ -126,7 +136,8 @@ class SpeedCount extends React.Component {
             this.setState({
                 cardsDealtImages: null,
                 whatsTheCountVisible: true,
-                input: ''
+                input: '',
+                durationInput: ''
             }) 
         }, 1000)
         this.displayCount()    
@@ -169,11 +180,11 @@ class SpeedCount extends React.Component {
             <ScrollView>
             <View style={styles.container}>
                 <View>
-                    <View style={styles.textContainer}>
+                    {/* <View style={styles.textContainer}>
                         <Text style={styles.textStyleTitle}>Practice your Card Counting Abilities</Text>
-                    </View>
+                    </View> */}
                     <View style={styles.selectionsContainer}>
-                        <Text style={styles.textStyle}>Select How Many Cards Per Second:</Text> 
+                        <Text style={styles.textStyle}>Cards Per Second:</Text> 
                         <TextInput
                             style={{height: 40, borderColor: 'black', borderWidth: 1, borderRadius: 10, backgroundColor: 'white', opacity: 0.7, width: 100, paddingTop: 5, paddingBottom: 5, paddingLeft: 35, fontSize: 26, fontWeight: 'bold'}}
                             keyboardType = 'phone-pad'
@@ -182,10 +193,18 @@ class SpeedCount extends React.Component {
                             value={this.state.input}
                         />
                     </View>
-                    <View style={styles.textContainer}>
-                        <Text style={styles.textStyleTime}>*Cards will run for 30 seconds, then you will be asked to enter the Count</Text>
+
+                    <View style={styles.selectionsContainer}>
+                        <Text style={styles.textStyle}>Duration in Seconds:</Text> 
+                        <TextInput
+                            style={{height: 40, borderColor: 'black', borderWidth: 1, borderRadius: 10, backgroundColor: 'white', opacity: 0.7, width: 100, paddingTop: 5, paddingBottom: 5, paddingLeft: 35, fontSize: 26, fontWeight: 'bold'}}
+                            keyboardType = 'phone-pad'
+                            maxLength={3}
+                            onChangeText={(durationInput) => this.setState({durationInput})}
+                            value={this.state.durationInput}
+                        />
                     </View>
-                    </View>
+                </View>
                     <Button color="#000000" onPress={this.dealCard} title="Start"></Button>
                     <View style={styles.answerWrapper}>
                         {this.state.whatsTheCountVisible 
