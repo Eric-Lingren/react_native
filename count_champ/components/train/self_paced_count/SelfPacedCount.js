@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Button, Text, View, StyleSheet, Image, Dimensions } from 'react-native';
 import { Constants } from 'expo';
-import axios from 'axios'
+import axios from 'axios';
+import AwesomeButton from 'react-native-really-awesome-button';
 
 let ScreenHeight = Dimensions.get("window").height;
 
@@ -89,9 +90,9 @@ class SelfPacedCount extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.textContainer}>
+                {/* <View style={styles.textContainer}>
                     <Text style={styles.textStyleTitle}>Practice your Card Counting Abilities</Text>
-                </View>
+                </View> */}
                 <View className='trainingWrapper'>
                     <View style={styles.deckContainer}>
                         <Image
@@ -100,13 +101,30 @@ class SelfPacedCount extends React.Component {
                         />
                     </View>
                     <View style={styles.buttonContainer}>
-                        <Button color="#000000" onPress={this.dealCard} title="Deal Card"></Button>
-                        { 
-                            this.state.runningCountVisible ?
-                            <Button color="#000000" onPress={this.toggleShowCount} title="Hide Count">Show Count</Button>
-                            :
-                            <Button color="#000000" onPress={this.toggleShowCount} title="Show Count">Show Count</Button>
-                        }
+                        <AwesomeButton
+                            type='primary'
+                            backgroundColor='#000'
+                            textColor='#FFDF00'
+                            textSize={16}
+                            raiseLevel={0}
+                            stretch={true}
+                            height={40}
+                            onPress={this.dealCard}
+                            >
+                            Deal Card
+                        </AwesomeButton>
+                        <AwesomeButton
+                            type='primary'
+                            backgroundColor='#FFDF00'
+                            textColor='#000'
+                            textSize={16}
+                            raiseLevel={0}
+                            width={200}
+                            height={40}
+                            onPress={this.toggleShowCount}
+                            >
+                            {this.state.runningCountVisible ? 'Show Count' : 'Hide Count' }
+                        </AwesomeButton>
                     </View>
                     <View>
                     {
@@ -144,6 +162,8 @@ const styles = StyleSheet.create({
         flex: 0,
         justifyContent: 'space-evenly',
         height: 120,
+        alignContent:'center',
+        alignItems: 'center',
     },
     count: {
         fontSize: 30,
