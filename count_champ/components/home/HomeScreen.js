@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, Text, View, StyleSheet, Image, Dimensions, TouchableWithoutFeedback, AsyncStorage } from 'react-native';
 import { Constants, AdMobBanner } from 'expo';
-import homeLogo from './blackjackLogo.jpg';
+// import homeLogo from './blackjackLogo.jpg';
 import logo2 from './logo2.png';
 import Menubar from '../menubar/Menubar';
 import AwesomeButton from 'react-native-really-awesome-button';
@@ -135,7 +135,7 @@ class HomeScreen extends React.Component {
             <Menubar navigation={navigate} />
             <TouchableWithoutFeedback onPress={() => this.toggleMenu()}>
               <Image
-                source={require("./close-gold.png")}
+                source={require("./close-ffdf00.png")}
                 style={{
                   width: 40,
                   height: 40,
@@ -148,7 +148,7 @@ class HomeScreen extends React.Component {
         ) : (
           <TouchableWithoutFeedback onPress={() => this.toggleMenu()}>
             <Image
-              source={require("./menuGold.png")}
+              source={require("./menu-ffdf00.png")}
               style={{
                 width: 50,
                 height: 50,
