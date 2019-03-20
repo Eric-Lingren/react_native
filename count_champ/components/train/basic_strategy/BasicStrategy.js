@@ -1,9 +1,13 @@
 import * as React from 'react';
 import { Button, Text, View, StyleSheet, Image, Dimensions, ScrollView, AsyncStorage, TouchableWithoutFeedback } from 'react-native';
 import CheckBox from 'react-native-check-box';
-import { Constants } from 'expo';
+import { Constants, AdMobInterstitial } from 'expo';
 import axios from 'axios';
 import AwesomeButton from 'react-native-really-awesome-button';
+
+const INTERSTITIAL_ID = `ca-app-pub-9918224509174617/8466949434`;
+AdMobInterstitial.setAdUnitID(INTERSTITIAL_ID);
+AdMobInterstitial.setTestDeviceID("EMULATOR");
 
 //  Help images imports for all decks
 import playerHelpHard10 from './bs_charts/universal_images/hard_10.png'
@@ -257,6 +261,7 @@ class BasicStrategy extends React.Component {
         this.saveStatsInStorage(hardHandsPlayed, hardHandsCorrect, softHandsPlayed, softHandsCorrect, splitHandsPlayed, splitHandsCorrect )
     }
 
+
     saveStatsInStorage = async (hardHandsPlayed, hardHandsCorrect, softHandsPlayed, softHandsCorrect, splitHandsPlayed, splitHandsCorrect ) => {
         try {
             await AsyncStorage.setItem('hardHandsPlayed', hardHandsPlayed);
@@ -367,7 +372,16 @@ class BasicStrategy extends React.Component {
         }).done();
     }
 
+
     whichDeckToDealFrom = () => {
+// >>>>>>>>>>>>>  Re-comment this in for the popup ad
+        // let hardHandsPlayed = this.state.hardHandsPlayed
+        // let softHandsPlayed = this.state.softHandsPlayed
+        // let splitHandsPlayed = this.state.splitHandsPlayed
+        // if((hardHandsPlayed + softHandsPlayed + splitHandsPlayed) % 50 === 0 ){
+        //     this.openInterstitial()
+        // }
+
         if(this.state.playAllHands){
             this.dealCard()
         } else if(this.state.playHardHands){
@@ -378,6 +392,12 @@ class BasicStrategy extends React.Component {
             this.dealSplitHand()
         }
     }
+
+// >>>>>>>>>>>>>  Re-comment this in for the popup ad
+// openInterstitial = async () => {
+//     await AdMobInterstitial.requestAdAsync();
+//     await AdMobInterstitial.showAdAsync();
+// };
 
     dealCard = () => {
         axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=3`).then(response => {
@@ -516,7 +536,6 @@ class BasicStrategy extends React.Component {
     }
 
     showCardData = () => {
-        console.log('show card data function ran')
         const dCard = this.state.dealerHand;
         let dCardNumber = 0
         const pCard1 = this.state.playerCard1;
