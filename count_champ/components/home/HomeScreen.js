@@ -287,8 +287,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: 250,
     height: 250,
-    borderWidth: 1,
-    borderColor: "white"
+    borderWidth: 2,
+    borderColor: "black"
   },
   buttonContainer: {
     marginTop: 0,
