@@ -208,9 +208,6 @@ class SpeedCount extends React.Component {
             <ScrollView>
             <View style={styles.container}>
                 <View>
-                    {/* <View style={styles.textContainer}>
-                        <Text style={styles.textStyleTitle}>Practice your Card Counting Abilities</Text>
-                    </View> */}
                     <View style={styles.selectionsContainer}>
                         <Text style={styles.textStyle}>Cards Per Second:</Text> 
                         <TextInput
@@ -233,12 +230,10 @@ class SpeedCount extends React.Component {
                         />
                     </View>
                 </View>
-                    {/* <Button color="#000000" onPress={this.dealCard} title="Start"></Button> */}
-
                     <AwesomeButton
                         type='primary'
-                        backgroundColor='#000'
-                        textColor='#FFDF00'
+                        backgroundColor='#FFDF00'
+                        textColor='#000'
                         textSize={16}
                         raiseLevel={0}
                         stretch={true}
@@ -262,8 +257,8 @@ class SpeedCount extends React.Component {
                                     value={this.state.inputAnswer}
                                 />
                                 <AwesomeButton
-                                    backgroundColor='#FFDF00'
-                                    textColor='#000'
+                                    backgroundColor='#000'
+                                    textColor='#FFDF00'
                                     textSize={16}
                                     raiseLevel={0}
                                     height={40}

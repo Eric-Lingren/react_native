@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Button, Text, View, StyleSheet, Dimensions, ScrollView, AsyncStorage } from 'react-native';
 import { Constants } from 'expo';
+import AwesomeButton from 'react-native-really-awesome-button';
 
 let ScreenHeight = Dimensions.get("window").height;
 
@@ -214,11 +215,23 @@ class BetSizing extends React.Component {
             <ScrollView>
             <View style={styles.container}>
                 <View className='container'>
-                    <View style={styles.questionContainer}>
+                    {/* <View style={styles.questionContainer}>
                         <Text style={styles.textStyle}>Press to Select a:</Text>
-                    </View>
+                    </View> */}
                     <View style={styles.answerButton}>
-                        <Button color='blue' onPress={this.newQuestion} title='New Question'></Button>
+                        {/* <Button color='blue' onPress={this.newQuestion} title='New Question'></Button> */}
+                        <AwesomeButton
+                                type='primary'
+                                backgroundColor='#FFDF00'
+                                textColor='#000'
+                                textSize={16}
+                                raiseLevel={0}
+                                stretch={true}
+                                height={40}
+                                onPress={this.newQuestion}
+                                >
+                                New Question
+                            </AwesomeButton>
                     </View>
                     <View style={styles.trueContainer}>
                         <Text style={styles.textStyle}>If the True Count is: <Text style={styles.question}>{this.state.randomCount} </Text>  
@@ -228,9 +241,9 @@ class BetSizing extends React.Component {
                         <Text style={styles.textStyle}>How much should you bet?</Text>
                         <Text style={styles.textStyle2} >(minumum bet size is 1 unit)</Text>
                     </View>
-                    <View style={styles.selectContainer}>
+                    {/* <View style={styles.selectContainer}>
                         <Text style={styles.textStyle}>Select how much you should bet:</Text>
-                    </View>
+                    </View> */}
                     <View style={styles.buttonContainer}>
                         <Button color={this.state.unit1ButtonColor} onPress={this.setAnswerTo1} title='1  hand  of  1  Unit'></Button>
                         <Button color={this.state.unit2ButtonColor} onPress={this.setAnswerTo2} title='1  hand  of  2  Units'></Button>
@@ -317,7 +330,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     answerButton: {
-        marginTop: -20,
+        marginTop: 0,
     },
     question: {
         color: 'orange',

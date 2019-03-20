@@ -61,22 +61,6 @@ class SelfPacedCount extends React.Component {
 
             }
         }, () => this.whatsTheCount() )
-        
-        // axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=1`).then(response => {
-        //     const oneCardDealt = response.data.cards[0].code;
-        //     const cardImage = response.data.cards[0].image
-        //     const cardValue = response.data.cards[0].value
-        //     const remaining = response.data.remaining
-        //     this.setState(prevState => {
-        //     return {
-        //         cardsDealt: [...prevState.cardsDealt, oneCardDealt],
-        //         cardsDealtImages: cardImage,
-        //         cardsDealtValues: [...prevState.cardsDealtValues, cardValue],
-        //         currentCardValue: cardValue,
-        //         remainingCardsInDeck: remaining
-        //     }
-        //     }, () => this.whatsTheCount() )
-        // })
     }
 
     whatsTheCount = () => {
@@ -120,9 +104,6 @@ class SelfPacedCount extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                {/* <View style={styles.textContainer}>
-                    <Text style={styles.textStyleTitle}>Practice your Card Counting Abilities</Text>
-                </View> */}
                 <View className='trainingWrapper'>
                     <View style={styles.deckContainer}>
                         <Image
@@ -133,8 +114,8 @@ class SelfPacedCount extends React.Component {
                     <View style={styles.buttonContainer}>
                         <AwesomeButton
                             type='primary'
-                            backgroundColor='#000'
-                            textColor='#FFDF00'
+                            backgroundColor='#FFDF00'
+                            textColor='#000'
                             textSize={16}
                             raiseLevel={0}
                             stretch={true}
@@ -145,8 +126,8 @@ class SelfPacedCount extends React.Component {
                         </AwesomeButton>
                         <AwesomeButton
                             type='primary'
-                            backgroundColor='#FFDF00'
-                            textColor='#000'
+                            backgroundColor='#000'
+                            textColor='#FFDF00'
                             textSize={16}
                             raiseLevel={0}
                             width={200}

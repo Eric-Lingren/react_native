@@ -4,6 +4,7 @@ import { Constants } from 'expo';
 import SubscribeModal from '../../subscribe_modal/SubscribeModal';
 let ScreenHeight = Dimensions.get("window").height;
 let ScreenWidth = Dimensions.get("window").width;
+import AwesomeButton from 'react-native-really-awesome-button';
 
 /////////////////////////////////////////////////////////////////////////////////////////
 ////                                                                                 ////
@@ -113,11 +114,19 @@ class TrueCount extends React.Component {
                     : null
                 }
                 <View>
-                    <View style={styles.textContainer}>
-                        <Text style={styles.textStyle}>Press to Select a:</Text>
-                    </View>
                     <View style={styles.questionContainer}>
-                        <Button color='blue' onPress={this.generateNewQuestion} title='New Question'></Button>
+                        <AwesomeButton
+                            type='primary'
+                            backgroundColor='#FFDF00'
+                            textColor='#000'
+                            textSize={16}
+                            raiseLevel={0}
+                            stretch={true}
+                            height={40}
+                            onPress={this.generateNewQuestion}                          
+                            >
+                            New Question
+                        </AwesomeButton>
                     </View>
                     <View style={styles.textContainer}>
                         <Text style={styles.textStyle2}>If the</Text>
@@ -128,7 +137,7 @@ class TrueCount extends React.Component {
                     <View style={styles.textContainer}>
                         <Text style={styles.textStyle}> What is the true count? (round down) </Text>
                         <TextInput
-                            style={{height: 40, borderColor: 'black', borderWidth: 1, borderRadius: 10, backgroundColor: 'white', opacity: 0.7, width: 100, paddingTop: 5, paddingBottom: 5, paddingLeft: 35, fontSize: 26, fontWeight: 'bold'}}
+                            style={{height: 40, borderColor: 'black', borderWidth: 1, borderRadius: 10, backgroundColor: 'white', opacity: 0.7, width: 100, paddingTop: 5, paddingBottom: 5, paddingLeft: 35, fontSize: 26, fontWeight: 'bold', marginBottom: -40, marginTop: -40}}
                             keyboardType = 'phone-pad'
                             maxLength={2}
                             onChangeText={(input) => this.setState({input})}
@@ -139,8 +148,18 @@ class TrueCount extends React.Component {
                         ?   null
                         : 
                         <View style={styles.buttonContainer}>
-                            {/* <Button color="#000000" onPress={this.generateNewQuestion} title="New Question"></Button> */}
-                            <Button color="#000000" onPress={this.clickCheck} title="Check Answer"></Button>
+                            <AwesomeButton
+                                type='primary'
+                                backgroundColor='#000'
+                                textColor='#FFDF00'
+                                textSize={16}
+                                raiseLevel={0}
+                                width={200}
+                                height={40}
+                                onPress={this.clickCheck}
+                                >
+                                Check Answer
+                            </AwesomeButton>
                         </View>
                     }
                     {
@@ -166,7 +185,7 @@ const styles = StyleSheet.create({
         height: ScreenHeight,
     },
     textContainer: {
-        marginTop: 0,
+        marginTop: -20,
         flex: 0,
         justifyContent: 'space-evenly',
         height: 140,
@@ -181,12 +200,14 @@ const styles = StyleSheet.create({
     textStyle2: {
         color: 'blue',
         fontSize: 16,
+        margin: 0,
     },
     buttonContainer: {
         marginTop: 0,
         flex: 0,
-        justifyContent: 'space-evenly',
+        justifyContent: 'center',
         height: 120,
+        alignItems: 'center',
     },
     answerContainer: {
         marginTop: 0,
@@ -205,13 +226,13 @@ const styles = StyleSheet.create({
         color: 'red',
     },
     questionContainer: {
-        marginTop: -70,
+        marginTop: -10,
         flex: 0,
         justifyContent: 'space-evenly',
         height: 90,
     },
     question: {
-        color: 'orange',
+        color: '#FFDF00',
         fontWeight: '900',
         fontSize: 24,
     },

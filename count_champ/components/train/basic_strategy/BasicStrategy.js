@@ -159,11 +159,11 @@ class BasicStrategy extends React.Component {
             ////////////////////////////////
             showBasicStrategyStats: false,
             selectedButtonColor: '',
-            hitButtonColor: '#2196f3',
-            standButtonColor: '#2196f3',
-            doubleButtonColor: '#2196f3',
-            splitButtonColor: '#2196f3',
-            surrenderButtonColor: '#2196f3',
+            hitButtonColor: '#000',
+            standButtonColor: '#000',
+            doubleButtonColor: '#000',
+            splitButtonColor: '#000',
+            surrenderButtonColor: '#000',
             showHelp: false,
             helpImageToShow: '',
             playAllHands: true,
@@ -397,11 +397,11 @@ class BasicStrategy extends React.Component {
                 playerImage2: playerCardImage2,
                 remainingCardsInDeck: response.data.remaining,
                 selectedButtonColor: '',
-                hitButtonColor: '',
-                standButtonColor: '',
-                doubleButtonColor: '',
-                splitButtonColor: '',
-                surrenderButtonColor: '',
+                hitButtonColor: '#000',
+                standButtonColor: '#000',
+                doubleButtonColor: '#000',
+                splitButtonColor: '#000',
+                surrenderButtonColor: '#000',
             }, () => this.checkIfDeckNeedsToBeShuffled() )
         })
     }
@@ -439,12 +439,12 @@ class BasicStrategy extends React.Component {
                 playerCard2: playerCardValue2,
                 playerImage1: playerCardImage1, 
                 playerImage2: playerCardImage2,
-                selectedButtonColor: '',
-                hitButtonColor: '',
-                standButtonColor: '',
-                doubleButtonColor: '',
-                splitButtonColor: '',
-                surrenderButtonColor: '',
+                selectedButtonColor: '#000',
+                hitButtonColor: '#000',
+                standButtonColor: '#000',
+                doubleButtonColor: '#000',
+                splitButtonColor: '#000',
+                surrenderButtonColor: '#000',
             }, () => this.showCardData() )
         }
     }
@@ -474,12 +474,12 @@ class BasicStrategy extends React.Component {
                 playerCard2: playerCardValue2,
                 playerImage1: playerCardImage1, 
                 playerImage2: playerCardImage2,
-                selectedButtonColor: '',
-                hitButtonColor: '',
-                standButtonColor: '',
-                doubleButtonColor: '',
-                splitButtonColor: '',
-                surrenderButtonColor: '',
+                selectedButtonColor: '#000',
+                hitButtonColor: '#000',
+                standButtonColor: '#000',
+                doubleButtonColor: '#000',
+                splitButtonColor: '#000',
+                surrenderButtonColor: '#000',
             }, () => this.showCardData() )
         }
     }
@@ -506,12 +506,12 @@ class BasicStrategy extends React.Component {
             playerCard2: playerCardValue2,
             playerImage1: playerCardImage1, 
             playerImage2: playerCardImage2,
-            selectedButtonColor: '',
-            hitButtonColor: '',
-            standButtonColor: '',
-            doubleButtonColor: '',
-            splitButtonColor: '',
-            surrenderButtonColor: '',
+            selectedButtonColor: '#000',
+            hitButtonColor: '#000',
+            standButtonColor: '#000',
+            doubleButtonColor: '#000',
+            splitButtonColor: '#000',
+            surrenderButtonColor: '#000',
         }, () => this.showCardData() )
     }
 
@@ -955,7 +955,7 @@ class BasicStrategy extends React.Component {
 
     checkHitButton = (e) => {
         if (this.state.correctPlay === 'HIT'){
-            this.setState({ hitButtonColor: '#055902' })
+            this.setState({ hitButtonColor: '#00ff00' })
 
             if (this.state.currentKindOfHandBeingPlayed === 'HARD'){
                 this.setState(prevState => { return{ hardHandsCorrect: prevState.hardHandsCorrect += 1 }} )
@@ -967,20 +967,20 @@ class BasicStrategy extends React.Component {
         } else {
             this.setState({ hitButtonColor: '#ff0000' })
             if(this.state.correctPlay === 'STAND'){
-                this.setState({ standButtonColor: '#055902' })
+                this.setState({ standButtonColor: '#00ff00' })
             } else if(this.state.correctPlay === 'DOUBLE'){
-                this.setState({ doubleButtonColor: '#055902' })
+                this.setState({ doubleButtonColor: '#00ff00' })
             } else if(this.state.correctPlay === 'SURRENDER'){
-                this.setState({ surrenderButtonColor: '#055902' })
+                this.setState({ surrenderButtonColor: '#00ff00' })
             } else if(this.state.correctPlay === 'SPLIT'){
-                this.setState({ splitButtonColor: '#055902' })
+                this.setState({ splitButtonColor: '#00ff00' })
             }
         }
     }
 
     checkStandButton = (e) => {
         if (this.state.correctPlay === 'STAND'){
-            this.setState({ standButtonColor: '#055902' })
+            this.setState({ standButtonColor: '#00ff00' })
             if (this.state.currentKindOfHandBeingPlayed === 'HARD'){
                 this.setState(prevState => { return{ hardHandsCorrect: prevState.hardHandsCorrect += 1 }} )
             } else if(this.state.currentKindOfHandBeingPlayed === 'SOFT'){
@@ -991,20 +991,20 @@ class BasicStrategy extends React.Component {
         } else {
             this.setState({ standButtonColor: '#ff0000' })
             if(this.state.correctPlay === 'HIT'){
-                this.setState({ hitButtonColor: '#055902' })
+                this.setState({ hitButtonColor: '#00ff00' })
             } else if(this.state.correctPlay === 'DOUBLE'){
-                this.setState({ doubleButtonColor: '#055902' })
+                this.setState({ doubleButtonColor: '#00ff00' })
             } else if(this.state.correctPlay === 'SURRENDER'){
-                this.setState({ surrenderButtonColor: '#055902' })
+                this.setState({ surrenderButtonColor: '#00ff00' })
             } else if(this.state.correctPlay === 'SPLIT'){
-                this.setState({ splitButtonColor: '#055902' })
+                this.setState({ splitButtonColor: '#00ff00' })
             }
         }
     }
 
     checkDoubleButton = (e) => {
         if (this.state.correctPlay === 'DOUBLE'){
-            this.setState({ doubleButtonColor: '#055902' })
+            this.setState({ doubleButtonColor: '#00ff00' })
             if (this.state.currentKindOfHandBeingPlayed === 'HARD'){
                 this.setState(prevState => { return{ hardHandsCorrect: prevState.hardHandsCorrect += 1 }} )
             } else if(this.state.currentKindOfHandBeingPlayed === 'SOFT'){
@@ -1015,20 +1015,20 @@ class BasicStrategy extends React.Component {
         } else {
             this.setState({ doubleButtonColor: '#ff0000' })
             if(this.state.correctPlay === 'STAND'){
-                this.setState({ standButtonColor: '#055902' })
+                this.setState({ standButtonColor: '#00ff00' })
             } else if(this.state.correctPlay === 'HIT'){
-                this.setState({ hitButtonColor: '#055902' })
+                this.setState({ hitButtonColor: '#00ff00' })
             } else if(this.state.correctPlay === 'SURRENDER'){
-                this.setState({ surrenderButtonColor: '#055902' })
+                this.setState({ surrenderButtonColor: '#00ff00' })
             } else if(this.state.correctPlay === 'SPLIT'){
-                this.setState({ splitButtonColor: '#055902' })
+                this.setState({ splitButtonColor: '#00ff00' })
             }
         }
     }
 
     checkSplitButton = (e) => {
         if (this.state.correctPlay === 'SPLIT'){
-            this.setState({ splitButtonColor: '#055902' })
+            this.setState({ splitButtonColor: '#00ff00' })
             if (this.state.currentKindOfHandBeingPlayed === 'HARD'){
                 this.setState(prevState => { return{ hardHandsCorrect: prevState.hardHandsCorrect += 1 }} )
             } else if(this.state.currentKindOfHandBeingPlayed === 'SOFT'){
@@ -1039,20 +1039,20 @@ class BasicStrategy extends React.Component {
         } else {
             this.setState({ splitButtonColor: '#ff0000' })
             if(this.state.correctPlay === 'STAND'){
-                this.setState({ standButtonColor: '#055902' })
+                this.setState({ standButtonColor: '#00ff00' })
             } else if(this.state.correctPlay === 'DOUBLE'){
-                this.setState({ doubleButtonColor: '#055902' })
+                this.setState({ doubleButtonColor: '#00ff00' })
             } else if(this.state.correctPlay === 'SURRENDER'){
-                this.setState({ surrenderButtonColor: '#055902' })
+                this.setState({ surrenderButtonColor: '#00ff00' })
             } else if(this.state.correctPlay === 'HIT'){
-                this.setState({ hitButtonColor: '#055902' })
+                this.setState({ hitButtonColor: '#00ff00' })
             }
         }
     }
 
     checkSurrenderButton = (e) => {
         if (this.state.correctPlay === 'SURRENDER'){
-            this.setState({ surrenderButtonColor: '#055902' })
+            this.setState({ surrenderButtonColor: '#00ff00' })
             if (this.state.currentKindOfHandBeingPlayed === 'HARD'){
                 this.setState(prevState => { return{ hardHandsCorrect: prevState.hardHandsCorrect += 1 }} )
             } else if(this.state.currentKindOfHandBeingPlayed === 'SOFT'){
@@ -1063,13 +1063,13 @@ class BasicStrategy extends React.Component {
         } else {
             this.setState({ surrenderButtonColor: '#ff0000' })
             if(this.state.correctPlay === 'STAND'){
-                this.setState({ standButtonColor: '#055902' })
+                this.setState({ standButtonColor: '#00ff00' })
             } else if(this.state.correctPlay === 'DOUBLE'){
-                this.setState({ doubleButtonColor: '#055902' })
+                this.setState({ doubleButtonColor: '#00ff00' })
             } else if(this.state.correctPlay === 'HIT'){
-                this.setState({ hitButtonColor: '#055902' })
+                this.setState({ hitButtonColor: '#00ff00' })
             } else if(this.state.correctPlay === 'SPLIT'){
-                this.setState({ splitButtonColor: '#055902' })
+                this.setState({ splitButtonColor: '#00ff00' })
             }
         }
     }
@@ -1575,9 +1575,19 @@ class BasicStrategy extends React.Component {
                     </View>
 
                     <Text style={styles.handLabel}>Player Hand</Text>
-                    <Button onPress={this.whichDeckToDealFrom} width='50' color='#000000' title='Deal'></Button>
-                    
-                    <Text style={styles.handLabel}> Choose the correct play:</Text>
+                    <AwesomeButton
+                            type='primary'
+                            backgroundColor='#FFDF00'
+                            textColor='#000'
+                            textSize={16}
+                            raiseLevel={0}
+                            stretch={true}
+                            height={40}
+                            onPress={this.whichDeckToDealFrom}
+                            >
+                            Deal Card
+                        </AwesomeButton>
+                    <Text style={styles.handLabel2}> Choose the correct play:</Text>
                     <View style={styles.buttonWrapper}>
                         <View style={styles.buttonContainerLeft}>
                             <Button onPress={this.checkHitButton} title='Hit' color={this.state.hitButtonColor}></Button>
@@ -1588,7 +1598,7 @@ class BasicStrategy extends React.Component {
                         <View style={styles.buttonContainerRight}>
                             <Button onPress={this.checkStandButton} title='Stand' color={this.state.standButtonColor}></Button>
                             <Button onPress={this.checkSplitButton} title='Split' color={this.state.splitButtonColor}></Button>
-                            <Button onPress={this.helpButton} title='Help' color='#2196f3'></Button>
+                            <Button onPress={this.helpButton} title='Help' color='#000'></Button>
                         </View>
                     </View>
 
@@ -1622,7 +1632,7 @@ const styles = StyleSheet.create({
         paddingTop: Constants.statusBarHeight,
         padding: 8,
         backgroundColor: ( '#0f9b0f', '#52c234', '#52c234', '#0f9b0f'),
-        height: 800,
+        height: 830,
     },
     buttonWrapper: {
         flex: 1,
@@ -1667,6 +1677,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 16,
         fontWeight: 'bold'
+    },
+    handLabel2: {
+        textAlign: 'center',
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: 'white',
     },
     cardDisplay: {
         width: 120, 
