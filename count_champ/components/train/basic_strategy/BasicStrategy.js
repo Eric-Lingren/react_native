@@ -1576,17 +1576,17 @@ class BasicStrategy extends React.Component {
 
                     <Text style={styles.handLabel}>Player Hand</Text>
                     <AwesomeButton
-                            type='primary'
-                            backgroundColor='#FFDF00'
-                            textColor='#000'
-                            textSize={16}
-                            raiseLevel={0}
-                            stretch={true}
-                            height={40}
-                            onPress={this.whichDeckToDealFrom}
-                            >
-                            Deal Card
-                        </AwesomeButton>
+                        type='primary'
+                        backgroundColor='#FFDF00'
+                        textColor='#000'
+                        textSize={16}
+                        raiseLevel={0}
+                        stretch={true}
+                        height={40}
+                        onPress={this.whichDeckToDealFrom}
+                        >
+                        Deal Card
+                    </AwesomeButton>
                     <Text style={styles.handLabel2}> Choose the correct play:</Text>
                     <View style={styles.buttonWrapper}>
                         <View style={styles.buttonContainerLeft}>

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Dimensions, View, Text, StyleSheet, AsyncStorage, Button } from 'react-native';
 import { Constants } from 'expo';
+import AwesomeButton from 'react-native-really-awesome-button';
 
 
 let ScreenHeight = Dimensions.get("window").height;
@@ -333,7 +334,6 @@ class StatsCharts extends React.Component {
     }
 
     resetStats = async () => {
-        console.log('clear button pressed')
         try {
             await AsyncStorage.setItem('hardHandsPlayed', '0');
         } catch (error) {}
@@ -398,9 +398,9 @@ class StatsCharts extends React.Component {
             betSizingQuestionsPlayed: 0,
             betSizingQuestionsCorrect: 0,
             percentOfBetSizingQuestionsCorrect: 0,
-            deviationsQuestionsPlayed: 0,
-            deviationsQuestionsCorrect: 0,
-            percentOfDeviationsQuestionsCorrect: 0,
+            deviationsPlayed: 0,
+            deviationsCorrect: 0,
+            percentOfDeviationQuestionsCorrect: 0,
         })
     }
 
@@ -413,7 +413,18 @@ class StatsCharts extends React.Component {
         return (
             <View style={styles.container}>
             <View style={styles.buttonContainer}>
-                <Button color="#003D66" onPress={this.resetStats} title="Reset Stats"></Button>
+                <AwesomeButton
+                        type='primary'
+                        backgroundColor='#FFDF00'
+                        textColor='#000'
+                        textSize={16}
+                        raiseLevel={0}
+                        width={150}
+                        height={40}
+                        onPress={this.resetStats}
+                        >
+                        Reset Stats
+                    </AwesomeButton>
             </View>
             
                 <View style={styles.statsContainer}>
