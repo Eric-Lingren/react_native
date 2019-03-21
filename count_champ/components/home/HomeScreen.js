@@ -5,6 +5,7 @@ import AwesomeButton from 'react-native-really-awesome-button';
 import Menubar from '../menubar/Menubar';
 
 import premiumLogo from './premium_logo.png';
+import freeLogo from './free_logo.png';
 
 
 
@@ -164,77 +165,40 @@ class HomeScreen extends React.Component {
           <Text style={styles.paragraph1}>Welcome to</Text>
           <View style={styles.imageContainer}>
             <Image style={styles.image} source={premiumLogo} alt="" />
+            {/* <Image style={styles.image} source={freeLogo} alt="" /> */}
           </View>
           <Text style={styles.paragraph2}>
             Learn How to Count Cards and Win at Blackjack!
           </Text>
-        </View>
+        </View> 
+          <View style={styles.buttonContainer}>
+              <AwesomeButton
+                type='primary'
+                backgroundColor='#000'
+                textColor='#FFDF00'
+                textSize={20}
+                raiseLevel={0}
+                stretch={true}
+                height={40}
+                onPress={() => navigate('Learn', {name: 'Learn'}) }
+                >
+                LEARN
+              </AwesomeButton>
 
-                {/* <View>
-                    <Text style={styles.paragraph}>
-                        So You Want To Be A Card Counter...
-                    </Text>
-                    <View style={styles.imageContainer}>
-                        <Image style={styles.image} source={homeLogo} alt='' ></Image>
-                    </View>
-                    <Text style={styles.paragraph}>
-                        You Better Start By Learning!
-                    </Text>
-                </View> */}
-                
-                <View style={styles.buttonContainer}>
-                    {/* <Button
-                    title="Learn"
-                    color="#000000"
-                    onPress={() => navigate('Learn', {name: 'Learn'}) }
-                    />
-                    <Button
-                    title="Train"
-                    color="#000000"
-                    onPress={() => navigate('Train', {name: 'Train'})}
-                    />
-                    <AwesomeButton
-                    type='primary'
-                    backgroundColor='#000'
-                    textColor='#FFDF00'
-                    raiseLevel='0'
-                    stretch='true'
-                    height={40}
-                    onPress={
-                      () => this.test()
-                    }
-                    >
-                    SAMPLE TEXT
-                    </AwesomeButton> */}
+              <AwesomeButton
+                type='primary'
+                backgroundColor='#FFDF00'
+                textColor='#000'
+                textSize={20}
+                raiseLevel={0}
+                stretch={true}
+                height={40}
+                onPress={() => navigate('Train', {name: 'Train'})}
+                >
+                TRAIN
+              </AwesomeButton>
 
-
-                    <AwesomeButton
-                      type='primary'
-                      backgroundColor='#000'
-                      textColor='#FFDF00'
-                      textSize={20}
-                      raiseLevel={0}
-                      stretch={true}
-                      height={40}
-                      onPress={() => navigate('Learn', {name: 'Learn'}) }
-                      >
-                      LEARN
-                    </AwesomeButton>
-
-                    <AwesomeButton
-                      type='primary'
-                      backgroundColor='#FFDF00'
-                      textColor='#000'
-                      textSize={20}
-                      raiseLevel={0}
-                      stretch={true}
-                      height={40}
-                      onPress={() => navigate('Train', {name: 'Train'})}
-                      >
-                      TRAIN
-                    </AwesomeButton>
-
-                </View>
+          </View>
                 {/* <AdMobBanner
                     bannerSize="fullBanner"
                     adUnitID="ca-app-pub-9918224509174617/8198931096" 
