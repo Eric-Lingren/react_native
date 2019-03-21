@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { Button, Text, View, StyleSheet, Image, Dimensions, TouchableWithoutFeedback, AsyncStorage } from 'react-native';
 import { Constants, AdMobBanner } from 'expo';
-// import homeLogo from './blackjackLogo.jpg';
-import logo2 from './logo2.png';
-import Menubar from '../menubar/Menubar';
 import AwesomeButton from 'react-native-really-awesome-button';
+import Menubar from '../menubar/Menubar';
+
+import premiumLogo from './premium_logo.png';
+
+
 
 let ScreenHeight = Dimensions.get("window").height;
 let ScreenWidth = Dimensions.get("window").width;
@@ -135,7 +137,7 @@ class HomeScreen extends React.Component {
             <Menubar navigation={navigate} />
             <TouchableWithoutFeedback onPress={() => this.toggleMenu()}>
               <Image
-                source={require("./close-ffdf00.png")}
+                source={require("./close_icon.png")}
                 style={{
                   width: 40,
                   height: 40,
@@ -148,7 +150,7 @@ class HomeScreen extends React.Component {
         ) : (
           <TouchableWithoutFeedback onPress={() => this.toggleMenu()}>
             <Image
-              source={require("./menu-ffdf00.png")}
+              source={require("./menu_icon.png")}
               style={{
                 width: 50,
                 height: 50,
@@ -161,7 +163,7 @@ class HomeScreen extends React.Component {
         <View>
           <Text style={styles.paragraph1}>Welcome to</Text>
           <View style={styles.imageContainer}>
-            <Image style={styles.image} source={logo2} alt="" />
+            <Image style={styles.image} source={premiumLogo} alt="" />
           </View>
           <Text style={styles.paragraph2}>
             Learn How to Count Cards and Win at Blackjack!
