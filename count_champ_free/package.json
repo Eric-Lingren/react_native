@@ -1,5 +1,18 @@
 {
-  "name": "count-champ",
+  "expo": {
+    "name": "Count Champ",
+    "icon": "./assets/images/premium_logo.png",
+    "version": "1.0.0",
+    "slug": "expo.io/@ericlingren/count-champ",
+    "sdkVersion": "32.0.0",
+    "ios": {
+      "bundleIdentifier": "com.cardchamp.countchamp"
+    },
+    "android": {
+      "package": "com.cardchamp.countchamp"
+    }
+  },
+  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -7,21 +20,25 @@
     "eject": "expo eject",
     "test": "node ./node_modules/jest/bin/jest.js --watchAll"
   },
-  "version": "0.0.0",
-  "description": "No description",
-  "author": null,
-  "private": true,
-  "main": "node_modules/expo/AppEntry.js",
+  "jest": {
+    "preset": "jest-expo"
+  },
+  "version": "1.0.0",
+  "description": "Blackjack card counting trainer",
+  "author": "CardChampLLC",
+  "private": false,
   "dependencies": {
     "axios": "^0.18.0",
     "expo": "^32.0.0",
-    "expo-ads-admob": "^3.0.0",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
-    "react-native-admob": "^1.3.2",
     "react-native-check-box": "^2.1.7",
     "react-native-paper": "2.2.8",
-    "react-native-simple-radio-button": "^2.7.3",
+    "react-native-really-awesome-button": "^1.4.2",
     "react-navigation": "^3.3.0"
+  },
+  "devDependencies": {
+    "babel-preset-expo": "^5.0.0",
+    "jest-expo": "^32.0.0"
   }
 }

@@ -16,7 +16,21 @@ class Profile extends React.Component {
         
         return (
             <View style={styles.container}>
-                <Text style={styles.textStyles}>Profile Page</Text>
+                <View>
+                    <Text style={styles.textStyles}>
+                        You are currently using the paid version.  This version contains full app functionality and no ads.
+                    </Text>
+                </View>
+                <View>
+                    <Text style={styles.textStyles}>
+                        Your license is maintained by the Google Play Store.
+                    </Text>
+                </View>
+                <View>
+                    <Text style={styles.textStyles2}>
+                        Thank you for your subscription!  We appreciate it!
+                    </Text>
+                </View>
             </View>
         )
     }
@@ -31,7 +45,19 @@ const styles = StyleSheet.create({
     textStyles: {
         color: 'white',
         fontSize: 20,
+        textAlign: 'center',
+        marginBottom: 40,
+        paddingLeft: 10,
+        paddingRight: 10,
+    },
+    textStyles2: {
+        color: 'white',
+        fontSize: 20,
         fontWeight: 'bold',
+        textAlign: 'center',
+        marginTop: 60,
+        paddingLeft: 10,
+        paddingRight: 10,
     }
 });
 export default Profile

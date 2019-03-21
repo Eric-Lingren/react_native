@@ -1,121 +1,123 @@
 import * as React from 'react';
 import { Button, Text, View, StyleSheet, Image, Dimensions, ScrollView, AsyncStorage, TouchableWithoutFeedback } from 'react-native';
 import CheckBox from 'react-native-check-box';
-import { Constants } from 'expo';
+import { Constants, AdMobInterstitial } from 'expo';
 import axios from 'axios';
-import SubscribeModal from '../../subscribe_modal/SubscribeModal'
+import AwesomeButton from 'react-native-really-awesome-button';
 
-// //  Help images imports for all decks
-// import playerHelpHard10 from './bs_charts/universal_images/hard_10.png'
-// import playerHelpHard12 from './bs_charts/universal_images/hard_12.png'
-// import playerHelpHard13 from './bs_charts/universal_images/hard_13.png'
-// import playerHelpHard14 from './bs_charts/universal_images/hard_14.png'
-// import playerHelpSplitA from './bs_charts/universal_images/split_A.png'
+const INTERSTITIAL_ID = `ca-app-pub-9918224509174617/8466949434`;
+AdMobInterstitial.setAdUnitID(INTERSTITIAL_ID);
+AdMobInterstitial.setTestDeviceID("EMULATOR");
 
-// //  Help images imports for all Single Deck
-// import sdHard5to7 from './bs_charts/single_deck/hard_5-7.png'
-// import sdHard8 from './bs_charts/single_deck/hard_8.png'
-// import sdHard9 from './bs_charts/single_deck/hard_9.png'
-// import sdHard10 from './bs_charts/single_deck/hard_10.png'
-// import sdHard11 from './bs_charts/single_deck/hard_11.png'
-// import sdHard12 from './bs_charts/single_deck/hard_12.png'
-// import sdHard13 from './bs_charts/single_deck/hard_13.png'
-// import sdHard14 from './bs_charts/single_deck/hard_14.png'
-// import sdHard16 from './bs_charts/single_deck/hard_16.png'
-// import sdHard18 from './bs_charts/single_deck/hard_18+.png'
-// import sdSoft13 from './bs_charts/single_deck/soft_13.png'
-// import sdSoft14 from './bs_charts/single_deck/soft_14.png'
-// import sdSoft15 from './bs_charts/single_deck/soft_15.png'
-// import sdSoft16 from './bs_charts/single_deck/soft_16.png'
-// import sdSoft17 from './bs_charts/single_deck/soft_17.png'
-// import sdSoft19 from './bs_charts/single_deck/soft_19.png'
-// import sdSoft20 from './bs_charts/single_deck/soft_20+.png'
-// import sdSplit4 from './bs_charts/single_deck/split_4.png'
-// import sdSplit6 from './bs_charts/single_deck/split_6.png'
-// import sdSplit8 from './bs_charts/single_deck/split_8.png'
-// import sdSplit12 from './bs_charts/single_deck/split_12.png'
-// import sdSplit14 from './bs_charts/single_deck/split_14.png'
-// import sdSplit16 from './bs_charts/single_deck/split_16.png'
+//  Help images imports for all decks
+import playerHelpHard10 from './bs_charts/universal_images/hard_10.png'
+import playerHelpHard12 from './bs_charts/universal_images/hard_12.png'
+import playerHelpHard13 from './bs_charts/universal_images/hard_13.png'
+import playerHelpHard14 from './bs_charts/universal_images/hard_14.png'
+import playerHelpSplitA from './bs_charts/universal_images/split_A.png'
 
-// //  Help images imports for STAND Single Deck
-// import sdStandHard15 from './bs_charts/singleDeck_dealer_stands_17/hard_15.png'
-// import sdStandHard17 from './bs_charts/singleDeck_dealer_stands_17/hard_17.png'
-// import sdStandSoft18 from './bs_charts/singleDeck_dealer_stands_17/soft_18.png'
-// import sdStandSplit18 from './bs_charts/singleDeck_dealer_stands_17/split_18.png'
+//  Help images imports for all Single Deck
+import sdHard5to7 from './bs_charts/single_deck/hard_5-7.png'
+import sdHard8 from './bs_charts/single_deck/hard_8.png'
+import sdHard9 from './bs_charts/single_deck/hard_9.png'
+import sdHard10 from './bs_charts/single_deck/hard_10.png'
+import sdHard11 from './bs_charts/single_deck/hard_11.png'
+import sdHard12 from './bs_charts/single_deck/hard_12.png'
+import sdHard13 from './bs_charts/single_deck/hard_13.png'
+import sdHard14 from './bs_charts/single_deck/hard_14.png'
+import sdHard16 from './bs_charts/single_deck/hard_16.png'
+import sdHard18 from './bs_charts/single_deck/hard_18+.png'
+import sdSoft13 from './bs_charts/single_deck/soft_13.png'
+import sdSoft14 from './bs_charts/single_deck/soft_14.png'
+import sdSoft15 from './bs_charts/single_deck/soft_15.png'
+import sdSoft16 from './bs_charts/single_deck/soft_16.png'
+import sdSoft17 from './bs_charts/single_deck/soft_17.png'
+import sdSoft19 from './bs_charts/single_deck/soft_19.png'
+import sdSoft20 from './bs_charts/single_deck/soft_20+.png'
+import sdSplit4 from './bs_charts/single_deck/split_4.png'
+import sdSplit6 from './bs_charts/single_deck/split_6.png'
+import sdSplit8 from './bs_charts/single_deck/split_8.png'
+import sdSplit12 from './bs_charts/single_deck/split_12.png'
+import sdSplit14 from './bs_charts/single_deck/split_14.png'
+import sdSplit16 from './bs_charts/single_deck/split_16.png'
 
-// //  Help images imports for HIT Single Deck
-// import sdHitHard15 from './bs_charts/singleDeck_dealer_hits_17/hard_15.png'
-// import sdHitHard17 from './bs_charts/singleDeck_dealer_hits_17/hard_17.png'
-// import sdHitSoft18 from './bs_charts/singleDeck_dealer_hits_17/soft_18.png'
-// import sdHitSplit18 from './bs_charts/singleDeck_dealer_hits_17/split_18.png'
+//  Help images imports for STAND Single Deck
+import sdStandHard15 from './bs_charts/singleDeck_dealer_stands_17/hard_15.png'
+import sdStandHard17 from './bs_charts/singleDeck_dealer_stands_17/hard_17.png'
+import sdStandSoft18 from './bs_charts/singleDeck_dealer_stands_17/soft_18.png'
+import sdStandSplit18 from './bs_charts/singleDeck_dealer_stands_17/split_18.png'
 
-// //  Help images imports for all Double Deck
-// import ddHard5to8 from './bs_charts/double_deck/hard_5-8.png'
-// import ddHard9 from './bs_charts/double_deck/hard_9.png'
-// import ddHard11 from './bs_charts/double_deck/hard_11.png'
-// import ddHard16 from './bs_charts/double_deck/hard_16.png'
-// import ddHard18 from './bs_charts/double_deck/hard_18+.png'
-// import ddSoft13 from './bs_charts/double_deck/soft_13.png'
-// import ddSoft14 from './bs_charts/double_deck/soft_14.png'
-// import ddSoft15 from './bs_charts/double_deck/soft_15.png'
-// import ddSoft16 from './bs_charts/double_deck/soft_16.png'
-// import ddSoft17 from './bs_charts/double_deck/soft_17.png'
-// import ddSoft20 from './bs_charts/double_deck/soft_20+.png'
-// import ddSplit4 from './bs_charts/double_deck/split_4.png'
-// import ddSplit6 from './bs_charts/double_deck/split_6.png'
-// import ddSplit8 from './bs_charts/double_deck/split_8.png'
-// import ddSplit12 from './bs_charts/double_deck/split_12.png'
-// import ddSplit14 from './bs_charts/double_deck/split_14.png'
-// import ddSplit18 from './bs_charts/double_deck/split_18.png'
+//  Help images imports for HIT Single Deck
+import sdHitHard15 from './bs_charts/singleDeck_dealer_hits_17/hard_15.png'
+import sdHitHard17 from './bs_charts/singleDeck_dealer_hits_17/hard_17.png'
+import sdHitSoft18 from './bs_charts/singleDeck_dealer_hits_17/soft_18.png'
+import sdHitSplit18 from './bs_charts/singleDeck_dealer_hits_17/split_18.png'
 
-// //  Help images imports for double deck STAND 17 
-// import ddStandHard15 from './bs_charts/doubleDeck_dealer_stands_17/hard_15.png'
-// import ddStandHard17 from './bs_charts/doubleDeck_dealer_stands_17/hard_17.png'
-// import ddStandSoft18 from './bs_charts/doubleDeck_dealer_stands_17/soft_18.png'
-// import ddStandSoft19 from './bs_charts/doubleDeck_dealer_stands_17/soft_19.png'
-// import ddStandSplit16 from './bs_charts/doubleDeck_dealer_stands_17/split_16.png'
+//  Help images imports for all Double Deck
+import ddHard5to8 from './bs_charts/double_deck/hard_5-8.png'
+import ddHard9 from './bs_charts/double_deck/hard_9.png'
+import ddHard11 from './bs_charts/double_deck/hard_11.png'
+import ddHard16 from './bs_charts/double_deck/hard_16.png'
+import ddHard18 from './bs_charts/double_deck/hard_18+.png'
+import ddSoft13 from './bs_charts/double_deck/soft_13.png'
+import ddSoft14 from './bs_charts/double_deck/soft_14.png'
+import ddSoft15 from './bs_charts/double_deck/soft_15.png'
+import ddSoft16 from './bs_charts/double_deck/soft_16.png'
+import ddSoft17 from './bs_charts/double_deck/soft_17.png'
+import ddSoft20 from './bs_charts/double_deck/soft_20+.png'
+import ddSplit4 from './bs_charts/double_deck/split_4.png'
+import ddSplit6 from './bs_charts/double_deck/split_6.png'
+import ddSplit8 from './bs_charts/double_deck/split_8.png'
+import ddSplit12 from './bs_charts/double_deck/split_12.png'
+import ddSplit14 from './bs_charts/double_deck/split_14.png'
+import ddSplit18 from './bs_charts/double_deck/split_18.png'
 
-// //  Help images imports for double deck HIT 17 
-// import ddHitHard15 from './bs_charts/doubleDeck_dealer_hits_17/hard_15.png'
-// import ddHitHard17 from './bs_charts/doubleDeck_dealer_hits_17/hard_17.png'
-// import ddHitSoft18 from './bs_charts/doubleDeck_dealer_hits_17/soft_18.png'
-// import ddHitSoft19 from './bs_charts/doubleDeck_dealer_hits_17/soft_19.png'
-// import ddHitSplit16 from './bs_charts/doubleDeck_dealer_hits_17/split_16.png'
+//  Help images imports for double deck STAND 17 
+import ddStandHard15 from './bs_charts/doubleDeck_dealer_stands_17/hard_15.png'
+import ddStandHard17 from './bs_charts/doubleDeck_dealer_stands_17/hard_17.png'
+import ddStandSoft18 from './bs_charts/doubleDeck_dealer_stands_17/soft_18.png'
+import ddStandSoft19 from './bs_charts/doubleDeck_dealer_stands_17/soft_19.png'
+import ddStandSplit16 from './bs_charts/doubleDeck_dealer_stands_17/split_16.png'
 
-// //  Help images imports for all shoes 
-// import shoeHard5to8 from './bs_charts/shoe/hard_5-8.png'
-// import shoeHard9 from './bs_charts/shoe/hard_9.png'
-// import shoeHard16 from './bs_charts/shoe/hard_16.png'
-// import shoeSoft13 from './bs_charts/shoe/soft_13.png'
-// import shoeSoft14 from './bs_charts/shoe/soft_14.png'
-// import shoeSoft15 from './bs_charts/shoe/soft_15.png'
-// import shoeSoft16 from './bs_charts/shoe/soft_16.png'
-// import shoeSoft17 from './bs_charts/shoe/soft_17.png'
-// import shoeSoft18 from './bs_charts/shoe/soft_18.png'
-// import shoeSplit4 from './bs_charts/shoe/split_4.png'
-// import shoeSplit6 from './bs_charts/shoe/split_6.png'
-// import shoeSplit8 from './bs_charts/shoe/split_8.png'
-// import shoeSplit12 from './bs_charts/shoe/split_12.png'
-// import shoeSplit14 from './bs_charts/shoe/split_14.png'
-// import shoeSplit18 from './bs_charts/shoe/split_18.png'
+//  Help images imports for double deck HIT 17 
+import ddHitHard15 from './bs_charts/doubleDeck_dealer_hits_17/hard_15.png'
+import ddHitHard17 from './bs_charts/doubleDeck_dealer_hits_17/hard_17.png'
+import ddHitSoft18 from './bs_charts/doubleDeck_dealer_hits_17/soft_18.png'
+import ddHitSoft19 from './bs_charts/doubleDeck_dealer_hits_17/soft_19.png'
+import ddHitSplit16 from './bs_charts/doubleDeck_dealer_hits_17/split_16.png'
 
-// //  Help images imports for shoe STAND 17 
-// import shoeStandHard11 from './bs_charts/shoe_dealer_stands_17/hard_11.png'
-// import shoeStandHard15 from './bs_charts/shoe_dealer_stands_17/hard_15.png'
-// import shoeStandHard17 from './bs_charts/shoe_dealer_stands_17/hard_17+.png'
-// import shoeStandSoft19 from './bs_charts/shoe_dealer_stands_17/soft_19+.png'
-// import shoeStandSplit16 from './bs_charts/shoe_dealer_stands_17/split_16.png'
+//  Help images imports for all shoes 
+import shoeHard5to8 from './bs_charts/shoe/hard_5-8.png'
+import shoeHard9 from './bs_charts/shoe/hard_9.png'
+import shoeHard16 from './bs_charts/shoe/hard_16.png'
+import shoeSoft13 from './bs_charts/shoe/soft_13.png'
+import shoeSoft14 from './bs_charts/shoe/soft_14.png'
+import shoeSoft15 from './bs_charts/shoe/soft_15.png'
+import shoeSoft16 from './bs_charts/shoe/soft_16.png'
+import shoeSoft17 from './bs_charts/shoe/soft_17.png'
+import shoeSoft18 from './bs_charts/shoe/soft_18.png'
+import shoeSplit4 from './bs_charts/shoe/split_4.png'
+import shoeSplit6 from './bs_charts/shoe/split_6.png'
+import shoeSplit8 from './bs_charts/shoe/split_8.png'
+import shoeSplit12 from './bs_charts/shoe/split_12.png'
+import shoeSplit14 from './bs_charts/shoe/split_14.png'
+import shoeSplit18 from './bs_charts/shoe/split_18.png'
 
-// //  Help images imports for shoe HIT 17
-// import shoeHitHard11 from './bs_charts/shoe_dealer_hits_17/hard_11.png'
-// import shoeHitHard15 from './bs_charts/shoe_dealer_hits_17/hard_15.png'
-// import shoeHitHard17 from './bs_charts/shoe_dealer_hits_17/hard_17.png'
-// import shoeHitHard18 from './bs_charts/shoe_dealer_hits_17/hard_18+.png'
-// import shoeHitSoft19 from './bs_charts/shoe_dealer_hits_17/soft_19.png'
-// import shoeHitSoft20 from './bs_charts/shoe_dealer_hits_17/soft_20+.png'
-// import shoeHitSplit16 from './bs_charts/shoe_dealer_hits_17/split_16.png'
+//  Help images imports for shoe STAND 17 
+import shoeStandHard11 from './bs_charts/shoe_dealer_stands_17/hard_11.png'
+import shoeStandHard15 from './bs_charts/shoe_dealer_stands_17/hard_15.png'
+import shoeStandHard17 from './bs_charts/shoe_dealer_stands_17/hard_17+.png'
+import shoeStandSoft19 from './bs_charts/shoe_dealer_stands_17/soft_19+.png'
+import shoeStandSplit16 from './bs_charts/shoe_dealer_stands_17/split_16.png'
 
-
+//  Help images imports for shoe HIT 17
+import shoeHitHard11 from './bs_charts/shoe_dealer_hits_17/hard_11.png'
+import shoeHitHard15 from './bs_charts/shoe_dealer_hits_17/hard_15.png'
+import shoeHitHard17 from './bs_charts/shoe_dealer_hits_17/hard_17.png'
+import shoeHitHard18 from './bs_charts/shoe_dealer_hits_17/hard_18+.png'
+import shoeHitSoft19 from './bs_charts/shoe_dealer_hits_17/soft_19.png'
+import shoeHitSoft20 from './bs_charts/shoe_dealer_hits_17/soft_20+.png'
+import shoeHitSplit16 from './bs_charts/shoe_dealer_hits_17/split_16.png'
 
 let ScreenHeight = Dimensions.get("window").height;
 let ScreenWidth = Dimensions.get("window").width;
@@ -124,7 +126,6 @@ class BasicStrategy extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            showSubscribeModal: false,
             deckID: '',
             dealerHand: '',
             dealerImages: 'string',
@@ -162,17 +163,77 @@ class BasicStrategy extends React.Component {
             ////////////////////////////////
             showBasicStrategyStats: false,
             selectedButtonColor: '',
-            hitButtonColor: '#2196f3',
-            standButtonColor: '#2196f3',
-            doubleButtonColor: '#2196f3',
-            splitButtonColor: '#2196f3',
-            surrenderButtonColor: '#2196f3',
+            hitButtonColor: '#000',
+            standButtonColor: '#000',
+            doubleButtonColor: '#000',
+            splitButtonColor: '#000',
+            surrenderButtonColor: '#000',
             showHelp: false,
             helpImageToShow: '',
             playAllHands: true,
             playHardHands: false,
             playSoftHands: false,
             playSplitHands: false,
+            deck: [
+                { "value": "6", "image": "https://deckofcardsapi.com/static/img/6H.png" },
+                { "value": "QUEEN", "image": "https://deckofcardsapi.com/static/img/QH.png" },
+                { "value": "JACK", "image": "https://deckofcardsapi.com/static/img/JC.png" },
+                { "value": "QUEEN", "image": "https://deckofcardsapi.com/static/img/QD.png" },
+                { "value": "2", "image": "https://deckofcardsapi.com/static/img/2D.png" },
+                { "value": "3", "image": "https://deckofcardsapi.com/static/img/3D.png" },
+                { "value": "QUEEN", "image": "https://deckofcardsapi.com/static/img/QS.png" },
+                { "value": "5", "image": "https://deckofcardsapi.com/static/img/5C.png" },
+                { "value": "9", "image": "https://deckofcardsapi.com/static/img/9D.png" },
+                { "value": "4", "image": "https://deckofcardsapi.com/static/img/4D.png" },
+                { "value": "7", "image": "https://deckofcardsapi.com/static/img/7S.png" },
+                { "value": "10", "image": "https://deckofcardsapi.com/static/img/0H.png" },
+                { "value": "KING", "image": "https://deckofcardsapi.com/static/img/KD.png" },
+                { "value": "6", "image": "https://deckofcardsapi.com/static/img/6S.png" },
+                { "value": "JACK", "image": "https://deckofcardsapi.com/static/img/JD.png" },
+                { "value": "5", "image": "https://deckofcardsapi.com/static/img/5S.png" },
+                { "value": "QUEEN", "image": "https://deckofcardsapi.com/static/img/QC.png" },
+                { "value": "10", "image": "https://deckofcardsapi.com/static/img/0D.png" },
+                { "value": "8", "image": "https://deckofcardsapi.com/static/img/8S.png" },
+                { "value": "KING", "image": "https://deckofcardsapi.com/static/img/KS.png" },
+                { "value": "2", "image": "https://deckofcardsapi.com/static/img/2C.png" },
+                { "value": "2", "image": "https://deckofcardsapi.com/static/img/2S.png" },
+                { "value": "4", "image": "https://deckofcardsapi.com/static/img/4C.png" },
+                { "value": "3", "image": "https://deckofcardsapi.com/static/img/3S.png" },
+                { "value": "2", "image": "https://deckofcardsapi.com/static/img/2H.png" },
+                { "value": "9", "image": "https://deckofcardsapi.com/static/img/9H.png" },
+                { "value": "7", "image": "https://deckofcardsapi.com/static/img/7H.png" },
+                { "value": "5", "image": "https://deckofcardsapi.com/static/img/5D.png" },
+                { "value": "10", "image": "https://deckofcardsapi.com/static/img/0S.png" },
+                { "value": "4", "image": "https://deckofcardsapi.com/static/img/4S.png" },
+                { "value": "KING", "image": "https://deckofcardsapi.com/static/img/KH.png" },
+                { "value": "4", "image": "https://deckofcardsapi.com/static/img/4H.png" },
+                { "value": "JACK", "image": "https://deckofcardsapi.com/static/img/JH.png" },
+                { "value": "8", "image": "https://deckofcardsapi.com/static/img/8D.png" },
+                { "value": "JACK", "image": "https://deckofcardsapi.com/static/img/JS.png" },
+                { "value": "5", "image": "https://deckofcardsapi.com/static/img/5H.png" },
+                { "value": "6", "image": "https://deckofcardsapi.com/static/img/6D.png" },
+                { "value": "KING", "image": "https://deckofcardsapi.com/static/img/KC.png" },
+                { "value": "10", "image": "https://deckofcardsapi.com/static/img/0C.png" },
+                { "value": "9", "image": "https://deckofcardsapi.com/static/img/9S.png" },
+                { "value": "8", "image": "https://deckofcardsapi.com/static/img/8C.png" },
+                { "value": "7", "image": "https://deckofcardsapi.com/static/img/7C.png" },
+                { "value": "3", "image": "https://deckofcardsapi.com/static/img/3H.png" },
+                { "value": "8", "image": "https://deckofcardsapi.com/static/img/8H.png" },
+                { "value": "7", "image": "https://deckofcardsapi.com/static/img/7D.png" },
+                { "value": "3", "image": "https://deckofcardsapi.com/static/img/3C.png" },
+                { "value": "9", "image": "https://deckofcardsapi.com/static/img/9C.png" },
+                { "value": "6", "image": "https://deckofcardsapi.com/static/img/6C.png" },
+                { "value": "ACE", "image": "https://deckofcardsapi.com/static/img/AS.png" },
+                { "value": "ACE", "image": "https://deckofcardsapi.com/static/img/aceDiamonds.png" },
+                { "value": "ACE", "image": "https://deckofcardsapi.com/static/img/AH.png" },
+                { "value": "ACE", "image": "https://deckofcardsapi.com/static/img/AC.png" }
+            ],
+            aces: [
+                { "value": "ACE", "image": "https://deckofcardsapi.com/static/img/AS.png" },
+                { "value": "ACE", "image": "https://deckofcardsapi.com/static/img/aceDiamonds.png" },
+                { "value": "ACE", "image": "https://deckofcardsapi.com/static/img/AH.png" },
+                { "value": "ACE", "image": "https://deckofcardsapi.com/static/img/AC.png" }
+            ],
         }
     }
 
@@ -198,29 +259,6 @@ class BasicStrategy extends React.Component {
         let splitHandsCorrect = this.state.splitHandsCorrect.toString()
         
         this.saveStatsInStorage(hardHandsPlayed, hardHandsCorrect, softHandsPlayed, softHandsCorrect, splitHandsPlayed, splitHandsCorrect )
-
-        // this.removeItems()
-    }
-
-    removeItems = async () => {
-        try {
-            await AsyncStorage.removeItem('hardHandsPlayed');
-        } catch (error) {}
-        try {
-            await AsyncStorage.removeItem('hardHandsCorrect');
-        } catch (error) {}
-        try {
-            await AsyncStorage.removeItem('softHandsPlayed');
-        } catch (error) {}
-        try {
-            await AsyncStorage.removeItem('softHandsCorrect');
-        } catch (error) {}
-        try {
-            await AsyncStorage.removeItem('splitHandsPlayed');
-        } catch (error) {}
-        try {
-            await AsyncStorage.removeItem('splitHandsCorrect');
-        } catch (error) {}
     }
 
 
@@ -279,7 +317,6 @@ class BasicStrategy extends React.Component {
     }
 
     getSavedRulesFromMemory = () =>{
-
         AsyncStorage.getItem("dealerStandsOnSoft17").then((dealerStandsOnSoft17Value) => {
             if(dealerStandsOnSoft17Value === 'true'){
                 this.setState({dealerStandsOnSoft17: true, dealerHitsOnSoft17: false} )
@@ -336,9 +373,34 @@ class BasicStrategy extends React.Component {
     }
 
 
+    whichDeckToDealFrom = () => {
+// >>>>>>>>>>>>>  Re-comment this in for the popup ad
+        // let hardHandsPlayed = this.state.hardHandsPlayed
+        // let softHandsPlayed = this.state.softHandsPlayed
+        // let splitHandsPlayed = this.state.splitHandsPlayed
+        // if((hardHandsPlayed + softHandsPlayed + splitHandsPlayed) % 50 === 0 ){
+        //     this.openInterstitial()
+        // }
+
+        if(this.state.playAllHands){
+            this.dealCard()
+        } else if(this.state.playHardHands){
+            this.dealHardHand()
+        }else if(this.state.playSoftHands){
+            this.dealSoftHand()
+        }else {
+            this.dealSplitHand()
+        }
+    }
+
+// >>>>>>>>>>>>>  Re-comment this in for the popup ad
+// openInterstitial = async () => {
+//     await AdMobInterstitial.requestAdAsync();
+//     await AdMobInterstitial.showAdAsync();
+// };
+
     dealCard = () => {
         axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=3`).then(response => {
-            
             const dealerCardValue = response.data.cards[0].value  
             const playerCardValue1 = response.data.cards[1].value  
             const playerCardValue2 = response.data.cards[2].value  
@@ -355,19 +417,125 @@ class BasicStrategy extends React.Component {
                 playerImage2: playerCardImage2,
                 remainingCardsInDeck: response.data.remaining,
                 selectedButtonColor: '',
-                hitButtonColor: '',
-                standButtonColor: '',
-                doubleButtonColor: '',
-                splitButtonColor: '',
-                surrenderButtonColor: '',
-            }, () => this.showCardData() )
+                hitButtonColor: '#000',
+                standButtonColor: '#000',
+                doubleButtonColor: '#000',
+                splitButtonColor: '#000',
+                surrenderButtonColor: '#000',
+            }, () => this.checkIfDeckNeedsToBeShuffled() )
         })
     }
-    showCardData = () => {
+
+    checkIfDeckNeedsToBeShuffled = () => {
         if(this.state.remainingCardsInDeck <= 5){
             axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/shuffle/`).then(response => {
             })
         }
+        this.showCardData()
+    }
+
+    dealHardHand = () => {
+        let randomCardIndex1 = Math.floor(Math.random() * 52 )
+        let randomCardIndex2 = Math.floor(Math.random() * 48 )
+        let randomCardIndex3 = Math.floor(Math.random() * 48 )
+        let dealerCardValue = this.state.deck[randomCardIndex1].value
+        let playerCardValue1 = this.state.deck[randomCardIndex2].value
+        let playerCardValue2 = this.state.deck[randomCardIndex3].value
+        let dealerCardImage = this.state.deck[randomCardIndex1].image
+        let playerCardImage1 = this.state.deck[randomCardIndex2].image
+        let playerCardImage2 = this.state.deck[randomCardIndex3].image
+
+        this.checkCustomHardHandShuffle(dealerCardValue, playerCardValue1, playerCardValue2, dealerCardImage, playerCardImage1, playerCardImage2)
+    }
+
+    checkCustomHardHandShuffle = (dealerCardValue, playerCardValue1, playerCardValue2, dealerCardImage, playerCardImage1, playerCardImage2) => {
+        if(playerCardValue1 === playerCardValue2){
+            this.dealHardHand()
+        } else{
+            this.setState({
+                dealerHand: dealerCardValue,
+                dealerImages: dealerCardImage,
+                playerCard1: playerCardValue1, 
+                playerCard2: playerCardValue2,
+                playerImage1: playerCardImage1, 
+                playerImage2: playerCardImage2,
+                selectedButtonColor: '#000',
+                hitButtonColor: '#000',
+                standButtonColor: '#000',
+                doubleButtonColor: '#000',
+                splitButtonColor: '#000',
+                surrenderButtonColor: '#000',
+            }, () => this.showCardData() )
+        }
+    }
+
+    dealSplitHand = () => {
+        let randomCardIndex1 = Math.floor(Math.random() * 52 )
+        let randomCardIndex2 = Math.floor(Math.random() * 52 )
+        let randomCardIndex3 = Math.floor(Math.random() * 52 )
+        let dealerCardValue = this.state.deck[randomCardIndex1].value
+        let playerCardValue1 = this.state.deck[randomCardIndex2].value
+        let playerCardValue2 = this.state.deck[randomCardIndex3].value
+        let dealerCardImage = this.state.deck[randomCardIndex1].image
+        let playerCardImage1 = this.state.deck[randomCardIndex2].image
+        let playerCardImage2 = this.state.deck[randomCardIndex3].image
+
+        this.checkCustomSplitHandShuffle(dealerCardValue, playerCardValue1, playerCardValue2, dealerCardImage, playerCardImage1, playerCardImage2)
+    }
+
+    checkCustomSplitHandShuffle = (dealerCardValue, playerCardValue1, playerCardValue2, dealerCardImage, playerCardImage1, playerCardImage2) => {
+        if(playerCardValue1 !== playerCardValue2){
+            this.dealSplitHand()
+        } else{
+            this.setState({
+                dealerHand: dealerCardValue,
+                dealerImages: dealerCardImage,
+                playerCard1: playerCardValue1, 
+                playerCard2: playerCardValue2,
+                playerImage1: playerCardImage1, 
+                playerImage2: playerCardImage2,
+                selectedButtonColor: '#000',
+                hitButtonColor: '#000',
+                standButtonColor: '#000',
+                doubleButtonColor: '#000',
+                splitButtonColor: '#000',
+                surrenderButtonColor: '#000',
+            }, () => this.showCardData() )
+        }
+    }
+
+    dealSoftHand = () => {
+        let randomCardIndex1 = Math.floor(Math.random() * 52 )
+        let randomCardIndex2 = Math.floor(Math.random() * 52 )
+        let randomCardIndex3 = Math.floor(Math.random() * 4 )
+        let dealerCardValue = this.state.deck[randomCardIndex1].value
+        let dealerCardImage = this.state.deck[randomCardIndex1].image
+        let playerCardValue1 = this.state.deck[randomCardIndex2].value
+        let playerCardImage1 = this.state.deck[randomCardIndex2].image
+        let playerCardValue2 = this.state.aces[randomCardIndex3].value
+        let playerCardImage2 = this.state.aces[randomCardIndex3].image
+
+        this.checkCustomSoftHandShuffle(dealerCardValue, playerCardValue1, playerCardValue2, dealerCardImage, playerCardImage1, playerCardImage2)
+    }
+
+    checkCustomSoftHandShuffle = (dealerCardValue, playerCardValue1, playerCardValue2, dealerCardImage, playerCardImage1, playerCardImage2) => {
+        this.setState({
+            dealerHand: dealerCardValue,
+            dealerImages: dealerCardImage,
+            playerCard1: playerCardValue1, 
+            playerCard2: playerCardValue2,
+            playerImage1: playerCardImage1, 
+            playerImage2: playerCardImage2,
+            selectedButtonColor: '#000',
+            hitButtonColor: '#000',
+            standButtonColor: '#000',
+            doubleButtonColor: '#000',
+            splitButtonColor: '#000',
+            surrenderButtonColor: '#000',
+        }, () => this.showCardData() )
+    }
+
+    showCardData = () => {
         const dCard = this.state.dealerHand;
         let dCardNumber = 0
         const pCard1 = this.state.playerCard1;
@@ -430,6 +598,7 @@ class BasicStrategy extends React.Component {
         }, () => this.whatCheckHandFunctionToRun() )
     }
 
+    
     whatCheckHandFunctionToRun = () => {
         const pCard1Number = parseInt(this.state.pCard1Number)
         const pCard2Number = parseInt(this.state.pCard2Number)
@@ -447,12 +616,7 @@ class BasicStrategy extends React.Component {
 
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////
-
     checkSplitHand = (dealerHand, playerHand) => {
-        console.log('check SPLIT hand function ran ')
         const pHand = playerHand;
         const dHand = dealerHand;
 
@@ -584,7 +748,6 @@ class BasicStrategy extends React.Component {
     }
     
     checkSoftHand = (dealerHand, playerHand) => {
-        console.log('check SOFT hand function ran ')
         const pHand = playerHand;
         const dHand = dealerHand;
 
@@ -699,8 +862,6 @@ class BasicStrategy extends React.Component {
     }
     
     checkHardHand = (dealerHand, playerHand) => {
-        console.log('check HARD hand function ran ')
-
         const pHand = playerHand;
         const dHand = dealerHand;
 
@@ -813,7 +974,7 @@ class BasicStrategy extends React.Component {
 
     checkHitButton = (e) => {
         if (this.state.correctPlay === 'HIT'){
-            this.setState({ hitButtonColor: '#055902' })
+            this.setState({ hitButtonColor: '#00ff00' })
 
             if (this.state.currentKindOfHandBeingPlayed === 'HARD'){
                 this.setState(prevState => { return{ hardHandsCorrect: prevState.hardHandsCorrect += 1 }} )
@@ -822,24 +983,23 @@ class BasicStrategy extends React.Component {
             } else if(this.state.currentKindOfHandBeingPlayed === 'SPLIT'){
                 this.setState(prevState => { return{ splitHandsCorrect: prevState.splitHandsCorrect += 1 }} )
             }
-
         } else {
             this.setState({ hitButtonColor: '#ff0000' })
             if(this.state.correctPlay === 'STAND'){
-                this.setState({ standButtonColor: '#055902' })
+                this.setState({ standButtonColor: '#00ff00' })
             } else if(this.state.correctPlay === 'DOUBLE'){
-                this.setState({ doubleButtonColor: '#055902' })
+                this.setState({ doubleButtonColor: '#00ff00' })
             } else if(this.state.correctPlay === 'SURRENDER'){
-                this.setState({ surrenderButtonColor: '#055902' })
+                this.setState({ surrenderButtonColor: '#00ff00' })
             } else if(this.state.correctPlay === 'SPLIT'){
-                this.setState({ splitButtonColor: '#055902' })
+                this.setState({ splitButtonColor: '#00ff00' })
             }
         }
     }
 
     checkStandButton = (e) => {
         if (this.state.correctPlay === 'STAND'){
-            this.setState({ standButtonColor: '#055902' })
+            this.setState({ standButtonColor: '#00ff00' })
             if (this.state.currentKindOfHandBeingPlayed === 'HARD'){
                 this.setState(prevState => { return{ hardHandsCorrect: prevState.hardHandsCorrect += 1 }} )
             } else if(this.state.currentKindOfHandBeingPlayed === 'SOFT'){
@@ -850,20 +1010,20 @@ class BasicStrategy extends React.Component {
         } else {
             this.setState({ standButtonColor: '#ff0000' })
             if(this.state.correctPlay === 'HIT'){
-                this.setState({ hitButtonColor: '#055902' })
+                this.setState({ hitButtonColor: '#00ff00' })
             } else if(this.state.correctPlay === 'DOUBLE'){
-                this.setState({ doubleButtonColor: '#055902' })
+                this.setState({ doubleButtonColor: '#00ff00' })
             } else if(this.state.correctPlay === 'SURRENDER'){
-                this.setState({ surrenderButtonColor: '#055902' })
+                this.setState({ surrenderButtonColor: '#00ff00' })
             } else if(this.state.correctPlay === 'SPLIT'){
-                this.setState({ splitButtonColor: '#055902' })
+                this.setState({ splitButtonColor: '#00ff00' })
             }
         }
     }
 
     checkDoubleButton = (e) => {
         if (this.state.correctPlay === 'DOUBLE'){
-            this.setState({ doubleButtonColor: '#055902' })
+            this.setState({ doubleButtonColor: '#00ff00' })
             if (this.state.currentKindOfHandBeingPlayed === 'HARD'){
                 this.setState(prevState => { return{ hardHandsCorrect: prevState.hardHandsCorrect += 1 }} )
             } else if(this.state.currentKindOfHandBeingPlayed === 'SOFT'){
@@ -874,20 +1034,20 @@ class BasicStrategy extends React.Component {
         } else {
             this.setState({ doubleButtonColor: '#ff0000' })
             if(this.state.correctPlay === 'STAND'){
-                this.setState({ standButtonColor: '#055902' })
+                this.setState({ standButtonColor: '#00ff00' })
             } else if(this.state.correctPlay === 'HIT'){
-                this.setState({ hitButtonColor: '#055902' })
+                this.setState({ hitButtonColor: '#00ff00' })
             } else if(this.state.correctPlay === 'SURRENDER'){
-                this.setState({ surrenderButtonColor: '#055902' })
+                this.setState({ surrenderButtonColor: '#00ff00' })
             } else if(this.state.correctPlay === 'SPLIT'){
-                this.setState({ splitButtonColor: '#055902' })
+                this.setState({ splitButtonColor: '#00ff00' })
             }
         }
     }
 
     checkSplitButton = (e) => {
         if (this.state.correctPlay === 'SPLIT'){
-            this.setState({ splitButtonColor: '#055902' })
+            this.setState({ splitButtonColor: '#00ff00' })
             if (this.state.currentKindOfHandBeingPlayed === 'HARD'){
                 this.setState(prevState => { return{ hardHandsCorrect: prevState.hardHandsCorrect += 1 }} )
             } else if(this.state.currentKindOfHandBeingPlayed === 'SOFT'){
@@ -898,20 +1058,20 @@ class BasicStrategy extends React.Component {
         } else {
             this.setState({ splitButtonColor: '#ff0000' })
             if(this.state.correctPlay === 'STAND'){
-                this.setState({ standButtonColor: '#055902' })
+                this.setState({ standButtonColor: '#00ff00' })
             } else if(this.state.correctPlay === 'DOUBLE'){
-                this.setState({ doubleButtonColor: '#055902' })
+                this.setState({ doubleButtonColor: '#00ff00' })
             } else if(this.state.correctPlay === 'SURRENDER'){
-                this.setState({ surrenderButtonColor: '#055902' })
+                this.setState({ surrenderButtonColor: '#00ff00' })
             } else if(this.state.correctPlay === 'HIT'){
-                this.setState({ hitButtonColor: '#055902' })
+                this.setState({ hitButtonColor: '#00ff00' })
             }
         }
     }
 
     checkSurrenderButton = (e) => {
         if (this.state.correctPlay === 'SURRENDER'){
-            this.setState({ surrenderButtonColor: '#055902' })
+            this.setState({ surrenderButtonColor: '#00ff00' })
             if (this.state.currentKindOfHandBeingPlayed === 'HARD'){
                 this.setState(prevState => { return{ hardHandsCorrect: prevState.hardHandsCorrect += 1 }} )
             } else if(this.state.currentKindOfHandBeingPlayed === 'SOFT'){
@@ -922,441 +1082,436 @@ class BasicStrategy extends React.Component {
         } else {
             this.setState({ surrenderButtonColor: '#ff0000' })
             if(this.state.correctPlay === 'STAND'){
-                this.setState({ standButtonColor: '#055902' })
+                this.setState({ standButtonColor: '#00ff00' })
             } else if(this.state.correctPlay === 'DOUBLE'){
-                this.setState({ doubleButtonColor: '#055902' })
+                this.setState({ doubleButtonColor: '#00ff00' })
             } else if(this.state.correctPlay === 'HIT'){
-                this.setState({ hitButtonColor: '#055902' })
+                this.setState({ hitButtonColor: '#00ff00' })
             } else if(this.state.correctPlay === 'SPLIT'){
-                this.setState({ splitButtonColor: '#055902' })
+                this.setState({ splitButtonColor: '#00ff00' })
             }
         }
     }
 
-    // helpButton = () => {
-    //     let pHand = this.state.pHand
-    //     let handType = this.state.currentKindOfHandBeingPlayed
-    //     this.setState({showHelp: !this.state.showHelp})
-
-    //     ////////////////////////////////////////////////
-    //     ///           Help shown for Shoe           ///
-    //     //////////////////////////////////////////////
-    //     if(this.state.shoe){
-    //         if(handType === 'HARD'){
-    //         switch(pHand){
-    //             case 9:
-    //                 this.setState({ helpImageToShow: shoeHard9 })
-    //                 break;
-    //             case 10:
-    //                 this.setState({ helpImageToShow: playerHelpHard10 })
-    //                 break;
-    //             case 11:
-    //                 if(this.state.dealerStandsOnSoft17){
-    //                     this.setState({ helpImageToShow: shoeStandHard11 })
-    //                 } else {
-    //                     this.setState({ helpImageToShow: shoeHitHard11 })
-    //                 }
-    //                 break;
-    //             case 12:
-    //                 this.setState({ helpImageToShow: playerHelpHard12 })
-    //                 break;
-    //             case 13:
-    //                 this.setState({ helpImageToShow: playerHelpHard13 })
-    //                 break;
-    //             case 14:
-    //                 this.setState({ helpImageToShow: playerHelpHard14 })
-    //                 break;
-    //             case 15:
-    //                 if(this.state.dealerStandsOnSoft17){
-    //                     this.setState({ helpImageToShow: shoeStandHard15 })
-    //                 } else {
-    //                     this.setState({ helpImageToShow: shoeHitHard15 })
-    //                 }
-    //                 break;
-    //             case 16:
-    //                 this.setState({ helpImageToShow: shoeHard16 })
-    //                 break;
-    //             case 17:
-    //                 if(this.state.dealerStandsOnSoft17){
-    //                     this.setState({ helpImageToShow: shoeStandHard17 })
-    //                 } else {
-    //                     this.setState({ helpImageToShow: shoeHitHard17 })
-    //                 }
-    //                 break;
-    //             case 18:
-    //                 if(this.state.dealerStandsOnSoft17){
-    //                     this.setState({ helpImageToShow: shoeStandHard17 })
-    //                 } else {
-    //                     this.setState({ helpImageToShow: shoeHitHard18 })
-    //                 }
-    //                 break;
-    //             case 19:
-    //                 if(this.state.dealerStandsOnSoft17){
-    //                     this.setState({ helpImageToShow: shoeStandHard17 })
-    //                 } else {
-    //                     this.setState({ helpImageToShow: shoeHitHard18 })
-    //                 }
-    //                 break;
-    //             case 20:
-    //                 if(this.state.dealerStandsOnSoft17){
-    //                     this.setState({ helpImageToShow: shoeStandHard17 })
-    //                 } else {
-    //                     this.setState({ helpImageToShow: shoeHitHard18 })
-    //                 }
-    //                 break;
-    //             default:
-    //                 this.setState({ helpImageToShow: shoeHard5to8 })
-    //             }
-    //         } 
-    //         if(handType === 'SOFT'){
-    //             switch(pHand){
-    //                 case 13:
-    //                     this.setState({ helpImageToShow: shoeSoft13 })
-    //                     break;
-    //                 case 14:
-    //                     this.setState({ helpImageToShow: shoeSoft14 })
-    //                     break;
-    //                 case 15:
-    //                     this.setState({ helpImageToShow: shoeSoft15 })
-    //                     break;
-    //                 case 16:
-    //                     this.setState({ helpImageToShow: shoeSoft16 })
-    //                     break;
-    //                 case 17:
-    //                     this.setState({ helpImageToShow: shoeSoft17 })
-    //                     break;
-    //                 case 18:
-    //                     this.setState({ helpImageToShow: shoeSoft18 })
-    //                     break;
-    //                 case 19:
-    //                     if(this.state.dealerStandsOnSoft17){
-    //                         this.setState({ helpImageToShow: shoeStandSoft19 })
-    //                     } else {
-    //                         this.setState({ helpImageToShow: shoeHitSoft19 })
-    //                     }
-    //                     break;
-    //                 case 20:
-    //                     if(this.state.dealerStandsOnSoft17){
-    //                         this.setState({ helpImageToShow: shoeStandSoft19 })
-    //                     } else {
-    //                         this.setState({ helpImageToShow: shoeHitSoft20 })
-    //                     }
-    //                     break;
-    //                 case 21:
-    //                     if(this.state.dealerStandsOnSoft17){
-    //                         this.setState({ helpImageToShow: shoeStandSoft19 })
-    //                     } else {
-    //                         this.setState({ helpImageToShow: shoeHitSoft20 })
-    //                     }
-    //                     break;
-    //                 default:
-    //                     null
-    //             }
-    //         }
-    //         if(handType === 'SPLIT'){
-    //             switch(pHand){
-    //                 case 4:
-    //                     this.setState({ helpImageToShow: shoeSplit4 })
-    //                     break;
-    //                 case 6:
-    //                     this.setState({ helpImageToShow: shoeSplit6 })
-    //                     break;
-    //                 case 8:
-    //                     this.setState({ helpImageToShow: shoeSplit8 })
-    //                     break;
-    //                 case 10:
-    //                     this.setState({ helpImageToShow: playerHelpHard10 })
-    //                     break;
-    //                 case 12:
-    //                     this.setState({ helpImageToShow: shoeSplit12 })
-    //                     break;
-    //                 case 14:
-    //                     this.setState({ helpImageToShow: shoeSplit14 })
-    //                     break;
-    //                 case 16:
-    //                     if(this.state.dealerStandsOnSoft17){
-    //                         this.setState({ helpImageToShow: shoeStandSplit16  })
-    //                     } else {
-    //                         this.setState({ helpImageToShow: shoeHitSplit16 })
-    //                     }
-    //                     break;
-    //                 case 18:
-    //                     this.setState({ helpImageToShow: shoeSplit18 })
-    //                     break;
-    //                 default:
-    //                     this.setState({ helpImageToShow: playerHelpSplitA })
-    //             }
-    //         }
-    //     }   
+    helpButton = () => {
+        let pHand = this.state.pHand
+        let handType = this.state.currentKindOfHandBeingPlayed
+        this.setState({showHelp: !this.state.showHelp})
         
-    //     ////////////////////////////////////////////////
-    //     ///        Help shown for Double Deck       ///
-    //     //////////////////////////////////////////////
-    //     if(this.state.doubleDeck){
-    //         if(handType === 'HARD'){
-    //             switch(pHand){
-    //                 case 9:
-    //                     this.setState({ helpImageToShow: ddHard9 })
-    //                     break;
-    //                 case 10:
-    //                     this.setState({ helpImageToShow: playerHelpHard10 })
-    //                     break;
-    //                 case 11:
-    //                     this.setState({ helpImageToShow: ddHard11 })
-    //                     break;
-    //                 case 12:
-    //                     this.setState({ helpImageToShow: playerHelpHard12 })
-    //                     break;
-    //                 case 13:
-    //                     this.setState({ helpImageToShow: playerHelpHard13 })
-    //                     break;
-    //                 case 14:
-    //                     this.setState({ helpImageToShow: playerHelpHard14 })
-    //                     break;
-    //                 case 15:
-    //                     if(this.state.dealerStandsOnSoft17){
-    //                         this.setState({ helpImageToShow: ddStandHard15 })
-    //                     } else {
-    //                         this.setState({ helpImageToShow: ddHitHard15 })
-    //                     }
-    //                     break;
-    //                 case 16:
-    //                     this.setState({ helpImageToShow: ddHard16 })
-    //                     break;
-    //                 case 17:
-    //                     if(this.state.dealerStandsOnSoft17){
-    //                         this.setState({ helpImageToShow: ddStandHard17 })
-    //                     } else {
-    //                         this.setState({ helpImageToShow: ddHitHard17 })
-    //                     }
-    //                     break;
-    //                 case 18:
-    //                     this.setState({ helpImageToShow: ddHard18 })
-    //                     break;
-    //                 case 19:
-    //                     this.setState({ helpImageToShow: ddHard18  })
-    //                     break;
-    //                 case 20:
-    //                     this.setState({ helpImageToShow: ddHard18  })
-    //                     break;
-    //                 default:
-    //                     this.setState({ helpImageToShow: ddHard5to8 })
-    //                 }
-    //             } 
-    //             if(handType === 'SOFT'){
-    //                 switch(pHand){
-    //                     case 13:
-    //                         this.setState({ helpImageToShow: ddSoft13 })
-    //                         break;
-    //                     case 14:
-    //                         this.setState({ helpImageToShow: ddSoft14 })
-    //                         break;
-    //                     case 15:
-    //                         this.setState({ helpImageToShow: ddSoft15 })
-    //                         break;
-    //                     case 16:
-    //                         this.setState({ helpImageToShow: ddSoft16 })
-    //                         break;
-    //                     case 17:
-    //                         this.setState({ helpImageToShow: ddSoft17 })
-    //                         break;
-    //                     case 18:
-    //                         if(this.state.dealerStandsOnSoft17){
-    //                             this.setState({ helpImageToShow: ddStandSoft18 })
-    //                         } else {
-    //                             this.setState({ helpImageToShow: ddHitSoft18 })
-    //                         }
-    //                         break;
-    //                     case 19:
-    //                         if(this.state.dealerStandsOnSoft17){
-    //                             this.setState({ helpImageToShow: ddStandSoft19 })
-    //                         } else {
-    //                             this.setState({ helpImageToShow: ddHitSoft19 })
-    //                         }
-    //                         break;
-    //                     case 20:
-    //                         this.setState({ helpImageToShow: ddSoft20})
-    //                         break;
-    //                     case 21:
-    //                         this.setState({ helpImageToShow: ddSoft20})
-    //                         break;
-    //                     default:
-    //                         null
-    //                 }
-    //             }
-    //             if(handType === 'SPLIT'){
-    //                 switch(pHand){
-    //                     case 4:
-    //                         this.setState({ helpImageToShow: ddSplit4 })
-    //                         break;
-    //                     case 6:
-    //                         this.setState({ helpImageToShow: ddSplit6 })
-    //                         break;
-    //                     case 8:
-    //                         this.setState({ helpImageToShow: ddSplit8 })
-    //                         break;
-    //                     case 10:
-    //                         this.setState({ helpImageToShow: playerHelpHard10 })
-    //                         break;
-    //                     case 12:
-    //                         this.setState({ helpImageToShow: ddSplit12 })
-    //                         break;
-    //                     case 14:
-    //                         this.setState({ helpImageToShow: ddSplit14 })
-    //                         break;
-    //                     case 16:
-    //                         if(this.state.dealerStandsOnSoft17){
-    //                             this.setState({ helpImageToShow: ddStandSplit16  })
-    //                         } else {
-    //                             this.setState({ helpImageToShow: ddHitSplit16 })
-    //                         }
-    //                         break;
-    //                     case 18:
-    //                         this.setState({ helpImageToShow: ddSplit18 })
-    //                         break;
-    //                     default:
-    //                         this.setState({ helpImageToShow: playerHelpSplitA })
-    //                 }
-    //             }
-                
-    //         }
+        ////////////////////////////////////////////////
+        ///           Help shown for Shoe           ///
+        //////////////////////////////////////////////
+        if(this.state.shoe){
+            if(handType === 'HARD'){
+            switch(pHand){
+                case 9:
+                    this.setState({ helpImageToShow: shoeHard9 })
+                    break;
+                case 10:
+                    this.setState({ helpImageToShow: playerHelpHard10 })
+                    break;
+                case 11:
+                    if(this.state.dealerStandsOnSoft17){
+                        this.setState({ helpImageToShow: shoeStandHard11 })
+                    } else {
+                        this.setState({ helpImageToShow: shoeHitHard11 })
+                    }
+                    break;
+                case 12:
+                    this.setState({ helpImageToShow: playerHelpHard12 })
+                    break;
+                case 13:
+                    this.setState({ helpImageToShow: playerHelpHard13 })
+                    break;
+                case 14:
+                    this.setState({ helpImageToShow: playerHelpHard14 })
+                    break;
+                case 15:
+                    if(this.state.dealerStandsOnSoft17){
+                        this.setState({ helpImageToShow: shoeStandHard15 })
+                    } else {
+                        this.setState({ helpImageToShow: shoeHitHard15 })
+                    }
+                    break;
+                case 16:
+                    this.setState({ helpImageToShow: shoeHard16 })
+                    break;
+                case 17:
+                    if(this.state.dealerStandsOnSoft17){
+                        this.setState({ helpImageToShow: shoeStandHard17 })
+                    } else {
+                        this.setState({ helpImageToShow: shoeHitHard17 })
+                    }
+                    break;
+                case 18:
+                    if(this.state.dealerStandsOnSoft17){
+                        this.setState({ helpImageToShow: shoeStandHard17 })
+                    } else {
+                        this.setState({ helpImageToShow: shoeHitHard18 })
+                    }
+                    break;
+                case 19:
+                    if(this.state.dealerStandsOnSoft17){
+                        this.setState({ helpImageToShow: shoeStandHard17 })
+                    } else {
+                        this.setState({ helpImageToShow: shoeHitHard18 })
+                    }
+                    break;
+                case 20:
+                    if(this.state.dealerStandsOnSoft17){
+                        this.setState({ helpImageToShow: shoeStandHard17 })
+                    } else {
+                        this.setState({ helpImageToShow: shoeHitHard18 })
+                    }
+                    break;
+                default:
+                    this.setState({ helpImageToShow: shoeHard5to8 })
+                }
+            } 
+            if(handType === 'SOFT'){
+                switch(pHand){
+                    case 13:
+                        this.setState({ helpImageToShow: shoeSoft13 })
+                        break;
+                    case 14:
+                        this.setState({ helpImageToShow: shoeSoft14 })
+                        break;
+                    case 15:
+                        this.setState({ helpImageToShow: shoeSoft15 })
+                        break;
+                    case 16:
+                        this.setState({ helpImageToShow: shoeSoft16 })
+                        break;
+                    case 17:
+                        this.setState({ helpImageToShow: shoeSoft17 })
+                        break;
+                    case 18:
+                        this.setState({ helpImageToShow: shoeSoft18 })
+                        break;
+                    case 19:
+                        if(this.state.dealerStandsOnSoft17){
+                            this.setState({ helpImageToShow: shoeStandSoft19 })
+                        } else {
+                            this.setState({ helpImageToShow: shoeHitSoft19 })
+                        }
+                        break;
+                    case 20:
+                        if(this.state.dealerStandsOnSoft17){
+                            this.setState({ helpImageToShow: shoeStandSoft19 })
+                        } else {
+                            this.setState({ helpImageToShow: shoeHitSoft20 })
+                        }
+                        break;
+                    case 21:
+                        if(this.state.dealerStandsOnSoft17){
+                            this.setState({ helpImageToShow: shoeStandSoft19 })
+                        } else {
+                            this.setState({ helpImageToShow: shoeHitSoft20 })
+                        }
+                        break;
+                    default:
+                        null
+                }
+            }
+            if(handType === 'SPLIT'){
+                switch(pHand){
+                    case 4:
+                        this.setState({ helpImageToShow: shoeSplit4 })
+                        break;
+                    case 6:
+                        this.setState({ helpImageToShow: shoeSplit6 })
+                        break;
+                    case 8:
+                        this.setState({ helpImageToShow: shoeSplit8 })
+                        break;
+                    case 10:
+                        this.setState({ helpImageToShow: playerHelpHard10 })
+                        break;
+                    case 12:
+                        this.setState({ helpImageToShow: shoeSplit12 })
+                        break;
+                    case 14:
+                        this.setState({ helpImageToShow: shoeSplit14 })
+                        break;
+                    case 16:
+                        if(this.state.dealerStandsOnSoft17){
+                            this.setState({ helpImageToShow: shoeStandSplit16  })
+                        } else {
+                            this.setState({ helpImageToShow: shoeHitSplit16 })
+                        }
+                        break;
+                    case 18:
+                        this.setState({ helpImageToShow: shoeSplit18 })
+                        break;
+                    default:
+                        this.setState({ helpImageToShow: playerHelpSplitA })
+                }
+            }
+        }   
+        
+        ////////////////////////////////////////////////
+        ///        Help shown for Double Deck       ///
+        //////////////////////////////////////////////
+        if(this.state.doubleDeck){
+            if(handType === 'HARD'){
+                switch(pHand){
+                    case 9:
+                        this.setState({ helpImageToShow: ddHard9 })
+                        break;
+                    case 10:
+                        this.setState({ helpImageToShow: playerHelpHard10 })
+                        break;
+                    case 11:
+                        this.setState({ helpImageToShow: ddHard11 })
+                        break;
+                    case 12:
+                        this.setState({ helpImageToShow: playerHelpHard12 })
+                        break;
+                    case 13:
+                        this.setState({ helpImageToShow: playerHelpHard13 })
+                        break;
+                    case 14:
+                        this.setState({ helpImageToShow: playerHelpHard14 })
+                        break;
+                    case 15:
+                        if(this.state.dealerStandsOnSoft17){
+                            this.setState({ helpImageToShow: ddStandHard15 })
+                        } else {
+                            this.setState({ helpImageToShow: ddHitHard15 })
+                        }
+                        break;
+                    case 16:
+                        this.setState({ helpImageToShow: ddHard16 })
+                        break;
+                    case 17:
+                        if(this.state.dealerStandsOnSoft17){
+                            this.setState({ helpImageToShow: ddStandHard17 })
+                        } else {
+                            this.setState({ helpImageToShow: ddHitHard17 })
+                        }
+                        break;
+                    case 18:
+                        this.setState({ helpImageToShow: ddHard18 })
+                        break;
+                    case 19:
+                        this.setState({ helpImageToShow: ddHard18  })
+                        break;
+                    case 20:
+                        this.setState({ helpImageToShow: ddHard18  })
+                        break;
+                    default:
+                        this.setState({ helpImageToShow: ddHard5to8 })
+                    }
+                } 
+            if(handType === 'SOFT'){
+                switch(pHand){
+                    case 13:
+                        this.setState({ helpImageToShow: ddSoft13 })
+                        break;
+                    case 14:
+                        this.setState({ helpImageToShow: ddSoft14 })
+                        break;
+                    case 15:
+                        this.setState({ helpImageToShow: ddSoft15 })
+                        break;
+                    case 16:
+                        this.setState({ helpImageToShow: ddSoft16 })
+                        break;
+                    case 17:
+                        this.setState({ helpImageToShow: ddSoft17 })
+                        break;
+                    case 18:
+                        if(this.state.dealerStandsOnSoft17){
+                            this.setState({ helpImageToShow: ddStandSoft18 })
+                        } else {
+                            this.setState({ helpImageToShow: ddHitSoft18 })
+                        }
+                        break;
+                    case 19:
+                        if(this.state.dealerStandsOnSoft17){
+                            this.setState({ helpImageToShow: ddStandSoft19 })
+                        } else {
+                            this.setState({ helpImageToShow: ddHitSoft19 })
+                        }
+                        break;
+                    case 20:
+                        this.setState({ helpImageToShow: ddSoft20})
+                        break;
+                    case 21:
+                        this.setState({ helpImageToShow: ddSoft20})
+                        break;
+                    default:
+                        null
+                }
+            }
+            if(handType === 'SPLIT'){
+                switch(pHand){
+                    case 4:
+                        this.setState({ helpImageToShow: ddSplit4 })
+                        break;
+                    case 6:
+                        this.setState({ helpImageToShow: ddSplit6 })
+                        break;
+                    case 8:
+                        this.setState({ helpImageToShow: ddSplit8 })
+                        break;
+                    case 10:
+                        this.setState({ helpImageToShow: playerHelpHard10 })
+                        break;
+                    case 12:
+                        this.setState({ helpImageToShow: ddSplit12 })
+                        break;
+                    case 14:
+                        this.setState({ helpImageToShow: ddSplit14 })
+                        break;
+                    case 16:
+                        if(this.state.dealerStandsOnSoft17){
+                            this.setState({ helpImageToShow: ddStandSplit16  })
+                        } else {
+                            this.setState({ helpImageToShow: ddHitSplit16 })
+                        }
+                        break;
+                    case 18:
+                        this.setState({ helpImageToShow: ddSplit18 })
+                        break;
+                    default:
+                        this.setState({ helpImageToShow: playerHelpSplitA })
+                }
+            }
+        }
 
-    //         ////////////////////////////////////////////////
-    //         ///        Help shown for Single Deck       ///
-    //         //////////////////////////////////////////////
-    //         if(this.state.singleDeck){
-    //             if(handType === 'HARD'){
-    //                 switch(pHand){
-    //                     case 8:
-    //                         this.setState({ helpImageToShow: sdHard8 })
-    //                         break;
-    //                     case 9:
-    //                         this.setState({ helpImageToShow: sdHard9 })
-    //                         break;
-    //                     case 10:
-    //                         this.setState({ helpImageToShow: sdHard10 })
-    //                         break;
-    //                     case 11:
-    //                         this.setState({ helpImageToShow: sdHard11 })
-    //                         break;
-    //                     case 12:
-    //                         this.setState({ helpImageToShow: sdHard12 })
-    //                         break;
-    //                     case 13:
-    //                         this.setState({ helpImageToShow: sdHard13 })
-    //                         break;
-    //                     case 14:
-    //                         this.setState({ helpImageToShow: sdHard14 })
-    //                         break;
-    //                     case 15:
-    //                         if(this.state.dealerStandsOnSoft17){
-    //                             this.setState({ helpImageToShow: sdStandHard15 })
-    //                         } else {
-    //                             this.setState({ helpImageToShow: sdHitHard15 })
-    //                         }
-    //                         break;
-    //                     case 16:
-    //                         this.setState({ helpImageToShow: sdHard16 })
-    //                         break;
-    //                     case 17:
-    //                         if(this.state.dealerStandsOnSoft17){
-    //                             this.setState({ helpImageToShow: sdStandHard17 })
-    //                         } else {
-    //                             this.setState({ helpImageToShow: sdHitHard17 })
-    //                         }
-    //                         break;
-    //                     case 18:
-    //                         this.setState({ helpImageToShow: sdHard18 })
-    //                         break;
-    //                     case 19:
-    //                         this.setState({ helpImageToShow: sdHard18  })
-    //                         break;
-    //                     case 20:
-    //                         this.setState({ helpImageToShow: sdHard18  })
-    //                         break;
-    //                     default:
-    //                         this.setState({ helpImageToShow: sdHard5to7 })
-    //                     }
-    //                 } 
+            ////////////////////////////////////////////////
+            ///        Help shown for Single Deck       ///
+            //////////////////////////////////////////////
+        if(this.state.singleDeck){
+            if(handType === 'HARD'){
+                switch(pHand){
+                    case 8:
+                        this.setState({ helpImageToShow: sdHard8 })
+                        break;
+                    case 9:
+                        this.setState({ helpImageToShow: sdHard9 })
+                        break;
+                    case 10:
+                        this.setState({ helpImageToShow: sdHard10 })
+                        break;
+                    case 11:
+                        this.setState({ helpImageToShow: sdHard11 })
+                        break;
+                    case 12:
+                        this.setState({ helpImageToShow: sdHard12 })
+                        break;
+                    case 13:
+                        this.setState({ helpImageToShow: sdHard13 })
+                        break;
+                    case 14:
+                        this.setState({ helpImageToShow: sdHard14 })
+                        break;
+                    case 15:
+                        if(this.state.dealerStandsOnSoft17){
+                            this.setState({ helpImageToShow: sdStandHard15 })
+                        } else {
+                            this.setState({ helpImageToShow: sdHitHard15 })
+                        }
+                        break;
+                    case 16:
+                        this.setState({ helpImageToShow: sdHard16 })
+                        break;
+                    case 17:
+                        if(this.state.dealerStandsOnSoft17){
+                            this.setState({ helpImageToShow: sdStandHard17 })
+                        } else {
+                            this.setState({ helpImageToShow: sdHitHard17 })
+                        }
+                        break;
+                    case 18:
+                        this.setState({ helpImageToShow: sdHard18 })
+                        break;
+                    case 19:
+                        this.setState({ helpImageToShow: sdHard18  })
+                        break;
+                    case 20:
+                        this.setState({ helpImageToShow: sdHard18  })
+                        break;
+                    default:
+                        this.setState({ helpImageToShow: sdHard5to7 })
+                }
+            } 
 
-    //                 if(handType === 'SOFT'){
-    //                     switch(pHand){
-    //                         case 13:
-    //                             this.setState({ helpImageToShow: sdSoft13 })
-    //                             break;
-    //                         case 14:
-    //                             this.setState({ helpImageToShow: sdSoft14 })
-    //                             break;
-    //                         case 15:
-    //                             this.setState({ helpImageToShow: sdSoft15 })
-    //                             break;
-    //                         case 16:
-    //                             this.setState({ helpImageToShow: sdSoft16 })
-    //                             break;
-    //                         case 17:
-    //                             this.setState({ helpImageToShow: sdSoft17 })
-    //                             break;
-    //                         case 18:
-    //                             if(this.state.dealerStandsOnSoft17){
-    //                                 this.setState({ helpImageToShow: sdStandSoft18 })
-    //                             } else {
-    //                                 this.setState({ helpImageToShow: sdHitSoft18 })
-    //                             }
-    //                             break;
-    //                         case 19:
-    //                             this.setState({ helpImageToShow: sdStandSoft19 })
-    //                             break;
-    //                         case 20:
-    //                             this.setState({ helpImageToShow: sdSoft20})
-    //                             break;
-    //                         case 21:
-    //                             this.setState({ helpImageToShow: sdSoft20})
-    //                             break;
-    //                         default:
-    //                             null
-    //                     }
-    //                 }
-    //                 if(handType === 'SPLIT'){
-    //                     switch(pHand){
-    //                         case 4:
-    //                             this.setState({ helpImageToShow: sdSplit4 })
-    //                             break;
-    //                         case 6:
-    //                             this.setState({ helpImageToShow: sdSplit6 })
-    //                             break;
-    //                         case 8:
-    //                             this.setState({ helpImageToShow: sdSplit8 })
-    //                             break;
-    //                         case 10:
-    //                             this.setState({ helpImageToShow: playerHelpHard10 })
-    //                             break;
-    //                         case 12:
-    //                             this.setState({ helpImageToShow: sdSplit12 })
-    //                             break;
-    //                         case 14:
-    //                             this.setState({ helpImageToShow: sdSplit14 })
-    //                             break;
-    //                         case 16:
-    //                             this.setState({ helpImageToShow: sdStandSplit16  })
-    //                             break;
-    //                         case 18:
-    //                             if(this.state.dealerStandsOnSoft17){
-    //                                 this.setState({ helpImageToShow: sdStandSplit18 })
-    //                             } else {
-    //                                 this.setState({ helpImageToShow: sdHitSplit18 })
-    //                             }
-    //                             break;
-    //                         default:
-    //                             this.setState({ helpImageToShow: playerHelpSplitA })
-    //                     }
-    //                 }
-    //             }
-    // }
+            if(handType === 'SOFT'){
+                switch(pHand){
+                    case 13:
+                        this.setState({ helpImageToShow: sdSoft13 })
+                        break;
+                    case 14:
+                        this.setState({ helpImageToShow: sdSoft14 })
+                        break;
+                    case 15:
+                        this.setState({ helpImageToShow: sdSoft15 })
+                        break;
+                    case 16:
+                        this.setState({ helpImageToShow: sdSoft16 })
+                        break;
+                    case 17:
+                        this.setState({ helpImageToShow: sdSoft17 })
+                        break;
+                    case 18:
+                        if(this.state.dealerStandsOnSoft17){
+                            this.setState({ helpImageToShow: sdStandSoft18 })
+                        } else {
+                            this.setState({ helpImageToShow: sdHitSoft18 })
+                        }
+                        break;
+                    case 19:
+                        this.setState({ helpImageToShow: sdStandSoft19 })
+                        break;
+                    case 20:
+                        this.setState({ helpImageToShow: sdSoft20})
+                        break;
+                    case 21:
+                        this.setState({ helpImageToShow: sdSoft20})
+                        break;
+                    default:
+                        null
+                }
+            }
+            if(handType === 'SPLIT'){
+                switch(pHand){
+                    case 4:
+                        this.setState({ helpImageToShow: sdSplit4 })
+                        break;
+                    case 6:
+                        this.setState({ helpImageToShow: sdSplit6 })
+                        break;
+                    case 8:
+                        this.setState({ helpImageToShow: sdSplit8 })
+                        break;
+                    case 10:
+                        this.setState({ helpImageToShow: playerHelpHard10 })
+                        break;
+                    case 12:
+                        this.setState({ helpImageToShow: sdSplit12 })
+                        break;
+                    case 14:
+                        this.setState({ helpImageToShow: sdSplit14 })
+                        break;
+                    case 16:
+                        this.setState({ helpImageToShow: sdStandSplit16  })
+                        break;
+                    case 18:
+                        if(this.state.dealerStandsOnSoft17){
+                            this.setState({ helpImageToShow: sdStandSplit18 })
+                        } else {
+                            this.setState({ helpImageToShow: sdHitSplit18 })
+                        }
+                        break;
+                    default:
+                        this.setState({ helpImageToShow: playerHelpSplitA })
+                }
+            }
+        }
+    }
 
-
-    toggleSubscribeModal = () => {
-        this.setState({showSubscribeModal: !this.state.showSubscribeModal})
-    } 
 
     static navigationOptions = {
         title: 'Basic Strategy Drill',
@@ -1364,29 +1519,16 @@ class BasicStrategy extends React.Component {
 
     render() {
         const {navigate} = this.props.navigation;
-
-        console.log(this.props.dealHardHand)
         
         return (
             <ScrollView>
-
                 <View style={styles.container}>
-                {this.state.showSubscribeModal 
-                ?   <View style={styles.modalContainer}>
-                        <TouchableWithoutFeedback onPress={() => this.toggleSubscribeModal()} >
-                            <Image
-                                source={require('../../images/close_white.png')}
-                                style={{ width: 40, height: 40, marginLeft:(ScreenWidth -60), marginTop: 20, zIndex: 20, position: 'absolute'}}/>
-                        </TouchableWithoutFeedback>
-                        <SubscribeModal />
-                    </View>
-                : null
-                }
+                
 
                 <View style={styles.rulesWrapper}>
-                        <Text style={styles.rulesHeader}>Choose Hand Type:</Text>
+                        <Text style={styles.rulesHeader}>Type of Hands:</Text>
                                 <CheckBox
-                                    onClick={() => this.toggleSubscribeModal()}
+                                    onClick={()=>{ this.setState({ playAllHands: !this.state.playAllHands, playHardHands: false, playSplitHands: false, playSoftHands: false }) }}
                                     isChecked={this.state.playAllHands}
                                     rightText={"All Hands"} 
                                     checkBoxColor={'#fff'}
@@ -1396,7 +1538,7 @@ class BasicStrategy extends React.Component {
                                 /> 
                             <View style={{marginLeft: 150, marginTop: -25}}>
                                 <CheckBox
-                                    onClick={ () => this.toggleSubscribeModal() }
+                                    onClick={()=>{ this.setState({ playHardHands: !this.state.playHardHands, playAllHands: false, playSplitHands: false, playSoftHands: false}) }}
                                     isChecked={this.state.playHardHands}
                                     rightText={"Hard Hands"} 
                                     checkBoxColor={'#fff'}
@@ -1407,7 +1549,7 @@ class BasicStrategy extends React.Component {
                             </View>
                             <View style={{marginTop: 5}}>
                                 <CheckBox
-                                    onClick={ () => this.toggleSubscribeModal() }
+                                    onClick={   ()=>{ this.setState({ playSoftHands: !this.state.playSoftHands, playAllHands: false, playHardHands: false, playSplitHands: false }) }}
                                     isChecked={this.state.playSoftHands}
                                     rightText={"Soft Hands"} 
                                     checkBoxColor={'#fff'}
@@ -1418,7 +1560,7 @@ class BasicStrategy extends React.Component {
                             </View>
                             <View style={{marginLeft: 150, marginTop: -25}}>
                                 <CheckBox
-                                    onClick= {() => this.toggleSubscribeModal() }
+                                    onClick={   ()=>{ this.setState({ playSplitHands: !this.state.playSplitHands, playAllHands: false, playHardHands: false, playSoftHands: false }) }}
                                     isChecked={this.state.playSplitHands}
                                     rightText={"Split Hands"} 
                                     checkBoxColor={'#fff'}
@@ -1452,9 +1594,19 @@ class BasicStrategy extends React.Component {
                     </View>
 
                     <Text style={styles.handLabel}>Player Hand</Text>
-                    <Button onPress={this.dealCard} width='50' color='#000000' title='Deal' ></Button>
-                    
-                    <Text style={styles.handLabel}> Choose the correct play:</Text>
+                    <AwesomeButton
+                        type='primary'
+                        backgroundColor='#FFDF00'
+                        textColor='#000'
+                        textSize={16}
+                        raiseLevel={0}
+                        stretch={true}
+                        height={40}
+                        onPress={this.whichDeckToDealFrom}
+                        >
+                        Deal Card
+                    </AwesomeButton>
+                    <Text style={styles.handLabel2}> Choose the correct play:</Text>
                     <View style={styles.buttonWrapper}>
                         <View style={styles.buttonContainerLeft}>
                             <Button onPress={this.checkHitButton} title='Hit' color={this.state.hitButtonColor}></Button>
@@ -1465,7 +1617,7 @@ class BasicStrategy extends React.Component {
                         <View style={styles.buttonContainerRight}>
                             <Button onPress={this.checkStandButton} title='Stand' color={this.state.standButtonColor}></Button>
                             <Button onPress={this.checkSplitButton} title='Split' color={this.state.splitButtonColor}></Button>
-                            <Button onPress={this.helpButton} title='Help' color='#2196f3'></Button>
+                            <Button onPress={this.helpButton} title='Help' color='#000'></Button>
                         </View>
                     </View>
 
@@ -1487,9 +1639,6 @@ class BasicStrategy extends React.Component {
                     </View>
                     : null
                     }
-
-
-                   
                 </View>
             </ScrollView>
 
@@ -1502,7 +1651,7 @@ const styles = StyleSheet.create({
         paddingTop: Constants.statusBarHeight,
         padding: 8,
         backgroundColor: ( '#0f9b0f', '#52c234', '#52c234', '#0f9b0f'),
-        height: 900,
+        height: 830,
     },
     buttonWrapper: {
         flex: 1,
@@ -1547,6 +1696,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 16,
         fontWeight: 'bold'
+    },
+    handLabel2: {
+        textAlign: 'center',
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: 'white',
     },
     cardDisplay: {
         width: 120, 
@@ -1596,12 +1751,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginBottom: 10,
         textDecorationLine: 'underline',
-    },
-    modalContainer: {
-        width: ScreenWidth + 30, 
-        marginLeft: -8,
-        marginTop: -25,
-        zIndex: 50,
     },
 });
 

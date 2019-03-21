@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, Dimensions, AsyncStorage, WebView, TouchableWithoutFeedback, Image, ScrollView } from 'react-native';
+import { Text, View, StyleSheet, Dimensions, AsyncStorage, ScrollView, TouchableWithoutFeedback, Image } from 'react-native';
 import CheckBox from 'react-native-check-box';
 import { Constants } from 'expo';
-import SubscribeModal from '../subscribe_modal/SubscribeModal';
+import SubscribeModal from '../subscribe_modal/SubscribeModal'
 
-let ScreenHeight = Dimensions.get("window").height;
 let ScreenWidth = Dimensions.get("window").width;
 
 class CasinoRules extends React.Component {
@@ -28,7 +27,6 @@ class CasinoRules extends React.Component {
     }
 
     getSavedRulesFromMemory = () =>{
-
         AsyncStorage.getItem("dealerStandsOnSoft17").then((dealerStandsOnSoft17Value) => {
             if(dealerStandsOnSoft17Value === 'true'){
                 this.setState({dealerStandsOnSoft17: true, dealerHitsOnSoft17: false} )
@@ -84,14 +82,10 @@ class CasinoRules extends React.Component {
                 this.setState({shoe: false})
             }
         }).done();
-
-        
     }
 
     saveRuleInStorage = async (rule , value) => {
-        console.log('rule is : '+ rule)
-        console.log('value is : '+ value)
-        if(rule === 'doubleAllowed'){
+        if (rule === 'doubleAllowed'){
             if(value === true){
                 try {
                     await AsyncStorage.setItem('doubleAllowed', 'true');
@@ -101,7 +95,7 @@ class CasinoRules extends React.Component {
                     await AsyncStorage.setItem('doubleAllowed', 'false');
                 } catch (error) {}
             }
-        } else if(rule === 'doubleAfterSplitAllowed'){
+        } else if (rule === 'doubleAfterSplitAllowed'){
             if(value === true){
                 try {
                     await AsyncStorage.setItem('doubleAfterSplitAllowed', 'true');
@@ -111,7 +105,7 @@ class CasinoRules extends React.Component {
                     await AsyncStorage.setItem('doubleAfterSplitAllowed', 'false');
                 } catch (error) {}
             }
-        } else if(rule === 'surrenderAllowed'){
+        } else if (rule === 'surrenderAllowed'){
             if(value === true){
                 try {
                     await AsyncStorage.setItem('surrenderAllowed', 'true');
@@ -121,7 +115,7 @@ class CasinoRules extends React.Component {
                     await AsyncStorage.setItem('surrenderAllowed', 'false');
                 } catch (error) {}
             }
-        } else if(rule === 'dealerStandsOnSoft17'){
+        } else if (rule === 'dealerStandsOnSoft17'){
             if(this.state.dealerStandsOnSoft17 === true){
                 try {
                     await AsyncStorage.setItem('dealerStandsOnSoft17', 'true');
@@ -137,8 +131,8 @@ class CasinoRules extends React.Component {
                     await AsyncStorage.setItem('dealerHitsOnSoft17', 'true');
                 } catch (error) {}
             }
-        }else if(rule === 'dealerHitsOnSoft17'){
-            if(this.state.dealerHitsOnSoft17 === true){
+        } else if (rule === 'dealerHitsOnSoft17'){
+            if (this.state.dealerHitsOnSoft17 === true){
                 try {
                     await AsyncStorage.setItem('dealerHitsOnSoft17', 'true');
                 } catch (error) {}
@@ -153,8 +147,8 @@ class CasinoRules extends React.Component {
                     await AsyncStorage.setItem('dealerStandsOnSoft17', 'true');
                 } catch (error) {}
             } 
-        } else if(rule === 'singleDeck'){
-            if(this.state.singleDeck === true){
+        } else if (rule === 'singleDeck'){
+            if (this.state.singleDeck === true){
                 try {
                     await AsyncStorage.setItem('singleDeck', 'true');
                 } catch (error) {}
@@ -165,8 +159,8 @@ class CasinoRules extends React.Component {
                     await AsyncStorage.setItem('shoe', 'false');
                 } catch (error) {}
             } 
-        } else if(rule === 'doubleDeck'){
-            if(this.state.doubleDeck === true){
+        } else if (rule === 'doubleDeck'){
+            if (this.state.doubleDeck === true){
                 try {
                     await AsyncStorage.setItem('singleDeck', 'false');
                 } catch (error) {}
@@ -177,8 +171,8 @@ class CasinoRules extends React.Component {
                     await AsyncStorage.setItem('shoe', 'false');
                 } catch (error) {}
             } 
-        }  else if(rule === 'shoe'){
-            if(this.state.shoe === true){
+        }  else if (rule === 'shoe'){
+            if (this.state.shoe === true){
                 try {
                     await AsyncStorage.setItem('singleDeck', 'false');
                 } catch (error) {}
@@ -206,109 +200,132 @@ class CasinoRules extends React.Component {
         const {navigate} = this.props.navigation;
         return (
             <ScrollView>
-            <View style={styles.container}>
-                {this.state.showSubscribeModal 
-                ?   <View style={styles.modalContainer}>
-                        <TouchableWithoutFeedback onPress={() => this.toggleSubscribeModal()} >
-                            <Image
-                                source={require('../images/close_white.png')}
-                                style={{ width: 40, height: 40, marginLeft:(ScreenWidth -60), marginTop: 20, zIndex: 20, position: 'absolute'}}/>
-                        </TouchableWithoutFeedback>
-                        <SubscribeModal />
+                <View style={styles.container}>
+
+                    {this.state.showSubscribeModal 
+                    ?   <View style={styles.modalContainer}>
+                            <TouchableWithoutFeedback onPress={() => this.toggleSubscribeModal()} >
+                                <Image
+                                    source={require('./close_icon.png')}
+                                    style={{ width: 40, height: 40, marginLeft:(ScreenWidth -60), marginTop: 20, zIndex: 20, position: 'absolute'}}/>
+                            </TouchableWithoutFeedback>
+                            <SubscribeModal />
+                        </View>
+                    : null
+                    }
+
+                    <View style={styles.buttonContainer}>
+                        <View style={styles.rulesWrapper}>
+                            <Text style={styles.rulesHeader}>Dealer Rules:</Text>
+                            <CheckBox
+                                onClick={   
+                                    ()=> this.toggleSubscribeModal()
+                                    // ()=>{ this.setState({ dealerStandsOnSoft17: !this.state.dealerStandsOnSoft17 }, 
+                                    // () => this.saveRuleInStorage('dealerStandsOnSoft17', this.state.dealerStandsOnSoft17))}
+                                }
+                                isChecked={true}
+                                rightText={"Dealer stands on soft 17"} 
+                                checkBoxColor={'#fff'}
+                                checkedCheckBoxColor={'#fff'}
+                                rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5, paddingBottom: 5}}
+                            /> 
+
+                            <CheckBox
+                                onClick={   
+                                    ()=> this.toggleSubscribeModal()
+                                    // ()=>{ this.setState({ dealerHitsOnSoft17: !this.state.dealerHitsOnSoft17 }, 
+                                    // () => this.saveRuleInStorage('dealerHitsOnSoft17' , this.state.dealerHitsOnSoft17))}
+                                }
+                                isChecked={false}
+                                rightText={"Dealer hits on soft 17"} 
+                                checkBoxColor={'#fff'}
+                                checkedCheckBoxColor={'#fff'}
+                                rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5}}
+                            />
+                        </View>
+
+                        <View style={styles.rulesWrapper}>
+                            <Text style={styles.rulesHeader}>Player Rules:</Text>
+                            <CheckBox
+                                onClick={   
+                                    ()=> this.toggleSubscribeModal()
+                                    // ()=>{ this.setState({ doubleAllowed: !this.state.doubleAllowed }, 
+                                    // () => this.saveRuleInStorage('doubleAllowed', this.state.doubleAllowed))}
+                                }
+                                isChecked={true}
+                                rightText={"Double allowed"} 
+                                checkBoxColor={'#fff'}
+                                checkedCheckBoxColor={'#fff'}
+                                rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5, paddingBottom: 5}}
+                            /> 
+                            <CheckBox
+                                onClick={
+                                    ()=> this.toggleSubscribeModal()
+                                    // ()=>{  this.setState({ doubleAfterSplitAllowed: !this.state.doubleAfterSplitAllowed },
+                                    // () => this.saveRuleInStorage('doubleAfterSplitAllowed', this.state.doubleAfterSplitAllowed))}
+                                }
+                                isChecked={true}
+                                rightText={"Double after split"}
+                                checkBoxColor={'#fff'}
+                                checkedCheckBoxColor={'#fff'}
+                                rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5, paddingBottom: 5}}
+                            /> 
+                            <CheckBox
+                                onClick={
+                                    ()=> this.toggleSubscribeModal()
+                                    // ()=>{ this.setState({ surrenderAllowed: !this.state.surrenderAllowed },
+                                    // () => this.saveRuleInStorage('surrenderAllowed', this.state.surrenderAllowed))}
+                                }
+                                isChecked={false}
+                                rightText={"Surrender Allowed"}
+                                checkBoxColor={'#fff'}
+                                checkedCheckBoxColor={'#fff'}
+                                rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5}} 
+                            /> 
+                        </View>
+
+                        <View style={styles.rulesWrapper}>
+                            <Text style={styles.rulesHeader}>Decks:</Text>
+                            <CheckBox
+                                onClick={   
+                                    ()=> this.toggleSubscribeModal()
+                                    // ()=>{ this.setState({ singleDeck: !this.state.singleDeck }, 
+                                    // () => this.saveRuleInStorage('singleDeck' , this.state.singleDeck ))}
+                                }
+                                isChecked={this.state.singleDeck}
+                                rightText={"Single Deck"} 
+                                checkBoxColor={'#fff'}
+                                checkedCheckBoxColor={'#fff'}
+                                rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5, paddingBottom: 5}} 
+                            /> 
+                            <CheckBox
+                                onClick={
+                                    ()=> this.toggleSubscribeModal()
+                                    // ()=>{  this.setState({ doubleDeck: !this.state.doubleDeck },
+                                    // () => this.saveRuleInStorage('doubleDeck', this.state.doubleDeck))}
+                                }
+                                isChecked={this.state.doubleDeck}
+                                rightText={"Double Deck"}
+                                checkBoxColor={'#fff'}
+                                checkedCheckBoxColor={'#fff'}
+                                rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5, paddingBottom: 5}} 
+                            /> 
+                            <CheckBox
+                                onClick={
+                                    ()=> this.toggleSubscribeModal()
+                                    // ()=>{ this.setState({ shoe: !this.state.shoe },
+                                    // () => this.saveRuleInStorage('shoe', this.state.shoe))}
+                                }
+                                isChecked={this.state.shoe}
+                                rightText={"4 - 8 Deck Shoe"}
+                                checkBoxColor={'#fff'}
+                                checkedCheckBoxColor={'#fff'}
+                                rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5}}
+                            /> 
+                        </View>
                     </View>
-                : null
-                }
-                <View style={styles.buttonContainer}>
-
-                    <View style={styles.rulesWrapper}>
-                        <Text style={styles.rulesHeader}>Dealer Rules:</Text>
-                        <CheckBox
-                            onClick={ ()=> this.toggleSubscribeModal() }
-                            isChecked={this.state.dealerStandsOnSoft17}
-                            rightText={"Dealer stands on soft 17"} 
-                            checkBoxColor={'#fff'}
-                            checkedCheckBoxColor={'#fff'}
-                            rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5, paddingBottom: 5}}
-                            // disabled={true}
-                        /> 
-
-                        <CheckBox
-                            onClick={ ()=> this.toggleSubscribeModal() }
-                            isChecked={this.state.dealerHitsOnSoft17}
-                            rightText={"Dealer hits on soft 17"} 
-                            checkBoxColor={'#fff'}
-                            checkedCheckBoxColor={'#fff'}
-                            rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5}}
-                            // disabled={true}
-                        />
-                    </View>
-
-                    <View style={styles.rulesWrapper}>
-                        <Text style={styles.rulesHeader}>Player Rules:</Text>
-                        <CheckBox
-                            onClick={ ()=> this.toggleSubscribeModal() }
-                            isChecked={this.state.doubleAllowed}
-                            rightText={"Double allowed"} 
-                            checkBoxColor={'#fff'}
-                            checkedCheckBoxColor={'#fff'}
-                            rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5, paddingBottom: 5}}
-                            // disabled={true}
-                        /> 
-                        <CheckBox
-                            onClick={ ()=> this.toggleSubscribeModal() }
-                            isChecked={this.state.doubleAfterSplitAllowed}
-                            rightText={"Double after split"}
-                            checkBoxColor={'#fff'}
-                            checkedCheckBoxColor={'#fff'}
-                            rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5, paddingBottom: 5}}
-                            // disabled={true}
-                        /> 
-                        <CheckBox
-                            onClick={ ()=> this.toggleSubscribeModal() }
-                            isChecked={false}
-                            rightText={"Surrender Allowed"}
-                            checkBoxColor={'#fff'}
-                            checkedCheckBoxColor={'#fff'}
-                            rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5}}
-                            // disabled={true}
-                        /> 
-                    </View>
-
-                    <View style={styles.rulesWrapper}>
-                        <Text style={styles.rulesHeader}>Decks:</Text>
-                        <CheckBox
-                            onClick={ ()=> this.toggleSubscribeModal() }
-                            isChecked={this.state.singleDeck}
-                            rightText={"Single Deck"} 
-                            checkBoxColor={'#fff'}
-                            checkedCheckBoxColor={'#fff'}
-                            rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5, paddingBottom: 5}}
-                            // disabled={true}
-                        /> 
-                        <CheckBox
-                            onClick={ ()=> this.toggleSubscribeModal() }
-                            isChecked={this.state.doubleDeck}
-                            rightText={"Double Deck"}
-                            checkBoxColor={'#fff'}
-                            checkedCheckBoxColor={'#fff'}
-                            rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5, paddingBottom: 5}}
-                            // disabled={true}
-                        /> 
-                        <CheckBox
-                            onClick={ ()=> this.toggleSubscribeModal() }
-                            isChecked={this.state.shoe}
-                            rightText={"4 - 8 Deck Shoe"}
-                            checkBoxColor={'#fff'}
-                            checkedCheckBoxColor={'#fff'}
-                            rightTextStyle={{ fontSize: 20, color: '#fff', paddingLeft: 5}}
-                        /> 
-                    </View>
-
                 </View>
-            </View>
             </ScrollView>
-            
-
         );
     }
 }
@@ -318,7 +335,7 @@ const styles = StyleSheet.create({
         paddingTop: Constants.statusBarHeight,
         padding: 8,
         backgroundColor: ( '#0f9b0f', '#52c234', '#52c234', '#0f9b0f'),
-        height: 600,
+        height: 650,
     },
     modalContainer: {
         width: ScreenWidth + 30, 

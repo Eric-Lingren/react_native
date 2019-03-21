@@ -1,28 +1,29 @@
 {
   "expo": {
-    "name": "sponaneous-kiwi",
-    "description": "No description",
-    "slug": "snack-rJnASTDr4",
-    "privacy": "unlisted",
+    "name": "CountChamp",
+    "description": "",
+    "slug": "CountChamp",
+    "privacy": "public",
     "sdkVersion": "32.0.0",
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "version": "1.0.0",
+    "icon": "./assets/images/premium_logo.png",
     "orientation": "portrait",
-    "primaryColor": "#cccccc",
-    "icon": "https://d1wp6m56sqw74a.cloudfront.net/~assets/c9aa1be8a6a6fe81e20c3ac4106a2ebc",
-    "loading": {
-      "icon": "https://d1wp6m56sqw74a.cloudfront.net/~assets/c9aa1be8a6a6fe81e20c3ac4106a2ebc",
-      "hideExponentText": false
+    
+    "updates": {
+      "fallbackToCacheTimeout": 0
     },
-    "packagerOpts": {
-      "assetExts": [
-        "ttf",
-        "mp4",
-        "otf",
-        "xml"
-      ]
-    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.cardchamp.countchamp"
     }
   }
 }

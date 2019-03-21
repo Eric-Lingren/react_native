@@ -1,7 +1,12 @@
 import * as React from 'react';
 import { ScrollView, Button, Text, View, StyleSheet, TextInput,  Image, Dimensions, AsyncStorage } from 'react-native';
-import { Constants } from 'expo';
+import { Constants, AdMobInterstitial } from 'expo';
 import axios from 'axios'
+import AwesomeButton from 'react-native-really-awesome-button';
+
+const INTERSTITIAL_ID = `ca-app-pub-9918224509174617/8466949434`;
+AdMobInterstitial.setAdUnitID(INTERSTITIAL_ID);
+AdMobInterstitial.setTestDeviceID("EMULATOR");
 
 let ScreenHeight = Dimensions.get("window").height;
 
@@ -24,23 +29,33 @@ class SpeedCount extends React.Component {
             guessWasCorrect: '',
             sessionsPlayed: 0,
             sessionsCorrect: 0,
+            durationInput: '',
+            deck: []
         }
     }
 
     componentDidMount(){
-        axios.get('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=8').then(response => {
+        this.getDeck()
+        this.getCountingStatsFromStorage()
+    }
+
+    getDeck = () => {
+        axios.get('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=10').then(response => {
             const deckID = response.data.deck_id;
             this.setState({
                 deckID: deckID,
-            })
+            }, () => this.setDeck())
         })
-        this.getCountingStatsFromStorage()
+    }
+    setDeck = () => {
+        axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=520`).then(response => {
+                this.setState({deck: response.data.cards})
+            })
     }
 
     componentWillUnmount = () => {
         let speedCountSessionsPlayed = this.state.sessionsPlayed.toString()
         let speedCountSessionsCorrect = this.state.sessionsCorrect.toString()
-        
         this.saveStatsInStorage(speedCountSessionsPlayed, speedCountSessionsCorrect)
     }
 
@@ -73,6 +88,7 @@ class SpeedCount extends React.Component {
             runningCountVisible: false,
             whatsTheCountVisible: false, 
             inputAnswer: '',
+            guessWasCorrect: '',
         })
         
         let speed;
@@ -82,25 +98,33 @@ class SpeedCount extends React.Component {
             speed = 1000
         }
 
+        let duration = this.state.durationInput
+        if(this.state.durationInput){
+            duration = ( 1000 * (Number(this.state.durationInput)) )
+        } else {
+            duration = 30000
+        }
+
+        let deck = this.state.deck
+        let index = 0
         const timerId = setInterval(()=>{
-            axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=1`).then(response => {
-                const oneCardDealt = response.data.cards[0].code;
-                const cardImage = response.data.cards[0].image
-                const cardValue = response.data.cards[0].value
+                const oneCardDealt = deck[index].code;
+                const cardImage = deck[index].image
+                const cardValue = deck[index].value
                 this.setState(prevState => {
                     return {
-                    cardsDealt: [...prevState.cardsDealt, oneCardDealt],
-                    cardsDealtImages: cardImage,
-                    cardsDealtValues: [...prevState.cardsDealtValues, cardValue],
-                    currentCardValue: cardValue,
-                }
+                        cardsDealt: [...prevState.cardsDealt, oneCardDealt],
+                        cardsDealtImages: cardImage,
+                        cardsDealtValues: [...prevState.cardsDealtValues, cardValue],
+                        currentCardValue: cardValue,
+                    }
                 }, () => this.whatsTheCount() )
-            })
+                index += 1
         },speed)
         setTimeout( ()=> { 
             clearInterval(timerId)
             this.countIsFinished()
-        }, 5000)  
+        }, duration)  
     }
     
     whatsTheCount = () => {
@@ -126,13 +150,15 @@ class SpeedCount extends React.Component {
             this.setState({
                 cardsDealtImages: null,
                 whatsTheCountVisible: true,
-                input: ''
+                input: '',
+                durationInput: ''
             }) 
         }, 1000)
         this.displayCount()    
     }
 
     checkAnswer = () => {
+        this.getDeck()
         let guess = Number(this.state.inputAnswer)
         let answer = this.state.count
         
@@ -142,14 +168,23 @@ class SpeedCount extends React.Component {
                 sessionsCorrect: prevState.sessionsCorrect += 1,
             }))
         } else {
-            this.setState({ guessWasCorrect : 'Wrong' })
+            this.setState({ guessWasCorrect : 'Incorrect, Try Again!' })
         }
         this.setState(prevState => ({ 
             whatsTheCountVisible : false, 
             count: 0,
             sessionsPlayed: prevState.sessionsPlayed += 1
         }))
+
+// >>>>>>>>>>>>>  Re-comment this in for the popup ad
+        // this.openInterstitial()
     }
+
+// >>>>>>>>>>>>>  Re-comment this in for the popup ad
+    // openInterstitial = async () => {
+    //     await AdMobInterstitial.requestAdAsync();
+    //     await AdMobInterstitial.showAdAsync();
+    // };
 
     displayCount = () => {
         setTimeout ( () => {
@@ -159,17 +194,21 @@ class SpeedCount extends React.Component {
         }, 3000)  
     }
 
+
     static navigationOptions = {
         title: 'Speed Count Drill',
     };
     
+    test = () => {
+        console.log('test button')
+    }
     render() {
         const {navigate} = this.props.navigation;
         return (
             <ScrollView>
             <View style={styles.container}>
                 <View>
-                    <View style={styles.textContainer}>
+                    <View style={styles.selectionsContainer}>
                         <Text style={styles.textStyle}>Cards Per Second:</Text> 
                         <TextInput
                             style={{height: 40, borderColor: 'black', borderWidth: 1, borderRadius: 10, backgroundColor: 'white', opacity: 0.7, width: 100, paddingTop: 5, paddingBottom: 5, paddingLeft: 35, fontSize: 26, fontWeight: 'bold'}}
@@ -179,25 +218,54 @@ class SpeedCount extends React.Component {
                             value={this.state.input}
                         />
                     </View>
-                    <View >
-                        <View style={styles.deckContainer}>
-                            <Image style={styles.deckDisplay} source={{uri: this.state.cardsDealtImages}} />
-                            
-                        </View>
+
+                    <View style={styles.selectionsContainer}>
+                        <Text style={styles.textStyle}>Duration in Seconds:</Text> 
+                        <TextInput
+                            style={{height: 40, borderColor: 'black', borderWidth: 1, borderRadius: 10, backgroundColor: 'white', opacity: 0.7, width: 100, paddingTop: 5, paddingBottom: 5, paddingLeft: 35, fontSize: 26, fontWeight: 'bold'}}
+                            keyboardType = 'phone-pad'
+                            maxLength={3}
+                            onChangeText={(durationInput) => this.setState({durationInput})}
+                            value={this.state.durationInput}
+                        />
                     </View>
-                    <Button color="#000000" onPress={this.dealCard} title="Start"></Button>
+                </View>
+                    <AwesomeButton
+                        type='primary'
+                        backgroundColor='#FFDF00'
+                        textColor='#000'
+                        textSize={16}
+                        raiseLevel={0}
+                        stretch={true}
+                        height={40}
+                        onPress={this.dealCard}
+                        >
+                        START
+                    </AwesomeButton>
+
                     <View style={styles.answerWrapper}>
                         {this.state.whatsTheCountVisible 
                         ?   <View style={styles.answerContainer}>
                                 <Text style={styles.textStyleAnswer}>Whats The Count?</Text>
                                 <TextInput
                                     style={{height: 40, borderColor: 'black', borderWidth: 1, borderRadius: 10, backgroundColor: 'white', opacity: 0.7, width: 100, paddingTop: 5, paddingBottom: 5, paddingLeft: 35, fontSize: 26, fontWeight: 'bold', marginBottom: 10}}
+                                    // placeholder='1'
+                                    // placeholderTextColor="#00ff00"
                                     keyboardType = 'phone-pad'
                                     maxLength={3}
                                     onChangeText={(inputAnswer) => this.setState({inputAnswer})}
                                     value={this.state.inputAnswer}
                                 />
-                                <Button color="#2196f3" onPress={this.checkAnswer} title="Check Answer"></Button>
+                                <AwesomeButton
+                                    backgroundColor='#000'
+                                    textColor='#FFDF00'
+                                    textSize={16}
+                                    raiseLevel={0}
+                                    height={40}
+                                    onPress={this.checkAnswer}
+                                    >
+                                    Check Answer
+                                </AwesomeButton>
                             </View>
                         : null
                         }
@@ -205,7 +273,10 @@ class SpeedCount extends React.Component {
                         : null
                         }
                     </View>
-                    
+                    <View >
+                        <View style={styles.deckContainer}>
+                            <Image style={styles.deckDisplay} source={{uri: this.state.cardsDealtImages}} />          
+                        </View>
                 </View>
             </View> 
             </ScrollView>
@@ -221,6 +292,14 @@ const styles = StyleSheet.create({
         height: ScreenHeight,
     },
     textContainer: {
+        marginTop: -20,
+        flex: 0,
+        justifyContent: 'space-evenly',
+        height: 80,
+        alignItems: 'center',
+        alignContent: 'center',
+    },
+    selectionsContainer: {
         marginTop: -20,
         flex: 0,
         justifyContent: 'space-evenly',
@@ -248,9 +327,20 @@ const styles = StyleSheet.create({
         height: 350,
     },
     textStyle: {
-        fontSize: 18, 
+        fontSize: 20, 
         fontWeight: 'bold', 
         color: 'white'
+    },
+    textStyleTitle: {
+        marginTop: -15,
+        fontSize: 22, 
+        fontWeight: 'bold', 
+        color: 'blue',
+    },
+    textStyleTime: {
+        fontSize: 16, 
+        fontWeight: 'bold', 
+        color: 'blue',
     },
     answerWrapper: {
         justifyContent: 'center',

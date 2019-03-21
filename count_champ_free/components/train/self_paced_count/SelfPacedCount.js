@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Button, Text, View, StyleSheet, Image, Dimensions } from 'react-native';
 import { Constants } from 'expo';
-import axios from 'axios'
+import axios from 'axios';
+import AwesomeButton from 'react-native-really-awesome-button';
 
 let ScreenHeight = Dimensions.get("window").height;
 
@@ -16,36 +17,50 @@ class SelfPacedCount extends React.Component {
             currentCardValue: 0,
             count: 0,
             runningCountVisible: false,
-            remainingCardsInDeck: 10
+            remainingCardsInDeck: 10,
+            deck: [],
+            index: 0,
         }
         
     }
 
     componentDidMount(){
-        axios.get('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1').then(response => {
+        this.getDeck()
+    }
+
+    getDeck = () => {
+        axios.get('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=20').then(response => {
             const deckID = response.data.deck_id;
             this.setState({
                 deckID: deckID,
-            })
+            }, () => this.setDeck())
         })
     }
+    setDeck = () => {
+        axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=1040`).then(response => {
+                this.setState({deck: response.data.cards})
+            })
+    }
+
 
     dealCard = () => {
-        axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=1`).then(response => {
-            const oneCardDealt = response.data.cards[0].code;
-            const cardImage = response.data.cards[0].image
-            const cardValue = response.data.cards[0].value
-            const remaining = response.data.remaining
-            this.setState(prevState => {
+        let deck = this.state.deck
+        let index = this.state.index
+
+        const oneCardDealt = deck[index].code;
+        const cardImage = deck[index].image
+        const cardValue = deck[index].value
+        
+        this.setState(prevState => {
             return {
                 cardsDealt: [...prevState.cardsDealt, oneCardDealt],
                 cardsDealtImages: cardImage,
                 cardsDealtValues: [...prevState.cardsDealtValues, cardValue],
                 currentCardValue: cardValue,
-                remainingCardsInDeck: remaining
+                index: prevState.index += 1
+
             }
-            }, () => this.whatsTheCount() )
-        })
+        }, () => this.whatsTheCount() )
     }
 
     whatsTheCount = () => {
@@ -97,13 +112,30 @@ class SelfPacedCount extends React.Component {
                         />
                     </View>
                     <View style={styles.buttonContainer}>
-                        <Button color="#000000" onPress={this.dealCard} title="Deal Card"></Button>
-                        { 
-                            this.state.runningCountVisible ?
-                            <Button color="#000000" onPress={this.toggleShowCount} title="Hide Count">Show Count</Button>
-                            :
-                            <Button color="#000000" onPress={this.toggleShowCount} title="Show Count">Show Count</Button>
-                        }
+                        <AwesomeButton
+                            type='primary'
+                            backgroundColor='#FFDF00'
+                            textColor='#000'
+                            textSize={16}
+                            raiseLevel={0}
+                            stretch={true}
+                            height={40}
+                            onPress={this.dealCard}
+                            >
+                            Deal Card
+                        </AwesomeButton>
+                        <AwesomeButton
+                            type='primary'
+                            backgroundColor='#000'
+                            textColor='#FFDF00'
+                            textSize={16}
+                            raiseLevel={0}
+                            width={200}
+                            height={40}
+                            onPress={this.toggleShowCount}
+                            >
+                            {this.state.runningCountVisible ? 'Hide Count' : 'Show Count' }
+                        </AwesomeButton>
                     </View>
                     <View>
                     {
@@ -141,14 +173,28 @@ const styles = StyleSheet.create({
         flex: 0,
         justifyContent: 'space-evenly',
         height: 120,
+        alignContent:'center',
+        alignItems: 'center',
     },
     count: {
         fontSize: 30,
         fontWeight: 'bold',
         color: "#ffffff",
         textAlign: 'center',
-
-
+    },
+    textContainer: {
+        marginTop: -20,
+        flex: 0,
+        justifyContent: 'space-evenly',
+        height: 80,
+        alignItems: 'center',
+        alignContent: 'center',
+    },
+    textStyleTitle: {
+        marginTop: -15,
+        fontSize: 22, 
+        fontWeight: 'bold', 
+        color: '#ffb600',   
     },
 });
 

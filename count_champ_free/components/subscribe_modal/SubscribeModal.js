@@ -20,7 +20,7 @@ class SubscribeModal extends React.Component {
                 <View style={styles.textContainer}>
                     <Text style={styles.textStyles}>This is a premium feature.</Text>
                     
-                    <Text style={styles.hyperlinkStyles} onPress={ ()=> Linking.openURL('https://google.com') } >
+                    <Text style={styles.hyperlinkStyles} onPress={ ()=> Linking.openURL('https://play.google.com/store/apps/details?id=com.cardchamp.countchamp&rdid=com.cardchamp.countchamp') } >
                         You can get the upgraded version here.
                     </Text>
                 </View>

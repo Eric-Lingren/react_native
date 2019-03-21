@@ -1,23 +1,23 @@
 import * as React from 'react';
 import { Button, Text, View, StyleSheet, Dimensions, ScrollView, AsyncStorage } from 'react-native';
 import { Constants } from 'expo';
-import SubscribeModal from '../../subscribe_modal/SubscribeModal';
+import AwesomeButton from 'react-native-really-awesome-button';
 
 let ScreenHeight = Dimensions.get("window").height;
-let ScreenWidth = Dimensions.get("window").width;
 
 class BetSizing extends React.Component {
     constructor(){
         super()
         this.state = {
-            showSubscribeModal: true,
             randomCount: 0,
             answer: 0,
             unit1ButtonColor: '#000',
             unit2ButtonColor: '#000',
+            unit3ButtonColor: '#000',
             unit4ButtonColor: '#000',
-            unit8ButtonColor: '#000',
-            unit16ButtonColor: '#000',
+            unit5ButtonColor: '#000',
+            unit6ButtonColor: '#000',
+            unit12ButtonColor: '#000',
             betSizingQuestionsPlayed: 0,
             betSizingQuestionsCorrect: 0,
         }
@@ -60,18 +60,36 @@ class BetSizing extends React.Component {
             showAnswer: false,
             unit1ButtonColor: '#000',
             unit2ButtonColor: '#000',
+            unit3ButtonColor: '#000',
             unit4ButtonColor: '#000',
-            unit8ButtonColor: '#000',
-            unit16ButtonColor: '#000',
+            unit5ButtonColor: '#000',
+            unit6ButtonColor: '#000',
+            unit12ButtonColor: '#000',
         }, () => this.generateRandomCount())
     }
 
     generateRandomCount = () => {
-        const betCountArray = [0,1,2,3,4]
-        let randomCount = betCountArray[Math.floor(Math.random()*betCountArray.length)]
-        this.setState({
-            randomCount: randomCount,
-        })
+        const betCountArray = [0,1,2,3,4,5,6]
+        let randomCount;
+        randomCount = betCountArray[Math.floor(Math.random()*betCountArray.length)]
+        if(this.state.randomCount !== randomCount){
+            this.setState({
+                randomCount: randomCount,
+            })
+        } else {
+            randomCount = betCountArray[Math.floor(Math.random()*betCountArray.length)]
+            if(this.state.randomCount !== randomCount){
+                this.setState({
+                    randomCount: randomCount,
+                })
+            } else {
+                randomCount = betCountArray[Math.floor(Math.random()*betCountArray.length)]
+                this.setState({
+                    randomCount: randomCount,
+                })
+            }
+            
+        }
     }
 
     setAnswerTo1 = () => {
@@ -86,21 +104,32 @@ class BetSizing extends React.Component {
         }, () => this.checkAnswer(this.state.answer))
     }
 
+    setAnswerTo3 = () => {
+        this.setState({
+            answer: 3
+        }, () => this.checkAnswer(this.state.answer))
+    }
+
     setAnswerTo4 = () => {
         this.setState({
             answer: 4
         }, () => this.checkAnswer(this.state.answer))
     }
 
-    setAnswerTo8 = () => {
+    setAnswerTo5 = () => {
         this.setState({
-            answer: 8
+            answer: 5
+        }, () => this.checkAnswer(this.state.answer))
+    }
+    setAnswerTo6 = () => {
+        this.setState({
+            answer: 6
         }, () => this.checkAnswer(this.state.answer))
     }
 
-    setAnswerTo16 = () => {
+    setAnswerTo12 = () => {
         this.setState({
-            answer: 16
+            answer: 12
         }, () => this.checkAnswer(this.state.answer))
     }
 
@@ -109,19 +138,25 @@ class BetSizing extends React.Component {
         let count = this.state.randomCount
         
         if (answer === 1 && count === 0 ){
-            this.setState({ unit1ButtonColor: '#055902' })
+            this.setState({ unit1ButtonColor: '#00ff00' })
             this.displayOutputCorrect()
         } else if (answer === 2 && count === 1 ){
-            this.setState({ unit2ButtonColor: '#055902' })
+            this.setState({ unit2ButtonColor: '#00ff00' })
             this.displayOutputCorrect()
-        } else if (answer === 4 && count === 2 ){
-            this.setState({ unit4ButtonColor: '#055902' })
+        } else if (answer === 3 && count === 2 ){
+            this.setState({ unit3ButtonColor: '#00ff00' })
             this.displayOutputCorrect()
-        } else if (answer === 8 && count === 3 ){
-            this.setState({ unit8ButtonColor: '#055902' })
+        } else if (answer === 4 && count === 3 ){
+            this.setState({ unit4ButtonColor: '#00ff00' })
             this.displayOutputCorrect()
-        } else if (answer === 16 && count === 4 ){
-            this.setState({ unit16ButtonColor: '#055902' })
+        } else if (answer === 5 && count === 4 ){
+            this.setState({ unit5ButtonColor: '#00ff00' })
+            this.displayOutputCorrect()
+        } else if (answer === 6 && count === 5 ){
+            this.setState({ unit6ButtonColor: '#00ff00' })
+            this.displayOutputCorrect()
+        } else if (answer === 12 && count === 6 ){
+            this.setState({ unit12ButtonColor: '#00ff00' })
             this.displayOutputCorrect()
         } else{
             this.displayOutputIncorrect(answer)
@@ -140,24 +175,32 @@ class BetSizing extends React.Component {
             this.setState({ unit1ButtonColor: '#ff0000' })
         } else if (answer === 2){
             this.setState({ unit2ButtonColor: '#ff0000' })
+        } else if (answer === 3){
+            this.setState({ unit3ButtonColor: '#ff0000' })
         } else if (answer === 4){
             this.setState({ unit4ButtonColor: '#ff0000' })
-        } else if (answer === 8){
-            this.setState({ unit8ButtonColor: '#ff0000' })
-        } else if (answer ===16){
-            this.setState({ unit16ButtonColor: '#ff0000' })
+        } else if (answer === 5){
+            this.setState({ unit5ButtonColor: '#ff0000' })
+        } else if (answer === 6){
+            this.setState({ unit6ButtonColor: '#ff0000' })
+        } else if (answer === 12){
+            this.setState({ unit12ButtonColor: '#ff0000' })
         }
 
         if(count === 0){
-            this.setState({ unit1ButtonColor: '#055902' })
+            this.setState({ unit1ButtonColor: '#00ff00' })
         } else if (count === 1){
-            this.setState({ unit2ButtonColor: '#055902' })
+            this.setState({ unit2ButtonColor: '#00ff00' })
         } else if (count === 2){
-            this.setState({ unit4ButtonColor: '#055902' })
+            this.setState({ unit3ButtonColor: '#00ff00' })
         } else if (count === 3){
-            this.setState({ unit8ButtonColor: '#055902' })
+            this.setState({ unit4ButtonColor: '#00ff00' })
         } else if (count === 4){
-            this.setState({ unit16ButtonColor: '#055902' })
+            this.setState({ unit5ButtonColor: '#00ff00' })
+        } else if (count === 5){
+            this.setState({ unit6ButtonColor: '#00ff00' })
+        } else if (count === 6){
+            this.setState({ unit12ButtonColor: '#00ff00' })
         }
     }
 
@@ -171,30 +214,45 @@ class BetSizing extends React.Component {
         return (
             <ScrollView>
             <View style={styles.container}>
-                {this.state.showSubscribeModal 
-                ?   <View style={styles.modalContainer}>
-                        <SubscribeModal />
+                <View className='container'>
+                    {/* <View style={styles.questionContainer}>
+                        <Text style={styles.textStyle}>Press to Select a:</Text>
+                    </View> */}
+                    <View style={styles.answerButton}>
+                        {/* <Button color='blue' onPress={this.newQuestion} title='New Question'></Button> */}
+                        <AwesomeButton
+                                type='primary'
+                                backgroundColor='#FFDF00'
+                                textColor='#000'
+                                textSize={16}
+                                raiseLevel={0}
+                                stretch={true}
+                                height={40}
+                                onPress={this.newQuestion}
+                                >
+                                New Question
+                            </AwesomeButton>
                     </View>
-                : null
-                }
-
-                <View>
-                    <View style={styles.textContainer}>
-                    <Text style={styles.textStyle}>Your minumum bet size is 1 unit.</Text>
-                    <Text style={styles.textStyle}>What should your bet be if... </Text>
-                    <Text style={styles.textStyle}>The true count is:  <Text style={styles.question}>{this.state.randomCount} </Text> ? </Text>
+                    <View style={styles.trueContainer}>
+                        <Text style={styles.textStyle}>If the True Count is: <Text style={styles.question}>{this.state.randomCount} </Text>  
+                        </Text>
                     </View>
-                    {/* <View style={styles.buttonContainer}>
+                    <View style={styles.howMuchContainer}>
+                        <Text style={styles.textStyle}>How much should you bet?</Text>
+                        <Text style={styles.textStyle2} >(minumum bet size is 1 unit)</Text>
+                    </View>
+                    {/* <View style={styles.selectContainer}>
+                        <Text style={styles.textStyle}>Select how much you should bet:</Text>
+                    </View> */}
+                    <View style={styles.buttonContainer}>
                         <Button color={this.state.unit1ButtonColor} onPress={this.setAnswerTo1} title='1  hand  of  1  Unit'></Button>
                         <Button color={this.state.unit2ButtonColor} onPress={this.setAnswerTo2} title='1  hand  of  2  Units'></Button>
+                        <Button color={this.state.unit3ButtonColor}  onPress={this.setAnswerTo3} title='1  hand  of  3  Units'></Button>
                         <Button color={this.state.unit4ButtonColor}  onPress={this.setAnswerTo4} title='1  hand  of  4  Units'></Button>
-                        <Button color={this.state.unit8ButtonColor}  onPress={this.setAnswerTo8} title='1  hand  of  8  Units'></Button>
-                        <Button color={this.state.unit16ButtonColor}  onPress={this.setAnswerTo16} title='2  hands  of  8  Units'></Button>
+                        <Button color={this.state.unit5ButtonColor}  onPress={this.setAnswerTo5} title='1  hand  of  5  Units'></Button>
+                        <Button color={this.state.unit6ButtonColor}  onPress={this.setAnswerTo6} title='1  hand  of  6  Units'></Button>
+                        <Button color={this.state.unit12ButtonColor}  onPress={this.setAnswerTo12} title='2  hands  of  6  Units'></Button>
                     </View>
-                    <View style={styles.answerButton}>
-                        <Button color='#2196f3' onPress={this.newQuestion} title='New Question'></Button>
-                    </View> */}
-                    
                     {
                     this.state.showAnswer ?
                     <View style={styles.answerContainer}>
@@ -202,9 +260,7 @@ class BetSizing extends React.Component {
                     </View>
                     :
                     null
-                    }
-                    
-                    
+                    }                    
                 </View>
             </View>
             </ScrollView>
@@ -219,11 +275,34 @@ const styles = StyleSheet.create({
         backgroundColor: ( '#0f9b0f', '#52c234', '#52c234', '#0f9b0f'),
         height: ScreenHeight,
     },
-    textContainer: {
-        marginTop: -20,
+    questionContainer: {
         flex: 0,
         justifyContent: 'space-evenly',
-        height: 150,
+        height: 100,
+        alignItems: 'center',
+        alignContent: 'center',
+    },
+    trueContainer: {
+        marginTop: 10,
+        flex: 0,
+        justifyContent: 'space-evenly',
+        height: 70,
+        alignItems: 'center',
+        alignContent: 'center',
+    },
+    howMuchContainer: {
+        marginTop: 10,
+        flex: 0,
+        // justifyContent: 'space-evenly',
+        height: 70,
+        alignItems: 'center',
+        alignContent: 'center',
+    },
+    selectContainer: {
+        marginTop: -10,
+        flex: 0,
+        justifyContent: 'space-evenly',
+        height: 70,
         alignItems: 'center',
         alignContent: 'center',
     },
@@ -232,11 +311,14 @@ const styles = StyleSheet.create({
         fontWeight: 'bold', 
         color: 'white'
     },
+    textStyle2: {
+        color: 'blue',
+    },
     buttonContainer: {
         marginTop: 0,
         flex: 0,
         justifyContent: 'space-evenly',
-        height: 250,
+        height: 350,
     },
     answerContainer: {
         marginTop: 30,
@@ -248,18 +330,14 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     answerButton: {
-        marginTop: 35,
+        marginTop: 0,
     },
     question: {
         color: 'orange',
         fontWeight: '900',
         fontSize: 24,
-    },
-    modalContainer: {
-        width: ScreenWidth + 30, 
-        marginLeft: -8,
-        marginTop: -25,
-    },
+        marginTop: 10,
+    }
 });
 
 export default BetSizing

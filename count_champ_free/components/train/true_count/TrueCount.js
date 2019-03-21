@@ -1,10 +1,16 @@
 import * as React from 'react';
-import { Button, Text, View, StyleSheet, AsyncStorage, TextInput, Dimensions, TouchableWithoutFeedback } from 'react-native';
+import { Button, Text, View, StyleSheet, AsyncStorage, TextInput, Dimensions } from 'react-native';
 import { Constants } from 'expo';
 import SubscribeModal from '../../subscribe_modal/SubscribeModal';
-
 let ScreenHeight = Dimensions.get("window").height;
 let ScreenWidth = Dimensions.get("window").width;
+import AwesomeButton from 'react-native-really-awesome-button';
+
+/////////////////////////////////////////////////////////////////////////////////////////
+////                                                                                 ////
+////  To change from premium to free change this.state.showSubscriberModal to true   ////
+////                                                                                 ////
+/////////////////////////////////////////////////////////////////////////////////////////
 
 class TrueCount extends React.Component {
     constructor(){
@@ -18,7 +24,7 @@ class TrueCount extends React.Component {
             showAnswerBox: false,
             questionsPlayed: 0,
             questionsCorrect: 0,
-            showSubscribeModal: true,
+            showSubscribeModal: false,
         }
     }
 
@@ -43,8 +49,7 @@ class TrueCount extends React.Component {
             let trueCountQuestionsCorrectNum;
             trueCountQuestionsCorrect === 'NaN' || trueCountQuestionsCorrect === 'null' ? trueCountQuestionsCorrectNum = 0 : trueCountQuestionsCorrectNum = parseInt(trueCountQuestionsCorrect)
             this.setState({questionsCorrect: trueCountQuestionsCorrectNum})
-        }).done();
-        
+        }).done();       
     }
 
     saveStatsInStorage = async (trueCountQuestionsPlayed, trueCountQuestionsCorrect) => {
@@ -98,39 +103,69 @@ class TrueCount extends React.Component {
         title: 'True Count Drill',
     };
     
-    render() {
+    render() { 
         const {navigate} = this.props.navigation;
         return (
             <View style={styles.container}>
                 {this.state.showSubscribeModal 
                     ?   <View style={styles.modalContainer}>
-                            
                             <SubscribeModal />
                         </View>
                     : null
                 }
                 <View>
+                    <View style={styles.questionContainer}>
+                        <AwesomeButton
+                            type='primary'
+                            backgroundColor='#FFDF00'
+                            textColor='#000'
+                            textSize={16}
+                            raiseLevel={0}
+                            stretch={true}
+                            height={40}
+                            onPress={this.generateNewQuestion}                          
+                            >
+                            New Question
+                        </AwesomeButton>
+                    </View>
                     <View style={styles.textContainer}>
+                        <Text style={styles.textStyle2}>If the</Text>
                         <Text style={styles.textStyle}> Running Count: <Text style={styles.question}> {this.state.randomCount} </Text> </Text>
+                        <Text style={styles.textStyle2}>and there are</Text>
                         <Text style={styles.textStyle}> Decks Left: <Text style={styles.question}> {this.state.randomDeck}</Text> </Text>
-                        <Text style={styles.textStyle}> What's the true count? (round down) </Text>
+                    </View>
+                    <View style={styles.textContainer}>
+                        <Text style={styles.textStyle}> What is the true count? (round down) </Text>
                         <TextInput
-                            style={{height: 40, borderColor: 'black', borderWidth: 1, borderRadius: 10, backgroundColor: 'white', opacity: 0.7, width: 100, paddingTop: 5, paddingBottom: 5, paddingLeft: 35, fontSize: 26, fontWeight: 'bold'}}
+                            style={{height: 40, borderColor: 'black', borderWidth: 1, borderRadius: 10, backgroundColor: 'white', opacity: 0.7, width: 100, paddingTop: 5, paddingBottom: 5, paddingLeft: 35, fontSize: 26, fontWeight: 'bold', marginBottom: -40, marginTop: -40}}
                             keyboardType = 'phone-pad'
                             maxLength={2}
                             onChangeText={(input) => this.setState({input})}
                             value={this.state.input}
                         />
                     </View>
-                    
-                    <View style={styles.buttonContainer}>
-                        {/* <Button color="#000000" onPress={this.generateNewQuestion} title="New Question"></Button>
-                        <Button color="#000000" onPress={this.clickCheck} title="Check Answer"></Button> */}
-                    </View>
+                    {this.state.showSubscribeModal 
+                        ?   null
+                        : 
+                        <View style={styles.buttonContainer}>
+                            <AwesomeButton
+                                type='primary'
+                                backgroundColor='#000'
+                                textColor='#FFDF00'
+                                textSize={16}
+                                raiseLevel={0}
+                                width={200}
+                                height={40}
+                                onPress={this.clickCheck}
+                                >
+                                Check Answer
+                            </AwesomeButton>
+                        </View>
+                    }
                     {
                         this.state.showAnswerBox ?
                         <View style={styles.answerContainer}>
-                            { this.state.wereTheyRight ? <Text style={styles.answerStyle}>Correct!</Text> : <Text style={styles.answerStyle}>Answer Was: {this.state.answer}</Text>
+                            { this.state.wereTheyRight ? <Text style={styles.correctStyle}>Correct!</Text> : <Text style={styles.wrongStyle}>Sorry, the Correct Answer Was: {this.state.answer}</Text>
                             }
                         </View>
                         :
@@ -150,10 +185,10 @@ const styles = StyleSheet.create({
         height: ScreenHeight,
     },
     textContainer: {
-        marginTop: 0,
+        marginTop: -20,
         flex: 0,
         justifyContent: 'space-evenly',
-        height: 200,
+        height: 140,
         alignItems: 'center',
         alignContent: 'center',
     },
@@ -162,25 +197,42 @@ const styles = StyleSheet.create({
         fontWeight: 'bold', 
         color: 'white'
     },
+    textStyle2: {
+        color: 'blue',
+        fontSize: 16,
+        margin: 0,
+    },
+    buttonContainer: {
+        marginTop: 0,
+        flex: 0,
+        justifyContent: 'center',
+        height: 120,
+        alignItems: 'center',
+    },
     answerContainer: {
         marginTop: 0,
         flex: 0,
         alignItems: 'center',
         alignContent: 'center',
     },
-    answerStyle: {
+    correctStyle: {
         fontSize: 22, 
         fontWeight: 'bold', 
-        color: 'white'
+        color: 'blue',
     },
-    buttonContainer: {
-        marginTop: 0,
+    wrongStyle: {
+        fontSize: 20, 
+        fontWeight: 'bold', 
+        color: 'red',
+    },
+    questionContainer: {
+        marginTop: -10,
         flex: 0,
         justifyContent: 'space-evenly',
-        height: 120,
+        height: 90,
     },
     question: {
-        color: 'orange',
+        color: '#FFDF00',
         fontWeight: '900',
         fontSize: 24,
     },
@@ -189,6 +241,9 @@ const styles = StyleSheet.create({
         marginLeft: -8,
         marginTop: -25,
     },
+    Button: {
+        margin: 5,
+    },
 });                                    
 
-export default TrueCount
+export default TrueCount 

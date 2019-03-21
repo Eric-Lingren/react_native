@@ -36,7 +36,7 @@ class Menubar extends React.Component {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: 'black',
-        opacity: .8,
+        opacity: .9,
         width: (ScreenWidth * .6),
         position: 'absolute',
         marginTop: 24,
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     textStyles: {
-        color: 'white',
+        color: '#FFDF00',
         fontSize: 22,
         fontWeight: 'bold',
         textDecorationLine: 'underline',
