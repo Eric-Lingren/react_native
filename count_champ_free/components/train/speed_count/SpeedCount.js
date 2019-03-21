@@ -177,14 +177,14 @@ class SpeedCount extends React.Component {
         }))
 
 // >>>>>>>>>>>>>  Re-comment this in for the popup ad
-        // this.openInterstitial()
+        this.openInterstitial()
     }
 
 // >>>>>>>>>>>>>  Re-comment this in for the popup ad
-    // openInterstitial = async () => {
-    //     await AdMobInterstitial.requestAdAsync();
-    //     await AdMobInterstitial.showAdAsync();
-    // };
+    openInterstitial = async () => {
+        await AdMobInterstitial.requestAdAsync();
+        await AdMobInterstitial.showAdAsync();
+    };
 
     displayCount = () => {
         setTimeout ( () => {

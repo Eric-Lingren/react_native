@@ -4,6 +4,7 @@ import CheckBox from 'react-native-check-box';
 import { Constants, AdMobInterstitial } from 'expo';
 import axios from 'axios';
 import AwesomeButton from 'react-native-really-awesome-button';
+import SubscribeModal from '../../subscribe_modal/SubscribeModal'
 
 const INTERSTITIAL_ID = `ca-app-pub-9918224509174617/8466949434`;
 AdMobInterstitial.setAdUnitID(INTERSTITIAL_ID);
@@ -174,6 +175,7 @@ class BasicStrategy extends React.Component {
             playHardHands: false,
             playSoftHands: false,
             playSplitHands: false,
+            showSubscribeModal: false,
             deck: [
                 { "value": "6", "image": "https://deckofcardsapi.com/static/img/6H.png" },
                 { "value": "QUEEN", "image": "https://deckofcardsapi.com/static/img/QH.png" },
@@ -375,12 +377,12 @@ class BasicStrategy extends React.Component {
 
     whichDeckToDealFrom = () => {
 // >>>>>>>>>>>>>  Re-comment this in for the popup ad
-        // let hardHandsPlayed = this.state.hardHandsPlayed
-        // let softHandsPlayed = this.state.softHandsPlayed
-        // let splitHandsPlayed = this.state.splitHandsPlayed
-        // if((hardHandsPlayed + softHandsPlayed + splitHandsPlayed) % 50 === 0 ){
-        //     this.openInterstitial()
-        // }
+        let hardHandsPlayed = this.state.hardHandsPlayed
+        let softHandsPlayed = this.state.softHandsPlayed
+        let splitHandsPlayed = this.state.splitHandsPlayed
+        if((hardHandsPlayed + softHandsPlayed + splitHandsPlayed) % 50 === 0 ){
+            this.openInterstitial()
+        }
 
         if(this.state.playAllHands){
             this.dealCard()
@@ -394,10 +396,10 @@ class BasicStrategy extends React.Component {
     }
 
 // >>>>>>>>>>>>>  Re-comment this in for the popup ad
-// openInterstitial = async () => {
-//     await AdMobInterstitial.requestAdAsync();
-//     await AdMobInterstitial.showAdAsync();
-// };
+openInterstitial = async () => {
+    await AdMobInterstitial.requestAdAsync();
+    await AdMobInterstitial.showAdAsync();
+};
 
     dealCard = () => {
         axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=3`).then(response => {
@@ -1512,6 +1514,9 @@ class BasicStrategy extends React.Component {
         }
     }
 
+    toggleSubscribeModal = () => {
+        this.setState({showSubscribeModal: !this.state.showSubscribeModal})
+    } 
 
     static navigationOptions = {
         title: 'Basic Strategy Drill',
@@ -1523,7 +1528,17 @@ class BasicStrategy extends React.Component {
         return (
             <ScrollView>
                 <View style={styles.container}>
-                
+                {this.state.showSubscribeModal 
+                    ?   <View style={styles.modalContainer}>
+                            <TouchableWithoutFeedback onPress={() => this.toggleSubscribeModal()} >
+                                <Image
+                                    source={require('./close_icon.png')}
+                                    style={{ width: 40, height: 40, marginLeft:(ScreenWidth -60), marginTop: 20, zIndex: 20, position: 'absolute'}}/>
+                            </TouchableWithoutFeedback>
+                            <SubscribeModal />
+                        </View>
+                    : null
+                }
 
                 <View style={styles.rulesWrapper}>
                         <Text style={styles.rulesHeader}>Type of Hands:</Text>
@@ -1534,39 +1549,35 @@ class BasicStrategy extends React.Component {
                                     checkBoxColor={'#fff'}
                                     checkedCheckBoxColor={'#fff'}
                                     rightTextStyle={{ fontSize: 14, color: '#fff', paddingBottom: 5}}
-                                    // disabled={true}
                                 /> 
                             <View style={{marginLeft: 150, marginTop: -25}}>
                                 <CheckBox
-                                    onClick={()=>{ this.setState({ playHardHands: !this.state.playHardHands, playAllHands: false, playSplitHands: false, playSoftHands: false}) }}
+                                    onClick={this.toggleSubscribeModal}
                                     isChecked={this.state.playHardHands}
                                     rightText={"Hard Hands"} 
                                     checkBoxColor={'#fff'}
                                     checkedCheckBoxColor={'#fff'}
                                     rightTextStyle={{ fontSize: 14, color: '#fff'}}
-                                    // disabled={true}
                                 />
                             </View>
                             <View style={{marginTop: 5}}>
                                 <CheckBox
-                                    onClick={   ()=>{ this.setState({ playSoftHands: !this.state.playSoftHands, playAllHands: false, playHardHands: false, playSplitHands: false }) }}
+                                    onClick={this.toggleSubscribeModal}
                                     isChecked={this.state.playSoftHands}
                                     rightText={"Soft Hands"} 
                                     checkBoxColor={'#fff'}
                                     checkedCheckBoxColor={'#fff'}
                                     rightTextStyle={{ fontSize: 14, color: '#fff'}}
-                                    // disabled={true}
                                 />
                             </View>
                             <View style={{marginLeft: 150, marginTop: -25}}>
                                 <CheckBox
-                                    onClick={   ()=>{ this.setState({ playSplitHands: !this.state.playSplitHands, playAllHands: false, playHardHands: false, playSoftHands: false }) }}
+                                    onClick={this.toggleSubscribeModal}
                                     isChecked={this.state.playSplitHands}
                                     rightText={"Split Hands"} 
                                     checkBoxColor={'#fff'}
                                     checkedCheckBoxColor={'#fff'}
                                     rightTextStyle={{ fontSize: 14, color: '#fff'}}
-                                    // disabled={true}
                                 />
                             </View>
                     </View>
@@ -1751,6 +1762,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginBottom: 10,
         textDecorationLine: 'underline',
+    },
+    modalContainer: {
+        width: ScreenWidth + 30, 
+        marginLeft: -8,
+        marginTop: -25,
+        zIndex: 100,
     },
 });
 

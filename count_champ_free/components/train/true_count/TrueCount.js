@@ -2,9 +2,10 @@ import * as React from 'react';
 import { Button, Text, View, StyleSheet, AsyncStorage, TextInput, Dimensions } from 'react-native';
 import { Constants } from 'expo';
 import SubscribeModal from '../../subscribe_modal/SubscribeModal';
-let ScreenHeight = Dimensions.get("window").height;
-let ScreenWidth = Dimensions.get("window").width;
 import AwesomeButton from 'react-native-really-awesome-button';
+
+let ScreenWidth = Dimensions.get("window").width;
+let ScreenHeight = Dimensions.get("window").height;
 
 /////////////////////////////////////////////////////////////////////////////////////////
 ////                                                                                 ////
@@ -24,7 +25,7 @@ class TrueCount extends React.Component {
             showAnswerBox: false,
             questionsPlayed: 0,
             questionsCorrect: 0,
-            showSubscribeModal: false,
+            showSubscribeModal: true,
         }
     }
 
@@ -240,6 +241,7 @@ const styles = StyleSheet.create({
         width: ScreenWidth + 30, 
         marginLeft: -8,
         marginTop: -25,
+        zIndex: 100,
     },
     Button: {
         margin: 5,

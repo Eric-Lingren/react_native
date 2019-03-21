@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Button, View, Text, Image, StyleSheet, Dimensions, AsyncStorage, ScrollView, TouchableWithoutFeedback } from 'react-native';
 import { Constants } from 'expo';
 import AwesomeButton from 'react-native-really-awesome-button';
+import SubscribeModal from '../../subscribe_modal/SubscribeModal'
 
 import fab14v10 from './charts/fab_14v10.png'
 import fab15v9 from './charts/fab_15v9.png'
@@ -59,6 +60,7 @@ class TrainDeviations extends React.Component {
             fab4RuleSelected: false,
             showHelp: false,
             helpImageToShow: '',
+            showSubscribeModal: true,
             deck: [
                 { "value": "6", "image": "https://deckofcardsapi.com/static/img/6H.png" },
                 { "value": "QUEEN", "image": "https://deckofcardsapi.com/static/img/QH.png" },
@@ -988,6 +990,15 @@ class TrainDeviations extends React.Component {
         const {navigate} = this.props.navigation;
         return (
             <ScrollView>
+                {this.state.showSubscribeModal 
+                ?   <View style={styles.modalContainer}>
+                            <Image
+                                source={require('./close_icon.png')}
+                                style={{ width: 40, height: 40, marginLeft:(ScreenWidth -60), marginTop: 20, zIndex: 20, position: 'absolute'}}/>
+                        <SubscribeModal />
+                    </View>
+                : null
+                }
             <View style={styles.container}>
             <Text style={styles.handLabel}>Dealer Hand</Text>
                 
@@ -1009,7 +1020,6 @@ class TrainDeviations extends React.Component {
                 </View>
 
                 <Text style={styles.handLabel}>Player Hand</Text>
-                {/* <Button onPress={this.dealHand} width='50' color='#000000' title='Deal'></Button> */}
                 <AwesomeButton
                     type='primary'
                     backgroundColor='#FFDF00'
@@ -1062,8 +1072,6 @@ class TrainDeviations extends React.Component {
                     </View>
                     : null
                     }
-
-
             </View>
             </ScrollView>
             
@@ -1176,6 +1184,11 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginBottom: 10,
         textDecorationLine: 'underline',
+    },
+    modalContainer: {
+        width: ScreenWidth + 30, 
+        marginLeft: 0,
+        marginTop: -5,
     },
 });
 

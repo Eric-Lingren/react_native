@@ -225,13 +225,13 @@ class Deviations extends React.Component {
 
                 </View> 
             </ScrollView>
-                {/* <AdMobBanner
+                <AdMobBanner
                     bannerSize="fullBanner"
                     adUnitID="ca-app-pub-9918224509174617/8198931096" 
                     testDeviceID="EMULATOR"
                     onDidFailToReceiveAdWithError={this.bannerError} 
                     style={{width: ScreenWidth, paddingLeft:0, marginLeft: 0, position: 'absolute', bottom: -1 }}
-                /> */}
+                />
             </View>
         );
     }

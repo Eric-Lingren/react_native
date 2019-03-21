@@ -2,8 +2,10 @@ import * as React from 'react';
 import { Button, Text, View, StyleSheet, Dimensions, ScrollView, AsyncStorage } from 'react-native';
 import { Constants } from 'expo';
 import AwesomeButton from 'react-native-really-awesome-button';
+import SubscribeModal from '../../subscribe_modal/SubscribeModal';
 
 let ScreenHeight = Dimensions.get("window").height;
+let ScreenWidth = Dimensions.get("window").width;
 
 class BetSizing extends React.Component {
     constructor(){
@@ -20,6 +22,7 @@ class BetSizing extends React.Component {
             unit12ButtonColor: '#000',
             betSizingQuestionsPlayed: 0,
             betSizingQuestionsCorrect: 0,
+            showSubscribeModal: true,
         }
     }
 
@@ -214,12 +217,14 @@ class BetSizing extends React.Component {
         return (
             <ScrollView>
             <View style={styles.container}>
+                {this.state.showSubscribeModal 
+                    ?   <View style={styles.modalContainer}>
+                            <SubscribeModal />
+                        </View>
+                    : null
+                }
                 <View className='container'>
-                    {/* <View style={styles.questionContainer}>
-                        <Text style={styles.textStyle}>Press to Select a:</Text>
-                    </View> */}
                     <View style={styles.answerButton}>
-                        {/* <Button color='blue' onPress={this.newQuestion} title='New Question'></Button> */}
                         <AwesomeButton
                                 type='primary'
                                 backgroundColor='#FFDF00'
@@ -337,7 +342,13 @@ const styles = StyleSheet.create({
         fontWeight: '900',
         fontSize: 24,
         marginTop: 10,
-    }
+    },
+    modalContainer: {
+        width: ScreenWidth + 30, 
+        marginLeft: -8,
+        marginTop: -25,
+        zIndex: 100,
+    },
 });
 
 export default BetSizing

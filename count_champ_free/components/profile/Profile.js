@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Dimensions, View, Text, StyleSheet} from 'react-native';
+import { Dimensions, View, Text, StyleSheet, Linking} from 'react-native';
 import { Constants } from 'expo';
 
 let ScreenHeight = Dimensions.get("window").height;
@@ -18,7 +18,7 @@ class Profile extends React.Component {
             <View style={styles.container}>
                 <View>
                     <Text style={styles.textStyles}>
-                        You are currently using the paid version.  This version contains full app functionality and no ads.
+                        You are currently using the free version.  This version contains limited app functionality and ads.
                     </Text>
                 </View>
                 <View>
@@ -28,7 +28,10 @@ class Profile extends React.Component {
                 </View>
                 <View>
                     <Text style={styles.textStyles2}>
-                        Thank you for your subscription!  We appreciate it!
+                        Please download the premium version for full unlocked and ad free content here: 
+                    </Text>
+                    <Text style={styles.hyperlinkStyles} onPress={ ()=> Linking.openURL('https://play.google.com/store/apps/details?id=com.cardchamp.countchamp&rdid=com.cardchamp.countchamp') } >
+                        Download Premium
                     </Text>
                 </View>
             </View>
@@ -58,6 +61,13 @@ const styles = StyleSheet.create({
         marginTop: 60,
         paddingLeft: 10,
         paddingRight: 10,
+    },
+    hyperlinkStyles: {
+        fontSize: 22,
+        textDecorationLine: 'underline',
+        color: 'blue',
+        textAlign: 'center',
+        marginTop: 10,
     }
 });
 export default Profile
