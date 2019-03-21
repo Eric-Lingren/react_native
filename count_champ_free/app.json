@@ -1,16 +1,16 @@
 {
   "expo": {
-    "name": "CountChamp",
+    "name": "CountChampFree",
     "description": "",
-    "slug": "CountChamp",
+    "slug": "CountChampFree",
     "privacy": "public",
     "sdkVersion": "32.0.0",
     "platforms": [
       "ios",
       "android"
     ],
-    "version": "1.0.0",
-    "icon": "./assets/images/premium_logo.png",
+    "version": "1.1.0",
+    "icon": "./assets/images/free_logo.png",
     "orientation": "portrait",
     
     "updates": {
@@ -23,7 +23,7 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.cardchamp.countchamp"
+      "package": "com.cardchamp.countchampfree"
     }
   }
 }
