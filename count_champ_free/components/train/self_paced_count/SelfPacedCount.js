@@ -1,8 +1,12 @@
 import * as React from 'react';
 import { Button, Text, View, StyleSheet, Image, Dimensions } from 'react-native';
-import { Constants } from 'expo';
+import { Constants, AdMobInterstitial } from 'expo';
 import axios from 'axios';
 import AwesomeButton from 'react-native-really-awesome-button';
+
+const INTERSTITIAL_ID = `ca-app-pub-9918224509174617/8466949434`;
+AdMobInterstitial.setAdUnitID(INTERSTITIAL_ID);
+AdMobInterstitial.setTestDeviceID("EMULATOR");
 
 let ScreenHeight = Dimensions.get("window").height;
 
@@ -20,6 +24,7 @@ class SelfPacedCount extends React.Component {
             remainingCardsInDeck: 10,
             deck: [],
             index: 0,
+            handsPlayed: 0,
         }
         
     }
@@ -42,8 +47,17 @@ class SelfPacedCount extends React.Component {
             })
     }
 
+    openInterstitial = async () => {
+        await AdMobInterstitial.requestAdAsync();
+        await AdMobInterstitial.showAdAsync();
+    }
+
 
     dealCard = () => {
+        if(this.state.handsPlayed % 100 === 0 ){
+            this.openInterstitial()
+        }
+
         let deck = this.state.deck
         let index = this.state.index
 
@@ -57,7 +71,8 @@ class SelfPacedCount extends React.Component {
                 cardsDealtImages: cardImage,
                 cardsDealtValues: [...prevState.cardsDealtValues, cardValue],
                 currentCardValue: cardValue,
-                index: prevState.index += 1
+                index: prevState.index += 1,
+                handsPlayed: prevState.handsPlayed += 1,
 
             }
         }, () => this.whatsTheCount() )

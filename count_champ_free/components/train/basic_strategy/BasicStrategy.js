@@ -1544,7 +1544,8 @@ openInterstitial = async () => {
                         <Text style={styles.rulesHeader}>Type of Hands:</Text>
                                 <CheckBox
                                     onClick={()=>{ this.setState({ playAllHands: !this.state.playAllHands, playHardHands: false, playSplitHands: false, playSoftHands: false }) }}
-                                    isChecked={this.state.playAllHands}
+                                    isChecked={true}
+                                    disabled={true}
                                     rightText={"All Hands"} 
                                     checkBoxColor={'#fff'}
                                     checkedCheckBoxColor={'#fff'}
@@ -1637,7 +1638,7 @@ openInterstitial = async () => {
                         <View style={styles.helpModal}>
                         <TouchableWithoutFeedback onPress={() => this.helpButton()} style={{  }}>
                             <Image
-                                source={require('../../images/close_white.png')}
+                                source={require('./close_icon.png')}
                                 style={{ width: 30, height: 30, marginLeft:(ScreenWidth -60), marginTop: 10, zIndex: 6, position: 'absolute'}}/>
                         </TouchableWithoutFeedback>
 

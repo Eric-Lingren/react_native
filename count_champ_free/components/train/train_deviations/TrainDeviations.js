@@ -992,9 +992,9 @@ class TrainDeviations extends React.Component {
             <ScrollView>
                 {this.state.showSubscribeModal 
                 ?   <View style={styles.modalContainer}>
-                            <Image
+                            {/* <Image
                                 source={require('./close_icon.png')}
-                                style={{ width: 40, height: 40, marginLeft:(ScreenWidth -60), marginTop: 20, zIndex: 20, position: 'absolute'}}/>
+                                style={{ width: 40, height: 40, marginLeft:(ScreenWidth -60), marginTop: 20, zIndex: 20, position: 'absolute'}}/> */}
                         <SubscribeModal />
                     </View>
                 : null
