@@ -1059,7 +1059,7 @@ class TrainDeviations extends React.Component {
                         <View style={styles.helpModal}>
                         <TouchableWithoutFeedback onPress={() => this.helpButton()} style={{  }}>
                             <Image
-                                source={require('../../images/close_white.png')}
+                                source={require('./close_icon.png')}
                                 style={{ width: 30, height: 30, marginLeft:(ScreenWidth -60), marginTop: 10, zIndex: 6, position: 'absolute'}}/>
                         </TouchableWithoutFeedback>
 
