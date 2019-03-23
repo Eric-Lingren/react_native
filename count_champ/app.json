@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "CountChamp",
+    "name": "CountChamp Premium",
     "description": "",
-    "slug": "CountChamp",
+    "slug": "CountChampPremium",
     "privacy": "public",
     "sdkVersion": "32.0.0",
     "platforms": [
