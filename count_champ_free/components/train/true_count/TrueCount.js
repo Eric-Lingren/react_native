@@ -124,7 +124,8 @@ class TrueCount extends React.Component {
                             raiseLevel={0}
                             stretch={true}
                             height={40}
-                            onPress={this.generateNewQuestion}                          
+                            onPress={this.generateNewQuestion}    
+                            disabled={true}                      
                             >
                             New Question
                         </AwesomeButton>

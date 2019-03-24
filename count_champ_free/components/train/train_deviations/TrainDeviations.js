@@ -992,9 +992,9 @@ class TrainDeviations extends React.Component {
             <ScrollView>
                 {this.state.showSubscribeModal 
                 ?   <View style={styles.modalContainer}>
-                            <Image
+                            {/* <Image
                                 source={require('./close_icon.png')}
-                                style={{ width: 40, height: 40, marginLeft:(ScreenWidth -60), marginTop: 20, zIndex: 20, position: 'absolute'}}/>
+                                style={{ width: 40, height: 40, marginLeft:(ScreenWidth -60), marginTop: 20, zIndex: 20, position: 'absolute'}}/> */}
                         <SubscribeModal />
                     </View>
                 : null
@@ -1059,7 +1059,7 @@ class TrainDeviations extends React.Component {
                         <View style={styles.helpModal}>
                         <TouchableWithoutFeedback onPress={() => this.helpButton()} style={{  }}>
                             <Image
-                                source={require('../../images/close_white.png')}
+                                source={require('./close_icon.png')}
                                 style={{ width: 30, height: 30, marginLeft:(ScreenWidth -60), marginTop: 10, zIndex: 6, position: 'absolute'}}/>
                         </TouchableWithoutFeedback>
 
