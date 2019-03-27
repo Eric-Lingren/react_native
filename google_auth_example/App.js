@@ -1,7 +1,6 @@
 import React from "react"
 import { StyleSheet, Text, View, Image, Button } from "react-native"
-import {Expo, Google} from "expo"
-import { AppAuth } from 'expo-app-auth'
+import { Google } from "expo"
 
 export default class App extends React.Component {
   constructor(props) {
