@@ -5,6 +5,8 @@ import { Constants, AdMobInterstitial } from 'expo';
 import axios from 'axios';
 import AwesomeButton from 'react-native-really-awesome-button';
 
+//  Need to make help modal pop up on wrong answer
+
 const INTERSTITIAL_ID = `ca-app-pub-9918224509174617/8466949434`;
 AdMobInterstitial.setAdUnitID(INTERSTITIAL_ID);
 AdMobInterstitial.setTestDeviceID("EMULATOR");
