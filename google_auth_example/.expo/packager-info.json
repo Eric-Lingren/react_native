@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 15264,
-  "expoServerNgrokUrl": "https://mj-nk5.ericlingren.google-auth-example.exp.direct",
-  "packagerNgrokUrl": "https://packager.mj-nk5.ericlingren.google-auth-example.exp.direct",
-  "ngrokPid": 840,
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "webpackServerPort": null
 }
